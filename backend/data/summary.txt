@@ -1,0 +1,5 @@
+I am an AI & Software Engineer with a solid foundation in Mechatronics, Robotics, and Automation Engineering from Misr University for Science and Technology (MUST).
+
+My expertise bridges applied AI, software engineering, and systems thinking. Currently, I am an Artificial Intelligence Intern at Arche Robotics developing AI solutions, while also teaching programming as an English-speaking instructor at iSchool. Previously, I worked as an AI Software Engineer at Outlier evaluating and enhancing frontier LLM reasoning, safety, and performance.
+
+My technical focus spans Large Language Models, agentic workflows, FastAPI backend services, Docker containerization, and AWS serverless architectures (Lambda, API Gateway, S3, CloudFront). With certifications from Harvard's CS50 (Computer Science and AI with Python) and DeepLearning.AI's Machine Learning Specialization, I combine disciplined engineering fundamentals with modern AI application development.

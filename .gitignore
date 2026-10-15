@@ -1,0 +1,35 @@
+.env
+.env.local
+.env.*.local
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate.d/
+*.tfvars
+!terraform.tfvars
+!prod.tfvars
+
+# Lambda packaging
+lambda-deployment.zip
+lambda-package/
+backend/lambda-deployment.zip
+backend/lambda-package/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+backend/.venv/
+backend/__pycache__/
+
+# Memory storage
+memory/*.json
+!memory/.gitkeep
+
+# Frontend
+frontend/.next/
+frontend/out/
+frontend/node_modules/

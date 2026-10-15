@@ -1,0 +1,63 @@
+name: Backup Health Check
+
+on:
+  schedule:
+    # Runs every day at 8:00 AM UTC
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    name: Multi-Provider Health Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Primary (AWS)
+        id: aws_check
+        continue-on-error: true
+        run: |
+          STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "${{ secrets.CLOUDFRONT_URL }}" --max-time 10 || echo "000")
+          echo "aws_status=$STATUS" >> $GITHUB_OUTPUT
+          echo "☁️ AWS CloudFront: $STATUS"
+
+      - name: Check Primary API (AWS)
+        id: api_check
+        continue-on-error: true
+        run: |
+          RESPONSE=$(curl -sf "${{ secrets.API_GATEWAY_URL }}/health" --max-time 10 || echo "FAILED")
+          echo "api_response=$RESPONSE" >> $GITHUB_OUTPUT
+          echo "⚡ AWS API: $RESPONSE"
+
+      - name: Check Backup Frontend (Vercel)
+        id: vercel_check
+        continue-on-error: true
+        run: |
+          STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "${{ secrets.VERCEL_URL }}" --max-time 10 || echo "000")
+          echo "vercel_status=$STATUS" >> $GITHUB_OUTPUT
+          echo "▲ Vercel: $STATUS"
+
+      - name: Check Backup API (Railway)
+        id: railway_check
+        continue-on-error: true
+        run: |
+          RESPONSE=$(curl -sf "${{ secrets.RAILWAY_URL }}/health" --max-time 10 || echo "FAILED")
+          echo "railway_response=$RESPONSE" >> $GITHUB_OUTPUT
+          echo "🚂 Railway: $RESPONSE"
+
+      - name: Report Summary
+        run: |
+          echo "╔══════════════════════════════════════╗"
+          echo "║     Daily Health Check Results       ║"
+          echo "╠══════════════════════════════════════╣"
+          echo "║ ☁️  AWS Frontend:  ${{ steps.aws_check.outputs.aws_status }}"
+          echo "║ ⚡ AWS API:       ${{ steps.api_check.outputs.api_response }}"
+          echo "║ ▲  Vercel:        ${{ steps.vercel_check.outputs.vercel_status }}"
+          echo "║ 🚂 Railway:       ${{ steps.railway_check.outputs.railway_response }}"
+          echo "╚══════════════════════════════════════╝"
+
+          # Fail if ALL providers are down
+          if [ "${{ steps.aws_check.outputs.aws_status }}" != "200" ] && \
+             [ "${{ steps.vercel_check.outputs.vercel_status }}" != "200" ]; then
+            echo "🚨 CRITICAL: All frontend providers are DOWN!"
+            exit 1
+          fi

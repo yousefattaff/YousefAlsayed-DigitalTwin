@@ -1,0 +1,68 @@
+{
+  "full_name": "Yousef Alsayed Abdelfattah",
+  "name": "Yousef",
+  "current_role": "AI Software Engineer & Programming Instructor",
+  "location": "Cairo, Egypt",
+  "email": "yousefabuelkhear@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/yousef-alsayed-abdelfattah",
+  "specialties": [
+    "Generative AI, LLMs & Autonomous AI Agents",
+    "Full-Stack Python & FastAPI Backend Engineering",
+    "Cloud Architecture & AWS Serverless (Lambda, S3, API Gateway)",
+    "Mechatronics, Robotics & Industrial Automation"
+  ],
+  "years_experience": 2,
+  "education": [
+    {
+      "degree": "Bachelor of Science in Mechatronics, Robotics, and Automation Engineering",
+      "institution": "Misr University for Science and Technology (MUST)",
+      "period": "2019 - 2024"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Arche Robotics",
+      "role": "Artificial Intelligence Intern",
+      "period": "August 2026 - Present",
+      "location": "Istanbul, Türkiye",
+      "description": "Developing cutting-edge AI solutions and intelligent software systems."
+    },
+    {
+      "company": "iSchool",
+      "role": "English-Speaking Programming Instructor",
+      "period": "May 2026 - Present",
+      "location": "Cairo, Egypt",
+      "description": "Instructing students in software development fundamentals, algorithms, and Python."
+    },
+    {
+      "company": "Outlier",
+      "role": "AI Software Engineer",
+      "period": "November 2024 - January 2025",
+      "description": "Evaluated complex LLM responses for factual accuracy, reasoning, and adherence to guidelines; provided RLHF feedback to refine AI model performance."
+    },
+    {
+      "company": "Egyptian Armed Forces Engineering Authority",
+      "role": "IT Help Desk (Military Service)",
+      "period": "January 2025 - March 2026",
+      "location": "Giza, Egypt"
+    }
+  ],
+  "certifications": [
+    "DeepLearning.AI - Machine Learning Specialization",
+    "Harvard / edX - CS50's Introduction to Computer Science",
+    "Harvard / edX - CS50's Introduction to Artificial Intelligence with Python",
+    "EF SET English Certificate 71/100 (C2 Proficient)",
+    "Siemens - PLC Industrial Automation (TIA Portal S7-1200 & 1500)",
+    "DMG MORI - CNC Programming & Operation"
+  ],
+  "key_technologies": [
+    "Python",
+    "FastAPI",
+    "OpenAI / Groq LLMs",
+    "Docker",
+    "AWS (Lambda, S3, API Gateway, CloudFront)",
+    "Git",
+    "Next.js / React",
+    "Mechatronics & Control Systems"
+  ]
+}
