@@ -1,7 +1,0 @@
-I am Yousef Alsayed Abdelfattah — an AI Software Engineer and Mechatronics graduate based in Cairo, Egypt.
-
-I build intelligent systems at the intersection of AI, cloud architecture, and robotics. Currently, I'm an AI Intern at Arche Robotics in Istanbul, developing cutting-edge AI solutions, while also teaching programming as an English-speaking instructor at iSchool.
-
-My technical focus spans Large Language Models, autonomous AI agents, FastAPI backend services, Docker containerization, and AWS serverless architectures. I hold certifications from Harvard (CS50 AI), DeepLearning.AI, and Siemens (PLC Automation).
-
-I'm passionate about taking AI from research to production — building systems that are not just smart, but reliable, scalable, and useful in the real world.

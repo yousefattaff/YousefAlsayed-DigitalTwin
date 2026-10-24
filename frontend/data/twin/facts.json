@@ -1,0 +1,111 @@
+{
+  "full_name": "Yousef Alsayed Abdelfattah",
+  "name": "Yousef",
+  "current_role": "AI Engineering Intern at Arche Robotics & English-Speaking Programming Instructor at iSchool",
+  "location": "Cairo, Egypt",
+  "email": "yousefabuelkhear@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/yousef-alsayed-abdelfattah",
+  "specialties": [
+    "AI solution development, AI-assisted coding, and workflow automation",
+    "LLM applications, multi-agent systems, OpenAI Agents SDK, CrewAI, LangGraph, n8n, and MCP",
+    "LangChain, ChromaDB, RAG, fine-tuning experiments, PyTorch, and LLM evaluation",
+    "Python, FastAPI, Docker, and AWS serverless engineering",
+    "Real-time robot monitoring, ROS, mechatronics, and industrial automation"
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Mechatronics, Robotics, and Automation Engineering",
+      "institution": "Misr University for Science and Technology (MUST)",
+      "period": "September 2019 - June 2024"
+    }
+  ],
+  "experience": [
+    {
+      "company": "Arche Robotics",
+      "role": "Artificial Intelligence Intern",
+      "period": "July 2026 - Present",
+      "location": "Istanbul, T?rkiye",
+      "description": "Developing a real-time AI fleet-monitoring agent with Python, AWS Lambda, AWS SAM, DynamoDB Streams, Groq, and FastMCP. Approximately 0.3-second capture, a six-stage inference skip ladder, fixes for nine production issues, 265 Pytest unit tests, and 13 live-stream smoke tests."
+    },
+    {
+      "company": "iSchool",
+      "role": "English-Speaking Programming Instructor",
+      "period": "May 2026 - Present",
+      "location": "Cairo, Egypt",
+      "description": "Teaching over 30 students across Grades 1?12 in Python, AI, JavaScript, and UI/UX through project-based curricula."
+    },
+    {
+      "company": "Egyptian Armed Forces Engineering Authority",
+      "role": "IT Help Desk (Military Service)",
+      "period": "January 2025 - March 2026",
+      "location": "Giza, Egypt",
+      "description": "Completed national military service while providing on-site IT infrastructure, hardware, and technical troubleshooting support."
+    },
+    {
+      "company": "Outlier",
+      "role": "AI Software Engineer",
+      "period": "November 2024 - January 2025",
+      "description": "Evaluated over 50 LLM responses daily across more than six domains, developed more than 20 prompt variations, and reviewed over 50 analyst submissions for RLHF annotation quality."
+    },
+    {
+      "company": "Siemens",
+      "role": "PLC Industrial Automation Training",
+      "period": "September 2023",
+      "location": "Cairo, Egypt",
+      "description": "TIA Portal, S7-1200 and S7-1500 PLCs, ladder logic, industrial control, debugging, and system integration."
+    },
+    {
+      "company": "DMG MORI",
+      "role": "CNC Programming and Operation Training",
+      "period": "September 2022",
+      "location": "Cairo, Egypt",
+      "description": "CNC turning and milling, G-code, machine setup and operation, precision machining, and manufacturing workflows."
+    },
+    {
+      "company": "AOI Training Academy",
+      "role": "Car Assembly and Maintenance Training",
+      "period": "September 2021",
+      "location": "Cairo, Egypt",
+      "description": "Vehicle assembly workflows, mechanical systems, maintenance, diagnostics, and teamwork."
+    }
+  ],
+  "certifications": [
+    "Udemy / Ed Donner / Ligency - AI Builder — Create Agents, Voice Agents & Automations in n8n (2026-10-14)",
+    "Udemy / Ed Donner / Ligency - AI Coder — Complete Claude Code & Coding Agents Course (2026-10-21)",
+    "Udemy / Ed Donner / Ligency - AI Engineer Agentic Track — The Complete Agent & MCP Course (2026-06-15)",
+    "Udemy / Ed Donner / Ligency - AI Engineer Core Track — LLM Engineering, RAG, QLoRA, Agents (2026-05-06)",
+    "Udemy / Ed Donner / Ligency - AI Engineer Production Track — Deploy LLMs & Agents at Scale (2026-10-03)",
+    "Udemy / Ed Donner / Ligency - AI Leader — Generative AI & Agentic AI for Leaders & Founders (2026-10-09)",
+    "Harvard / edX - CS50's Introduction to Artificial Intelligence with Python",
+    "Harvard / edX - CS50's Introduction to Computer Science",
+    "DMG MORI - CNC Programming and Operation (September 2022)",
+    "LinkedIn Learning - Docker Foundations Professional Certificate (2026-09-06)",
+    "EF SET - EF SET English Certificate (2024-07-27)",
+    "Stanford Online / DeepLearning.AI / Coursera - Machine Learning Specialization (2026-08-24)",
+    "Certificate of Completion — Mathematics",
+    "Siemens - PLC Industrial Automation (September 2023)"
+  ],
+  "key_technologies": [
+    "AI solution development and AI-assisted coding",
+    "Python",
+    "OpenAI Agents SDK, CrewAI, LangGraph, and n8n",
+    "MCP and FastMCP",
+    "LangChain, ChromaDB, and RAG",
+    "PyTorch, Qwen, and QLoRA fine-tuning experiments",
+    "Prompt engineering, LLM evaluation, and RLHF",
+    "FastAPI",
+    "Pydantic and Langfuse",
+    "OpenAI and Groq LLMs",
+    "Docker",
+    "AWS SAM, DynamoDB Streams, and real-time telemetry",
+    "AWS Lambda, S3, API Gateway, and CloudFront",
+    "Pytest and automated testing",
+    "Claude Code and coding agents",
+    "Git",
+    "Next.js and React",
+    "Embedded C, ROS, mechatronics, and control systems",
+    "Siemens TIA Portal, PLC programming, and CNC fundamentals"
+  ],
+  "headline": "AI Engineer | AI Solutions, LLMs & Multi-Agent Systems",
+  "availability": "Seeking a full-time AI Engineer or AI Automation role; military service completed."
+}

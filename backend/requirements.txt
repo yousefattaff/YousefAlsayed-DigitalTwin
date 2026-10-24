@@ -1,9 +1,8 @@
-fastapi
-uvicorn
-openai
-groq
-python-dotenv
-python-multipart
-boto3
-pypdf
-mangum
+boto3>=1.43.101
+chromadb>=1.5.5
+fastapi>=0.141.1
+groq>=1.7.0
+httpx>=0.28.1
+mangum>=0.22.0
+python-dotenv>=1.2.3
+uvicorn>=0.53.0

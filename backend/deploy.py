@@ -1,98 +1,71 @@
-import os
 import shutil
-import zipfile
 import subprocess
-import sys
+import zipfile
+from pathlib import Path
 
 
-def is_docker_running():
-    try:
-        res = subprocess.run(["docker", "info"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-        return res.returncode == 0
-    except Exception:
-        return False
+BACKEND_DIR = Path(__file__).resolve().parent
+CONTENT_DIR = BACKEND_DIR.parent / "content"
+PACKAGE_DIR = BACKEND_DIR / "lambda-package"
+ARCHIVE_PATH = BACKEND_DIR / "lambda-deployment.zip"
+APP_FILES = ("server.py", "lambda_handler.py")
 
 
 def main():
-    print("=" * 60)
-    print("AI Digital Twin - AWS Lambda Packaging Script")
-    print("=" * 60)
+    required = [BACKEND_DIR / name for name in (*APP_FILES, "pyproject.toml", "uv.lock")]
+    if any(not path.is_file() for path in required):
+        raise FileNotFoundError("Lambda packaging requires the runtime modules, pyproject.toml, and uv.lock.")
+    documents = sorted(CONTENT_DIR.rglob("*.md"))
+    if not any(path.name.lower() != "readme.md" for path in documents):
+        raise FileNotFoundError("Lambda packaging requires the canonical content/ Markdown documents.")
 
-    # 1. Clean up old builds
-    if os.path.exists("lambda-package"):
-        print("Cleaning up old lambda-package/...")
-        shutil.rmtree("lambda-package")
-    if os.path.exists("lambda-deployment.zip"):
-        print("Removing old lambda-deployment.zip...")
-        os.remove("lambda-deployment.zip")
+    temporary_archive = ARCHIVE_PATH.with_suffix(".zip.tmp")
+    local_dir = BACKEND_DIR / ".local"
+    requirements_path = local_dir / "lambda-requirements.txt"
+    for artifact in (PACKAGE_DIR, ARCHIVE_PATH, temporary_archive, local_dir):
+        if artifact.resolve() != BACKEND_DIR / artifact.name:
+            raise ValueError("Packaging artifacts must remain inside the backend directory.")
+    if requirements_path.resolve() != local_dir / requirements_path.name:
+        raise ValueError("Dependency exports must remain inside the backend .local directory.")
+    local_dir.mkdir(exist_ok=True)
+    subprocess.run([
+        "uv", "--cache-dir", str(local_dir / "uv-cache"),
+        "export", "--frozen", "--no-dev", "--no-emit-project", "--format", "requirements.txt",
+        "--output-file", str(requirements_path), "--quiet",
+    ], check=True, cwd=BACKEND_DIR)
+    if PACKAGE_DIR.exists():
+        shutil.rmtree(PACKAGE_DIR)
+    PACKAGE_DIR.mkdir()
 
-    os.makedirs("lambda-package", exist_ok=True)
+    print("Installing locked Linux x86_64 dependencies for AWS Lambda Python 3.12...")
+    subprocess.run([
+        "uv", "--cache-dir", str(local_dir / "uv-cache"), "pip", "install",
+        "--python-platform", "x86_64-manylinux_2_34", "--python-version", "3.12",
+        "--target", str(PACKAGE_DIR), "--only-binary", ":all:", "--require-hashes",
+        "-r", str(requirements_path),
+    ], check=True, cwd=BACKEND_DIR)
 
-    # 2. Install Linux x86_64 dependencies
-    if is_docker_running():
-        print("\n[1/4] Docker is running. Installing dependencies via official AWS Lambda container...")
-        cwd = os.getcwd()
-        docker_cmd = [
-            "docker",
-            "run",
-            "--rm",
-            "-v",
-            f"{cwd}:/var/task",
-            "--platform",
-            "linux/amd64",
-            "--entrypoint",
-            "",
-            "public.ecr.aws/lambda/python:3.12",
-            "/bin/sh",
-            "-c",
-            "pip install --target /var/task/lambda-package -r /var/task/requirements.txt --platform manylinux2014_x86_64 --only-binary=:all: --upgrade",
-        ]
-        subprocess.run(docker_cmd, check=True)
-    else:
-        print("\n[1/4] Docker daemon not active. Using uv cross-platform Linux x86_64 packaging...")
-        uv_cmd = [
-            "uv",
-            "pip",
-            "install",
-            "--python-platform",
-            "x86_64-unknown-linux-gnu",
-            "--python-version",
-            "3.12",
-            "--target",
-            "lambda-package",
-            "-r",
-            "requirements.txt",
-        ]
-        subprocess.run(uv_cmd, check=True)
+    for name in APP_FILES:
+        shutil.copy2(BACKEND_DIR / name, PACKAGE_DIR / name)
+    for document in documents:
+        destination = PACKAGE_DIR / "content" / document.relative_to(CONTENT_DIR)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(document, destination)
 
-    # 3. Copy application files
-    print("\n[2/4] Copying backend application files...")
-    app_files = ["server.py", "lambda_handler.py", "context.py", "resources.py"]
-    for file in app_files:
-        if os.path.exists(file):
-            shutil.copy2(file, "lambda-package/")
-            print(f"  + Copied {file}")
-
-    # 4. Copy data directory
-    if os.path.exists("data"):
-        print("\n[3/4] Copying data/ directory (facts, style, resume)...")
-        shutil.copytree("data", "lambda-package/data")
-        print("  + Copied data/ directory")
-
-    # 5. Create ZIP archive
-    print("\n[4/4] Creating lambda-deployment.zip...")
-    with zipfile.ZipFile("lambda-deployment.zip", "w", zipfile.ZIP_DEFLATED) as zipf:
-        for root, dirs, files in os.walk("lambda-package"):
-            for file in files:
-                file_path = os.path.join(root, file)
-                arcname = os.path.relpath(file_path, "lambda-package")
-                zipf.write(file_path, arcname)
-
-    size_mb = os.path.getsize("lambda-deployment.zip") / (1024 * 1024)
-    print("=" * 60)
-    print(f" SUCCESS! Created lambda-deployment.zip ({size_mb:.2f} MB)")
-    print("Ready to upload to AWS Lambda (twin-api) or via S3.")
-    print("=" * 60)
+    paths = sorted(path for path in PACKAGE_DIR.rglob("*") if path.is_file())
+    if any(path.name.startswith(".env") for path in paths):
+        raise ValueError("Environment files must not be included in a Lambda package.")
+    try:
+        with zipfile.ZipFile(temporary_archive, "w", zipfile.ZIP_DEFLATED) as archive:
+            for path in paths:
+                archive.write(path, path.relative_to(PACKAGE_DIR))
+        if temporary_archive.stat().st_size > 50 * 1024 * 1024:
+            raise ValueError("The package exceeds Lambda's direct-upload limit; configure S3 delivery before deploying.")
+        temporary_archive.replace(ARCHIVE_PATH)
+    finally:
+        temporary_archive.unlink(missing_ok=True)
+    size_mb = ARCHIVE_PATH.stat().st_size / (1024 * 1024)
+    print(f"Created {ARCHIVE_PATH.name} ({size_mb:.2f} MB) for the existing AWS Lambda backend.")
 
 
 if __name__ == "__main__":

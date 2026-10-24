@@ -1,236 +1,136 @@
-# Yousef Alsayed — AI Digital Twin & Full-Stack Portfolio
+# Yousef Alsayed — AI Digital Twin
 
-[![Next.js](https://img.shields.io/badge/Next.js-16.3-black?style=flat&logo=next.js)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19.2-blue?style=flat&logo=react)](https://react.dev/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=flat&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat&logo=python)](https://www.python.org/)
-[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-v4-38B2AC?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
-[![AWS](https://img.shields.io/badge/AWS-Lambda%20%7C%20S3%20%7C%20API%20Gateway-FF9900?style=flat&logo=amazon-aws)](https://aws.amazon.com/)
-[![Terraform](https://img.shields.io/badge/IaC-Terraform-7B42BC?style=flat&logo=terraform)](https://www.terraform.io/)
+**An AI solutions portfolio you can explore, query, and talk to.**
 
-A modern, full-stack developer portfolio integrated with an **autonomous AI Digital Twin**. This repository pairs a responsive, high-performance **Next.js 16** frontend with a **FastAPI** backend that acts as Yousef's virtual twin — answering technical questions, discussing project history, and interacting with recruiters and developers in real-time.
+[![Live Demo](https://img.shields.io/badge/Live_Demo-yousefalsayed.me-10b981?style=flat-square)](https://yousefalsayed.me)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16-09090b?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org)
+[![React 19](https://img.shields.io/badge/React-19-09090b?style=flat-square&logo=react&logoColor=white)](https://react.dev)
+[![Vercel](https://img.shields.io/badge/Hosted_on-Vercel-09090b?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com)
+[![Groq LLM](https://img.shields.io/badge/Groq-openai%2Fgpt--oss--120b-10b981?style=flat-square)](https://console.groq.com)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-09090b?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS-v4-09090b?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
----
+Built with Next.js 16, React 19, and TypeScript, this portfolio presents Yousef's AI solution development, agent workflows, RAG projects, and robotics experience. Its Digital Twin answers from verified career documents and an authentic conversational persona through a native Vercel serverless API.
 
-## 🌟 Key Features
+[Explore the live portfolio](https://yousefalsayed.me) · [Deployment guide](DEPLOYMENT_PLAN.md) · [Release review](docs/RELEASE_REVIEW.md)
 
-* **🤖 Autonomous AI Digital Twin**:
-  * Real-time conversational AI trained on Yousef's verified career history, technical expertise, and engineering philosophy.
-  * Multi-provider LLM support (**OpenAI GPT-4o-mini** and **Groq OSS models**).
-  * Session-based memory with persistence to **AWS S3** or local storage.
-  * Available both as an on-page interactive section and an omnipresent floating chat widget.
+## Core features
 
-* **🎨 Modern UI & Dual Themes**:
-  * Clean, developer-focused aesthetic inspired by modern portfolio design systems.
-  * Seamless **Dark Mode** (`#0d1116` midnight) and **Light Mode** (`#f8f9fa` canvas) with animated theme toggle.
-  * Rich micro-animations, skill chips, expandable project cards, and chronological experience timeline.
+- **AI Digital Twin.** Grounded in career facts, resume content, project narratives, and tone guidelines. Bounded conversation history and retrieval topics support follow-up questions across fresh serverless instances. Groq uses `openai/gpt-oss-120b`, with `openai/gpt-oss-20b` for supported provider fallback conditions.
+- **Interactive developer terminal.** Explore `help`, `whoami`, `skills`, `projects`, `contact`, and `clear` directly in the portfolio.
+- **Obsidian & Titanium Stealth Design System.** An obsidian canvas, frosted zinc panels, titanium text, and breathing emerald status indicators. Responsive galleries, video posters, defined media proportions, and reduced-motion styles keep the interface steady.
+- **Multi-cloud fallback ready.** Vercel serves the portfolio and native Twin together. The optional FastAPI/Mangum backend supports AWS Lambda and local/S3 conversation storage. Selecting the AWS target requires a verified external API and a frontend rebuild; Terraform currently supplies the state bootstrap.
 
-* **☁️ Cloud & Serverless Ready**:
-  * Backend deploys as an **AWS Lambda** function via Mangum with API Gateway and S3 bucket storage.
-  * Infrastructure as Code configured with **Terraform**.
-  * Automated CI/CD workflows powered by **GitHub Actions**.
-
----
-
-## 🏗️ System Architecture
+## Architecture
 
 ```mermaid
-graph TD
-    Client[Web Visitor / Recruiter] -->|Interacts with| NextApp[Next.js 16 Frontend App]
-    NextApp -->|Chat Widget / Page Section| API[FastAPI Backend / AWS Lambda]
-    API -->|Session Memory| Storage[(Local Storage / AWS S3)]
-    API -->|Prompt & Career Context| Brain[Persona Context Engine]
-    API -->|Inference Query| LLM[LLM Provider: OpenAI / Groq]
-    LLM -->|Streamed Response| API
-    API -->|JSON ChatResponse| NextApp
+flowchart LR
+    Visitor["Visitor"] --> Delivery["Next.js 16<br/>Vercel Edge delivery"]
+    Delivery --> Portfolio["Portfolio UI"]
+    Portfolio --> Chat["Vercel Serverless<br/>Node.js /api/chat"]
+    Portfolio --> Health["Node.js /api/health"]
+    Knowledge["Canonical content + persona<br/>Bundled at build time"] --> Chat
+    Knowledge --> Health
+    Chat --> Groq["Groq<br/>openai/gpt-oss-120b"]
+    Chat -. "Supported provider fallback" .-> Small["Groq<br/>openai/gpt-oss-20b"]
+    Portfolio -. "Explicit AWS target" .-> AWS["API Gateway<br/>FastAPI / AWS Lambda"]
 ```
 
----
+Vercel's edge network delivers the site; the API routes execute in the **Node.js serverless runtime**. In the default Vercel mode, the browser calls same-origin `/api/chat` and `/api/health`. The Groq key stays on the server.
 
-## 📁 Repository Structure
+## Repository layout
 
 ```text
-YousefAlsayed-DigitalTwin/
-├── .github/
-│   └── workflows/
-│       ├── deploy-aws.yml        # CI/CD: Automated AWS Lambda deployment
-│       └── backup-check.yml      # CI/CD: Health & backup verification
-├── backend/
-│   ├── data/                     # Persona context, resume, facts, and profile data
-│   │   ├── facts.json            # Structured career and skill facts
-│   │   ├── summary.txt           # Executive career summary
-│   │   └── style.txt             # Conversational style guidelines
-│   ├── context.py                # Context loader and dynamic prompt builder
-│   ├── server.py                 # FastAPI application and chat endpoints
-│   ├── lambda_handler.py         # AWS Lambda entrypoint (Mangum)
-│   ├── requirements.txt          # Python dependencies
-│   └── Procfile                  # Alternative deployment configuration
-├── frontend/
-│   ├── app/                      # Next.js App Router (layout, page, globals.css)
-│   ├── components/               # React UI components
-│   │   ├── Navbar.tsx            # Navigation bar & theme switch
-│   │   ├── Hero.tsx              # Hero introduction & quick links
-│   │   ├── About.tsx             # Background & education
-│   │   ├── Expertise.tsx         # Domain skill cards & tech chips
-│   │   ├── Timeline.tsx          # Career timeline
-│   │   ├── Projects.tsx          # Interactive project showcase
-│   │   ├── twin.tsx              # On-page Digital Twin chat interface
-│   │   ├── ChatWidget.tsx        # Floating pop-up chat widget
-│   │   ├── Contact.tsx           # Contact form & social connections
-│   │   └── ThemeProvider.tsx     # Theme state management
-│   ├── public/                   # Static assets, images, and avatar
-│   └── package.json              # Frontend scripts & dependencies
-├── terraform/                    # Infrastructure as Code definitions
-│   ├── bootstrap/                # AWS resource bootstrap
-│   ├── variables.tf              # Terraform input variables
-│   └── versions.tf               # Terraform AWS provider config
-├── .gitignore                    # Ignored artifacts & environment files
-├── PLAN.md                       # Architectural design plan
-└── README.md                     # Repository documentation
+.
+├── frontend/               Next.js app, components, CSS, native API, tests, media
+│   ├── app/api/            Chat and configuration-health routes
+│   ├── content/            Synchronized Markdown for deployment
+│   ├── data/twin/          Synchronized facts and persona
+│   ├── lib/                Twin service, content parsing, browser chat state
+│   └── scripts/            Development, deployment, and release checks
+├── content/                Canonical editable portfolio and Twin knowledge
+├── backend/                Optional FastAPI / Lambda service
+│   ├── data/               Persona sources and LinkedIn provenance
+│   ├── terraform/          AWS provider configuration and state bootstrap
+│   └── tests/              Backend and packaging regressions
+├── .github/                CI, health checks, optional AWS deployment
+├── docs/                   Canonical release review
+└── DEPLOYMENT_PLAN.md       Vercel, environment, DNS, and AWS setup
 ```
 
----
+Local source-media archives and private conversation storage are kept in ignored `.local/` and `backend/.memory/` directories. They are excluded from release candidates.
 
-## 🚀 Getting Started
+## Local development
 
-### Prerequisites
+Requires **Node.js 20.9+**, npm, Git, and a [Groq API key](https://console.groq.com/keys). Python is needed only for the optional external backend.
 
-* **Node.js** 20.x or higher
-* **Python** 3.11 or higher
-* **Git**
-* OpenAI API Key or Groq API Key
-
----
-
-### 1. Backend Setup
-
-1. Navigate to the backend folder:
-   ```bash
-   cd backend
-   ```
-
-2. Create and activate a Python virtual environment:
-   ```bash
-   # Windows
-   python -m venv .venv
-   .venv\Scripts\activate
-
-   # Linux / macOS
-   python3 -m venv .venv
-   source .venv/bin/activate
-   ```
-
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Create an environment configuration file:
-   ```bash
-   cp .env.example .env
-   ```
-   Add your API keys to `backend/.env`:
-   ```env
-   OPENAI_API_KEY=your_openai_api_key_here
-   # OR
-   GROQ_API_KEY=your_groq_api_key_here
-
-   # Storage configuration
-   USE_S3=false
-   MEMORY_DIR=../memory
-   CORS_ORIGINS=http://localhost:3000
-   ```
-
-5. Run the FastAPI development server:
-   ```bash
-   python server.py
-   # Or using uvicorn:
-   uvicorn server:app --reload --port 8000
-   ```
-   The API will be accessible at `http://localhost:8000` (docs at `http://localhost:8000/docs`).
-
----
-
-### 2. Frontend Setup
-
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Configure environment variables (optional for local API override):
-   ```env
-   NEXT_PUBLIC_API_URL=http://localhost:8000
-   ```
-
-4. Launch the Next.js development server:
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
-
----
-
-## 📡 API Endpoints
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/` | API status and memory configuration details |
-| `GET` | `/health` | Health check endpoint |
-| `POST` | `/chat` | Send a message to the AI Digital Twin and receive a response |
-| `GET` | `/conversation/{session_id}` | Retrieve chat history for an active session |
-
-#### Sample `/chat` Request
-```json
-{
-  "message": "What is Yousef's experience with Autonomous Agents and FastAPI?",
-  "session_id": "optional-uuid"
-}
-```
-
----
-
-## ☁️ Deployment
-
-### Frontend Deployment
-The frontend is optimized for deployment on [Vercel](https://vercel.com) or AWS Amplify:
 ```bash
-cd frontend
-npm run build
+git clone https://github.com/yousefattaff/YousefAlsayed-DigitalTwin.git
+cd YousefAlsayed-DigitalTwin/frontend
+npm ci --include=dev
+cp .env.example .env.local
 ```
 
-### Backend Deployment (AWS Serverless)
-1. Package the FastAPI application for Lambda:
-   ```bash
-   pip install -t lambda-package -r requirements.txt
-   cp server.py context.py lambda_handler.py lambda-package/
-   cp -r data lambda-package/
-   cd lambda-package && zip -r ../lambda-deployment.zip .
-   ```
-2. Provision resources and deploy using Terraform:
-   ```bash
-   cd terraform
-   terraform init
-   terraform apply
-   ```
+On PowerShell, replace the last command with `Copy-Item .env.example .env.local`. Edit the ignored `.env.local`:
 
----
+```dotenv
+NEXT_PUBLIC_DEPLOY_TARGET=vercel
+GROQ_API_KEY=your_groq_api_key_here
+GROQ_MODEL=openai/gpt-oss-120b
+GROQ_MODEL_FALLBACK=openai/gpt-oss-20b
+```
 
-## 👤 Author
+```bash
+npm run dev
+```
 
-**Yousef Alsayed Abdelfattah**
-* **Title:** AI Software Engineer & Mechatronics Graduate
-* **LinkedIn:** [linkedin.com/in/yousef-alsayed-abdelfattah](https://www.linkedin.com/in/yousef-alsayed-abdelfattah)
-* **GitHub:** [@yousefattaff](https://github.com/yousefattaff)
-* **Email:** yousefabuelkhear@gmail.com
+Open [localhost:3000](http://localhost:3000). The launcher checks the server key and knowledge, then starts or reuses Next.js. Both native API routes run in that process. Restart the server after changing environment settings.
 
----
+`GROQ_API_KEY` must remain server-only. Keep credentials in ignored `.env*` files or Vercel environment settings; `.env.example` is the only public environment template.
 
-## 📄 License
+## Content workflow
 
-This project is licensed under the MIT License — feel free to explore, customize, and build your own Digital Twin!
+Edit Markdown in root [content/](content/README.md). Public identity and links live in `profile.md`; `experience.md`, `expertise.md`, projects, and certifications provide the Twin's career knowledge. The persona sources are `backend/data/facts.json`, `summary.txt`, and `style.txt`; the LinkedIn source is `backend/data/linkedin.pdf`.
+
+`predev` and `prebuild` synchronize these sources into `frontend/content/` and `frontend/data/twin/`. The sync removes stale bundled Markdown after a canonical document is deleted or renamed, so the deployed Twin uses current knowledge. Next.js traces the copies into both serverless functions. Run `npm run sync:content` after content edits when preparing a standalone frontend upload, and include the synchronized copies in the release.
+
+Preserve the public navigation IDs: `about`, `skills`, `projects`, `achievements`, `terminal`, `contact`, and `twin`.
+
+## Production verification
+
+From `frontend/`:
+
+```bash
+npm test
+npm run lint
+npm run build
+npm run release:check
+npm run start
+```
+
+The release checker verifies secret/artifact exclusions, source and Git-index credentials, browser output, native API manifests, bundled knowledge, protected IDs, and referenced local assets. It runs offline and does not modify Git.
+
+`GET /api/health` checks server configuration and loaded documents. A successful health response is distinct from a real Groq reply; exercise `POST /api/chat` and a follow-up question to verify provider connectivity.
+
+## Deployment and release
+
+Vercel uses root directory `frontend/`, framework `nextjs`, `npm ci --include=dev`, `npm run build`, and the framework-default output. Set the Production server-only `GROQ_API_KEY` and `NEXT_PUBLIC_DEPLOY_TARGET=vercel`, then redeploy. See [DEPLOYMENT_PLAN.md](DEPLOYMENT_PLAN.md) for the verified-project deployment helper and Namecheap records.
+
+The optional backend uses Python 3.12+ and the frozen `uv.lock`. From the repository root:
+
+```bash
+cd backend
+uv sync --frozen --no-dev
+cp .env.example .env
+uv run --frozen --no-dev python -m unittest discover -s tests
+uv run --frozen --no-dev uvicorn server:app --reload --port 8000
+```
+
+Set the backend's own key in `.env` before serving external chat. For this mode, set `NEXT_PUBLIC_DEPLOY_TARGET=aws` and a verified `NEXT_PUBLIC_API_URL` in the frontend environment. The AWS workflow updates an existing Lambda; it does not provision application infrastructure.
+
+From the repository root, the PowerShell release helper runs the checks, stages the intended project paths, scans the Git index again, and creates the requested commit:
+
+```powershell
+& .\.github\prepare-release.ps1
+git push origin main
+```

@@ -1,0 +1,412 @@
+/* Portfolio surfaces share the canvas, glass, and titanium design tokens. */
+.projects-container .projects-grid,
+.certificate-media-row,
+.graduation-media-row,
+.graduation-photo-row {
+  min-width: 0;
+  scrollbar-color: var(--border-hover) transparent;
+  scrollbar-width: thin;
+}
+
+.projects-container .projects-grid,
+.certificate-media-row {
+  /* Leave room for the four-pixel lift inside each horizontal rail. */
+  padding-top: 8px;
+  padding-bottom: 24px;
+}
+
+.projects-container .projects-grid .project,
+.achievement-award,
+.certificate-media-card,
+.resume-extra,
+.resume-viewer,
+.graduation-model-viewer {
+  position: relative;
+  min-width: 0;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--rim-light), var(--shadow-elevation);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+}
+
+.projects-container .projects-grid .project,
+.achievement-award,
+.certificate-media-card {
+  transition:
+    transform var(--duration-normal) var(--ease-out),
+    background-color var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.projects-container .projects-grid .project::before,
+.project-showcase-dialog::before,
+.twin-chat-box::before,
+.achievement-award::before {
+  background: var(--rim-gradient);
+  content: "";
+  height: 1px;
+  left: 12%;
+  position: absolute;
+  right: 12%;
+  top: 0;
+}
+
+.projects-container .projects-grid .project:hover {
+  background: var(--bg-card-hover) !important;
+  border-color: var(--border-hover) !important;
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-4px);
+}
+
+.projects-container .projects-grid .project:focus-within,
+.certificate-media-card:focus-within {
+  border-color: var(--border-hover) !important;
+  box-shadow: var(--rim-light), var(--shadow-card-hover);
+}
+
+/* A media slot keeps its dimensions before an image or video is decoded. */
+.project > a:first-child {
+  align-self: start;
+  display: block;
+  height: auto;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+
+.project > a:first-child .zoom,
+.project > a:first-child .project-media-wrapper,
+.project-media-wrapper,
+.project-dialog-media > .zoom {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--media-project-ratio);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface);
+  object-fit: cover;
+}
+
+.project > a:first-child .project-media-wrapper video,
+.project-media-wrapper video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: var(--media-project-ratio);
+  object-fit: cover;
+  border-radius: inherit;
+  background-color: transparent;
+}
+
+.project h2 {
+  font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.project h2:hover {
+  color: var(--titanium-light) !important;
+  text-decoration: none;
+}
+
+.project p,
+.project-showcase-count,
+.certificate-media-intro,
+.resume-extra p,
+.achievement-award p,
+.achievement-details li {
+  color: var(--text-secondary) !important;
+  line-height: 1.6;
+  opacity: 1;
+}
+
+.project-showcase-count {
+  font-family: var(--font-code) !important;
+  font-size: 0.8rem;
+}
+
+.project-details-trigger,
+.project-dialog-link,
+.project-dialog-close,
+.resume-download a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 1px solid var(--border-zinc);
+  border-radius: var(--radius-full);
+  background: var(--bg-card-active) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-ui) !important;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.project-details-trigger:hover,
+.project-details-trigger:focus-visible,
+.project-dialog-link:hover,
+.project-dialog-link:focus-visible,
+.project-dialog-close:hover,
+.resume-download a:hover {
+  border-color: var(--accent-emerald);
+  background: var(--bg-card-hover) !important;
+  color: var(--text-primary) !important;
+  box-shadow: var(--rim-light);
+}
+
+.project-dialog-close {
+  width: 44px;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.project-showcase-dialog-backdrop {
+  background: var(--bg-overlay);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  z-index: 3000;
+}
+
+.project-showcase-dialog {
+  background: var(--bg-floating) !important;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--rim-light), var(--shadow-elevation);
+  backdrop-filter: blur(var(--blur-glass));
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+}
+
+.project-dialog-media {
+  overflow: hidden;
+  aspect-ratio: var(--media-project-ratio);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+
+.achievement-feature {
+  min-width: 0;
+  gap: 20px;
+}
+
+.achievement-award h3,
+.achievement-award strong {
+  color: var(--text-primary) !important;
+}
+
+.achievement-award .eyebrow {
+  color: var(--accent-emerald) !important;
+  font-family: var(--font-code) !important;
+}
+
+.achievement-award strong {
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.achievement-details li::marker {
+  color: var(--accent-emerald);
+}
+
+.graduation-model-viewer model-viewer {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: inherit;
+  background: var(--bg-surface);
+}
+
+.graduation-model-viewer model-viewer:not(:defined),
+.graduation-model-viewer model-viewer::part(default-poster) {
+  background: var(--bg-surface) url("/graduation/r2_waiter_portfolio_renders.png") center / contain no-repeat;
+}
+
+.graduation-media-row {
+  width: 100%;
+  max-width: 100%;
+  padding: 8px 4px 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 4px;
+}
+
+.graduation-photo-row {
+  /* Model and photos participate in the same horizontal scroll rail. */
+  display: contents;
+}
+
+.graduation-media-row > .graduation-model-viewer,
+.graduation-gallery-video,
+.graduation-photo-row img,
+.graduation-photo-row .graduation-design-render {
+  flex: 0 0 min(520px, 100%);
+  width: min(520px, 100%);
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.graduation-gallery-video,
+.graduation-photo-row img,
+.graduation-photo-row .graduation-design-render {
+  display: block;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--media-project-ratio);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+
+.graduation-photo-row img {
+  object-fit: contain;
+}
+
+.graduation-gallery-video {
+  object-fit: contain;
+  box-shadow: var(--rim-light), var(--shadow-elevation);
+}
+
+.certificate-media-card img,
+.certificate-media-card iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  object-fit: contain;
+}
+
+.certificate-media-card-body {
+  border-top: 0;
+  padding: 18px;
+}
+
+.certificate-media-card-body h3 {
+  line-height: 1.5;
+}
+
+.certificate-media-card-body a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  text-decoration-color: var(--border-hover);
+  text-underline-offset: 4px;
+}
+
+.certificate-media-card-body a:hover {
+  color: var(--accent-emerald) !important;
+  text-decoration-color: currentColor;
+}
+
+.resume-viewer-bar {
+  min-height: 48px;
+  background: var(--bg-floating);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.resume-viewer-dot {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--border-medium);
+}
+
+/* Window controls are decorative titanium, never RGB status indicators. */
+.resume-viewer-dot-red {
+  background: var(--text-muted);
+}
+
+.resume-viewer-dot-yellow {
+  background: var(--text-secondary);
+}
+
+.resume-viewer-dot-green {
+  background: var(--titanium-light);
+}
+
+.resume-viewer-title {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-secondary) !important;
+  font-family: var(--font-code) !important;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resume-viewer iframe {
+  aspect-ratio: 4 / 5;
+  background: var(--bg-surface);
+}
+
+.resume-download {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.resume-download a {
+  padding: 10px 18px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .projects-container .projects-grid .project:hover,
+  .achievement-award:hover,
+  .certificate-media-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover) !important;
+    background: var(--bg-card-hover) !important;
+    box-shadow: var(--rim-light), var(--shadow-card-hover);
+  }
+}
+
+@media (hover: none) {
+  .projects-container .projects-grid .project:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .project h2 {
+    font-size: 1.3rem;
+  }
+
+  .project-showcase-dialog-backdrop {
+    padding: 16px;
+  }
+
+  .project-showcase-dialog {
+    max-height: calc(100dvh - 32px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-container .projects-grid .project:hover,
+  .achievement-award:hover,
+  .certificate-media-card:hover {
+    transform: none !important;
+  }
+}

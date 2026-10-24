@@ -1,53 +1,10 @@
-'use client';
-
-import React from 'react';
-
-interface Milestone {
+export interface Milestone {
   date: string;
   title: string;
   subtitle: string;
   description: string;
   isEducation?: boolean;
 }
-
-const milestones: Milestone[] = [
-  {
-    date: 'Aug 2026 – Present',
-    title: 'Artificial Intelligence Intern',
-    subtitle: 'Arche Robotics · Istanbul, Türkiye',
-    description:
-      'Developing cutting-edge AI solutions and autonomous robotics systems at a premier robotics enterprise.',
-  },
-  {
-    date: 'May 2026 – Present',
-    title: 'Programming Instructor',
-    subtitle: 'iSchool · Cairo, Egypt',
-    description:
-      'Teaching software engineering fundamentals, algorithm design, and Python programming in English.',
-  },
-  {
-    date: 'Jan 2025 – Mar 2026',
-    title: 'IT Help Desk (Military Service)',
-    subtitle: 'Egyptian Armed Forces · Giza, Egypt',
-    description:
-      'Completed mandatory military service managing mission-critical IT infrastructure, networks, and technical support.',
-  },
-  {
-    date: 'Nov 2024 – Jan 2025',
-    title: 'AI Software Engineer',
-    subtitle: 'Outlier · Remote',
-    description:
-      'Evaluated frontier LLM generations for mathematical reasoning and factual accuracy. Provided RLHF feedback to refine model weights.',
-  },
-  {
-    date: '2019 – 2024',
-    title: 'B.Sc. Mechatronics, Robotics & Automation',
-    subtitle: 'MUST University · Cairo, Egypt',
-    description:
-      'Rigorous engineering foundation in control systems, Siemens PLC automation, CNC programming, and software engineering.',
-    isEducation: true,
-  },
-];
 
 const BriefcaseIconSvg = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -63,14 +20,14 @@ const GraduationIconSvg = () => (
   </svg>
 );
 
-export default function Timeline() {
+export default function Timeline({ milestones }: { milestones: Milestone[] }) {
   return (
     <div id="history">
       <div className="items-container">
         <h1>Career History</h1>
         <div className="vertical-timeline vertical-timeline--animate vertical-timeline--two-columns">
-          {milestones.map((item, index) => (
-            <div key={index} className="vertical-timeline-element vertical-timeline-element--work">
+          {milestones.map((item) => (
+            <div key={`${item.date}-${item.title}`} className="vertical-timeline-element vertical-timeline-element--work">
               <span className="vertical-timeline-element-icon">
                 {item.isEducation ? <GraduationIconSvg /> : <BriefcaseIconSvg />}
               </span>

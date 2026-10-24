@@ -1,41 +1,26 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-
-# testing
-/coverage
-
-# next.js
+# Build output, dependencies, deployment metadata, and local archives.
+/node_modules/
 /.next/
 /out/
+/.vercel/
+/build/
+/coverage/
+/.local/
+/.aws/
+/.agents/
+/.codex/
 
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
+# Secrets: .env.example is the only public template.
 .env*
+!.env.example
+*.pem
+*.key
 
-# vercel
-.vercel
-
-# typescript
+# Generated TypeScript metadata and logs.
 *.tsbuildinfo
 next-env.d.ts
+*.log
+
+# Operating system files.
+.DS_Store
+Thumbs.db

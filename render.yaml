@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: yousef-digital-twin-api
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: CONTENT_DIR
+        value: /content
+      - key: CHROMA_DIR
+        value: /tmp/chroma
+      - key: USE_S3
+        value: "false"

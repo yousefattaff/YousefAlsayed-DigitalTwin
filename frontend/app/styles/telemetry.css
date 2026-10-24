@@ -1,0 +1,564 @@
+/* Terminal and digital-twin surfaces share the portfolio's glass tokens. */
+.developer-terminal {
+  width: min(1120px, calc(100% - 32px));
+  margin: clamp(48px, 8vw, 96px) auto;
+  min-width: 0;
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+.terminal-window,
+.twin-chat-box {
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  background: var(--bg-card) !important;
+  box-shadow: var(--rim-light), var(--shadow-elevation);
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  backdrop-filter: blur(var(--blur-glass));
+}
+
+.terminal-window {
+  font-family: var(--font-code);
+}
+
+.terminal-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-floating);
+}
+
+.terminal-window-dot {
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  box-shadow: var(--rim-light);
+}
+
+.terminal-window-dot-muted {
+  background: var(--border-zinc);
+}
+
+.terminal-window-dot-mid {
+  background: var(--text-muted);
+}
+
+.terminal-window-dot-bright {
+  background: var(--text-secondary);
+}
+
+.developer-terminal .terminal-window-title {
+  min-width: 0;
+  margin: 0 0 0 8px;
+  color: var(--text-secondary) !important;
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  font-family: var(--font-code);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.terminal-console {
+  min-height: 280px;
+  max-height: 430px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--border-hover) transparent;
+  scrollbar-width: thin;
+  padding: 22px 20px 12px;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.terminal-entry {
+  margin-bottom: 14px;
+  overflow-wrap: anywhere;
+}
+
+.terminal-output {
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+}
+
+.terminal-command-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 44px;
+}
+
+.developer-terminal .terminal-prompt {
+  color: var(--accent-emerald);
+  font-family: var(--font-code);
+  white-space: nowrap;
+}
+
+.terminal-command-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  border: 0;
+  border-radius: 2px;
+  padding: 0;
+  background: transparent;
+  color: var(--text-primary);
+  caret-color: var(--accent-emerald);
+  font: inherit;
+}
+
+.terminal-command-input:focus-visible {
+  outline-offset: 2px;
+}
+
+.twin-intro {
+  max-width: 800px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.twin-chat-box {
+  margin-top: 24px;
+}
+
+.twin-chat-header,
+.twin-chat-input-area {
+  background: var(--bg-floating) !important;
+  border-color: var(--border-subtle);
+}
+
+.twin-chat-header {
+  gap: 16px;
+  padding: 16px 20px;
+}
+
+.twin-chat-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.twin-avatar {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  aspect-ratio: 1;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.twin-chat-name {
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+.twin-status {
+  position: relative;
+  width: max-content;
+  margin-top: 2px;
+  color: var(--status-active) !important;
+  font-family: var(--font-code);
+  font-size: 0.6875rem;
+  line-height: 1.6;
+}
+
+/* A halo breathes around the existing status glyph; its text stays intact. */
+.twin-status::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0.01em;
+  width: 0.58em;
+  height: 0.58em;
+  border-radius: var(--radius-full);
+  background: var(--status-active);
+  transform: translateY(-50%);
+  pointer-events: none;
+  animation: twin-status-breathe 2s ease-in-out infinite;
+}
+
+@keyframes twin-status-breathe {
+  0%,
+  100% {
+    opacity: 0.8;
+    box-shadow: 0 0 0 0 var(--status-active-glow);
+  }
+
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+.twin-status-checking,
+.twin-status-unavailable,
+.twin-status-unconfigured {
+  color: var(--text-secondary) !important;
+}
+
+.twin-status-checking::before,
+.twin-status-unavailable::before,
+.twin-status-unconfigured::before {
+  background: var(--text-secondary);
+  animation: none;
+  box-shadow: none;
+}
+
+.twin-chat-header .twin-chat-clear {
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.twin-chat-header .twin-chat-clear:hover {
+  border-color: var(--border-medium);
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.twin-chat-messages {
+  height: 380px;
+  min-width: 0;
+  padding: 24px;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--border-hover) transparent;
+  scrollbar-width: thin;
+}
+
+.twin-chat-empty {
+  max-width: 680px;
+  margin: auto;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.twin-chat-welcome {
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.6;
+}
+
+.twin-help-text {
+  margin-bottom: 20px;
+  color: var(--text-secondary) !important;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.twin-msg-user,
+.twin-msg-assistant {
+  min-width: 0;
+  max-width: 80%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--rim-light);
+  overflow-wrap: anywhere;
+}
+
+.twin-msg-user {
+  border-color: var(--border-medium);
+  background: var(--bg-card-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+.twin-msg-assistant {
+  background: var(--bg-card) !important;
+  color: var(--text-secondary) !important;
+}
+
+.twin-message-content {
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Markdown owns its presentation here, without competing utility classes. */
+.twin-markdown-body {
+  font-family: var(--font-ui);
+  line-height: 1.65;
+  color: var(--text-secondary);
+  white-space: normal;
+}
+
+.twin-markdown-body p {
+  margin: 0.45rem 0;
+}
+
+.twin-markdown-body p:first-child {
+  margin-top: 0;
+}
+
+.twin-markdown-body p:last-child {
+  margin-bottom: 0;
+}
+
+.twin-markdown-body h2,
+.twin-markdown-body h3,
+.twin-markdown-body h4 {
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  margin: 0.85rem 0 0.35rem;
+  line-height: 1.35;
+}
+
+.twin-markdown-body h2 {
+  font-size: 1.15rem;
+}
+
+.twin-markdown-body h3 {
+  border-bottom: 1px solid var(--border-code);
+  padding-bottom: 0.25rem;
+  font-size: 1.05rem;
+}
+
+.twin-markdown-body h4 {
+  font-size: 0.95rem;
+}
+
+.twin-markdown-body strong {
+  color: var(--text-emphasis);
+  font-weight: 600;
+}
+
+.twin-markdown-body em {
+  color: var(--titanium-light);
+  font-style: italic;
+}
+
+.twin-markdown-body ul,
+.twin-markdown-body ol {
+  margin: 0.5rem 0;
+  padding-left: 1.35rem;
+}
+
+.twin-markdown-body ul {
+  list-style-type: disc;
+}
+
+.twin-markdown-body ol {
+  list-style-type: decimal;
+}
+
+.twin-markdown-body li {
+  margin: 0.3rem 0;
+  color: var(--text-detail);
+  line-height: 1.55;
+}
+
+.twin-markdown-body code {
+  font-family: var(--font-code) !important;
+  font-size: 0.85em;
+  line-height: calc(1 / 0.75);
+  margin-inline: 0.125rem;
+  padding: 0.15rem 0.4rem;
+  background: var(--bg-code-inline);
+  border-radius: 4px;
+  color: var(--accent-emerald-light);
+}
+
+.twin-markdown-body pre {
+  margin: 0.6rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--bg-code);
+  border: 1px solid var(--border-code);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  line-height: calc(1 / 0.75);
+  color: var(--titanium-light);
+  overflow-x: auto;
+}
+
+.twin-markdown-body pre code {
+  margin: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--text-secondary);
+}
+
+.twin-markdown-body a {
+  color: var(--accent-emerald-light) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.twin-markdown-body a:hover {
+  color: var(--accent-emerald-hover) !important;
+}
+
+.twin-message-time {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  font-family: var(--font-code);
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.twin-msg-user .twin-message-time {
+  text-align: right;
+}
+
+.twin-thinking-text {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.twin-chat-input-area {
+  gap: 10px;
+  padding: 16px 20px;
+}
+
+.twin-chat-input {
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid var(--border-zinc);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  caret-color: var(--accent-emerald);
+  transition: border-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.twin-chat-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 1;
+}
+
+.twin-chat-input:focus {
+  border-color: var(--accent-emerald);
+  box-shadow: 0 0 0 3px var(--status-active-glow);
+}
+
+.twin-chat-send {
+  flex-shrink: 0;
+  border: 1px solid var(--accent-emerald);
+  border-radius: var(--radius-sm);
+  background: var(--accent-emerald) !important;
+  box-shadow: var(--rim-light);
+  color: var(--bg-canvas) !important;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: box-shadow var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.twin-chat-send:not(:disabled):hover {
+  background: var(--accent-emerald) !important;
+  box-shadow: var(--rim-light), 0 0 0 4px var(--status-active-glow);
+}
+
+.twin-chat-send:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.twin-chat-send:disabled,
+.twin-chat-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.twin-chat-send:disabled {
+  border-color: var(--border-zinc);
+  background: var(--bg-card-hover) !important;
+  color: var(--text-secondary) !important;
+  box-shadow: none;
+}
+
+@media (max-width: 640px) {
+  .terminal-window-bar {
+    padding: 12px 14px;
+  }
+
+  .terminal-console {
+    padding: 18px 14px 10px;
+    font-size: 0.8125rem;
+  }
+
+  .twin-chat-header {
+    gap: 8px;
+    padding: 14px 12px;
+  }
+
+  .twin-chat-profile {
+    gap: 8px;
+  }
+
+  .twin-chat-name {
+    font-size: 0.8125rem;
+  }
+
+  .twin-chat-header .twin-chat-clear {
+    padding: 8px;
+    font-size: 0.75rem;
+  }
+
+  .twin-chat-messages {
+    padding: 20px 12px;
+  }
+
+  .twin-msg-user,
+  .twin-msg-assistant {
+    max-width: 92%;
+    padding: 10px 12px;
+  }
+
+  .twin-chat-input-area {
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .twin-chat-input {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .twin-chat-send {
+    padding: 10px 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .twin-status::before {
+    animation: none;
+    box-shadow: none;
+  }
+
+  .twin-chat-send:not(:disabled):active {
+    transform: none;
+  }
+}

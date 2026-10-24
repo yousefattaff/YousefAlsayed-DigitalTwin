@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import ThemeProvider from "@/components/ThemeProvider";
 import "./globals.css";
+import "./styles/tokens.css";
+import "./styles/foundation.css";
+import "./styles/navigation.css";
+import "./styles/portfolio.css";
+import "./styles/telemetry.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -10,23 +14,29 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Yousef Alsayed — AI Software Engineer | Digital Twin",
+  title: "Yousef Alsayed Abdelfattah — AI Solutions & Multi-Agent Systems",
   description:
-    "AI Software Engineer & Mechatronics Graduate specializing in LLMs, cloud architecture, and robotics. Chat with my AI-powered Digital Twin to learn about my experience.",
+    "Yousef Alsayed Abdelfattah builds AI solutions with LLMs, multi-agent systems, RAG, AI-assisted development, and Python. AI Intern at Arche Robotics with a mechatronics and robotics background.",
   keywords: [
     "Yousef Alsayed",
     "AI Engineer",
     "Software Engineer",
     "Digital Twin",
     "LLM",
+    "AI Automation",
+    "Multi-Agent Systems",
+    "RAG",
+    "AI-Assisted Development",
+    "LangChain",
+    "n8n",
     "FastAPI",
     "AWS",
     "Mechatronics",
   ],
   openGraph: {
-    title: "Yousef Alsayed — AI Software Engineer",
+    title: "Yousef Alsayed Abdelfattah — AI Engineer",
     description:
-      "Chat with my AI Digital Twin. Built with Next.js, FastAPI, and AWS.",
+      "Explore my AI solutions, agent workflows, RAG projects, and robotics experience, or chat with my portfolio-grounded Digital Twin.",
     type: "website",
   },
 };
@@ -35,7 +45,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
+        {children}
       </body>
     </html>
   );

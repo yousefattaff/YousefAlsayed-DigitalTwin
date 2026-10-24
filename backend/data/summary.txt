@@ -1,5 +1,11 @@
-I am an AI & Software Engineer with a solid foundation in Mechatronics, Robotics, and Automation Engineering from Misr University for Science and Technology (MUST).
+I am Yousef Alsayed Abdelfattah, an AI engineer based in Cairo, Egypt. I build practical AI solutions, LLM applications, multi-agent workflows, and automations. I use AI-assisted development and coding agents alongside Python engineering, testing, and evaluation to turn ideas into working systems.
 
-My expertise bridges applied AI, software engineering, and systems thinking. Currently, I am an Artificial Intelligence Intern at Arche Robotics developing AI solutions, while also teaching programming as an English-speaking instructor at iSchool. Previously, I worked as an AI Software Engineer at Outlier evaluating and enhancing frontier LLM reasoning, safety, and performance.
+I started in embedded C, microcontrollers, and autonomous robots with ROS while studying Mechatronics, Robotics, and Automation Engineering at Misr University for Science and Technology (MUST), from September 2019 to June 2024. That engineering foundation led me into AI development and workflow automation.
 
-My technical focus spans Large Language Models, agentic workflows, FastAPI backend services, Docker containerization, and AWS serverless architectures (Lambda, API Gateway, S3, CloudFront). With certifications from Harvard's CS50 (Computer Science and AI with Python) and DeepLearning.AI's Machine Learning Specialization, I combine disciplined engineering fundamentals with modern AI application development.
+I am currently an Artificial Intelligence Intern at Arche Robotics, where I work on a real-time AI monitoring agent for live robot logs and anomaly detection. Alongside that, I teach Python, AI, JavaScript, and UI/UX fundamentals in English at iSchool. Previously, I evaluated LLM outputs and contributed RLHF feedback at Outlier.
+
+My agent and automation toolkit includes the OpenAI Agents SDK, CrewAI, LangGraph, n8n, MCP, and prompt engineering. I build document retrieval pipelines with LangChain and ChromaDB, and experiment with fine-tuning smaller local Qwen models using QLoRA. My LinkedIn profile lists fine-tuning, PyTorch, and React.js among my top skills.
+
+For backend engineering and deployment, I use Python, FastAPI, Pydantic, Langfuse, Docker, AWS Lambda, AWS SAM, and DynamoDB Streams. My portfolio also includes Groq and OpenAI integrations, API Gateway, S3, CloudFront, Git, Next.js, and React. My AI-assisted development training includes Claude Code and coding agents.
+
+I have completed my military service and am looking for a full-time AI Engineer or AI Automation role where I can contribute to real products and continue learning.

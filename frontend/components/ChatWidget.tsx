@@ -1,6 +1,12 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, type KeyboardEvent } from 'react';
+import Image from 'next/image';
+import { ChatRequestError, checkChatConnection, getChatErrorMessage, requestChat, type ChatContext } from '@/lib/chat';
+import { useReducedMotion } from '@/lib/useReducedMotion';
+import { MarkdownMessage } from './MarkdownMessage';
+
+export { MarkdownMessage };
 
 interface Message {
   id: string;
@@ -9,99 +15,137 @@ interface Message {
   timestamp: Date;
 }
 
+type ConnectionState = 'checking' | 'connected' | 'unavailable' | 'unconfigured';
+
+const connectionLabels: Record<ConnectionState, string> = {
+  checking: 'Checking connection',
+  connected: 'Connected',
+  unavailable: 'Unavailable',
+  unconfigured: 'Not configured',
+};
+
+function createMessage(role: Message['role'], content: string): Message {
+  return { id: crypto.randomUUID(), role, content, timestamp: new Date() };
+}
+
+function conversationContext(messages: Message[], topic?: string): ChatContext {
+  const history: ChatContext['history'] = [];
+  let remaining = 3000;
+  for (const message of messages.slice(-6).reverse()) {
+    if (message.role === 'assistant' && message.content.startsWith('Connection error:')) continue;
+    const content = message.content.slice(0, Math.min(2000, remaining));
+    if (!content) continue;
+    history.unshift({ role: message.role, content });
+    remaining -= content.length;
+  }
+  return { history, topic };
+}
+
 export default function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [sessionId, setSessionId] = useState<string>('');
+  const [connection, setConnection] = useState<ConnectionState>('checking');
+  const sessionIdRef = useRef<string | undefined>(undefined);
+  const topicRef = useRef<string | undefined>(undefined);
+  const requestRef = useRef<AbortController | null>(null);
+  const connectionRequestRef = useRef<AbortController | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, isLoading]);
+    const pane = messagesEndRef.current?.parentElement;
+    pane?.scrollTo({
+      top: pane.scrollHeight,
+      behavior: reducedMotion ? 'auto' : 'smooth',
+    });
+  }, [messages, isLoading, reducedMotion]);
 
-  const sendMessage = async (textToSend?: string) => {
-    const query = (textToSend || input).trim();
-    if (!query || isLoading) return;
-
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content: query,
-      timestamp: new Date(),
+  useEffect(() => {
+    const checkConnection = async () => {
+      if (requestRef.current) return;
+      connectionRequestRef.current?.abort();
+      const request = new AbortController();
+      connectionRequestRef.current = request;
+      try {
+        await checkChatConnection(request.signal);
+        if (connectionRequestRef.current === request && !request.signal.aborted) {
+          setConnection('connected');
+        }
+      } catch (error) {
+        if (connectionRequestRef.current === request && !request.signal.aborted) {
+          setConnection(error instanceof ChatRequestError && error.code === 'configuration'
+            ? 'unconfigured' : 'unavailable');
+        }
+      } finally {
+        if (connectionRequestRef.current === request) connectionRequestRef.current = null;
+      }
     };
+
+    void checkConnection();
+    const interval = setInterval(() => void checkConnection(), 30_000);
+    const handleOnline = () => void checkConnection();
+    window.addEventListener('online', handleOnline);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('online', handleOnline);
+      connectionRequestRef.current?.abort();
+      connectionRequestRef.current = null;
+      requestRef.current?.abort();
+      requestRef.current = null;
+    };
+  }, []);
+
+  const sendMessage = async () => {
+    const query = input.trim();
+    if (!query || requestRef.current) return;
+    const request = new AbortController();
+    requestRef.current = request;
+    connectionRequestRef.current?.abort();
+    connectionRequestRef.current = null;
+    const userMessage = createMessage('user', query);
 
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
     try {
-      const primaryUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-      const fallbackUrl = process.env.NEXT_PUBLIC_API_URL_FALLBACK;
-
-      let response: Response | null = null;
-      try {
-        response = await fetch(`${primaryUrl}/chat`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            message: query,
-            session_id: sessionId || undefined,
-          }),
-        });
-        if (!response.ok) throw new Error('Primary API failed');
-      } catch {
-        if (fallbackUrl) {
-          response = await fetch(`${fallbackUrl}/chat`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              message: query,
-              session_id: sessionId || undefined,
-            }),
-          });
-        } else {
-          throw new Error('API unavailable');
-        }
-      }
-
-      if (!response || !response.ok) throw new Error('Failed to send message');
-      const data = await response.json();
-
-      if (!sessionId && data.session_id) {
-        setSessionId(data.session_id);
-      }
-
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content: data.response,
-        timestamp: new Date(),
-      };
-
+      const data = await requestChat(
+        query, sessionIdRef.current, request.signal, conversationContext(messages, topicRef.current),
+      );
+      if (request.signal.aborted || requestRef.current !== request) return;
+      sessionIdRef.current = data.session_id ?? sessionIdRef.current;
+      topicRef.current = data.topic ?? topicRef.current;
+      setConnection('connected');
+      const assistantMessage = createMessage('assistant', data.response);
       setMessages((prev) => [...prev, assistantMessage]);
-    } catch (err) {
-      console.error('Chat error:', err);
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: 'assistant',
-        content:
-          "I'm having trouble connecting to my brain right now. Please ensure the backend server is running or try again shortly.",
-        timestamp: new Date(),
-      };
+    } catch (error) {
+      if (request.signal.aborted || requestRef.current !== request) return;
+      setConnection(error instanceof ChatRequestError && error.code === 'configuration'
+        ? 'unconfigured' : 'unavailable');
+      const errorMessage = createMessage('assistant',
+        `Connection error: ${getChatErrorMessage(error)}`);
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
-      setIsLoading(false);
+      if (requestRef.current === request) {
+        requestRef.current = null;
+        setIsLoading(false);
+      }
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+  const clearChat = () => {
+    requestRef.current?.abort();
+    requestRef.current = null;
+    sessionIdRef.current = undefined;
+    topicRef.current = undefined;
+    setMessages([]);
+    setIsLoading(false);
+  };
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
       e.preventDefault();
       sendMessage();
     }
@@ -110,64 +154,45 @@ export default function ChatWidget() {
   return (
     <div className="items-container" id="twin">
       <h1>AI Digital Twin</h1>
-      <p style={{ maxWidth: '800px', lineHeight: 1.6 }}>
-        Chat directly with my interactive AI twin. Trained on my career milestones, technical skills, and research background.
+      <p className="twin-intro">
+        Ask my AI twin about my solutions, career, projects, and technical skills. Answers draw from my portfolio and LinkedIn profile.
       </p>
 
       <div className="twin-chat-box">
         {/* Header */}
         <div className="twin-chat-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img
-              src="/yousef.jpg"
+          <div className="twin-chat-profile">
+            <Image
+              src="/data/profile/yousef.jpg"
               alt="Yousef"
-              style={{ width: '34px', height: '34px', borderRadius: '50%', objectFit: 'cover' }}
+              width={34}
+              height={34}
+              className="twin-avatar"
             />
             <div>
-              <div style={{ fontWeight: 'bold', fontSize: '0.95rem' }}>Yousef&apos;s Digital Twin</div>
-              <div style={{ fontSize: '0.75rem', color: '#10b981' }}>● Online</div>
+              <div className="twin-chat-name">Yousef&apos;s Digital Twin</div>
+              <div className={`twin-status twin-status-${connection}`} role="status" aria-live="polite">
+                ● {connectionLabels[connection]}
+              </div>
             </div>
           </div>
           <button
             type="button"
-            onClick={() => setMessages([])}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '0.85rem',
-              color: '#8b949e',
-            }}
+            onClick={clearChat}
+            className="twin-chat-clear"
           >
             Clear chat
           </button>
         </div>
 
         {/* Messages */}
-        <div className="twin-chat-messages">
+        <div className="twin-chat-messages" role="log" aria-live="polite" aria-busy={isLoading}>
           {messages.length === 0 && (
-            <div style={{ textAlign: 'center', margin: 'auto', padding: '20px 0' }}>
-              <p style={{ fontSize: '1.2rem', marginBottom: '8px' }}>👋 Hello! I am Yousef&apos;s AI Digital Twin.</p>
-              <p style={{ fontSize: '0.95rem', color: '#8b949e', marginBottom: '20px' }}>
-                Ask me anything about my projects, my experience at Arche Robotics, or my technical stack.
+            <div className="twin-chat-empty">
+              <p className="twin-chat-welcome">👋 Hello! I am Yousef&apos;s AI Digital Twin.</p>
+              <p className="twin-help-text">
+                Ask about my projects, background in AI &amp; robotics, or engineering work.
               </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '8px' }}>
-                {[
-                  'What is your experience at Arche Robotics?',
-                  'Tell me about your AI projects',
-                  'What are your primary technical skills?',
-                ].map((prompt) => (
-                  <button
-                    key={prompt}
-                    type="button"
-                    onClick={() => sendMessage(prompt)}
-                    className="chip"
-                    style={{ cursor: 'pointer', border: 'none' }}
-                  >
-                    <span>{prompt}</span>
-                  </button>
-                ))}
-              </div>
             </div>
           )}
 
@@ -176,16 +201,15 @@ export default function ChatWidget() {
               key={msg.id}
               className={msg.role === 'user' ? 'twin-msg-user' : 'twin-msg-assistant'}
             >
-              <div style={{ whiteSpace: 'pre-wrap', lineHeight: 1.5, fontSize: '0.95rem' }}>
-                {msg.content}
+              <div className="twin-message-content">
+                {msg.role === 'assistant' ? (
+                  <MarkdownMessage content={msg.content} />
+                ) : (
+                  msg.content
+                )}
               </div>
               <div
-                style={{
-                  fontSize: '0.7rem',
-                  opacity: 0.7,
-                  marginTop: '4px',
-                  textAlign: msg.role === 'user' ? 'right' : 'left',
-                }}
+                className="twin-message-time"
               >
                 {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </div>
@@ -194,7 +218,7 @@ export default function ChatWidget() {
 
           {isLoading && (
             <div className="twin-msg-assistant">
-              <span style={{ fontSize: '0.9rem' }}>Thinking...</span>
+              <span className="twin-thinking-text">Thinking...</span>
             </div>
           )}
 
@@ -204,8 +228,10 @@ export default function ChatWidget() {
         {/* Input */}
         <div className="twin-chat-input-area">
           <input
-            ref={inputRef}
+            id="twin-chat-input"
+            aria-label="Message for Yousef's Digital Twin"
             type="text"
+            maxLength={2000}
             className="twin-chat-input"
             value={input}
             onChange={(e) => setInput(e.target.value)}

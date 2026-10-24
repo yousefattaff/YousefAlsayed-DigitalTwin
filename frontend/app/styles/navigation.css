@@ -1,0 +1,264 @@
+/* Floating navigation and contact chrome. Keep the existing navigation markup. */
+.navigation-bar-container {
+  padding: 16px 20px;
+  pointer-events: none;
+}
+
+.navigation-bar {
+  width: min(100%, 760px);
+  height: 56px;
+  padding: 5px 12px;
+  justify-content: center;
+  border: 1px solid var(--border-zinc);
+  border-radius: var(--radius-full);
+  background: var(--bg-floating) !important;
+  box-shadow: var(--rim-light), var(--shadow-elevation);
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  backdrop-filter: blur(var(--blur-glass));
+  pointer-events: auto;
+  transition:
+    border-color var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.navigation-bar-container.scrolled .navigation-bar {
+  border-color: var(--border-medium);
+  box-shadow: var(--rim-light), var(--shadow-elevation) !important;
+}
+
+.navigation-bar nav {
+  min-width: 0;
+  max-width: 100%;
+  margin-inline: auto;
+  justify-content: center;
+  gap: 4px;
+}
+
+.navigation-bar button,
+.navigation-bar .nav-link-btn {
+  flex-shrink: 0;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary) !important;
+  font-family: var(--font-ui) !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.navigation-bar button:hover,
+.navigation-bar .nav-link-btn:hover {
+  border-color: var(--border-subtle);
+  background: var(--bg-card-active) !important;
+  color: var(--text-primary) !important;
+}
+
+.navigation-bar button:active {
+  transform: translateY(1px);
+}
+
+.navigation-bar-container + [role="presentation"] {
+  background: var(--bg-floating);
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  backdrop-filter: blur(var(--blur-glass));
+}
+
+.navigation-bar-responsive {
+  width: min(280px, calc(100vw - 24px));
+  height: 100vh;
+  height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-right: 1px solid var(--border-zinc);
+  background: var(--bg-floating) !important;
+  box-shadow: var(--rim-light), var(--shadow-elevation);
+  -webkit-backdrop-filter: blur(var(--blur-glass));
+  backdrop-filter: blur(var(--blur-glass));
+}
+
+.mobile-menu-top {
+  justify-content: flex-start;
+  gap: 10px;
+  min-height: 76px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary) !important;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.mobile-menu-top svg {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.mobile-nav-list {
+  gap: 4px;
+  padding: 12px;
+}
+
+.mobile-nav-btn {
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary) !important;
+  font-family: var(--font-ui) !important;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  text-align: left;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.mobile-nav-btn:hover,
+.mobile-menu-close:hover {
+  border-color: var(--border-medium);
+  background: var(--bg-card-active) !important;
+  color: var(--text-primary) !important;
+}
+
+.mobile-menu-close {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-zinc);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  color: var(--text-secondary) !important;
+  font-family: var(--font-ui) !important;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  box-shadow: var(--rim-light);
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+footer#contact {
+  margin-top: 32px;
+  padding: 40px clamp(20px, 5vw, 80px) 48px;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+footer#contact > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+footer#contact > div:first-child a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  box-shadow: var(--rim-light);
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+footer#contact svg {
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0;
+  color: var(--text-secondary) !important;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+footer#contact p {
+  margin: 8px auto 0;
+  color: var(--text-secondary) !important;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  opacity: 1;
+  text-wrap: pretty;
+}
+
+footer#contact p a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--text-secondary) !important;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+footer#contact a:hover {
+  color: var(--text-primary) !important;
+}
+
+footer#contact p a:hover {
+  color: var(--text-primary) !important;
+  text-decoration-line: underline;
+}
+
+footer#contact > div:first-child a:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-card-hover);
+}
+
+footer#contact a:hover svg {
+  color: var(--accent-emerald) !important;
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+  .navigation-bar-container {
+    padding: 12px;
+  }
+
+  .navigation-bar {
+    padding-inline: 8px;
+  }
+
+  .navigation-bar nav {
+    gap: 2px;
+  }
+
+  .navigation-bar button,
+  .navigation-bar .nav-link-btn {
+    padding-inline: 8px;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .navigation-bar-container {
+    padding: 12px;
+  }
+
+  .navigation-bar {
+    justify-content: flex-start;
+    padding: 5px 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navigation-bar button:active {
+    transform: none;
+  }
+}

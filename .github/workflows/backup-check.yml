@@ -1,4 +1,4 @@
-name: Backup Health Check
+name: Production and Backup Health
 
 on:
   schedule:
@@ -6,58 +6,101 @@ on:
     - cron: '0 8 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: production-health
+  cancel-in-progress: false
+
 jobs:
   health-check:
-    name: Multi-Provider Health Check
+    name: Verify live portfolio and native Twin
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
-      - name: Check Primary (AWS)
-        id: aws_check
-        continue-on-error: true
+      - name: Check production and optional backup
+        env:
+          API_GATEWAY_URL: ${{ vars.API_GATEWAY_URL || secrets.API_GATEWAY_URL }}
         run: |
-          STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "${{ secrets.CLOUDFRONT_URL }}" --max-time 10 || echo "000")
-          echo "aws_status=$STATUS" >> $GITHUB_OUTPUT
-          echo "☁️ AWS CloudFront: $STATUS"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlsplit
+          from urllib.request import Request, urlopen
 
-      - name: Check Primary API (AWS)
-        id: api_check
-        continue-on-error: true
-        run: |
-          RESPONSE=$(curl -sf "${{ secrets.API_GATEWAY_URL }}/health" --max-time 10 || echo "FAILED")
-          echo "api_response=$RESPONSE" >> $GITHUB_OUTPUT
-          echo "⚡ AWS API: $RESPONSE"
+          primary = "https://yousefalsayed.me"
 
-      - name: Check Backup Frontend (Vercel)
-        id: vercel_check
-        continue-on-error: true
-        run: |
-          STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "${{ secrets.VERCEL_URL }}" --max-time 10 || echo "000")
-          echo "vercel_status=$STATUS" >> $GITHUB_OUTPUT
-          echo "▲ Vercel: $STATUS"
+          def request(url, payload=None, timeout=20):
+              body = json.dumps(payload).encode() if payload is not None else None
+              headers = {"Content-Type": "application/json"} if body else {}
+              try:
+                  with urlopen(Request(url, data=body, headers=headers), timeout=timeout) as response:
+                      data = response.read(131073)
+                      if response.status != 200:
+                          return None, f"HTTP {response.status}"
+                      return (data, None) if len(data) <= 131072 else (None, "response too large")
+              except HTTPError as error:
+                  return None, f"HTTP {error.code}"
+              except (URLError, TimeoutError, OSError):
+                  return None, "unreachable"
 
-      - name: Check Backup API (Railway)
-        id: railway_check
-        continue-on-error: true
-        run: |
-          RESPONSE=$(curl -sf "${{ secrets.RAILWAY_URL }}/health" --max-time 10 || echo "FAILED")
-          echo "railway_response=$RESPONSE" >> $GITHUB_OUTPUT
-          echo "🚂 Railway: $RESPONSE"
+          def decode(data):
+              try:
+                  return json.loads(data) if data else None
+              except (ValueError, UnicodeError):
+                  return None
 
-      - name: Report Summary
-        run: |
-          echo "╔══════════════════════════════════════╗"
-          echo "║     Daily Health Check Results       ║"
-          echo "╠══════════════════════════════════════╣"
-          echo "║ ☁️  AWS Frontend:  ${{ steps.aws_check.outputs.aws_status }}"
-          echo "║ ⚡ AWS API:       ${{ steps.api_check.outputs.api_response }}"
-          echo "║ ▲  Vercel:        ${{ steps.vercel_check.outputs.vercel_status }}"
-          echo "║ 🚂 Railway:       ${{ steps.railway_check.outputs.railway_response }}"
-          echo "╚══════════════════════════════════════╝"
+          def configured(health):
+              return (isinstance(health, dict) and health.get("status") == "healthy"
+                      and health.get("llm_configured") is True
+                      and type(health.get("rag_documents")) is int and health["rag_documents"] > 0
+                      and health.get("model") in {"openai/gpt-oss-120b", "openai/gpt-oss-20b"})
 
-          # Fail if ALL providers are down
-          if [ "${{ steps.aws_check.outputs.aws_status }}" != "200" ] && \
-             [ "${{ steps.vercel_check.outputs.vercel_status }}" != "200" ]; then
-            echo "🚨 CRITICAL: All frontend providers are DOWN!"
-            exit 1
-          fi
+          rows = []
+          page, page_error = request(primary, timeout=15)
+          portfolio_ok = page is not None and b"Yousef" in page
+          rows.append(("Portfolio", "healthy" if portfolio_ok else page_error or "invalid page"))
+
+          health, health_error = request(primary + "/api/health")
+          twin_ok = configured(decode(health))
+          rows.append(("Native Twin configuration", "healthy" if twin_ok else health_error or "not configured"))
+
+          chat_ok = False
+          if twin_ok:
+              reply, reply_error = request(primary + "/api/chat", {"message": "Briefly introduce yourself."}, timeout=45)
+              chat = decode(reply)
+              answer = chat.get("response") if isinstance(chat, dict) else None
+              chat_ok = isinstance(answer, str) and bool(answer.strip())
+              rows.append(("Native Twin live chat", "healthy" if chat_ok else reply_error or "no reply"))
+          else:
+              rows.append(("Native Twin live chat", "skipped: configuration failed"))
+
+          backup = os.environ.get("API_GATEWAY_URL", "").strip().rstrip("/")
+          if backup:
+              url = urlsplit(backup)
+              host = (url.hostname or "").lower()
+              valid = (url.scheme == "https" and host and not url.username and not url.password
+                       and not url.query and not url.fragment
+                       and host not in {"localhost", "127.0.0.1", "0.0.0.0", "::1"}
+                       and not host.endswith(".localhost"))
+              if valid:
+                  data, backup_error = request(backup + "/health")
+                  rows.append(("Optional AWS configuration health", "healthy" if configured(decode(data)) else backup_error or "not configured"))
+              else:
+                  rows.append(("Optional AWS configuration health", "invalid endpoint configuration"))
+          else:
+              rows.append(("Optional AWS configuration health", "not configured"))
+
+          summary = "## Daily production check\n\n| Service | Result |\n| --- | --- |\n"
+          summary += "".join(f"| {label} | {result} |\n" for label, result in rows)
+          print(summary)
+          if os.environ.get("GITHUB_STEP_SUMMARY"):
+              with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as report:
+                  report.write(summary)
+          if not (portfolio_ok and twin_ok and chat_ok):
+              raise SystemExit("The primary portfolio or native Digital Twin failed verification.")
+          PY

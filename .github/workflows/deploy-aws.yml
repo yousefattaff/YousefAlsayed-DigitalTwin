@@ -1,99 +1,60 @@
-name: Deploy to AWS
+name: Deploy AWS Backend Backup
 
 on:
   workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: optional-aws-backend
+  cancel-in-progress: false
 
 env:
   AWS_REGION: eu-north-1
   PROJECT_NAME: twin
 
 jobs:
-  deploy-frontend:
-    name: Build & Deploy Frontend
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: frontend
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Set production API URL
-        run: echo "NEXT_PUBLIC_API_URL=${{ secrets.API_GATEWAY_URL }}" > .env.production
-
-      - name: Build static export
-        run: npm run build
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Upload to S3
-        run: |
-          aws s3 sync out/ s3://${{ secrets.S3_FRONTEND_BUCKET }}/ \
-            --delete \
-            --cache-control "public, max-age=31536000, immutable" \
-            --exclude "*.html" \
-            --exclude "*.json"
-          # HTML and JSON files get shorter cache
-          aws s3 sync out/ s3://${{ secrets.S3_FRONTEND_BUCKET }}/ \
-            --cache-control "public, max-age=0, must-revalidate" \
-            --include "*.html" \
-            --include "*.json" \
-            --exclude "*" \
-            --include "*.html" \
-            --include "*.json"
-
-      - name: Invalidate CloudFront cache
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*"
-
   deploy-backend:
-    name: Package & Deploy Backend
+    name: Package & Deploy Optional AWS API
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: backend
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Check backup configuration
+        env:
+          API_GATEWAY_URL: ${{ vars.API_GATEWAY_URL || secrets.API_GATEWAY_URL }}
+        run: |
+          python3 - <<'PY'
+          import os
+          from urllib.parse import urlsplit
+
+          url = urlsplit(os.environ.get("API_GATEWAY_URL", "").strip())
+          host = (url.hostname or "").lower()
+          if (url.scheme != "https" or not host or url.username or url.password or url.query or url.fragment
+              or host in {"localhost", "127.0.0.1", "0.0.0.0", "::1"} or host.endswith(".localhost")):
+              raise SystemExit("A verified public HTTPS API_GATEWAY_URL is required for the optional backend.")
+          print("Optional API endpoint configuration is present.")
+          PY
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
-      - name: Install uv
-        run: pip install uv
-
-      - name: Package Lambda
-        run: |
-          mkdir -p lambda-package
-          uv pip install \
-            --python-platform x86_64-unknown-linux-gnu \
-            --python-version 3.12 \
-            --target lambda-package \
-            -r requirements.txt
-          # Copy app files
-          cp server.py lambda_handler.py context.py resources.py lambda-package/
-          cp -r data lambda-package/
-          # Create ZIP
-          cd lambda-package && zip -r ../lambda-deployment.zip .
+      - name: Setup locked dependency tooling
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.10.12'
+          enable-cache: true
+          cache-dependency-glob: backend/uv.lock
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -101,33 +62,67 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
+          mask-aws-account-id: true
+
+      - name: Verify existing Lambda runtime
+        run: |
+          mkdir -p .local
+          aws lambda get-function-configuration \
+            --function-name "${PROJECT_NAME}-api" \
+            --query '{runtime:Runtime,architectures:Architectures}' \
+            --output json > .local/lambda-runtime.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          runtime = json.loads(Path(".local/lambda-runtime.json").read_text())
+          if runtime.get("runtime") != "python3.12" or runtime.get("architectures") != ["x86_64"]:
+              raise SystemExit("The existing backup function must use Python 3.12 and x86_64 for this package.")
+          print("Existing Lambda runtime and architecture verified.")
+          PY
+
+      - name: Package Lambda
+        run: python deploy.py
 
       - name: Deploy to Lambda
         run: |
           aws lambda update-function-code \
-            --function-name ${{ env.PROJECT_NAME }}-api \
-            --zip-file fileb://lambda-deployment.zip
+            --function-name "${PROJECT_NAME}-api" \
+            --zip-file fileb://lambda-deployment.zip \
+            --query 'LastUpdateStatus' --output text
+          aws lambda wait function-updated \
+            --function-name "${PROJECT_NAME}-api"
+          echo "Optional AWS backend code update completed."
 
   health-check:
-    name: Post-Deploy Health Check
-    needs: [deploy-frontend, deploy-backend]
+    name: AWS Backend Health Check
+    needs: deploy-backend
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
       - name: Check API health
+        env:
+          API_GATEWAY_URL: ${{ vars.API_GATEWAY_URL || secrets.API_GATEWAY_URL }}
         run: |
-          RESPONSE=$(curl -sf "${{ secrets.API_GATEWAY_URL }}/health" || echo "FAILED")
-          echo "API Health: $RESPONSE"
-          if [ "$RESPONSE" = "FAILED" ]; then
-            echo "⚠️ API health check failed!"
-            exit 1
-          fi
+          python3 - <<'PY'
+          import json
+          import os
+          from urllib.request import urlopen
 
-      - name: Check Frontend
-        run: |
-          STATUS=$(curl -sf -o /dev/null -w "%{http_code}" "${{ secrets.CLOUDFRONT_URL }}" || echo "000")
-          echo "Frontend Status: $STATUS"
-          if [ "$STATUS" != "200" ]; then
-            echo "⚠️ Frontend health check failed!"
-            exit 1
-          fi
+          endpoint = os.environ["API_GATEWAY_URL"].strip().rstrip("/") + "/health"
+          try:
+              with urlopen(endpoint, timeout=20) as response:
+                  health = json.loads(response.read(131072))
+          except Exception:
+              raise SystemExit("AWS API health request failed.") from None
+          if not isinstance(health, dict):
+              raise SystemExit("AWS API returned invalid configuration health.")
+          configured = health.get("llm_configured") is True
+          documents = health.get("rag_documents", 0)
+          model_ready = health.get("model") in {"openai/gpt-oss-120b", "openai/gpt-oss-20b"}
+          if health.get("status") != "healthy" or not configured or type(documents) is not int or documents <= 0 or not model_ready:
+              raise SystemExit("AWS API health check failed: provider configuration and canonical knowledge are required.")
+          print("AWS API configuration health passed: provider configured, supported model selected, and knowledge loaded.")
+          print("Provider inference is separate from this configuration health check.")
+          PY

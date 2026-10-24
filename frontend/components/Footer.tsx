@@ -1,14 +1,11 @@
-'use client';
-
-import React from 'react';
 import { GithubIcon, LinkedinIcon } from './Icons';
 
 export default function Footer() {
   return (
-    <footer>
+    <footer id="contact">
       <div>
         <a
-          href="https://github.com/yousefalsayed"
+          href="https://github.com/yousefattaff"
           target="_blank"
           rel="noreferrer"
           aria-label="GitHub"
@@ -24,6 +21,11 @@ export default function Footer() {
           <LinkedinIcon size={24} />
         </a>
       </div>
+      <p>
+        <a href="mailto:yousefabuelkhear@gmail.com">Email Yousef</a>
+        {' · '}
+        <a href="/resume.pdf" download>Download resume</a>
+      </p>
       <p>
         A portfolio designed &amp; built by{' '}
         <a

@@ -1,19 +1,22 @@
-'use client';
-
-import React from 'react';
+import Image from 'next/image';
 import { LinkedinIcon, GithubIcon } from './Icons';
+import type { HomeProfile } from './HomeClient';
 
-export default function Hero() {
+export default function Hero({
+  profile,
+}: {
+  profile: HomeProfile;
+}) {
   return (
     <div className="hero-wrapper" id="about" style={{ width: '100%', maxWidth: '100%' }}>
       <div className="about-section">
         <div className="image-wrapper">
-          <img src="/yousef.jpg" alt="Avatar" />
+          <Image src={profile.avatarUrl} alt={profile.displayName} width={150} height={150} preload />
         </div>
         <div className="content">
           <div className="social_icons">
             <a
-              href="https://github.com/yousefalsayed"
+              href={profile.githubUrl}
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
@@ -21,7 +24,7 @@ export default function Hero() {
               <GithubIcon size={28} />
             </a>
             <a
-              href="https://www.linkedin.com/in/yousef-alsayed-abdelfattah"
+              href={profile.linkedinUrl}
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
@@ -29,12 +32,12 @@ export default function Hero() {
               <LinkedinIcon size={28} />
             </a>
           </div>
-          <h1>Yousef Alsayed</h1>
-          <p>AI Software Engineer & Mechatronics Graduate</p>
+          <h1>{profile.displayName}</h1>
+          <p>{profile.headline}</p>
 
           <div className="mobile_social_icons">
             <a
-              href="https://github.com/yousefalsayed"
+              href={profile.githubUrl}
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
@@ -42,7 +45,7 @@ export default function Hero() {
               <GithubIcon size={28} />
             </a>
             <a
-              href="https://www.linkedin.com/in/yousef-alsayed-abdelfattah"
+              href={profile.linkedinUrl}
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"

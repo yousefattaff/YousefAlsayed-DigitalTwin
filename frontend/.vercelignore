@@ -1,0 +1,13 @@
+.env*
+.vercel
+.next
+out
+node_modules
+.local
+.aws
+.agents
+.codex
+*.log
+*.tsbuildinfo
+
+# Canonical content/ and data/twin/ are intentionally included.

@@ -3,14 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "sync:content": "node scripts/sync-content.mjs",
+    "predev": "node scripts/sync-content.mjs",
+    "dev": "node scripts/dev.mjs",
+    "predev:frontend": "node scripts/sync-content.mjs",
+    "dev:frontend": "next dev",
+    "dev:check": "node scripts/dev.mjs --check",
+    "prebuild": "node scripts/sync-content.mjs",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "deploy:vercel": "node scripts/deploy-vercel.mjs",
+    "deploy:check": "node scripts/deploy-vercel.mjs --check",
+    "release:check": "node scripts/release-check.mjs",
+    "lint": "eslint",
+    "test": "node --test tests/chat.test.mjs tests/twin.test.mjs tests/sync-content.test.mjs tests/vercel-target.test.mjs tests/vercel-api.test.mjs tests/release-check.test.mjs"
   },
   "dependencies": {
+    "@google/model-viewer": "^4.4.0",
     "lucide-react": "^1.47.0",
-    "next": "16.3.5",
+    "next": "16.4.3",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
@@ -20,7 +31,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.3.5",
+    "eslint-config-next": "16.4.3",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

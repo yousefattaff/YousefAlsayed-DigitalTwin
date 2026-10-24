@@ -1,12 +1,6 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "out",
-  "installCommand": "npm ci",
   "framework": "nextjs",
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://uvsk3twnk5.execute-api.eu-north-1.amazonaws.com/:path*"
-    }
-  ]
+  "buildCommand": "npm run build",
+  "installCommand": "npm ci --include=dev",
+  "outputDirectory": null
 }

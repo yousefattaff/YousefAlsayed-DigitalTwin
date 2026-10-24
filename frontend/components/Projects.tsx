@@ -1,8 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useRef, useState } from 'react';
+import Image from 'next/image';
+import { useModal } from '@/lib/useModal';
+import { useReducedMotion } from '@/lib/useReducedMotion';
 
-interface ProjectItem {
+export interface ProjectShowcaseItem {
   title: string;
   description: string;
   mock: string;
@@ -11,64 +14,11 @@ interface ProjectItem {
   url?: string;
 }
 
-const projectList: ProjectItem[] = [
-  {
-    title: 'AI Digital Twin Platform',
-    description:
-      'A real-time conversational AI clone powered by FastAPI, OpenAI/Groq LLMs, and AWS Lambda. Visitors can chat directly with an AI that faithfully represents my career, skills, and technical expertise.',
-    mock: '/images/mock10.png',
-    image: '/projects/digital-twin.png',
-    video: '/projects/digital-twin.mp4',
-    url: '#twin',
-  },
-  {
-    title: 'Automated AI Evaluation Pipeline',
-    description:
-      'RLHF benchmarking suite for evaluating LLM reasoning, mathematical accuracy, and instruction following. Built to systematically evaluate and refine frontier model performance.',
-    mock: '/images/mock04.png',
-    image: '/projects/ai-evaluation.png',
-    video: '/projects/ai-evaluation.mp4',
-    url: 'https://github.com/yousefalsayed',
-  },
-  {
-    title: 'Industrial Automation & PLC Controller',
-    description:
-      'Control systems architecture designed for Siemens S7-1200/1500 PLCs and CNC machines. Automated manufacturing processes with TIA Portal programming and real-time sensor monitoring.',
-    mock: '/images/mock06.png',
-    image: '/projects/plc-automation.png',
-    video: '/projects/plc-automation.mp4',
-    url: 'https://github.com/yousefalsayed',
-  },
-  {
-    title: 'Serverless Cloud Architecture',
-    description:
-      'Designed and deployed a full serverless stack on AWS — Lambda functions, API Gateway, S3, CloudFront CDN, and Terraform IaC — powering cost-efficient, scalable production services.',
-    mock: '/images/mock05.png',
-    image: '/projects/cloud-architecture.png',
-    video: '/projects/cloud-architecture.mp4',
-    url: 'https://github.com/yousefalsayed',
-  },
-  {
-    title: 'Filmate AI: Semantic Search & Recommendations',
-    description:
-      'Intelligent media discovery platform featuring semantic vector embeddings with Qdrant, sentiment analysis, and natural language query understanding.',
-    mock: '/images/mock07.png',
-    url: 'https://github.com/yousefalsayed',
-  },
-  {
-    title: 'Autonomous Robotics Navigation System',
-    description:
-      'Embedded robotics control system combining path-planning algorithms, sensor fusion, and real-time motor actuation developed during mechatronics research.',
-    mock: '/images/mock08.png',
-    url: 'https://github.com/yousefalsayed',
-  },
-];
+function ProjectThumbnail({ project }: { project: ProjectShowcaseItem }) {
+  const [fallbackLevel, setFallbackLevel] = useState(0);
+  const reducedMotion = useReducedMotion();
 
-function ProjectThumbnail({ project }: { project: ProjectItem }) {
-  const [useFallback, setUseFallback] = useState(false);
-
-  // If a video exists, render video with hover playback
-  if (project.video) {
+  if (project.video && fallbackLevel === 0) {
     return (
       <div className="project-media-wrapper">
         <video
@@ -78,46 +28,61 @@ function ProjectThumbnail({ project }: { project: ProjectItem }) {
           muted
           loop
           playsInline
-          onMouseEnter={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
+          preload="metadata"
+          onMouseEnter={(event) => {
+            if (reducedMotion) return;
+            void event.currentTarget.play().catch(() => {
+              // Autoplay can be declined by the browser; the poster remains visible.
+            });
+          }}
           onMouseLeave={(e) => {
-            const v = e.target as HTMLVideoElement;
+            const v = e.currentTarget;
             v.pause();
             v.currentTime = 0;
           }}
-          onError={() => setUseFallback(true)}
+          onError={() => setFallbackLevel(1)}
         />
       </div>
     );
   }
 
-  // If custom screenshot image exists, try loading it; fall back to mock image if not present yet
-  if (project.image && !useFallback) {
+  if (project.image && fallbackLevel < 2) {
     return (
-      <img
+      <Image
         src={project.image}
         className="zoom"
         alt={project.title}
-        width="100%"
-        onError={() => setUseFallback(true)}
+        width={1200}
+        height={675}
+        sizes="(max-width: 768px) 88vw, 220px"
+        onError={() => setFallbackLevel(2)}
       />
     );
   }
 
-  // Default to template's authentic mock image
   return (
-    <img
+    <Image
       src={project.mock}
       className="zoom"
       alt={project.title}
-      width="100%"
+      width={1200}
+      height={675}
+      sizes="(max-width: 768px) 88vw, 220px"
     />
   );
 }
 
-export default function Projects() {
+export default function Projects({ projects: projectList }: { projects: ProjectShowcaseItem[] }) {
+  const [selectedProject, setSelectedProject] = useState<ProjectShowcaseItem | null>(null);
+  const dialogRef = useRef<HTMLElement>(null);
+  useModal(dialogRef, selectedProject !== null, () => setSelectedProject(null));
+
   return (
     <div className="projects-container" id="projects">
       <h1>Personal Projects</h1>
+      <p className="project-showcase-count" aria-live="polite">
+        Showing {projectList.length} projects
+      </p>
       <div className="projects-grid">
         {projectList.map((project) => (
           <div key={project.title} className="project">
@@ -136,9 +101,58 @@ export default function Projects() {
               <h2>{project.title}</h2>
             </a>
             <p>{project.description}</p>
+            <button
+              type="button"
+              className="project-details-trigger"
+              onClick={() => setSelectedProject(project)}
+              aria-label={`View details for ${project.title}`}
+            >
+              View project details
+            </button>
           </div>
         ))}
       </div>
+      {selectedProject && (
+        <div
+          className="project-showcase-dialog-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setSelectedProject(null);
+          }}
+        >
+          <section
+            ref={dialogRef}
+            className="project-showcase-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-dialog-title"
+            aria-describedby="project-dialog-description"
+            tabIndex={-1}
+          >
+            <button
+              type="button"
+              className="project-dialog-close"
+              onClick={() => setSelectedProject(null)}
+              aria-label="Close project details"
+            >
+              ×
+            </button>
+            <h2 id="project-dialog-title">{selectedProject.title}</h2>
+            <div className="project-dialog-media">
+              <ProjectThumbnail key={selectedProject.title} project={selectedProject} />
+            </div>
+            <p id="project-dialog-description">{selectedProject.description}</p>
+            <a
+              className="project-dialog-link"
+              href={selectedProject.url || '#projects'}
+              target={selectedProject.url?.startsWith('#') ? undefined : '_blank'}
+              rel="noreferrer"
+            >
+              Open project link
+            </a>
+          </section>
+        </div>
+      )}
     </div>
   );
 }

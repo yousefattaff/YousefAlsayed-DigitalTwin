@@ -1,42 +1,35 @@
-'use client';
-
-import React from 'react';
-
 const labelsFirst = [
-  'React',
-  'Next.js',
-  'TypeScript',
-  'JavaScript',
-  'HTML5',
-  'CSS3',
-  'FastAPI',
-  'Python',
-  'PostgreSQL',
-  'Postman',
+  'Claude Code',
+  'AI-Assisted Coding',
+  'OpenAI Agents SDK',
+  'CrewAI',
+  'LangGraph',
+  'n8n',
+  'MCP',
+  'Prompt Engineering',
 ];
 
 const labelsSecond = [
-  'Git',
-  'GitHub Actions',
-  'Docker',
-  'AWS Lambda',
-  'API Gateway',
-  'S3',
-  'CloudFront',
-  'Terraform',
-  'Linux',
+  'Python',
+  'LangChain',
+  'ChromaDB',
+  'RAG',
+  'PyTorch',
+  'Qwen / QLoRA',
+  'Pydantic',
+  'Langfuse',
+  'LLM Evaluation / RLHF',
 ];
 
 const labelsThird = [
-  'OpenAI',
+  'FastAPI',
+  'Docker',
+  'AWS Lambda / SAM',
+  'DynamoDB Streams',
   'Groq',
-  'LangChain',
-  'RLHF',
-  'Siemens PLC',
-  'TIA Portal',
-  'MATLAB',
-  'SolidWorks',
-  'Robotics',
+  'FastMCP',
+  'Pytest',
+  'Next.js / React',
 ];
 
 const ReactIconSvg = () => (
@@ -61,20 +54,20 @@ const PythonIconSvg = () => (
 export default function Expertise() {
   return (
     <div className="container" id="expertise">
-      <div className="skills-container">
+      <div className="skills-container" id="skills">
         <h1>Expertise</h1>
         <div className="skills-grid">
           {/* Pillar 1 */}
           <div className="skill">
             <ReactIconSvg />
-            <h3>Full Stack Web Development & AI Agents</h3>
+            <h3>AI Solutions &amp; Automation</h3>
             <p>
-              I build robust, responsive full-stack applications and autonomous agent pipelines from scratch using modern frameworks such as React, Next.js, and FastAPI. Strong proficiency in clean API design and asynchronous LLM orchestration.
+              I use AI-assisted development to build practical LLM applications, multi-agent systems, and workflow automations, connecting agents to tools and checking the results.
             </p>
             <div className="flex-chips">
               <span className="chip-title">Tech stack:</span>
-              {labelsFirst.map((label, index) => (
-                <span key={index} className="chip">
+              {labelsFirst.map((label) => (
+                <span key={label} className="chip">
                   <span>{label}</span>
                 </span>
               ))}
@@ -84,14 +77,14 @@ export default function Expertise() {
           {/* Pillar 2 */}
           <div className="skill">
             <DockerIconSvg />
-            <h3>Cloud & DevOps Architecture</h3>
+            <h3>RAG, Fine-Tuning &amp; Evaluation</h3>
             <p>
-              Architected and deployed scalable production services on AWS using Lambda, API Gateway, S3, and CloudFront. Experienced with Docker containerization, Terraform Infrastructure as Code, and automated CI/CD pipelines.
+              I build document retrieval pipelines and experiment with Qwen and QLoRA, using structured outputs, tracing, and LLM evaluation to improve reliability.
             </p>
             <div className="flex-chips">
               <span className="chip-title">Tech stack:</span>
-              {labelsSecond.map((label, index) => (
-                <span key={index} className="chip">
+              {labelsSecond.map((label) => (
+                <span key={label} className="chip">
                   <span>{label}</span>
                 </span>
               ))}
@@ -101,14 +94,14 @@ export default function Expertise() {
           {/* Pillar 3 */}
           <div className="skill">
             <PythonIconSvg />
-            <h3>GenAI, RLHF & Robotics</h3>
+            <h3>Production AI &amp; Cloud Engineering</h3>
             <p>
-              Hands-on background evaluating frontier LLMs with RLHF reasoning metrics at Outlier, combined with mechatronics systems engineering for Siemens S7 PLCs, CNC automation, and real-time robotic controllers.
+              I connect AI systems to Python APIs, Docker, and AWS, including real-time robot telemetry, DynamoDB Streams, MCP tooling, and automated testing.
             </p>
             <div className="flex-chips">
               <span className="chip-title">Tech stack:</span>
-              {labelsThird.map((label, index) => (
-                <span key={index} className="chip">
+              {labelsThird.map((label) => (
+                <span key={label} className="chip">
                   <span>{label}</span>
                 </span>
               ))}

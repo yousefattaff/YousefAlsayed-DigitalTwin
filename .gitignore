@@ -1,35 +1,51 @@
-.env
-.env.local
-.env.*.local
+# Secrets: only the public configuration template is tracked.
+.env*
+!.env.example
+*.pem
+*.key
 
-# Terraform
-*.tfstate
-*.tfstate.*
-.terraform/
-.terraform.lock.hcl
-terraform.tfstate.d/
-*.tfvars
-!terraform.tfvars
-!prod.tfvars
+# JavaScript builds, dependencies, deployment metadata, and logs.
+node_modules/
+.next/
+out/
+.vercel/
+coverage/
+*.log
+*.tsbuildinfo
+next-env.d.ts
 
-# Lambda packaging
-lambda-deployment.zip
-lambda-package/
-backend/lambda-deployment.zip
-backend/lambda-package/
-
-# Python
+# Python environments, bytecode, generated packages, and local state.
+.venv/
 __pycache__/
 *.py[cod]
-*$py.class
-backend/.venv/
-backend/__pycache__/
+build/
+dist/
+*.egg-info/
+lambda-package/
+lambda-deployment.zip*
+.chroma/
+.memory/
 
-# Memory storage
-memory/*.json
-!memory/.gitkeep
+# Terraform local state and private input files.
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfstate.d/
+*.tfvars
+*.tfvars.json
 
-# Frontend
-frontend/.next/
-frontend/out/
-frontend/node_modules/
+# Local source media, audit history, private conversations, and agent state.
+.local/
+.superpowers/
+.aws/
+.agents/
+.codex/
+/audit/
+/memory/
+/scratch_imgs/
+/staging_media/
+/github-profile/
+
+# Operating system files.
+.DS_Store
+Thumbs.db
