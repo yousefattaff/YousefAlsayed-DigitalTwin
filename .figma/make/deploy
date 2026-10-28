@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd frontend
+NODE_ENV=production npm run build
+cd ..
+[[ -d "frontend/.next" ]] || {
+  echo "Expected build output at frontend/.next" >&2
+  exit 1
+}
+figma make deploy --build-dir "frontend/.next" --adapter nextjs
