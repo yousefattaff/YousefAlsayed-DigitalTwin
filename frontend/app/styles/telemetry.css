@@ -1,123 +1,10 @@
-/* Terminal and digital-twin surfaces share the portfolio's glass tokens. */
-.developer-terminal {
-  width: min(1120px, calc(100% - 32px));
-  margin: clamp(48px, 8vw, 96px) auto;
-  min-width: 0;
-  color: var(--text-primary);
-  box-shadow: none;
-}
-
-.terminal-window,
+/* Digital-twin surfaces share the portfolio tokens. */
 .twin-chat-box {
   overflow: hidden;
   border: var(--border-brutal-width) solid var(--border-subtle);
   border-radius: var(--radius-lg);
   background: var(--bg-card) !important;
   box-shadow: var(--shadow-elevation);
-}
-
-.terminal-window {
-  background: #18191F !important;
-  color: #FFFFFF !important;
-  font-family: var(--font-code);
-}
-
-.terminal-window-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 18px;
-  border-bottom: var(--border-brutal-width) solid var(--border-subtle);
-  background: #000000;
-}
-
-.terminal-window-dot {
-  flex: 0 0 12px;
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--ink-dark);
-  border-radius: var(--radius-full);
-}
-
-.terminal-window-dot-muted {
-  background: var(--accent-orange);
-}
-
-.terminal-window-dot-mid {
-  background: var(--accent-emerald);
-}
-
-.terminal-window-dot-bright {
-  background: var(--text-secondary);
-}
-
-.developer-terminal .terminal-window-title {
-  min-width: 0;
-  margin: 0 0 0 8px;
-  color: #FFDD55 !important;
-  background: none;
-  -webkit-text-fill-color: currentColor;
-  font-family: var(--font-code);
-  font-size: 0.8125rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
-
-.terminal-console {
-  min-height: 280px;
-  max-height: 430px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-color: var(--border-hover) transparent;
-  scrollbar-width: thin;
-  padding: 22px 20px 12px;
-  color: #FFFFFF;
-  font-size: 0.875rem;
-  line-height: 1.65;
-}
-
-.terminal-entry {
-  margin-bottom: 14px;
-  overflow-wrap: anywhere;
-}
-
-.terminal-output {
-  color: #E4E4E7;
-  white-space: pre-wrap;
-}
-
-.terminal-command-form {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-  min-height: 44px;
-}
-
-.developer-terminal .terminal-prompt {
-  color: var(--accent-emerald);
-  font-family: var(--font-code);
-  white-space: nowrap;
-}
-
-.terminal-command-input {
-  flex: 1;
-  min-width: 0;
-  min-height: 44px;
-  border: 0;
-  border-radius: 2px;
-  padding: 0;
-  background: transparent;
-  color: #FFFFFF;
-  caret-color: var(--accent-emerald);
-  font: inherit;
-}
-
-.terminal-command-input:focus-visible {
-  outline-offset: 2px;
 }
 
 .twin-intro {
@@ -507,15 +394,6 @@
 }
 
 @media (max-width: 640px) {
-  .terminal-window-bar {
-    padding: 12px 14px;
-  }
-
-  .terminal-console {
-    padding: 18px 14px 10px;
-    font-size: 0.8125rem;
-  }
-
   .twin-chat-header {
     gap: 8px;
     padding: 14px 12px;

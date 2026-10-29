@@ -1,10 +1,9 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import PaletteSwitcher from '@/components/PaletteSwitcher';
 import Expertise from '@/components/Expertise';
 import Timeline, { type Milestone } from '@/components/Timeline';
 import Projects, { type ProjectShowcaseItem } from '@/components/Projects';
-import DeveloperTerminal from '@/components/DeveloperTerminal';
+import AboutMe, { type AboutFact } from '@/components/AboutMe';
 import ChatWidget from '@/components/ChatWidget';
 import Footer from '@/components/Footer';
 import AchievementsSection, { type GraduationAchievement } from '@/components/AchievementsSection';
@@ -29,6 +28,8 @@ export default function HomeClient({
   resumeUrl,
   driveUrl,
   certificateMedia,
+  aboutParagraphs,
+  aboutFacts,
 }: {
   profile: HomeProfile;
   milestones: HomeMilestone[];
@@ -37,19 +38,20 @@ export default function HomeClient({
   resumeUrl: string;
   driveUrl: string;
   certificateMedia: CertificateMedia[];
+  aboutParagraphs: string[];
+  aboutFacts: AboutFact[];
 }) {
   return (
     <div className="main-container primary-mode">
       <Navbar />
       <main>
-        <PaletteSwitcher />
-        <Hero profile={profile} resumeUrl={resumeUrl} />
+        <Hero profile={profile} />
+        <AboutMe paragraphs={aboutParagraphs} facts={aboutFacts} />
         <Expertise />
         <Timeline milestones={milestones} />
         <Projects projects={projects} />
         <AchievementsSection graduationProject={graduationProject} certificateMedia={certificateMedia} />
         <ResumeSection resumeUrl={resumeUrl} driveUrl={driveUrl} />
-        <DeveloperTerminal />
         <ChatWidget />
       </main>
       <Footer />

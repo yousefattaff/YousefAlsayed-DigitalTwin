@@ -96,12 +96,6 @@
   color: #FFFFFF !important;
 }
 
-.nav-style-link {
-  display: inline-flex;
-  align-items: center;
-  border: 1.5px solid #74C0FC !important;
-  color: #74C0FC !important;
-}
 
 .nav-cta-pill {
   display: inline-flex;

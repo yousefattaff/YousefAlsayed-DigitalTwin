@@ -7,16 +7,12 @@ headline: Verified learning, education, and project milestones
 career_history:
   - date: Jul 2026 - Present
     title: Artificial Intelligence Intern
-    subtitle: Arche Robotics · Istanbul, Türkiye
+    subtitle: Arche Robotics · Remote
     description: Building a real-time AI fleet-monitoring agent with Python, AWS Lambda, DynamoDB Streams, Groq, and MCP tooling, supported by 265 unit tests and 13 live-stream smoke tests.
   - date: May 2026 - Present
     title: English-Speaking Programming Instructor
     subtitle: iSchool · Cairo, Egypt
     description: Teaching 30+ students across Grades 1–12 through project-based lessons in Python, AI, JavaScript, and UI/UX design.
-  - date: Jan 2025 - Mar 2026
-    title: IT Help Desk (Military Service)
-    subtitle: Egyptian Armed Forces Engineering Authority · Giza, Egypt
-    description: Completed national military service while providing on-site IT infrastructure, hardware, and technical troubleshooting support.
   - date: Nov 2024 - Jan 2025
     title: AI Software Engineer
     subtitle: Outlier · Remote

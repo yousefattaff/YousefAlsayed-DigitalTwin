@@ -17,7 +17,7 @@ Built with Next.js 16, React 19, and TypeScript, this portfolio presents Yousef'
 ## Core features
 
 - **AI Digital Twin.** Grounded in career facts, resume content, project narratives, and tone guidelines. Bounded conversation history and retrieval topics support follow-up questions across fresh serverless instances. Groq uses `openai/gpt-oss-120b`, with `openai/gpt-oss-20b` for supported provider fallback conditions.
-- **Interactive developer terminal.** Explore `help`, `whoami`, `skills`, `projects`, `contact`, and `clear` directly in the portfolio.
+- **About me.** A short personal story with quick facts about background, focus, and availability.
 - **Obsidian & Titanium Stealth Design System.** An obsidian canvas, frosted zinc panels, titanium text, and breathing emerald status indicators. Responsive galleries, video posters, defined media proportions, and reduced-motion styles keep the interface steady.
 - **Multi-cloud fallback ready.** Vercel serves the portfolio and native Twin together. The optional FastAPI/Mangum backend supports AWS Lambda and local/S3 conversation storage. Selecting the AWS target requires a verified external API and a frontend rebuild; Terraform currently supplies the state bootstrap.
 
@@ -94,7 +94,7 @@ Edit Markdown in root [content/](content/README.md). Public identity and links l
 
 `predev` and `prebuild` synchronize these sources into `frontend/content/` and `frontend/data/twin/`. The sync removes stale bundled Markdown after a canonical document is deleted or renamed, so the deployed Twin uses current knowledge. Next.js traces the copies into both serverless functions. Run `npm run sync:content` after content edits when preparing a standalone frontend upload, and include the synchronized copies in the release.
 
-Preserve the public navigation IDs: `about`, `skills`, `projects`, `achievements`, `terminal`, `contact`, and `twin`.
+Preserve the public navigation IDs: `about`, `skills`, `projects`, `achievements`, `about-me`, `contact`, and `twin`.
 
 ## Production verification
 

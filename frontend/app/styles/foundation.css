@@ -77,9 +77,7 @@ samp,
 .chip span,
 .vertical-timeline-element-date,
 .project-showcase-count,
-.resume-viewer-title,
-.developer-terminal,
-.developer-terminal * {
+.resume-viewer-title {
   font-family: var(--font-code) !important;
   font-variant-ligatures: none;
   font-variant-numeric: tabular-nums;
@@ -102,7 +100,7 @@ samp,
 #projects,
 #achievements,
 #resume,
-#terminal,
+#about-me,
 #twin,
 #contact {
   scroll-margin-top: var(--anchor-clearance);
@@ -110,159 +108,6 @@ samp,
 
 .hero-wrapper {
   margin-top: 16px;
-}
-
-/* Visual Color Palette Studio Dock */
-.palette-Audit-dock {
-  width: min(1180px, calc(100% - 32px));
-  margin: 100px auto 0;
-  padding: 20px 24px;
-  border: 3px solid #000000;
-  border-radius: 18px;
-  background: #FFFFFF;
-  color: #000000;
-  box-shadow: 6px 6px 0px #000000;
-}
-
-.palette-dock-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.palette-dock-eyebrow {
-  display: block;
-  color: #000000 !important;
-  font-family: var(--font-code) !important;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-.palette-dock-title {
-  margin: 2px 0 0;
-  color: #000000 !important;
-  font-size: 1.2rem;
-  font-weight: 800;
-}
-
-.palette-dock-toggle {
-  padding: 8px 14px;
-  border: 2.5px solid #000000;
-  border-radius: 10px;
-  background: #FFDD55;
-  color: #000000 !important;
-  font-family: var(--font-display) !important;
-  font-size: 0.8rem;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 3px 3px 0px #000000;
-}
-
-.palette-swatch-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 14px;
-  margin-top: 16px;
-}
-
-.palette-card-btn {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  border: 3px solid #000000;
-  border-radius: 14px;
-  background: #FFFFFF;
-  color: #000000 !important;
-  text-align: left;
-  cursor: pointer;
-  box-shadow: 4px 4px 0px #000000;
-  transition: transform 120ms ease, box-shadow 120ms ease;
-}
-
-.palette-card-btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 6px 6px 0px #000000;
-}
-
-.palette-card-btn.is-selected {
-  outline: 3px solid #00C6AE;
-  outline-offset: 2px;
-  background: #FFFDF5;
-}
-
-.palette-color-strip {
-  display: grid;
-  grid-template-columns: 6fr 3fr 1.6fr;
-  height: 54px;
-  width: 100%;
-  overflow: hidden;
-  border: 2.5px solid #000000;
-  border-radius: 9px;
-}
-
-.palette-color-strip span {
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 4px 6px;
-  border-right: 2px solid #000000;
-}
-
-.palette-color-strip span:last-child {
-  border-right: 0;
-}
-
-.palette-color-strip em {
-  font-style: normal;
-  font-family: var(--font-code) !important;
-  font-size: 0.65rem;
-  font-weight: 700;
-}
-
-.palette-card-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.palette-card-dots {
-  display: flex;
-  align-items: center;
-}
-
-.palette-card-dots span {
-  width: 18px;
-  height: 18px;
-  margin-left: -5px;
-  border: 2px solid #000000;
-  border-radius: 50%;
-}
-
-.palette-card-dots span:first-child {
-  margin-left: 0;
-}
-
-.palette-card-text {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
-
-.palette-card-text strong {
-  color: #000000 !important;
-  font-family: var(--font-display) !important;
-  font-size: 0.85rem;
-  font-weight: 800;
-}
-
-.palette-card-text span {
-  color: #52525B !important;
-  font-family: var(--font-code) !important;
-  font-size: 0.7rem;
 }
 
 .about-section {
@@ -311,8 +156,8 @@ samp,
 }
 
 .brutal-badge-orange {
-  background: #010101;
-  color: #F4F5F8 !important;
+  background: var(--ink-dark);
+  color: var(--bg-card) !important;
 }
 
 .about-section .content h1 {
@@ -429,35 +274,10 @@ samp,
   box-shadow: 7px 7px 0px var(--ink-dark);
 }
 
-.hero-brutal-card-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-}
 
-.hero-card-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  border: 2px solid var(--ink-dark);
-}
 
-.hero-card-dot-orange {
-  background: #E8596A;
-}
 
-.hero-card-dot-ink {
-  background: #74C0FC;
-}
 
-.hero-card-tag {
-  margin-left: auto;
-  color: #FFFFFF;
-  font-family: var(--font-code) !important;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
 
 .hero-portrait-frame {
   overflow: hidden;
@@ -876,7 +696,8 @@ samp,
 
 .style-sheet-swatch-card {
   padding: 24px;
-  border: 3px solid;
+  border: var(--border-brutal-width) solid var(--ink-dark);
+  box-shadow: var(--shadow-ink);
   border-radius: var(--radius-md);
   display: flex;
   flex-direction: column;

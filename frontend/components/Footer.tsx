@@ -33,7 +33,7 @@ export default function Footer() {
           target="_blank"
           rel="noreferrer"
         >
-          Yousef Alsayed Abdelfattah
+          Yousef Alsayed
         </a>{' '}
         with 💜
       </p>

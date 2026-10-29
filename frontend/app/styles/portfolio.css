@@ -409,3 +409,66 @@
     transform: none !important;
   }
 }
+
+/* About Me: story column + quick-fact cards */
+.about-me-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 36px);
+  align-items: start;
+}
+
+.about-me-story p {
+  max-width: 68ch;
+  margin: 0 0 18px;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.about-me-facts {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.about-me-fact {
+  padding: 16px 18px;
+  border: var(--border-brutal-width) solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-ink);
+}
+
+.about-me-fact:first-child {
+  background: var(--accent-emerald);
+}
+
+.about-me-fact:first-child dt,
+.about-me-fact:first-child dd {
+  color: #F7F6F2 !important;
+}
+
+.about-me-fact dt {
+  margin-bottom: 4px;
+  color: var(--accent-emerald);
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.about-me-fact dd {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+@media (max-width: 860px) {
+  .about-me-grid {
+    grid-template-columns: 1fr;
+  }
+}

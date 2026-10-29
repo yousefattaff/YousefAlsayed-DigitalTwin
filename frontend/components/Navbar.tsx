@@ -5,6 +5,7 @@ import { useModal } from '@/lib/useModal';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 
 const navItems = [
+  ['About', 'about-me'],
   ['Expertise', 'expertise'],
   ['History', 'history'],
   ['Projects', 'projects'],
@@ -88,14 +89,6 @@ export default function Navbar() {
                 {label}
               </button>
             ))}
-            <a
-              href="/figma/style-indigo-brutal.svg?v=figma-ref"
-              target="_blank"
-              rel="noreferrer"
-              className="nav-link-btn nav-style-link"
-            >
-              Figma Spec
-            </a>
             <a href="mailto:yousefabuelkhear@gmail.com" className="nav-cta-pill">
               Hire me →
             </a>
@@ -138,15 +131,6 @@ export default function Navbar() {
                   {label}
                 </button>
               ))}
-              <a
-                href="/figma/style-indigo-brutal.svg?v=figma-ref"
-                target="_blank"
-                rel="noreferrer"
-                className="mobile-nav-btn"
-                onClick={() => setMobileOpen(false)}
-              >
-                Figma Style Spec
-              </a>
             </div>
           </div>
         </>

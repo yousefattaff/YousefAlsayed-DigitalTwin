@@ -21,9 +21,9 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Yousef Alsayed Abdelfattah — AI Solutions & Multi-Agent Systems",
+  title: "Yousef Alsayed — AI Solutions & Multi-Agent Systems",
   description:
-    "Yousef Alsayed Abdelfattah builds AI solutions with LLMs, multi-agent systems, RAG, AI-assisted development, and Python. AI Intern at Arche Robotics with a mechatronics and robotics background.",
+    "Yousef Alsayed builds AI solutions with LLMs, multi-agent systems, RAG, AI-assisted development, and Python. AI Intern at Arche Robotics with a mechatronics and robotics background.",
   keywords: [
     "Yousef Alsayed",
     "AI Engineer",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     "Mechatronics",
   ],
   openGraph: {
-    title: "Yousef Alsayed Abdelfattah — AI Engineer",
+    title: "Yousef Alsayed — AI Engineer",
     description:
       "Explore my AI solutions, agent workflows, RAG projects, and robotics experience, or chat with my portfolio-grounded Digital Twin.",
     type: "website",

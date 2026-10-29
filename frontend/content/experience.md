@@ -7,7 +7,7 @@ order: 3
 
 # Arche Robotics — Artificial Intelligence Intern
 
-Yousef Alsayed Abdelfattah has been an Artificial Intelligence Intern at Arche Robotics since July 2026. The role is listed in Istanbul, Türkiye. He develops a real-time AI fleet-monitoring agent that reads live robot logs and helps identify anomalies.
+Yousef Alsayed Abdelfattah has been an Artificial Intelligence Intern at Arche Robotics since July 2026. It is a remote role with Arche Robotics, which is based in Istanbul, Türkiye. He develops a real-time AI fleet-monitoring agent that reads live robot logs and helps identify anomalies.
 
 He re-architected the Python, AWS Lambda, and AWS SAM fleet-monitor-agent from 30-minute polling intervals to real-time DynamoDB Stream triggers, with approximately 0.3-second capture. A six-stage skip ladder controls Groq LLM inference costs.
 

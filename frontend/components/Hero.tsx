@@ -2,22 +2,11 @@ import Image from 'next/image';
 import { LinkedinIcon, GithubIcon } from './Icons';
 import type { HomeProfile } from './HomeClient';
 
-export default function Hero({
-  profile,
-  resumeUrl = '/resume.pdf',
-}: {
-  profile: HomeProfile;
-  resumeUrl?: string;
-}) {
+export default function Hero({ profile }: { profile: HomeProfile }) {
   return (
     <div className="hero-wrapper" id="about" style={{ width: '100%', maxWidth: '100%' }}>
       <div className="about-section">
         <div className="content">
-          <div className="hero-eyebrow-row">
-            <span className="brutal-badge brutal-badge-emerald">
-              ● AI SOLUTIONS &amp; MULTI-AGENT ENGINEER
-            </span>
-          </div>
           <h1>
             <span className="hero-greeting">Hello, I&apos;m</span>
             <span className="hero-name">{profile.displayName}</span>
@@ -36,13 +25,6 @@ export default function Hero({
               className="brutal-btn brutal-btn-secondary"
             >
               Chat with my Twin
-            </a>
-            <a
-              href={resumeUrl}
-              download
-              className="brutal-btn brutal-btn-outline"
-            >
-              Download CV ↓
             </a>
           </div>
 
@@ -87,11 +69,6 @@ export default function Hero({
 
         <div className="image-wrapper">
           <div className="hero-brutal-card">
-            <div className="hero-brutal-card-bar" aria-hidden="true">
-              <span className="hero-card-dot hero-card-dot-orange" />
-              <span className="hero-card-dot hero-card-dot-ink" />
-              <span className="hero-card-tag">YOUSEF.AI // LIVE</span>
-            </div>
             <div className="hero-portrait-frame">
               <Image
                 src={profile.avatarUrl}
