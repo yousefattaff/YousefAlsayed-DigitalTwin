@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import PaletteSwitcher from '@/components/PaletteSwitcher';
 import Expertise from '@/components/Expertise';
 import Timeline, { type Milestone } from '@/components/Timeline';
 import Projects, { type ProjectShowcaseItem } from '@/components/Projects';
@@ -41,6 +42,7 @@ export default function HomeClient({
     <div className="main-container primary-mode">
       <Navbar />
       <main>
+        <PaletteSwitcher />
         <Hero profile={profile} resumeUrl={resumeUrl} />
         <Expertise />
         <Timeline milestones={milestones} />
