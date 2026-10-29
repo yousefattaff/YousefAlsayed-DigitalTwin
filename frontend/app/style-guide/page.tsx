@@ -71,7 +71,7 @@ export default function StyleGuidePage() {
           </div>
           <div className="hero-cta-row">
             <a
-              href="/figma/style-indigo-brutal.svg"
+              href="/figma/style-indigo-brutal.svg?v=royal"
               download="style-indigo-brutal.svg"
               className="brutal-btn brutal-btn-primary"
             >
@@ -94,7 +94,7 @@ export default function StyleGuidePage() {
           </div>
           <div className="style-sheet-artboard-preview">
             <Image
-              src="/figma/style-indigo-brutal.svg"
+              src="/figma/style-indigo-brutal.svg?v=royal"
               alt="Style – Indigo Brutal complete Figma artboard"
               width={1600}
               height={2180}
@@ -144,7 +144,7 @@ export default function StyleGuidePage() {
               <p>Used in the hero badge and the AI Digital Twin chat header.</p>
               <div className="style-sheet-avatar-row">
                 <Image
-                  src="/data/profile/yousef-avatar.svg"
+                  src="/data/profile/yousef-avatar.svg?v=royal"
                   alt="Illustrated avatar of Yousef"
                   width={112}
                   height={112}

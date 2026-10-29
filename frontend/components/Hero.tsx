@@ -103,7 +103,7 @@ export default function Hero({
             </div>
             <a href="#twin" className="hero-avatar-sticker" aria-label="Jump to Yousef's AI Digital Twin">
               <Image
-                src="/data/profile/yousef-avatar.svg"
+                src="/data/profile/yousef-avatar.svg?v=royal"
                 alt="Illustrated avatar of Yousef"
                 width={56}
                 height={56}
