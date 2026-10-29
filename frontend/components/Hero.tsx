@@ -80,7 +80,7 @@ export default function Hero({ profile }: { profile: HomeProfile }) {
             </div>
             <a href="#twin" className="hero-avatar-sticker" aria-label="Jump to Yousef's AI Digital Twin">
               <Image
-                src="/data/profile/yousef-avatar.svg?v=soft-royal"
+                src="/data/profile/yousef-avatar.svg?v=logo-v2"
                 alt="Illustrated avatar of Yousef"
                 width={56}
                 height={56}

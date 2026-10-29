@@ -112,7 +112,7 @@ export default function StyleGuidePage() {
               <h3>Avatars</h3>
               <p>The illustrated avatar is used for the Digital Twin; the photo is used in the hero.</p>
               <div className="style-sheet-avatar-row">
-                <Image src="/data/profile/yousef-avatar.svg?v=soft-royal" alt="Illustrated avatar of Yousef" width={112} height={112} />
+                <Image src="/data/profile/yousef-avatar.svg?v=logo-v2" alt="Illustrated avatar of Yousef" width={112} height={112} />
                 <Image src="/data/profile/yousef.jpg" alt="Yousef Alsayed portrait" width={112} height={112} className="style-sheet-photo-sample" />
               </div>
             </div>

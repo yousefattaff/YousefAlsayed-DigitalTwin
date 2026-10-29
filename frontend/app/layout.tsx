@@ -46,6 +46,11 @@ export const metadata: Metadata = {
       "Explore my AI solutions, agent workflows, RAG projects, and robotics experience, or chat with my portfolio-grounded Digital Twin.",
     type: "website",
   },
+  icons: {
+    icon: "/data/profile/yousef-avatar.svg?v=logo-v2",
+    shortcut: "/data/profile/yousef-avatar.svg?v=logo-v2",
+    apple: "/data/profile/yousef-avatar.svg?v=logo-v2",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
