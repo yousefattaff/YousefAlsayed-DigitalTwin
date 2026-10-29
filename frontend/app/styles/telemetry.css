@@ -1,124 +1,10 @@
-/* Terminal and digital-twin surfaces share the portfolio's glass tokens. */
-.developer-terminal {
-  width: min(1120px, calc(100% - 32px));
-  margin: clamp(48px, 8vw, 96px) auto;
-  min-width: 0;
-  color: var(--text-primary);
-  box-shadow: none;
-}
-
-.terminal-window,
+/* Digital-twin surfaces share the portfolio tokens. */
 .twin-chat-box {
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
+  border: var(--border-brutal-width) solid var(--border-subtle);
   border-radius: var(--radius-lg);
   background: var(--bg-card) !important;
-  box-shadow: var(--rim-light), var(--shadow-elevation);
-  -webkit-backdrop-filter: blur(var(--blur-glass));
-  backdrop-filter: blur(var(--blur-glass));
-}
-
-.terminal-window {
-  font-family: var(--font-code);
-}
-
-.terminal-window-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--border-subtle);
-  background: var(--bg-floating);
-}
-
-.terminal-window-dot {
-  flex: 0 0 8px;
-  width: 8px;
-  height: 8px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-full);
-  box-shadow: var(--rim-light);
-}
-
-.terminal-window-dot-muted {
-  background: var(--border-zinc);
-}
-
-.terminal-window-dot-mid {
-  background: var(--text-muted);
-}
-
-.terminal-window-dot-bright {
-  background: var(--text-secondary);
-}
-
-.developer-terminal .terminal-window-title {
-  min-width: 0;
-  margin: 0 0 0 8px;
-  color: var(--text-secondary) !important;
-  background: none;
-  -webkit-text-fill-color: currentColor;
-  font-family: var(--font-code);
-  font-size: 0.8125rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
-
-.terminal-console {
-  min-height: 280px;
-  max-height: 430px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-color: var(--border-hover) transparent;
-  scrollbar-width: thin;
-  padding: 22px 20px 12px;
-  color: var(--text-primary);
-  font-size: 0.875rem;
-  line-height: 1.65;
-}
-
-.terminal-entry {
-  margin-bottom: 14px;
-  overflow-wrap: anywhere;
-}
-
-.terminal-output {
-  color: var(--text-secondary);
-  white-space: pre-wrap;
-}
-
-.terminal-command-form {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-  min-height: 44px;
-}
-
-.developer-terminal .terminal-prompt {
-  color: var(--accent-emerald);
-  font-family: var(--font-code);
-  white-space: nowrap;
-}
-
-.terminal-command-input {
-  flex: 1;
-  min-width: 0;
-  min-height: 44px;
-  border: 0;
-  border-radius: 2px;
-  padding: 0;
-  background: transparent;
-  color: var(--text-primary);
-  caret-color: var(--accent-emerald);
-  font: inherit;
-}
-
-.terminal-command-input:focus-visible {
-  outline-offset: 2px;
+  box-shadow: var(--shadow-elevation);
 }
 
 .twin-intro {
@@ -133,8 +19,9 @@
 
 .twin-chat-header,
 .twin-chat-input-area {
-  background: var(--bg-floating) !important;
-  border-color: var(--border-subtle);
+  background: var(--bg-canvas) !important;
+  border-color: var(--border-subtle) !important;
+  border-width: var(--border-brutal-width) !important;
 }
 
 .twin-chat-header {
@@ -150,11 +37,11 @@
 }
 
 .twin-avatar {
-  flex: 0 0 34px;
-  width: 34px;
-  height: 34px;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
   aspect-ratio: 1;
-  border: 1px solid var(--border-medium);
+  border: 2.5px solid var(--accent-emerald);
   border-radius: var(--radius-full);
   object-fit: cover;
 }
@@ -278,20 +165,26 @@
   min-width: 0;
   max-width: 80%;
   padding: 12px 16px;
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--rim-light);
+  border: 2.5px solid var(--border-subtle);
+  box-shadow: 4px 4px 0px #141422;
   overflow-wrap: anywhere;
 }
 
 .twin-msg-user {
-  border-color: var(--border-medium);
-  background: var(--bg-card-hover) !important;
-  color: var(--text-primary) !important;
+  border-color: var(--ink-dark);
+  background: var(--accent-emerald) !important;
+  color: #FFFFFF !important;
+  font-weight: 600;
+}
+
+.twin-msg-user .twin-message-time {
+  color: #DBEAFE !important;
 }
 
 .twin-msg-assistant {
-  background: var(--bg-card) !important;
-  color: var(--text-secondary) !important;
+  border-color: #000000;
+  background: #F4F5F8 !important;
+  color: var(--text-primary) !important;
 }
 
 .twin-message-content {
@@ -441,14 +334,14 @@
 .twin-chat-input {
   min-width: 0;
   min-height: 44px;
-  border: 1px solid var(--border-zinc);
+  border: 2.5px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   background: var(--bg-card) !important;
   color: var(--text-primary) !important;
   font-family: var(--font-ui);
   font-size: 0.9375rem;
   line-height: 1.6;
-  caret-color: var(--accent-emerald);
+  caret-color: var(--accent-orange);
   transition: border-color var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out);
 }
@@ -459,27 +352,28 @@
 }
 
 .twin-chat-input:focus {
-  border-color: var(--accent-emerald);
-  box-shadow: 0 0 0 3px var(--status-active-glow);
+  border-color: var(--accent-orange);
+  box-shadow: 4px 4px 0px var(--accent-orange);
 }
 
 .twin-chat-send {
   flex-shrink: 0;
-  border: 1px solid var(--accent-emerald);
-  border-radius: var(--radius-sm);
-  background: var(--accent-emerald) !important;
-  box-shadow: var(--rim-light);
-  color: var(--bg-canvas) !important;
-  font-family: var(--font-ui);
+  border: 2.5px solid var(--ink-dark);
+  border-radius: 10px;
+  background: #000000 !important;
+  box-shadow: 4px 4px 0px var(--accent-emerald);
+  color: #FFFFFF !important;
+  font-family: var(--font-display) !important;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 800;
   transition: box-shadow var(--duration-fast) var(--ease-out),
     transform var(--duration-fast) var(--ease-out);
 }
 
 .twin-chat-send:not(:disabled):hover {
-  background: var(--accent-emerald) !important;
-  box-shadow: var(--rim-light), 0 0 0 4px var(--status-active-glow);
+  background: #18191F !important;
+  box-shadow: 6px 6px 0px var(--accent-emerald);
+  transform: translate(-1px, -1px);
 }
 
 .twin-chat-send:not(:disabled):active {
@@ -500,15 +394,6 @@
 }
 
 @media (max-width: 640px) {
-  .terminal-window-bar {
-    padding: 12px 14px;
-  }
-
-  .terminal-console {
-    padding: 18px 14px 10px;
-    font-size: 0.8125rem;
-  }
-
   .twin-chat-header {
     gap: 8px;
     padding: 14px 12px;

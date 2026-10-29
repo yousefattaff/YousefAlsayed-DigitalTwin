@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const requiredIds = ['about', 'skills', 'projects', 'achievements', 'terminal', 'contact', 'twin'];
+export const requiredIds = ['about', 'skills', 'projects', 'achievements', 'contact', 'twin'];
 const secretPatterns = [
   ['Groq API key', /\bgsk_[A-Za-z0-9]{40,}\b/],
   ['OpenAI API key', /\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{24,}\b/],

@@ -4,7 +4,7 @@ slug: profile
 type: profile
 order: 1
 name: Yousef Alsayed Abdelfattah
-display_name: Yousef Alsayed Abdelfattah
+display_name: Yousef Alsayed
 headline: AI Engineer | AI Solutions, LLMs & Multi-Agent Systems
 location: Cairo, Egypt
 email: yousefabuelkhear@gmail.com

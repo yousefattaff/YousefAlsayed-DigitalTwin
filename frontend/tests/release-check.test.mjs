@@ -152,7 +152,7 @@ test('private environment files and ignore probes must be ignored while .env.exa
   assert.deepEqual(releaseFileProblems(input), []);
 });
 
-test('all seven section IDs must occur once in real HTML attributes', () => {
+test('all required section IDs must occur once in real HTML attributes', () => {
   const html = requiredIds.map(id => `<section id="${id}"></section>`).join('');
   assert.deepEqual(idProblems(html), []);
   assert.match(idProblems(html + '<div id="twin"></div>')[0].reason, /#twin/);

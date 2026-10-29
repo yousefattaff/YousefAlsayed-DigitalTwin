@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { useModal } from '@/lib/useModal';
 import { useReducedMotion } from '@/lib/useReducedMotion';
@@ -65,7 +66,23 @@ export default function Navbar() {
                 <line x1="3" y1="18" x2="21" y2="18" />
               </svg>
             </button>
-
+            <button
+              type="button"
+              className="nav-brand-btn"
+              onClick={() => scrollToSection('about')}
+              aria-label="Scroll to top"
+            >
+              <span className="nav-brand-monogram" aria-hidden="true">
+                <Image
+                  src="/data/profile/yousef-avatar.svg?v=logo-v3"
+                  alt=""
+                  width={38}
+                  height={38}
+                  className="nav-brand-avatar"
+                />
+              </span>
+              <span className="nav-brand-wordmark">Yousef.</span>
+            </button>
           </div>
 
           {/* Desktop links */}
@@ -80,6 +97,9 @@ export default function Navbar() {
                 {label}
               </button>
             ))}
+            <a href="mailto:yousefabuelkhear@gmail.com" className="nav-cta-pill">
+              Hire me →
+            </a>
           </nav>
         </div>
       </header>
@@ -94,15 +114,14 @@ export default function Navbar() {
           />
           <div ref={menuRef} id="mobile-navigation" className="navigation-bar-responsive" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title" tabIndex={-1}>
             <div className="mobile-menu-top">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="8" y1="6" x2="21" y2="6" />
-                <line x1="8" y1="12" x2="21" y2="12" />
-                <line x1="8" y1="18" x2="21" y2="18" />
-                <line x1="3" y1="6" x2="3.01" y2="6" />
-                <line x1="3" y1="12" x2="3.01" y2="12" />
-                <line x1="3" y1="18" x2="3.01" y2="18" />
-              </svg>
-              <span id="mobile-menu-title">Menu</span>
+              <Image
+                src="/data/profile/yousef-avatar.svg?v=logo-v3"
+                alt=""
+                width={32}
+                height={32}
+                className="nav-brand-avatar"
+              />
+              <span id="mobile-menu-title">Yousef.</span>
               <button type="button" className="mobile-menu-close" onClick={() => setMobileOpen(false)}>Close</button>
             </div>
             <div className="mobile-nav-list">
