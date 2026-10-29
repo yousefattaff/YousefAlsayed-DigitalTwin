@@ -65,7 +65,15 @@ export default function Navbar() {
                 <line x1="3" y1="18" x2="21" y2="18" />
               </svg>
             </button>
-
+            <button
+              type="button"
+              className="nav-brand-btn"
+              onClick={() => scrollToSection('about')}
+              aria-label="Scroll to top"
+            >
+              <span className="nav-brand-monogram" aria-hidden="true">YA</span>
+              <span className="nav-brand-wordmark">Yousef.</span>
+            </button>
           </div>
 
           {/* Desktop links */}
@@ -80,6 +88,17 @@ export default function Navbar() {
                 {label}
               </button>
             ))}
+            <a
+              href="/figma/style-indigo-brutal.svg"
+              target="_blank"
+              rel="noreferrer"
+              className="nav-link-btn nav-style-link"
+            >
+              Figma Spec
+            </a>
+            <a href="mailto:yousefabuelkhear@gmail.com" className="nav-cta-pill">
+              Hire me →
+            </a>
           </nav>
         </div>
       </header>
@@ -119,6 +138,15 @@ export default function Navbar() {
                   {label}
                 </button>
               ))}
+              <a
+                href="/figma/style-indigo-brutal.svg"
+                target="_blank"
+                rel="noreferrer"
+                className="mobile-nav-btn"
+                onClick={() => setMobileOpen(false)}
+              >
+                Figma Style Spec
+              </a>
             </div>
           </div>
         </>

@@ -163,10 +163,10 @@ export default function ChatWidget() {
         <div className="twin-chat-header">
           <div className="twin-chat-profile">
             <Image
-              src="/data/profile/yousef.jpg"
+              src="/data/profile/yousef-avatar.svg"
               alt="Yousef"
-              width={34}
-              height={34}
+              width={40}
+              height={40}
               className="twin-avatar"
             />
             <div>

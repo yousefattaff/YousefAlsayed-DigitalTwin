@@ -5,16 +5,14 @@
 }
 
 .navigation-bar {
-  width: min(100%, 760px);
-  height: 56px;
-  padding: 5px 12px;
-  justify-content: center;
-  border: 1px solid var(--border-zinc);
+  width: min(100%, 1080px);
+  min-height: 62px;
+  padding: 6px 14px;
+  justify-content: space-between;
+  border: var(--border-brutal-width) solid var(--border-subtle);
   border-radius: var(--radius-full);
   background: var(--bg-floating) !important;
-  box-shadow: var(--rim-light), var(--shadow-elevation);
-  -webkit-backdrop-filter: blur(var(--blur-glass));
-  backdrop-filter: blur(var(--blur-glass));
+  box-shadow: var(--shadow-elevation);
   pointer-events: auto;
   transition:
     border-color var(--duration-normal) var(--ease-out),
@@ -22,14 +20,47 @@
 }
 
 .navigation-bar-container.scrolled .navigation-bar {
-  border-color: var(--border-medium);
-  box-shadow: var(--rim-light), var(--shadow-elevation) !important;
+  border-color: var(--accent-emerald);
+  box-shadow: 6px 6px 0px var(--accent-orange) !important;
+}
+
+.nav-brand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px 4px 4px !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.nav-brand-monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 2.5px solid var(--ink-dark);
+  border-radius: 50%;
+  background: var(--accent-orange);
+  color: var(--ink-dark);
+  font-family: var(--font-display) !important;
+  font-size: 0.82rem;
+  font-weight: 800;
+  box-shadow: 2px 2px 0px var(--accent-emerald);
+}
+
+.nav-brand-wordmark {
+  color: var(--text-primary);
+  font-family: var(--font-display) !important;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 .navigation-bar nav {
   min-width: 0;
   max-width: 100%;
-  margin-inline: auto;
+  margin-left: auto;
   justify-content: center;
   gap: 4px;
 }
@@ -59,11 +90,42 @@
 
 .navigation-bar button:hover,
 .navigation-bar .nav-link-btn:hover {
-  border-color: var(--border-subtle);
-  background: var(--bg-card-active) !important;
-  color: var(--text-primary) !important;
+  border-color: var(--ink-dark);
+  background: var(--accent-emerald) !important;
+  color: var(--ink-dark) !important;
 }
 
+.nav-style-link {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--accent-emerald) !important;
+  color: var(--accent-emerald-light) !important;
+}
+
+.nav-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-left: 6px;
+  padding: 8px 16px;
+  border: 2.5px solid var(--ink-dark);
+  border-radius: var(--radius-full);
+  background: var(--accent-orange) !important;
+  color: var(--ink-dark) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.85rem;
+  font-weight: 800;
+  white-space: nowrap;
+  box-shadow: 3px 3px 0px var(--accent-emerald);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.nav-cta-pill:hover {
+  background: var(--accent-orange-hover) !important;
+  color: var(--ink-dark) !important;
+  transform: translate(-1px, -1px);
+}
 .navigation-bar button:active {
   transform: translateY(1px);
 }
@@ -154,7 +216,8 @@
 footer#contact {
   margin-top: 32px;
   padding: 40px clamp(20px, 5vw, 80px) 48px;
-  border-top: 1px solid var(--border-subtle);
+  border-top: var(--border-brutal-width) solid var(--border-subtle);
+  background: var(--bg-surface);
   color: var(--text-secondary);
 }
 
@@ -170,13 +233,14 @@ footer#contact > div:first-child a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
-  border: 1px solid var(--border-subtle);
+  min-width: 48px;
+  min-height: 48px;
+  border: var(--border-brutal-width) solid var(--border-subtle);
   border-radius: var(--radius-full);
-  background: var(--bg-card);
-  box-shadow: var(--rim-light);
+  background: var(--bg-canvas);
+  box-shadow: 4px 4px 0px var(--accent-emerald);
   transition:
+    transform var(--duration-fast) var(--ease-out),
     background-color var(--duration-fast) var(--ease-out),
     border-color var(--duration-fast) var(--ease-out);
 }
@@ -218,12 +282,13 @@ footer#contact p a:hover {
 }
 
 footer#contact > div:first-child a:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-card-hover);
+  border-color: var(--ink-dark);
+  background: var(--accent-orange);
+  transform: translate(-2px, -2px);
 }
 
 footer#contact a:hover svg {
-  color: var(--accent-emerald) !important;
+  color: var(--ink-dark) !important;
 }
 
 @media (min-width: 640px) and (max-width: 768px) {

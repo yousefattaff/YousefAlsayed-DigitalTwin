@@ -41,7 +41,7 @@ export default function HomeClient({
     <div className="main-container primary-mode">
       <Navbar />
       <main>
-        <Hero profile={profile} />
+        <Hero profile={profile} resumeUrl={resumeUrl} />
         <Expertise />
         <Timeline milestones={milestones} />
         <Projects projects={projects} />

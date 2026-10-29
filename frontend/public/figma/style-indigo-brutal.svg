@@ -1,0 +1,314 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 2180" width="1600" height="2180" role="img" aria-label="Style – Indigo Brutal — Figma Design System &amp; Hero Mockup">
+  <defs>
+    <style>
+      .display { font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 800; }
+      .heading { font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 700; }
+      .body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; font-weight: 500; }
+      .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; font-weight: 500; }
+    </style>
+  </defs>
+
+  <!-- ======================================================================= -->
+  <!-- CANVAS ROOT: Style – Indigo Brutal                                      -->
+  <!-- Import into Figma: drag & drop this SVG onto any Figma canvas           -->
+  <!-- ======================================================================= -->
+  <rect id="Canvas-Background" x="0" y="0" width="1600" height="2180" fill="#141422" />
+
+  <!-- Canvas Header Banner -->
+  <g id="00-File-Cover-Header" transform="translate(60, 44)">
+    <rect x="6" y="6" width="1480" height="96" rx="16" fill="#00A86B" />
+    <rect x="0" y="0" width="1480" height="96" rx="16" fill="#2A2A40" stroke="#00A86B" stroke-width="3" />
+    <rect x="28" y="26" width="164" height="44" rx="22" fill="#FF6B35" stroke="#1E1E2F" stroke-width="3" />
+    <text x="110" y="54" text-anchor="middle" fill="#1E1E2F" font-size="14" class="display">FIGMA SPEC v1.0</text>
+    <text x="216" y="50" fill="#F5F3EE" font-size="26" class="display">Style – Indigo Brutal · Yousef Alsayed Portfolio</text>
+    <text x="216" y="76" fill="#A9A9C2" font-size="14" class="mono">60% Indigo Night (#1E1E2F)  ·  30% Emerald Vibe (#00A86B)  ·  10% Electric Orange (#FF6B35)</text>
+  </g>
+
+  <!-- ======================================================================= -->
+  <!-- FRAME 01: 60-30-10 COLOR PALETTE & CONTRAST MATRIX                      -->
+  <!-- ======================================================================= -->
+  <g id="01-Color-Palette-60-30-10" transform="translate(60, 176)">
+    <rect x="8" y="8" width="1480" height="330" rx="20" fill="#00A86B" />
+    <rect x="0" y="0" width="1480" height="330" rx="20" fill="#1E1E2F" stroke="#00A86B" stroke-width="3" />
+    <text x="36" y="46" fill="#FF6B35" font-size="13" class="mono">01 / COLOR TOKENS &amp; WCAG CONTRAST</text>
+    <text x="36" y="80" fill="#F5F3EE" font-size="28" class="display">Core 60–30–10 Brutalist Palette</text>
+
+    <!-- Swatch 1: 60% Indigo Night -->
+    <g id="Swatch-60-Indigo-Night" transform="translate(36, 108)">
+      <rect x="6" y="6" width="260" height="186" rx="16" fill="#00A86B" />
+      <rect x="0" y="0" width="260" height="186" rx="16" fill="#1E1E2F" stroke="#F5F3EE" stroke-width="3" />
+      <rect x="18" y="18" width="84" height="28" rx="14" fill="#2A2A40" stroke="#00A86B" stroke-width="2" />
+      <text x="60" y="37" text-anchor="middle" fill="#00A86B" font-size="12" class="mono">60% BASE</text>
+      <text x="18" y="92" fill="#F5F3EE" font-size="22" class="display">Indigo Night</text>
+      <text x="18" y="118" fill="#A9A9C2" font-size="15" class="mono">#1E1E2F · --bg-canvas</text>
+      <text x="18" y="152" fill="#F5F3EE" font-size="13" class="body">Paper on Indigo: 13.8:1 (AAA)</text>
+    </g>
+
+    <!-- Swatch 2: Raised Surface -->
+    <g id="Swatch-Surface-Indigo" transform="translate(322, 108)">
+      <rect x="6" y="6" width="260" height="186" rx="16" fill="#00A86B" />
+      <rect x="0" y="0" width="260" height="186" rx="16" fill="#2A2A40" stroke="#00A86B" stroke-width="3" />
+      <rect x="18" y="18" width="102" height="28" rx="14" fill="#1E1E2F" stroke="#A9A9C2" stroke-width="2" />
+      <text x="69" y="37" text-anchor="middle" fill="#F5F3EE" font-size="12" class="mono">SURFACE</text>
+      <text x="18" y="92" fill="#F5F3EE" font-size="22" class="display">Indigo Slate</text>
+      <text x="18" y="118" fill="#A9A9C2" font-size="15" class="mono">#2A2A40 · --bg-surface</text>
+      <text x="18" y="152" fill="#F5F3EE" font-size="13" class="body">Panels, Terminal &amp; Dialogs</text>
+    </g>
+
+    <!-- Swatch 3: 30% Emerald Vibe -->
+    <g id="Swatch-30-Emerald-Vibe" transform="translate(608, 108)">
+      <rect x="6" y="6" width="260" height="186" rx="16" fill="#1E1E2F" stroke="#F5F3EE" stroke-width="2" />
+      <rect x="0" y="0" width="260" height="186" rx="16" fill="#00A86B" stroke="#1E1E2F" stroke-width="3" />
+      <rect x="18" y="18" width="110" height="28" rx="14" fill="#1E1E2F" />
+      <text x="73" y="37" text-anchor="middle" fill="#00A86B" font-size="12" class="mono">30% SECOND</text>
+      <text x="18" y="92" fill="#1E1E2F" font-size="22" class="display">Emerald Vibe</text>
+      <text x="18" y="118" fill="#1E1E2F" font-size="15" class="mono">#00A86B · --accent-emerald</text>
+      <text x="18" y="152" fill="#1E1E2F" font-size="13" class="body">Indigo Ink on Emerald: 5.3:1 (AA)</text>
+    </g>
+
+    <!-- Swatch 4: 10% Electric Orange -->
+    <g id="Swatch-10-Electric-Orange" transform="translate(894, 108)">
+      <rect x="6" y="6" width="260" height="186" rx="16" fill="#1E1E2F" stroke="#F5F3EE" stroke-width="2" />
+      <rect x="0" y="0" width="260" height="186" rx="16" fill="#FF6B35" stroke="#1E1E2F" stroke-width="3" />
+      <rect x="18" y="18" width="108" height="28" rx="14" fill="#1E1E2F" />
+      <text x="72" y="37" text-anchor="middle" fill="#FF6B35" font-size="12" class="mono">10% ACCENT</text>
+      <text x="18" y="92" fill="#1E1E2F" font-size="22" class="display">Electric Orange</text>
+      <text x="18" y="118" fill="#1E1E2F" font-size="15" class="mono">#FF6B35 · --accent-orange</text>
+      <text x="18" y="152" fill="#1E1E2F" font-size="13" class="body">Indigo Ink on Orange: 5.8:1 (AA)</text>
+    </g>
+
+    <!-- Swatch 5: Paper & Muted Text -->
+    <g id="Swatch-Paper-Text" transform="translate(1180, 108)">
+      <rect x="6" y="6" width="264" height="186" rx="16" fill="#00A86B" />
+      <rect x="0" y="0" width="264" height="186" rx="16" fill="#F5F3EE" stroke="#1E1E2F" stroke-width="3" />
+      <rect x="18" y="18" width="96" height="28" rx="14" fill="#1E1E2F" />
+      <text x="66" y="37" text-anchor="middle" fill="#F5F3EE" font-size="12" class="mono">INK / PAPER</text>
+      <text x="18" y="92" fill="#1E1E2F" font-size="22" class="display">Warm Paper</text>
+      <text x="18" y="118" fill="#1E1E2F" font-size="15" class="mono">#F5F3EE · #A9A9C2</text>
+      <text x="18" y="152" fill="#1E1E2F" font-size="13" class="body">Primary &amp; Muted Typography</text>
+    </g>
+  </g>
+
+  <!-- ======================================================================= -->
+  <!-- FRAME 02: TYPOGRAPHY & HARD-OFFSET SHADOW SYSTEM                        -->
+  <!-- ======================================================================= -->
+  <g id="02-Typography-And-Shadows" transform="translate(60, 540)">
+    <rect x="8" y="8" width="1480" height="320" rx="20" fill="#00A86B" />
+    <rect x="0" y="0" width="1480" height="320" rx="20" fill="#1E1E2F" stroke="#00A86B" stroke-width="3" />
+    <text x="36" y="44" fill="#FF6B35" font-size="13" class="mono">02 / TYPOGRAPHY SCALE &amp; BRUTALIST ELEVATION</text>
+
+    <!-- Left column: Type specimens -->
+    <text x="36" y="106" fill="#F5F3EE" font-size="48" class="display">Display H1 · Montserrat 800</text>
+    <text x="36" y="158" fill="#F5F3EE" font-size="32" class="display">Section H2 · Montserrat 800 (32–44px)</text>
+    <text x="36" y="202" fill="#00A86B" font-size="22" class="heading">Card Title H3 · Montserrat 700 (22–28px)</text>
+    <text x="36" y="242" fill="#A9A9C2" font-size="17" class="body">Body copy · Inter 400/500 (16–18px, 1.6 line-height) — grounded in verified career documents.</text>
+    <text x="36" y="278" fill="#FF6B35" font-size="14" class="mono">guest@yousef:~$ JetBrains Mono 500 · Chips, timestamps, terminal &amp; eyebrows</text>
+
+    <!-- Right column: Hard shadow tokens -->
+    <g id="Elevation-Specimens" transform="translate(930, 64)">
+      <rect x="6" y="6" width="235" height="96" rx="16" fill="#00A86B" />
+      <rect x="0" y="0" width="235" height="96" rx="16" fill="#2A2A40" stroke="#00A86B" stroke-width="3" />
+      <text x="20" y="42" fill="#F5F3EE" font-size="16" class="display">Shadow Emerald</text>
+      <text x="20" y="68" fill="#A9A9C2" font-size="13" class="mono">6px 6px 0px #00A86B</text>
+
+      <g transform="translate(265, 0)">
+        <rect x="6" y="6" width="235" height="96" rx="16" fill="#FF6B35" />
+        <rect x="0" y="0" width="235" height="96" rx="16" fill="#2A2A40" stroke="#FF6B35" stroke-width="3" />
+        <text x="20" y="42" fill="#F5F3EE" font-size="16" class="display">Shadow Orange</text>
+        <text x="20" y="68" fill="#A9A9C2" font-size="13" class="mono">6px 6px 0px #FF6B35</text>
+      </g>
+
+      <g transform="translate(0, 124)">
+        <rect x="6" y="6" width="500" height="96" rx="16" fill="#00A86B" />
+        <rect x="0" y="0" width="500" height="96" rx="16" fill="#2A2A40" stroke="#F5F3EE" stroke-width="3" />
+        <text x="22" y="40" fill="#F5F3EE" font-size="16" class="display">Motion Spec · Minimal Press &amp; Hover Lift</text>
+        <text x="22" y="68" fill="#A9A9C2" font-size="13" class="mono">Hover: translate(-2px,-2px) + 8px shadow · Active: +2px + 2px shadow</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ======================================================================= -->
+  <!-- FRAME 03: UI COMPONENT SHEET (BUTTONS, PILLS, CHIPS, BUBBLES)           -->
+  <!-- ======================================================================= -->
+  <g id="03-Component-Library" transform="translate(60, 894)">
+    <rect x="8" y="8" width="1480" height="390" rx="20" fill="#00A86B" />
+    <rect x="0" y="0" width="1480" height="390" rx="20" fill="#1E1E2F" stroke="#00A86B" stroke-width="3" />
+    <text x="36" y="44" fill="#FF6B35" font-size="13" class="mono">03 / COMPONENT SYSTEM</text>
+    <text x="36" y="80" fill="#F5F3EE" font-size="28" class="display">Brutalist Interactive Primitives</text>
+
+    <!-- CTA Buttons Row -->
+    <g id="Component-Buttons" transform="translate(36, 108)">
+      <!-- Primary CTA: Hire Me -->
+      <rect x="5" y="5" width="180" height="54" rx="27" fill="#00A86B" />
+      <rect x="0" y="0" width="180" height="54" rx="27" fill="#FF6B35" stroke="#1E1E2F" stroke-width="3" />
+      <text x="90" y="33" text-anchor="middle" fill="#1E1E2F" font-size="16" class="display">Hire me →</text>
+
+      <!-- Secondary CTA: Chat with my Twin -->
+      <g transform="translate(204, 0)">
+        <rect x="5" y="5" width="230" height="54" rx="27" fill="#FF6B35" />
+        <rect x="0" y="0" width="230" height="54" rx="27" fill="#00A86B" stroke="#1E1E2F" stroke-width="3" />
+        <text x="115" y="33" text-anchor="middle" fill="#1E1E2F" font-size="16" class="display">Chat with my Twin</text>
+      </g>
+
+      <!-- Tertiary Outline CTA: Download CV -->
+      <g transform="translate(458, 0)">
+        <rect x="5" y="5" width="190" height="54" rx="27" fill="#00A86B" />
+        <rect x="0" y="0" width="190" height="54" rx="27" fill="#2A2A40" stroke="#F5F3EE" stroke-width="3" />
+        <text x="95" y="33" text-anchor="middle" fill="#F5F3EE" font-size="16" class="display">Download CV ↓</text>
+      </g>
+
+      <!-- Circular Social Buttons -->
+      <g transform="translate(674, 0)">
+        <circle cx="31" cy="31" r="27" fill="#00A86B" />
+        <circle cx="27" cy="27" r="27" fill="#2A2A40" stroke="#F5F3EE" stroke-width="3" />
+        <text x="27" y="33" text-anchor="middle" fill="#F5F3EE" font-size="14" class="display">GH</text>
+      </g>
+      <g transform="translate(744, 0)">
+        <circle cx="31" cy="31" r="27" fill="#FF6B35" />
+        <circle cx="27" cy="27" r="27" fill="#00A86B" stroke="#1E1E2F" stroke-width="3" />
+        <text x="27" y="33" text-anchor="middle" fill="#1E1E2F" font-size="14" class="display">IN</text>
+      </g>
+    </g>
+
+    <!-- Skill Chips & Status Badges Row -->
+    <g id="Component-Chips" transform="translate(36, 194)">
+      <rect x="3" y="3" width="150" height="36" rx="18" fill="#00A86B" />
+      <rect x="0" y="0" width="150" height="36" rx="18" fill="#1E1E2F" stroke="#00A86B" stroke-width="2.5" />
+      <text x="75" y="23" text-anchor="middle" fill="#F5F3EE" font-size="13" class="mono">OpenAI Agents</text>
+
+      <g transform="translate(166, 0)">
+        <rect x="3" y="3" width="124" height="36" rx="18" fill="#00A86B" />
+        <rect x="0" y="0" width="124" height="36" rx="18" fill="#1E1E2F" stroke="#00A86B" stroke-width="2.5" />
+        <text x="62" y="23" text-anchor="middle" fill="#F5F3EE" font-size="13" class="mono">LangGraph</text>
+      </g>
+
+      <g transform="translate(306, 0)">
+        <rect x="3" y="3" width="136" height="36" rx="18" fill="#1E1E2F" />
+        <rect x="0" y="0" width="136" height="36" rx="18" fill="#FF6B35" stroke="#1E1E2F" stroke-width="2.5" />
+        <text x="68" y="23" text-anchor="middle" fill="#1E1E2F" font-size="13" class="mono">● OPEN TO WORK</text>
+      </g>
+
+      <g transform="translate(458, 0)">
+        <rect x="3" y="3" width="160" height="36" rx="18" fill="#1E1E2F" />
+        <rect x="0" y="0" width="160" height="36" rx="18" fill="#00A86B" stroke="#1E1E2F" stroke-width="2.5" />
+        <text x="80" y="23" text-anchor="middle" fill="#1E1E2F" font-size="13" class="mono">● TWIN CONNECTED</text>
+      </g>
+    </g>
+
+    <!-- Digital Twin & Terminal Mini Preview Card -->
+    <g id="Component-Twin-Preview" transform="translate(860, 96)">
+      <rect x="6" y="6" width="584" height="256" rx="18" fill="#00A86B" />
+      <rect x="0" y="0" width="584" height="256" rx="18" fill="#2A2A40" stroke="#F5F3EE" stroke-width="3" />
+      <rect x="0" y="0" width="584" height="54" rx="18" fill="#00A86B" stroke="#1E1E2F" stroke-width="3" />
+      <circle cx="30" cy="27" r="14" fill="#FF6B35" stroke="#1E1E2F" stroke-width="2.5" />
+      <text x="54" y="33" fill="#1E1E2F" font-size="16" class="display">Yousef's Digital Twin · Brutalist Card</text>
+
+      <!-- Assistant bubble -->
+      <rect x="24" y="76" width="380" height="68" rx="14" fill="#00A86B" stroke="#1E1E2F" stroke-width="3" />
+      <text x="42" y="104" fill="#1E1E2F" font-size="14" class="body">Hi! I'm Yousef's AI Twin. Ask me about multi-agent</text>
+      <text x="42" y="126" fill="#1E1E2F" font-size="14" class="body">workflows, RAG pipelines, or R2-WAITER robotics.</text>
+
+      <!-- Visitor bubble -->
+      <rect x="210" y="162" width="350" height="58" rx="14" fill="#FF6B35" stroke="#1E1E2F" stroke-width="3" />
+      <text x="228" y="196" fill="#1E1E2F" font-size="14" class="display">Tell me about Yousef's Groq RAG stack →</text>
+    </g>
+  </g>
+
+  <!-- ======================================================================= -->
+  <!-- FRAME 04: DESKTOP HERO & NAVIGATION MOCKUP (1440px REFERENCE)           -->
+  <!-- ======================================================================= -->
+  <g id="04-Desktop-Hero-Mockup-1440" transform="translate(60, 1318)">
+    <rect x="10" y="10" width="1480" height="800" rx="24" fill="#00A86B" />
+    <rect x="0" y="0" width="1480" height="800" rx="24" fill="#1E1E2F" stroke="#F5F3EE" stroke-width="4" />
+
+    <!-- Decorative dot grid indicator -->
+    <text x="40" y="42" fill="#FF6B35" font-size="13" class="mono">04 / DESKTOP 1440PX HERO MOCKUP (REFERENCE LAYOUT + 60-30-10 PALETTE)</text>
+
+    <!-- Brutalist Navbar Pill -->
+    <g id="Mockup-Navbar" transform="translate(120, 68)">
+      <rect x="6" y="6" width="1240" height="68" rx="34" fill="#00A86B" />
+      <rect x="0" y="0" width="1240" height="68" rx="34" fill="#2A2A40" stroke="#F5F3EE" stroke-width="3" />
+      <circle cx="42" cy="34" r="20" fill="#FF6B35" stroke="#1E1E2F" stroke-width="3" />
+      <text x="42" y="40" text-anchor="middle" fill="#1E1E2F" font-size="15" class="display">YA</text>
+      <text x="76" y="40" fill="#F5F3EE" font-size="18" class="display">Yousef.</text>
+      <text x="360" y="40" fill="#F5F3EE" font-size="15" class="body">Expertise</text>
+      <text x="470" y="40" fill="#F5F3EE" font-size="15" class="body">History</text>
+      <text x="565" y="40" fill="#F5F3EE" font-size="15" class="body">Projects</text>
+      <text x="665" y="40" fill="#00A86B" font-size="15" class="display">Digital Twin</text>
+      <text x="795" y="40" fill="#F5F3EE" font-size="15" class="body">Achievements</text>
+      <text x="935" y="40" fill="#F5F3EE" font-size="15" class="body">Resume</text>
+      <rect x="1084" y="12" width="140" height="44" rx="22" fill="#FF6B35" stroke="#1E1E2F" stroke-width="3" />
+      <text x="1154" y="39" text-anchor="middle" fill="#1E1E2F" font-size="14" class="display">Hire me →</text>
+    </g>
+
+    <!-- Hero Left Column -->
+    <g id="Mockup-Hero-Copy" transform="translate(120, 210)">
+      <rect x="4" y="4" width="248" height="38" rx="19" fill="#1E1E2F" />
+      <rect x="0" y="0" width="248" height="38" rx="19" fill="#00A86B" stroke="#F5F3EE" stroke-width="2.5" />
+      <text x="124" y="24" text-anchor="middle" fill="#1E1E2F" font-size="13" class="mono">● AI ENGINEER &amp; BUILDER</text>
+
+      <text x="0" y="112" fill="#F5F3EE" font-size="62" class="display">Hello, I'm</text>
+      <text x="0" y="186" fill="#00A86B" font-size="62" class="display">Yousef Alsayed</text>
+      <text x="0" y="242" fill="#A9A9C2" font-size="21" class="body">AI Solutions, LLMs, Multi-Agent Systems &amp; Robotics.</text>
+      <text x="0" y="274" fill="#A9A9C2" font-size="21" class="body">Explore my work or talk directly to my grounded AI Twin.</text>
+
+      <!-- 3 Hero Action Buttons -->
+      <g transform="translate(0, 318)">
+        <rect x="6" y="6" width="186" height="58" rx="29" fill="#00A86B" />
+        <rect x="0" y="0" width="186" height="58" rx="29" fill="#FF6B35" stroke="#F5F3EE" stroke-width="3" />
+        <text x="93" y="36" text-anchor="middle" fill="#1E1E2F" font-size="17" class="display">Hire me →</text>
+
+        <g transform="translate(208, 0)">
+          <rect x="6" y="6" width="236" height="58" rx="29" fill="#FF6B35" />
+          <rect x="0" y="0" width="236" height="58" rx="29" fill="#00A86B" stroke="#F5F3EE" stroke-width="3" />
+          <text x="118" y="36" text-anchor="middle" fill="#1E1E2F" font-size="17" class="display">Chat with my Twin</text>
+        </g>
+
+        <g transform="translate(466, 0)">
+          <rect x="6" y="6" width="188" height="58" rx="29" fill="#00A86B" />
+          <rect x="0" y="0" width="188" height="58" rx="29" fill="#2A2A40" stroke="#F5F3EE" stroke-width="3" />
+          <text x="94" y="36" text-anchor="middle" fill="#F5F3EE" font-size="16" class="display">Download CV</text>
+        </g>
+      </g>
+
+      <!-- Social Row -->
+      <g transform="translate(0, 412)">
+        <circle cx="30" cy="30" r="26" fill="#00A86B" />
+        <circle cx="26" cy="26" r="26" fill="#2A2A40" stroke="#F5F3EE" stroke-width="3" />
+        <text x="26" y="32" text-anchor="middle" fill="#F5F3EE" font-size="14" class="display">GH</text>
+
+        <g transform="translate(70, 0)">
+          <circle cx="30" cy="30" r="26" fill="#FF6B35" />
+          <circle cx="26" cy="26" r="26" fill="#2A2A40" stroke="#F5F3EE" stroke-width="3" />
+          <text x="26" y="32" text-anchor="middle" fill="#F5F3EE" font-size="14" class="display">IN</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- Hero Right Column: 30% Emerald Brutalist Profile Frame + Illustrated Badge -->
+    <g id="Mockup-Hero-Profile-Card" transform="translate(940, 196)">
+      <rect x="12" y="12" width="420" height="470" rx="28" fill="#FF6B35" stroke="#1E1E2F" stroke-width="4" />
+      <rect x="0" y="0" width="420" height="470" rx="28" fill="#00A86B" stroke="#F5F3EE" stroke-width="4" />
+
+      <!-- Top Window Dots on Hero Card -->
+      <circle cx="34" cy="32" r="8" fill="#FF6B35" stroke="#1E1E2F" stroke-width="2.5" />
+      <circle cx="58" cy="32" r="8" fill="#1E1E2F" />
+      <text x="386" y="37" text-anchor="end" fill="#1E1E2F" font-size="13" class="mono">YOUSEF.AI // 2025</text>
+
+      <!-- Inner portrait frame -->
+      <rect x="34" y="56" width="352" height="312" rx="20" fill="#1E1E2F" stroke="#1E1E2F" stroke-width="4" />
+      <circle cx="210" cy="206" r="108" fill="#2A2A40" stroke="#00A86B" stroke-width="4" />
+      <!-- Stylized vector portrait inside the mockup -->
+      <circle cx="210" cy="182" r="44" fill="#F2C6A8" stroke="#1E1E2F" stroke-width="4" />
+      <path d="M168 172 C168 142 252 142 252 172" fill="#1E1E2F" />
+      <rect x="182" y="172" width="22" height="16" rx="4" fill="#F5F3EE" stroke="#1E1E2F" stroke-width="3" />
+      <rect x="216" y="172" width="22" height="16" rx="4" fill="#F5F3EE" stroke="#1E1E2F" stroke-width="3" />
+      <path d="M148 294 C156 246 182 234 210 234 C238 234 264 246 272 294 Z" fill="#FF6B35" stroke="#1E1E2F" stroke-width="4" />
+
+      <!-- Bottom status plate inside emerald card -->
+      <rect x="34" y="388" width="352" height="54" rx="14" fill="#1E1E2F" />
+      <circle cx="62" cy="415" r="7" fill="#FF6B35" />
+      <text x="82" y="420" fill="#F5F3EE" font-size="14" class="mono">Photo + Twin Avatar Ready</text>
+    </g>
+  </g>
+</svg>
