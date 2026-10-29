@@ -1,4 +1,4 @@
-/* Style – Indigo Brutal: 60% Indigo Night (#1E1E2F), 30% Emerald Vibe (#00A86B), 10% Electric Orange (#FF6B35). */
+/* Style – Indigo Brutal: 60% Indigo Night (#1E1E2F), 30% Royal Amethyst (#A875FF), 10% Electric Orange (#FF6B35). */
 @font-face {
   font-family: "JetBrains Mono";
   src:
@@ -25,12 +25,12 @@
   --bg-card-hover: #32324D;
   --bg-card-active: #1E1E2F;
   --bg-code: #161625;
-  --bg-code-inline: rgba(0, 168, 107, 0.18);
+  --bg-code-inline: rgba(168, 117, 255, 0.22);
 
-  /* 30% Secondary — Emerald Vibe */
-  --accent-emerald: #00A86B;
-  --accent-emerald-light: #22C98B;
-  --accent-emerald-hover: #00C27C;
+  /* 30% Secondary — Royal Amethyst */
+  --accent-emerald: #A875FF;
+  --accent-emerald-light: #C4A1FF;
+  --accent-emerald-hover: #B88CFF;
 
   /* 10% Accent — Electric Orange */
   --accent-orange: #FF6B35;
@@ -40,10 +40,10 @@
   --ink-dark: #1E1E2F;
   --border-brutal-width: 3px;
   --border-subtle: #F5F3EE;
-  --border-medium: #00A86B;
+  --border-medium: #A875FF;
   --border-hover: #FF6B35;
   --border-zinc: #F5F3EE;
-  --border-code: #00A86B;
+  --border-code: #A875FF;
 
   --text-primary: #F5F3EE;
   --text-secondary: #D2D2E4;
@@ -76,6 +76,6 @@
   --content-width: 1180px;
   --anchor-clearance: 104px;
   --media-project-ratio: 16 / 9;
-  --canvas-dot: rgba(0, 168, 107, 0.16);
+  --canvas-dot: rgba(168, 117, 255, 0.2);
   --canvas-dot-spacing: 28px;
 }
