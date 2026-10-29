@@ -370,20 +370,20 @@ samp,
 }
 
 .brutal-btn-primary {
-  background: #010101 !important;
-  color: #FFFFFF !important;
+  background: var(--ink-dark) !important;
+  color: #F7F6F2 !important;
   box-shadow: 5px 5px 0px var(--accent-emerald);
 }
 
 .brutal-btn-secondary {
   background: var(--accent-emerald) !important;
-  color: #FFFFFF !important;
-  box-shadow: 5px 5px 0px #010101;
+  color: #F7F6F2 !important;
+  box-shadow: 5px 5px 0px var(--ink-dark);
 }
 
 .brutal-btn-outline {
-  background: #FFFFFF !important;
-  color: #010101 !important;
+  background: var(--bg-card) !important;
+  color: var(--ink-dark) !important;
   box-shadow: 5px 5px 0px var(--accent-emerald);
 }
 
@@ -423,10 +423,10 @@ samp,
 .hero-brutal-card {
   position: relative;
   padding: 18px;
-  border: 3px solid #000000;
+  border: 3px solid var(--ink-dark);
   border-radius: 16px;
   background: var(--accent-emerald);
-  box-shadow: 8px 8px 0px #000000;
+  box-shadow: 7px 7px 0px var(--ink-dark);
 }
 
 .hero-brutal-card-bar {
@@ -444,11 +444,11 @@ samp,
 }
 
 .hero-card-dot-orange {
-  background: #FE2C55;
+  background: #E8596A;
 }
 
 .hero-card-dot-ink {
-  background: #25F4EE;
+  background: #74C0FC;
 }
 
 .hero-card-tag {
@@ -486,9 +486,9 @@ samp,
   padding: 10px 14px;
   border: 3px solid var(--ink-dark);
   border-radius: 16px;
-  background: #FFFFFF;
-  color: #000000 !important;
-  box-shadow: 4px 4px 0px #000000;
+  background: #F7F6F2;
+  color: var(--ink-dark) !important;
+  box-shadow: 4px 4px 0px var(--ink-dark);
   transition: transform var(--duration-fast) var(--ease-out);
 }
 

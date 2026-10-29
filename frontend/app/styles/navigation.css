@@ -9,10 +9,10 @@
   min-height: 62px;
   padding: 6px 14px;
   justify-content: space-between;
-  border: 3px solid #000000;
+  border: 2.5px solid var(--ink-dark);
   border-radius: var(--radius-full);
-  background: #000000 !important;
-  color: #FFFFFF !important;
+  background: #1A1D24 !important;
+  color: #F7F6F2 !important;
   box-shadow: 0 6px 0px rgba(0, 0, 0, 0.22);
   pointer-events: auto;
   transition:
@@ -40,14 +40,14 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  border: 2.5px solid #FFFFFF;
+  border: 2px solid #F7F6F2;
   border-radius: 50%;
   background: var(--accent-emerald);
-  color: #FFFFFF;
+  color: #F7F6F2;
   font-family: var(--font-display) !important;
   font-size: 0.82rem;
   font-weight: 800;
-  box-shadow: -2px -2px 0px #25F4EE, 2px 2px 0px #FE2C55;
+  box-shadow: -1.5px -1.5px 0px #74C0FC, 1.5px 1.5px 0px #E8596A;
 }
 
 .nav-brand-wordmark {
@@ -99,8 +99,8 @@
 .nav-style-link {
   display: inline-flex;
   align-items: center;
-  border: 2px solid #25F4EE !important;
-  color: #25F4EE !important;
+  border: 1.5px solid #74C0FC !important;
+  color: #74C0FC !important;
 }
 
 .nav-cta-pill {
@@ -110,15 +110,15 @@
   min-height: 42px;
   margin-left: 6px;
   padding: 8px 16px;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #F7F6F2;
   border-radius: var(--radius-full);
   background: var(--accent-emerald) !important;
-  color: #FFFFFF !important;
+  color: #F7F6F2 !important;
   font-family: var(--font-display) !important;
   font-size: 0.85rem;
   font-weight: 800;
   white-space: nowrap;
-  box-shadow: -2px -2px 0px #25F4EE, 3px 3px 0px #FE2C55;
+  box-shadow: -1.5px -1.5px 0px #74C0FC, 2px 2px 0px #E8596A;
   transition: transform var(--duration-fast) var(--ease-out);
 }
 

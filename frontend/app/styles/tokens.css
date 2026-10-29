@@ -1,4 +1,4 @@
-/* TikTok Royal Brutal Palette: Off-White (#F4F5F8), Royal Blue (#2563EB), TikTok Black (#010101), Cyan (#25F4EE) & Pulse Red (#FE2C55). */
+/* Soft Eye-Friendly Royal Palette: Warm Alabaster (#EDEAE2), Soft Paper (#F7F6F2), Muted Royal Blue (#3B5BDB), and Soft Charcoal (#1A1D24). */
 @font-face {
   font-family: "JetBrains Mono";
   src:
@@ -16,47 +16,47 @@
   --font-display: var(--font-montserrat), var(--font-inter), "Montserrat", "Inter", sans-serif;
   --font-code: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  /* 60% Dominant — Kinda White (#F4F5F8) + Pure White cards (#FFFFFF) */
-  --bg-canvas: #F4F5F8;
-  --bg-surface: #FFFFFF;
-  --bg-card: #FFFFFF;
-  --bg-floating: #FFFFFF;
-  --bg-overlay: rgba(1, 1, 1, 0.72);
-  --bg-card-hover: #EEF2FF;
-  --bg-card-active: #DBEAFE;
-  --bg-code: #010101;
-  --bg-code-inline: rgba(37, 99, 235, 0.14);
+  /* 60% Dominant — Warm Alabaster (#EDEAE2) + Soft Paper cards (#F7F6F2) for zero glare */
+  --bg-canvas: #EDEAE2;
+  --bg-surface: #F7F6F2;
+  --bg-card: #F7F6F2;
+  --bg-floating: #F7F6F2;
+  --bg-overlay: rgba(26, 29, 36, 0.65);
+  --bg-card-hover: #E7ECFF;
+  --bg-card-active: #DBE4FF;
+  --bg-code: #1A1D24;
+  --bg-code-inline: rgba(59, 91, 219, 0.12);
 
-  /* 30% Secondary — Royal Blue (#2563EB) + TikTok Cyan (#25F4EE) */
-  --accent-emerald: #2563EB;
-  --accent-emerald-light: #1D4ED8;
-  --accent-emerald-hover: #3B82F6;
-  --tiktok-cyan: #25F4EE;
-  --tiktok-red: #FE2C55;
+  /* 30% Secondary — Soft Muted Royal Blue (#3B5BDB) */
+  --accent-emerald: #3B5BDB;
+  --accent-emerald-light: #364FC7;
+  --accent-emerald-hover: #4C6EF5;
+  --tiktok-cyan: #74C0FC;
+  --tiktok-red: #E8596A;
 
-  /* 10% Accent / Primary CTA — TikTok Pitch Black (#010101) */
-  --accent-orange: #010101;
-  --accent-orange-hover: #18191F;
+  /* 10% Accent / Primary CTA — Soft Charcoal Black (#1A1D24) */
+  --accent-orange: #1A1D24;
+  --accent-orange-hover: #252932;
 
-  /* High-contrast Neo-Brutalist ink & borders */
-  --ink-dark: #010101;
-  --border-brutal-width: 3px;
-  --border-subtle: #010101;
-  --border-medium: #010101;
-  --border-hover: #2563EB;
-  --border-zinc: #010101;
-  --border-code: #2563EB;
+  /* Eye-friendly Neo-Brutalist ink & borders */
+  --ink-dark: #1A1D24;
+  --border-brutal-width: 2.5px;
+  --border-subtle: #1A1D24;
+  --border-medium: #1A1D24;
+  --border-hover: #3B5BDB;
+  --border-zinc: #1A1D24;
+  --border-code: #3B5BDB;
 
-  --text-primary: #010101;
-  --text-secondary: #1E293B;
-  --text-detail: #0F172A;
-  --text-emphasis: #010101;
-  --text-muted: #475569;
-  --titanium-light: #010101;
+  --text-primary: #1A1D24;
+  --text-secondary: #343A46;
+  --text-detail: #2B303C;
+  --text-emphasis: #1A1D24;
+  --text-muted: #5C6474;
+  --titanium-light: #1A1D24;
   --titanium-gradient: none;
 
-  --status-active: #2563EB;
-  --status-active-glow: rgba(37, 99, 235, 0.28);
+  --status-active: #3B5BDB;
+  --status-active-glow: rgba(59, 91, 219, 0.22);
 
   --radius-sm: 10px;
   --radius-md: 12px;
@@ -64,10 +64,10 @@
   --radius-full: 9999px;
   --rim-light: 0 0 0 0 transparent;
   --rim-gradient: none;
-  --shadow-elevation: 6px 6px 0px #010101;
-  --shadow-card-hover: 8px 8px 0px #2563EB;
-  --shadow-press: 2px 2px 0px #010101;
-  --shadow-ink: 6px 6px 0px #010101;
+  --shadow-elevation: 5px 5px 0px #1A1D24;
+  --shadow-card-hover: 7px 7px 0px #3B5BDB;
+  --shadow-press: 2px 2px 0px #1A1D24;
+  --shadow-ink: 5px 5px 0px #1A1D24;
   --blur-glass: 0px;
 
   --duration-fast: 140ms;
@@ -78,6 +78,6 @@
   --content-width: 1180px;
   --anchor-clearance: 104px;
   --media-project-ratio: 16 / 9;
-  --canvas-dot: rgba(0, 0, 0, 0.08);
+  --canvas-dot: rgba(26, 29, 36, 0.06);
   --canvas-dot-spacing: 28px;
 }

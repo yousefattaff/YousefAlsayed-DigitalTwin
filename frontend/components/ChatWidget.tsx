@@ -163,7 +163,7 @@ export default function ChatWidget() {
         <div className="twin-chat-header">
           <div className="twin-chat-profile">
             <Image
-              src="/data/profile/yousef-avatar.svg?v=tiktok-royal"
+              src="/data/profile/yousef-avatar.svg?v=soft-royal"
               alt="Yousef"
               width={40}
               height={40}
