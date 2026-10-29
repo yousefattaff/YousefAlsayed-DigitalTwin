@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   icons: {
-    icon: "/data/profile/yousef-avatar.svg?v=logo-v2",
-    shortcut: "/data/profile/yousef-avatar.svg?v=logo-v2",
-    apple: "/data/profile/yousef-avatar.svg?v=logo-v2",
+    icon: "/data/profile/yousef-avatar.svg?v=logo-v3",
+    shortcut: "/data/profile/yousef-avatar.svg?v=logo-v3",
+    apple: "/data/profile/yousef-avatar.svg?v=logo-v3",
   },
 };
 

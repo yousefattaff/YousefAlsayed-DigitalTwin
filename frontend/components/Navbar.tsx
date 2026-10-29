@@ -74,7 +74,7 @@ export default function Navbar() {
             >
               <span className="nav-brand-monogram" aria-hidden="true">
                 <Image
-                  src="/data/profile/yousef-avatar.svg?v=logo-v2"
+                  src="/data/profile/yousef-avatar.svg?v=logo-v3"
                   alt=""
                   width={38}
                   height={38}
@@ -115,7 +115,7 @@ export default function Navbar() {
           <div ref={menuRef} id="mobile-navigation" className="navigation-bar-responsive" role="dialog" aria-modal="true" aria-labelledby="mobile-menu-title" tabIndex={-1}>
             <div className="mobile-menu-top">
               <Image
-                src="/data/profile/yousef-avatar.svg?v=logo-v2"
+                src="/data/profile/yousef-avatar.svg?v=logo-v3"
                 alt=""
                 width={32}
                 height={32}

@@ -139,29 +139,8 @@
       <ellipse cx="89" cy="116" rx="9" ry="5" fill="#E59885" opacity="0.38" />
       <ellipse cx="147" cy="116" rx="9" ry="5" fill="#E59885" opacity="0.38" />
 
-      <!-- Trimmed Jawline Beard, Chin Goatee & Soft Mustache -->
-      <path
-        d="M75 110 C77 127 93 141 118 141 C143 141 159 127 161 110 C160 133 143 149 118 149 C93 149 76 133 75 110 Z"
-        fill="#3A2518"
-      />
-      <!-- Beard Texture & Chin Patch -->
-      <path
-        d="M98 139 Q118 146 138 139"
-        fill="none"
-        stroke="#24160E"
-        stroke-width="3"
-        stroke-linecap="round"
-      />
-      <path d="M112 134 Q118 137 124 134" fill="none" stroke="#3A2518" stroke-width="2.5" stroke-linecap="round" />
-      <!-- Subtle Mustache Shadow -->
-      <path
-        d="M101 122 Q118 118 135 122"
-        fill="none"
-        stroke="#4A3222"
-        stroke-width="3"
-        stroke-linecap="round"
-        opacity="0.7"
-      />
+      <!-- Clean-Shaven Chin Contour -->
+      <path d="M112 136 Q118 139 124 136" fill="none" stroke="#D9A583" stroke-width="2.5" stroke-linecap="round" />
 
       <!-- Warm Confident Smile -->
       <path
