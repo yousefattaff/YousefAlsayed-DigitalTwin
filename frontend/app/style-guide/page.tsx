@@ -2,58 +2,58 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export const metadata = {
-  title: 'Style – Indigo Brutal | Figma Style Sheet & Design System',
-  description: '60-30-10 Neo-Brutalist Figma style sheet for Yousef Alsayed — Indigo Night, Royal Amethyst, and Electric Orange.',
+  title: 'Figma Reference Style Sheet | Sunshine Yellow, Mint-Teal & Jet Black',
+  description: 'Neo-Brutalist Figma style sheet matching the community portfolio reference (#FFDD55, #00C6AE, #000000, #FFFFFF).',
 };
 
 const swatches = [
   {
     ratio: '60% DOMINANT',
-    name: 'Indigo Night',
-    hex: '#1E1E2F',
+    name: 'Sunshine Yellow',
+    hex: '#FFDD55',
     token: '--bg-canvas',
-    bg: '#1E1E2F',
-    fg: '#F5F3EE',
-    border: '#F5F3EE',
-    shadow: '6px 6px 0px #A875FF',
-    contrast: '13.8:1 with Warm Paper (AAA)',
-    usage: 'Main canvas background, primary sections, and dark ink text on royal/orange fills.',
-  },
-  {
-    ratio: 'SURFACE',
-    name: 'Indigo Slate',
-    hex: '#2A2A40',
-    token: '--bg-surface',
-    bg: '#2A2A40',
-    fg: '#F5F3EE',
-    border: '#A875FF',
-    shadow: '6px 6px 0px #A875FF',
-    contrast: '10.4:1 with Warm Paper (AAA)',
-    usage: 'Raised cards, terminal console, navbar pill, and modal surfaces.',
+    bg: '#FFDD55',
+    fg: '#000000',
+    border: '#000000',
+    shadow: '6px 6px 0px #000000',
+    contrast: '15.4:1 with Jet Black ink (AAA)',
+    usage: 'Main portfolio canvas background and monogram badge fill in the black navbar.',
   },
   {
     ratio: '30% SECONDARY',
-    name: 'Royal Amethyst',
-    hex: '#A875FF',
+    name: 'Mint-Teal',
+    hex: '#00C6AE',
     token: '--accent-emerald',
-    bg: '#A875FF',
-    fg: '#1E1E2F',
-    border: '#1E1E2F',
-    shadow: '6px 6px 0px #FF6B35',
-    contrast: '5.1:1 with Indigo Night ink (AA)',
-    usage: 'Hero portrait card, feature headers, secondary CTA, Twin assistant bubbles, and offset shadows.',
+    bg: '#00C6AE',
+    fg: '#000000',
+    border: '#000000',
+    shadow: '6px 6px 0px #000000',
+    contrast: '9.4:1 with Jet Black ink (AAA)',
+    usage: 'Hero portrait card fill, hard offset button shadows, skill icon badges, and Twin accents.',
   },
   {
-    ratio: '10% ACCENT',
-    name: 'Electric Orange',
-    hex: '#FF6B35',
-    token: '--accent-orange',
-    bg: '#FF6B35',
-    fg: '#1E1E2F',
-    border: '#1E1E2F',
-    shadow: '6px 6px 0px #A875FF',
-    contrast: '5.8:1 with Indigo Night ink (AA)',
-    usage: 'Primary "Hire me" CTA, active badges, visitor chat bubbles, and keyboard focus rings.',
+    ratio: '10% INK & CTAS',
+    name: 'Jet Black',
+    hex: '#000000',
+    token: '--ink-dark',
+    bg: '#000000',
+    fg: '#FFFFFF',
+    border: '#000000',
+    shadow: '6px 6px 0px #00C6AE',
+    contrast: '21:1 with Crisp White (AAA)',
+    usage: 'Top navbar bar, primary CTA buttons (Hire me, Download CV), 3px outlines, and hard card shadows.',
+  },
+  {
+    ratio: 'CARDS & SOCIAL',
+    name: 'Crisp White',
+    hex: '#FFFFFF',
+    token: '--bg-card',
+    bg: '#FFFFFF',
+    fg: '#000000',
+    border: '#000000',
+    shadow: '6px 6px 0px #000000',
+    contrast: '21:1 with Jet Black ink (AAA)',
+    usage: 'Circular social icon buttons, expertise/project/timeline cards, and Twin chat surfaces.',
   },
 ];
 
@@ -64,14 +64,14 @@ export default function StyleGuidePage() {
         <header className="style-sheet-header">
           <div>
             <span className="brutal-badge brutal-badge-orange">FIGMA DESIGN SPEC v1.0</span>
-            <h1 className="style-sheet-title">Style – Indigo Brutal</h1>
+            <h1 className="style-sheet-title">Figma Reference Style Sheet</h1>
             <p className="style-sheet-subtitle">
-              60% Indigo Night (<code>#1E1E2F</code>) · 30% Royal Amethyst (<code>#A875FF</code>) · 10% Electric Orange (<code>#FF6B35</code>)
+              60% Sunshine Yellow (<code>#FFDD55</code>) · 30% Mint-Teal (<code>#00C6AE</code>) · 10% Jet Black (<code>#000000</code>) &amp; White (<code>#FFFFFF</code>)
             </p>
           </div>
           <div className="hero-cta-row">
             <a
-              href="/figma/style-indigo-brutal.svg?v=royal"
+              href="/figma/style-indigo-brutal.svg?v=figma-ref"
               download="style-indigo-brutal.svg"
               className="brutal-btn brutal-btn-primary"
             >
@@ -94,7 +94,7 @@ export default function StyleGuidePage() {
           </div>
           <div className="style-sheet-artboard-preview">
             <Image
-              src="/figma/style-indigo-brutal.svg?v=royal"
+              src="/figma/style-indigo-brutal.svg?v=figma-ref"
               alt="Style – Indigo Brutal complete Figma artboard"
               width={1600}
               height={2180}
@@ -144,7 +144,7 @@ export default function StyleGuidePage() {
               <p>Used in the hero badge and the AI Digital Twin chat header.</p>
               <div className="style-sheet-avatar-row">
                 <Image
-                  src="/data/profile/yousef-avatar.svg?v=royal"
+                  src="/data/profile/yousef-avatar.svg?v=figma-ref"
                   alt="Illustrated avatar of Yousef"
                   width={112}
                   height={112}

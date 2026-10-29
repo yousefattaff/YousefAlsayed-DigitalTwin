@@ -1,4 +1,4 @@
-/* Style – Indigo Brutal: 60% Indigo Night (#1E1E2F), 30% Royal Amethyst (#A875FF), 10% Electric Orange (#FF6B35). */
+/* Figma Community Portfolio Palette: 60% Sunshine Yellow (#FFDD55), 30% Mint-Teal (#00C6AE), 10% Jet Black (#000000) & White (#FFFFFF). */
 @font-face {
   font-family: "JetBrains Mono";
   src:
@@ -11,61 +11,61 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   --font-ui: var(--font-inter), "Inter", "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-display: var(--font-montserrat), var(--font-inter), "Montserrat", "Inter", sans-serif;
   --font-code: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  /* 60% Dominant — Indigo Night */
-  --bg-canvas: #1E1E2F;
-  --bg-surface: #2A2A40;
-  --bg-card: #2A2A40;
-  --bg-floating: #2A2A40;
-  --bg-overlay: rgba(20, 20, 34, 0.86);
-  --bg-card-hover: #32324D;
-  --bg-card-active: #1E1E2F;
-  --bg-code: #161625;
-  --bg-code-inline: rgba(168, 117, 255, 0.22);
+  /* 60% Dominant — Sunshine Yellow (#FFDD55) + Crisp White cards (#FFFFFF) */
+  --bg-canvas: #FFDD55;
+  --bg-surface: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-floating: #FFFFFF;
+  --bg-overlay: rgba(0, 0, 0, 0.65);
+  --bg-card-hover: #FFF8D6;
+  --bg-card-active: #FFDD55;
+  --bg-code: #18191F;
+  --bg-code-inline: rgba(0, 198, 174, 0.22);
 
-  /* 30% Secondary — Royal Amethyst */
-  --accent-emerald: #A875FF;
-  --accent-emerald-light: #C4A1FF;
-  --accent-emerald-hover: #B88CFF;
+  /* 30% Secondary — Mint-Teal (#00C6AE) from Figma reference */
+  --accent-emerald: #00C6AE;
+  --accent-emerald-light: #009583;
+  --accent-emerald-hover: #00DFC4;
 
-  /* 10% Accent — Electric Orange */
-  --accent-orange: #FF6B35;
-  --accent-orange-hover: #FF8254;
+  /* 10% Accent / Primary CTA — Jet Black (#000000) & Sunshine Yellow (#FFDD55) */
+  --accent-orange: #000000;
+  --accent-orange-hover: #18191F;
 
   /* High-contrast Neo-Brutalist ink & borders */
-  --ink-dark: #1E1E2F;
+  --ink-dark: #000000;
   --border-brutal-width: 3px;
-  --border-subtle: #F5F3EE;
-  --border-medium: #A875FF;
-  --border-hover: #FF6B35;
-  --border-zinc: #F5F3EE;
-  --border-code: #A875FF;
+  --border-subtle: #000000;
+  --border-medium: #000000;
+  --border-hover: #000000;
+  --border-zinc: #000000;
+  --border-code: #000000;
 
-  --text-primary: #F5F3EE;
-  --text-secondary: #D2D2E4;
-  --text-detail: #E6E4DF;
-  --text-emphasis: #FFFFFF;
-  --text-muted: #A9A9C2;
-  --titanium-light: #F5F3EE;
+  --text-primary: #000000;
+  --text-secondary: #18191F;
+  --text-detail: #18191F;
+  --text-emphasis: #000000;
+  --text-muted: #564E2C;
+  --titanium-light: #000000;
   --titanium-gradient: none;
 
-  --status-active: var(--accent-emerald);
-  --status-active-glow: rgba(255, 107, 53, 0.35);
+  --status-active: #007C6D;
+  --status-active-glow: rgba(0, 198, 174, 0.35);
 
   --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
   --radius-full: 9999px;
   --rim-light: 0 0 0 0 transparent;
   --rim-gradient: none;
-  --shadow-elevation: 6px 6px 0px var(--accent-emerald);
-  --shadow-card-hover: 8px 8px 0px var(--accent-orange);
-  --shadow-press: 2px 2px 0px var(--accent-emerald);
-  --shadow-ink: 6px 6px 0px #141422;
+  --shadow-elevation: 6px 6px 0px #000000;
+  --shadow-card-hover: 8px 8px 0px #000000;
+  --shadow-press: 2px 2px 0px #000000;
+  --shadow-ink: 6px 6px 0px #000000;
   --blur-glass: 0px;
 
   --duration-fast: 140ms;
@@ -76,6 +76,6 @@
   --content-width: 1180px;
   --anchor-clearance: 104px;
   --media-project-ratio: 16 / 9;
-  --canvas-dot: rgba(168, 117, 255, 0.2);
+  --canvas-dot: rgba(0, 0, 0, 0.08);
   --canvas-dot-spacing: 28px;
 }

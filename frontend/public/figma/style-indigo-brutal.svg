@@ -12,80 +12,80 @@
   <!-- CANVAS ROOT: Style – Indigo Brutal                                      -->
   <!-- Import into Figma: drag & drop this SVG onto any Figma canvas           -->
   <!-- ======================================================================= -->
-  <rect id="Canvas-Background" x="0" y="0" width="1600" height="2180" fill="#141422" />
+  <rect id="Canvas-Background" x="0" y="0" width="1600" height="2180" fill="#FFDD55" />
 
   <!-- Canvas Header Banner -->
   <g id="00-File-Cover-Header" transform="translate(60, 44)">
-    <rect x="6" y="6" width="1480" height="96" rx="16" fill="#A875FF" />
-    <rect x="0" y="0" width="1480" height="96" rx="16" fill="#2A2A40" stroke="#A875FF" stroke-width="3" />
-    <rect x="28" y="26" width="164" height="44" rx="22" fill="#FF6B35" stroke="#1E1E2F" stroke-width="3" />
-    <text x="110" y="54" text-anchor="middle" fill="#1E1E2F" font-size="14" class="display">FIGMA SPEC v1.0</text>
-    <text x="216" y="50" fill="#F5F3EE" font-size="26" class="display">Style – Indigo Brutal · Yousef Alsayed Portfolio</text>
-    <text x="216" y="76" fill="#A9A9C2" font-size="14" class="mono">60% Indigo Night (#1E1E2F)  ·  30% Royal Amethyst (#A875FF)  ·  10% Electric Orange (#FF6B35)</text>
+    <rect x="6" y="6" width="1480" height="96" rx="16" fill="#00C6AE" />
+    <rect x="0" y="0" width="1480" height="96" rx="16" fill="#000000" stroke="#000000" stroke-width="3" />
+    <rect x="28" y="26" width="164" height="44" rx="22" fill="#FFDD55" stroke="#000000" stroke-width="3" />
+    <text x="110" y="54" text-anchor="middle" fill="#000000" font-size="14" class="display">FIGMA SPEC v1.0</text>
+    <text x="216" y="50" fill="#FFFFFF" font-size="26" class="display">Figma Community Reference Palette · Yousef Alsayed</text>
+    <text x="216" y="76" fill="#FFDD55" font-size="14" class="mono">60% Sunshine Yellow (#FFDD55)  ·  30% Mint-Teal (#00C6AE)  ·  10% Jet Black (#000000) &amp; White (#FFFFFF)</text>
   </g>
 
   <!-- ======================================================================= -->
   <!-- FRAME 01: 60-30-10 COLOR PALETTE & CONTRAST MATRIX                      -->
   <!-- ======================================================================= -->
   <g id="01-Color-Palette-60-30-10" transform="translate(60, 176)">
-    <rect x="8" y="8" width="1480" height="330" rx="20" fill="#A875FF" />
-    <rect x="0" y="0" width="1480" height="330" rx="20" fill="#1E1E2F" stroke="#A875FF" stroke-width="3" />
-    <text x="36" y="46" fill="#FF6B35" font-size="13" class="mono">01 / COLOR TOKENS &amp; WCAG CONTRAST</text>
-    <text x="36" y="80" fill="#F5F3EE" font-size="28" class="display">Core 60–30–10 Brutalist Palette</text>
+    <rect x="8" y="8" width="1480" height="330" rx="20" fill="#000000" />
+    <rect x="0" y="0" width="1480" height="330" rx="20" fill="#FFFFFF" stroke="#000000" stroke-width="3" />
+    <text x="36" y="46" fill="#009583" font-size="13" class="mono">01 / COLOR TOKENS FROM FIGMA REFERENCE</text>
+    <text x="36" y="80" fill="#000000" font-size="28" class="display">Original Figma Reference Palette (#FFDD55 · #00C6AE · #000000)</text>
 
-    <!-- Swatch 1: 60% Indigo Night -->
+    <!-- Swatch 1: 60% Sunshine Yellow -->
     <g id="Swatch-60-Indigo-Night" transform="translate(36, 108)">
-      <rect x="6" y="6" width="260" height="186" rx="16" fill="#A875FF" />
-      <rect x="0" y="0" width="260" height="186" rx="16" fill="#1E1E2F" stroke="#F5F3EE" stroke-width="3" />
-      <rect x="18" y="18" width="84" height="28" rx="14" fill="#2A2A40" stroke="#A875FF" stroke-width="2" />
-      <text x="60" y="37" text-anchor="middle" fill="#A875FF" font-size="12" class="mono">60% BASE</text>
-      <text x="18" y="92" fill="#F5F3EE" font-size="22" class="display">Indigo Night</text>
-      <text x="18" y="118" fill="#A9A9C2" font-size="15" class="mono">#1E1E2F · --bg-canvas</text>
-      <text x="18" y="152" fill="#F5F3EE" font-size="13" class="body">Paper on Indigo: 13.8:1 (AAA)</text>
+      <rect x="6" y="6" width="260" height="186" rx="16" fill="#000000" />
+      <rect x="0" y="0" width="260" height="186" rx="16" fill="#FFDD55" stroke="#000000" stroke-width="3" />
+      <rect x="18" y="18" width="84" height="28" rx="14" fill="#000000" />
+      <text x="60" y="37" text-anchor="middle" fill="#FFDD55" font-size="12" class="mono">60% BASE</text>
+      <text x="18" y="92" fill="#000000" font-size="22" class="display">Sunshine Yellow</text>
+      <text x="18" y="118" fill="#18191F" font-size="15" class="mono">#FFDD55 · --bg-canvas</text>
+      <text x="18" y="152" fill="#000000" font-size="13" class="body">Black on Yellow: 15.4:1 (AAA)</text>
     </g>
 
-    <!-- Swatch 2: Raised Surface -->
+    <!-- Swatch 2: 30% Mint-Teal -->
     <g id="Swatch-Surface-Indigo" transform="translate(322, 108)">
-      <rect x="6" y="6" width="260" height="186" rx="16" fill="#A875FF" />
-      <rect x="0" y="0" width="260" height="186" rx="16" fill="#2A2A40" stroke="#A875FF" stroke-width="3" />
-      <rect x="18" y="18" width="102" height="28" rx="14" fill="#1E1E2F" stroke="#A9A9C2" stroke-width="2" />
-      <text x="69" y="37" text-anchor="middle" fill="#F5F3EE" font-size="12" class="mono">SURFACE</text>
-      <text x="18" y="92" fill="#F5F3EE" font-size="22" class="display">Indigo Slate</text>
-      <text x="18" y="118" fill="#A9A9C2" font-size="15" class="mono">#2A2A40 · --bg-surface</text>
-      <text x="18" y="152" fill="#F5F3EE" font-size="13" class="body">Panels, Terminal &amp; Dialogs</text>
+      <rect x="6" y="6" width="260" height="186" rx="16" fill="#000000" />
+      <rect x="0" y="0" width="260" height="186" rx="16" fill="#00C6AE" stroke="#000000" stroke-width="3" />
+      <rect x="18" y="18" width="102" height="28" rx="14" fill="#000000" />
+      <text x="69" y="37" text-anchor="middle" fill="#00C6AE" font-size="12" class="mono">30% TEAL</text>
+      <text x="18" y="92" fill="#000000" font-size="22" class="display">Mint-Teal Card</text>
+      <text x="18" y="118" fill="#000000" font-size="15" class="mono">#00C6AE · --accent-emerald</text>
+      <text x="18" y="152" fill="#000000" font-size="13" class="body">Hero Portrait &amp; Button Shadows</text>
     </g>
 
-    <!-- Swatch 3: 30% Royal Amethyst -->
+    <!-- Swatch 3: 10% Jet Black -->
     <g id="Swatch-30-Royal-Amethyst" transform="translate(608, 108)">
-      <rect x="6" y="6" width="260" height="186" rx="16" fill="#1E1E2F" stroke="#F5F3EE" stroke-width="2" />
-      <rect x="0" y="0" width="260" height="186" rx="16" fill="#A875FF" stroke="#1E1E2F" stroke-width="3" />
-      <rect x="18" y="18" width="110" height="28" rx="14" fill="#1E1E2F" />
-      <text x="73" y="37" text-anchor="middle" fill="#A875FF" font-size="12" class="mono">30% ROYAL</text>
-      <text x="18" y="92" fill="#1E1E2F" font-size="22" class="display">Royal Amethyst</text>
-      <text x="18" y="118" fill="#1E1E2F" font-size="15" class="mono">#A875FF · --accent-emerald</text>
-      <text x="18" y="152" fill="#1E1E2F" font-size="13" class="body">Indigo Ink on Royal: 5.1:1 (AA)</text>
+      <rect x="6" y="6" width="260" height="186" rx="16" fill="#00C6AE" />
+      <rect x="0" y="0" width="260" height="186" rx="16" fill="#000000" stroke="#000000" stroke-width="3" />
+      <rect x="18" y="18" width="110" height="28" rx="14" fill="#FFDD55" />
+      <text x="73" y="37" text-anchor="middle" fill="#000000" font-size="12" class="mono">10% INK</text>
+      <text x="18" y="92" fill="#FFFFFF" font-size="22" class="display">Jet Black</text>
+      <text x="18" y="118" fill="#00C6AE" font-size="15" class="mono">#000000 · Navbar &amp; CTAs</text>
+      <text x="18" y="152" fill="#FFFFFF" font-size="13" class="body">Navbar, Buttons, Outlines &amp; Shadows</text>
     </g>
 
-    <!-- Swatch 4: 10% Electric Orange -->
+    <!-- Swatch 4: Crisp White Surface -->
     <g id="Swatch-10-Electric-Orange" transform="translate(894, 108)">
-      <rect x="6" y="6" width="260" height="186" rx="16" fill="#1E1E2F" stroke="#F5F3EE" stroke-width="2" />
-      <rect x="0" y="0" width="260" height="186" rx="16" fill="#FF6B35" stroke="#1E1E2F" stroke-width="3" />
-      <rect x="18" y="18" width="108" height="28" rx="14" fill="#1E1E2F" />
-      <text x="72" y="37" text-anchor="middle" fill="#FF6B35" font-size="12" class="mono">10% ACCENT</text>
-      <text x="18" y="92" fill="#1E1E2F" font-size="22" class="display">Electric Orange</text>
-      <text x="18" y="118" fill="#1E1E2F" font-size="15" class="mono">#FF6B35 · --accent-orange</text>
-      <text x="18" y="152" fill="#1E1E2F" font-size="13" class="body">Indigo Ink on Orange: 5.8:1 (AA)</text>
+      <rect x="6" y="6" width="260" height="186" rx="16" fill="#000000" />
+      <rect x="0" y="0" width="260" height="186" rx="16" fill="#FFFFFF" stroke="#000000" stroke-width="3" />
+      <rect x="18" y="18" width="108" height="28" rx="14" fill="#00C6AE" />
+      <text x="72" y="37" text-anchor="middle" fill="#000000" font-size="12" class="mono">CARDS</text>
+      <text x="18" y="92" fill="#000000" font-size="22" class="display">Crisp White</text>
+      <text x="18" y="118" fill="#18191F" font-size="15" class="mono">#FFFFFF · --bg-card</text>
+      <text x="18" y="152" fill="#18191F" font-size="13" class="body">Social Circles &amp; Section Cards</text>
     </g>
 
-    <!-- Swatch 5: Paper & Muted Text -->
+    <!-- Swatch 5: Charcoal Ink -->
     <g id="Swatch-Paper-Text" transform="translate(1180, 108)">
-      <rect x="6" y="6" width="264" height="186" rx="16" fill="#A875FF" />
-      <rect x="0" y="0" width="264" height="186" rx="16" fill="#F5F3EE" stroke="#1E1E2F" stroke-width="3" />
-      <rect x="18" y="18" width="96" height="28" rx="14" fill="#1E1E2F" />
-      <text x="66" y="37" text-anchor="middle" fill="#F5F3EE" font-size="12" class="mono">INK / PAPER</text>
-      <text x="18" y="92" fill="#1E1E2F" font-size="22" class="display">Warm Paper</text>
-      <text x="18" y="118" fill="#1E1E2F" font-size="15" class="mono">#F5F3EE · #A9A9C2</text>
-      <text x="18" y="152" fill="#1E1E2F" font-size="13" class="body">Primary &amp; Muted Typography</text>
+      <rect x="6" y="6" width="264" height="186" rx="16" fill="#00C6AE" />
+      <rect x="0" y="0" width="264" height="186" rx="16" fill="#18191F" stroke="#000000" stroke-width="3" />
+      <rect x="18" y="18" width="96" height="28" rx="14" fill="#00C6AE" />
+      <text x="66" y="37" text-anchor="middle" fill="#000000" font-size="12" class="mono">BODY INK</text>
+      <text x="18" y="92" fill="#FFFFFF" font-size="22" class="display">Charcoal Ink</text>
+      <text x="18" y="118" fill="#FFDD55" font-size="15" class="mono">#18191F · --text-secondary</text>
+      <text x="18" y="152" fill="#FFFFFF" font-size="13" class="body">Subtitles &amp; Terminal Window</text>
     </g>
   </g>
 

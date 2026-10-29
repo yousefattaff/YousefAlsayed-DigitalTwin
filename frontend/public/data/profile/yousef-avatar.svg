@@ -1,56 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Illustrated avatar of Yousef Alsayed">
-  <!-- Neo-Brutalist Illustrated Avatar — Indigo Night (#1E1E2F), Royal Amethyst (#A875FF), Electric Orange (#FF6B35) -->
+  <!-- Figma Reference Palette — Mint-Teal (#00C6AE), Sunshine Yellow (#FFDD55), Jet Black (#000000), Crisp White (#FFFFFF) -->
   <g id="Avatar-Yousef-Brutalist">
-    <!-- Outer brutalist frame shadow + background -->
-    <circle cx="124" cy="124" r="108" fill="#1E1E2F" />
-    <circle cx="118" cy="118" r="108" fill="#A875FF" stroke="#1E1E2F" stroke-width="6" />
+    <!-- Outer brutalist frame shadow + teal card background -->
+    <circle cx="124" cy="124" r="108" fill="#000000" />
+    <circle cx="118" cy="118" r="108" fill="#00C6AE" stroke="#000000" stroke-width="6" />
 
-    <!-- Subtle geometric background accent -->
-    <circle cx="172" cy="64" r="18" fill="#FF6B35" stroke="#1E1E2F" stroke-width="4" />
-    <path d="M40 176 L62 176 L51 156 Z" fill="#F5F3EE" stroke="#1E1E2F" stroke-width="4" stroke-linejoin="round" />
-
-    <!-- Shoulders / Hoodie in Indigo Night + Electric Orange collar -->
-    <path d="M42 214 C48 168 78 154 118 154 C158 154 188 168 194 214 Z" fill="#1E1E2F" stroke="#1E1E2F" stroke-width="6" stroke-linejoin="round" />
-    <path d="M84 156 L118 184 L152 156" fill="#FF6B35" stroke="#1E1E2F" stroke-width="5" stroke-linejoin="round" />
-    <path d="M104 176 L104 212 M132 176 L132 212" stroke="#F5F3EE" stroke-width="4" stroke-linecap="round" />
+    <!-- Sunshine Yellow Sweater (#FFDD55) like the Figma reference -->
+    <path d="M42 214 C48 168 78 154 118 154 C158 154 188 168 194 214 Z" fill="#FFDD55" stroke="#000000" stroke-width="5" stroke-linejoin="round" />
+    <path d="M92 155 Q118 174 144 155" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+    <text x="118" y="198" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, Inter, sans-serif" font-weight="800" font-size="16" letter-spacing="2">Y.AI</text>
 
     <!-- Neck -->
-    <rect x="103" y="132" width="30" height="30" rx="10" fill="#E8B89A" stroke="#1E1E2F" stroke-width="5" />
+    <rect x="103" y="130" width="30" height="30" rx="10" fill="#F8D9CB" stroke="#000000" stroke-width="4" />
 
     <!-- Ears -->
-    <circle cx="71" cy="108" r="12" fill="#E8B89A" stroke="#1E1E2F" stroke-width="5" />
-    <circle cx="165" cy="108" r="12" fill="#E8B89A" stroke="#1E1E2F" stroke-width="5" />
+    <circle cx="71" cy="108" r="12" fill="#F8D9CB" stroke="#000000" stroke-width="4" />
+    <circle cx="165" cy="108" r="12" fill="#F8D9CB" stroke="#000000" stroke-width="4" />
 
     <!-- Head -->
-    <rect x="74" y="60" width="88" height="90" rx="40" fill="#F2C6A8" stroke="#1E1E2F" stroke-width="6" />
+    <rect x="74" y="60" width="88" height="90" rx="40" fill="#F8D9CB" stroke="#000000" stroke-width="5" />
 
-    <!-- Textured curly hair cap -->
-    <path d="M68 88 C64 58 88 42 118 42 C148 42 172 58 168 88 C160 74 142 68 118 68 C94 68 76 74 68 88 Z" fill="#1E1E2F" stroke="#1E1E2F" stroke-width="5" stroke-linejoin="round" />
-    <circle cx="88" cy="54" r="13" fill="#1E1E2F" />
-    <circle cx="112" cy="48" r="15" fill="#1E1E2F" />
-    <circle cx="138" cy="52" r="14" fill="#1E1E2F" />
-    <circle cx="156" cy="64" r="11" fill="#1E1E2F" />
-    <circle cx="76" cy="66" r="11" fill="#1E1E2F" />
+    <!-- Curly dark hair cap (#18191F) -->
+    <path d="M68 88 C64 56 88 40 118 40 C148 40 172 56 168 88 C160 72 142 66 118 66 C94 66 76 72 68 88 Z" fill="#18191F" stroke="#000000" stroke-width="4" stroke-linejoin="round" />
+    <circle cx="88" cy="52" r="14" fill="#18191F" />
+    <circle cx="114" cy="46" r="16" fill="#18191F" />
+    <circle cx="140" cy="50" r="15" fill="#18191F" />
+    <circle cx="156" cy="64" r="12" fill="#18191F" />
+    <circle cx="76" cy="66" r="12" fill="#18191F" />
 
-    <!-- Bold brutalist glasses -->
-    <rect x="82" y="92" width="32" height="24" rx="6" fill="#F5F3EE" stroke="#1E1E2F" stroke-width="5" />
-    <rect x="122" y="92" width="32" height="24" rx="6" fill="#F5F3EE" stroke="#1E1E2F" stroke-width="5" />
-    <line x1="114" y1="102" x2="122" y2="102" stroke="#1E1E2F" stroke-width="5" />
-    <line x1="74" y1="100" x2="82" y2="100" stroke="#1E1E2F" stroke-width="5" />
-    <line x1="154" y1="100" x2="162" y2="100" stroke="#1E1E2F" stroke-width="5" />
+    <!-- Round wireframe glasses like the Figma reference -->
+    <circle cx="98" cy="104" r="15" fill="#FFFFFF" fill-opacity="0.35" stroke="#000000" stroke-width="4" />
+    <circle cx="138" cy="104" r="15" fill="#FFFFFF" fill-opacity="0.35" stroke="#000000" stroke-width="4" />
+    <line x1="113" y1="104" x2="123" y2="104" stroke="#000000" stroke-width="4" />
+    <line x1="74" y1="102" x2="83" y2="104" stroke="#000000" stroke-width="4" />
+    <line x1="153" y1="104" x2="162" y2="102" stroke="#000000" stroke-width="4" />
 
     <!-- Eyes -->
-    <circle cx="98" cy="104" r="4.5" fill="#1E1E2F" />
-    <circle cx="138" cy="104" r="4.5" fill="#1E1E2F" />
-    <circle cx="100" cy="102" r="1.5" fill="#F5F3EE" />
-    <circle cx="140" cy="102" r="1.5" fill="#F5F3EE" />
+    <circle cx="98" cy="104" r="4" fill="#000000" />
+    <circle cx="138" cy="104" r="4" fill="#000000" />
 
     <!-- Eyebrows -->
-    <path d="M85 84 Q98 79 110 84" fill="none" stroke="#1E1E2F" stroke-width="4.5" stroke-linecap="round" />
-    <path d="M126 84 Q138 79 151 84" fill="none" stroke="#1E1E2F" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M85 84 Q98 78 110 84" fill="none" stroke="#000000" stroke-width="4.5" stroke-linecap="round" />
+    <path d="M126 84 Q138 78 151 84" fill="none" stroke="#000000" stroke-width="4.5" stroke-linecap="round" />
 
-    <!-- Subtle beard / jawline shadow + confident smile -->
-    <path d="M104 128 Q118 138 132 128" fill="none" stroke="#1E1E2F" stroke-width="5" stroke-linecap="round" />
-    <path d="M116 112 L113 120 L121 120" fill="none" stroke="#1E1E2F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Nose & Smile -->
+    <path d="M118 106 L115 118 L122 118" fill="none" stroke="#000000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M105 128 Q118 137 131 128" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" />
   </g>
 </svg>

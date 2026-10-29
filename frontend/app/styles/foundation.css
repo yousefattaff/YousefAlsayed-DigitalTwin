@@ -158,8 +158,8 @@ samp,
 }
 
 .brutal-badge-orange {
-  background: var(--accent-orange);
-  color: var(--ink-dark) !important;
+  background: #000000;
+  color: #FFDD55 !important;
 }
 
 .about-section .content h1 {
@@ -178,8 +178,8 @@ samp,
 
 .about-section .content h1 .hero-name {
   display: block;
-  color: var(--accent-emerald);
-  text-shadow: 4px 4px 0px #141422;
+  color: #000000;
+  text-shadow: none;
 }
 
 .about-section .content p {
@@ -203,7 +203,7 @@ samp,
   min-height: 52px;
   padding: 12px 24px;
   border: var(--border-brutal-width) solid var(--border-subtle);
-  border-radius: var(--radius-full);
+  border-radius: 12px;
   font-family: var(--font-display) !important;
   font-size: 0.95rem;
   font-weight: 800;
@@ -217,21 +217,21 @@ samp,
 }
 
 .brutal-btn-primary {
-  background: var(--accent-orange) !important;
-  color: var(--ink-dark) !important;
-  box-shadow: 6px 6px 0px var(--accent-emerald);
+  background: #000000 !important;
+  color: #FFFFFF !important;
+  box-shadow: 5px 5px 0px var(--accent-emerald);
 }
 
 .brutal-btn-secondary {
   background: var(--accent-emerald) !important;
-  color: var(--ink-dark) !important;
-  box-shadow: 6px 6px 0px var(--accent-orange);
+  color: #000000 !important;
+  box-shadow: 5px 5px 0px #000000;
 }
 
 .brutal-btn-outline {
-  background: var(--bg-surface) !important;
-  color: var(--text-primary) !important;
-  box-shadow: 6px 6px 0px var(--accent-emerald);
+  background: #000000 !important;
+  color: #FFFFFF !important;
+  box-shadow: 5px 5px 0px var(--accent-emerald);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -239,19 +239,19 @@ samp,
     transform: translate(-2px, -2px);
   }
   .brutal-btn-primary:hover {
-    background: var(--accent-orange-hover) !important;
-    box-shadow: 8px 8px 0px var(--accent-emerald);
-    color: var(--ink-dark) !important;
+    background: #18191F !important;
+    box-shadow: 7px 7px 0px var(--accent-emerald);
+    color: #FFFFFF !important;
   }
   .brutal-btn-secondary:hover {
     background: var(--accent-emerald-hover) !important;
-    box-shadow: 8px 8px 0px var(--accent-orange);
-    color: var(--ink-dark) !important;
+    box-shadow: 7px 7px 0px #000000;
+    color: #000000 !important;
   }
   .brutal-btn-outline:hover {
-    border-color: var(--accent-orange);
-    box-shadow: 8px 8px 0px var(--accent-orange);
-    color: var(--text-primary) !important;
+    background: #18191F !important;
+    box-shadow: 7px 7px 0px var(--accent-emerald);
+    color: #FFFFFF !important;
   }
 }
 
@@ -270,10 +270,10 @@ samp,
 .hero-brutal-card {
   position: relative;
   padding: 18px;
-  border: 4px solid var(--border-subtle);
-  border-radius: 26px;
+  border: 3px solid #000000;
+  border-radius: 16px;
   background: var(--accent-emerald);
-  box-shadow: 10px 10px 0px var(--accent-orange);
+  box-shadow: 8px 8px 0px #000000;
 }
 
 .hero-brutal-card-bar {
@@ -291,7 +291,7 @@ samp,
 }
 
 .hero-card-dot-orange {
-  background: var(--accent-orange);
+  background: #FFDD55;
 }
 
 .hero-card-dot-ink {
@@ -333,9 +333,9 @@ samp,
   padding: 10px 14px;
   border: 3px solid var(--ink-dark);
   border-radius: 16px;
-  background: var(--ink-dark);
-  color: var(--text-primary) !important;
-  box-shadow: 4px 4px 0px var(--accent-orange);
+  background: #FFFFFF;
+  color: #000000 !important;
+  box-shadow: 4px 4px 0px #000000;
   transition: transform var(--duration-fast) var(--ease-out);
 }
 
@@ -358,14 +358,14 @@ samp,
 }
 
 .hero-avatar-sticker-copy strong {
-  color: var(--accent-emerald);
+  color: #000000;
   font-family: var(--font-display) !important;
   font-size: 0.9rem;
   font-weight: 800;
 }
 
 .hero-avatar-sticker-copy span {
-  color: var(--text-primary);
+  color: #18191F;
   font-family: var(--font-code) !important;
   font-size: 0.75rem;
 }
@@ -403,8 +403,8 @@ samp,
 .about-section .social_icons a:hover,
 .about-section .mobile_social_icons a:hover {
   border-color: var(--ink-dark);
-  background: var(--accent-orange);
-  box-shadow: 6px 6px 0px var(--accent-emerald);
+  background: var(--accent-emerald);
+  box-shadow: 6px 6px 0px #000000;
   transform: translate(-2px, -2px);
 }
 
@@ -536,8 +536,8 @@ samp,
 
 .vertical-timeline-element-icon {
   border: 3px solid var(--ink-dark);
-  background: var(--accent-orange);
-  box-shadow: 3px 3px 0px var(--border-subtle);
+  background: var(--accent-emerald);
+  box-shadow: 3px 3px 0px #000000;
 }
 
 .vertical-timeline-element-icon svg {

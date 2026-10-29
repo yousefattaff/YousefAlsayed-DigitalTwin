@@ -89,7 +89,7 @@ export default function Navbar() {
               </button>
             ))}
             <a
-              href="/figma/style-indigo-brutal.svg?v=royal"
+              href="/figma/style-indigo-brutal.svg?v=figma-ref"
               target="_blank"
               rel="noreferrer"
               className="nav-link-btn nav-style-link"
@@ -139,7 +139,7 @@ export default function Navbar() {
                 </button>
               ))}
               <a
-                href="/figma/style-indigo-brutal.svg?v=royal"
+                href="/figma/style-indigo-brutal.svg?v=figma-ref"
                 target="_blank"
                 rel="noreferrer"
                 className="mobile-nav-btn"

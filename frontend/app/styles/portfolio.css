@@ -136,10 +136,10 @@
   align-items: center;
   justify-content: center;
   min-height: 44px;
-  border: 2.5px solid var(--ink-dark);
-  border-radius: var(--radius-full);
-  background: var(--accent-orange) !important;
-  color: var(--ink-dark) !important;
+  border: 2.5px solid #000000;
+  border-radius: 10px;
+  background: #000000 !important;
+  color: #FFFFFF !important;
   font-family: var(--font-display) !important;
   font-size: 0.85rem;
   font-weight: 800;
