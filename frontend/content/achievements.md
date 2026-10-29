@@ -17,11 +17,6 @@ career_history:
     title: AI Software Engineer
     subtitle: Outlier · Remote
     description: Evaluated 50+ LLM responses daily across 6+ domains, developed 20+ prompt variations, and reviewed analyst submissions to improve RLHF annotation quality.
-  - date: Sep 2019 - Jun 2024
-    title: B.Sc. Mechatronics, Robotics & Automation
-    subtitle: Misr University for Science and Technology · Egypt
-    description: Built a foundation in embedded C, microcontrollers, control systems, and autonomous robotics with ROS.
-    isEducation: true
   - date: Sep 2023
     title: Siemens PLC Training
     subtitle: Siemens · Cairo, Egypt
@@ -49,7 +44,7 @@ graduation_project:
   video: /projects/r2-waiter.mp4
   gallery_videos:
     - src: /projects/r2-waiter.mp4
-      poster: /graduation/r2-waiter-face.png
+      poster: /graduation/r2_waiter_portfolio_renders.png
       title: R2-Waiter animated face
     - src: /graduation/r2-waiter-gallery-video.mp4
       poster: /graduation/r2-waiter-gallery-video-poster.jpg
@@ -57,8 +52,6 @@ graduation_project:
   model: /graduation/r2_waiter_solidified_wink.glb
   photos:
     - /graduation/r2_waiter_portfolio_renders.png
-    - /graduation/r2-waiter-face.png
-    - /graduation/r2-waiter-gallery-photo.jpeg
   award: 3rd place at the International Gathering of Artificial Intelligence in Egypt
 ---
 

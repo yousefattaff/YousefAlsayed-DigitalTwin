@@ -5,7 +5,6 @@ import { useModal } from '@/lib/useModal';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 
 const navItems = [
-  ['About', 'about-me'],
   ['Expertise', 'expertise'],
   ['History', 'history'],
   ['Projects', 'projects'],

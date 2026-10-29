@@ -2,7 +2,7 @@ import HomeClient, {
   type HomeMilestone,
   type HomeProfile,
 } from '@/components/HomeClient';
-import { getAbout, getProfile, getProjects, getAchievements, getCertificateMedia, getResume } from '@/lib/content';
+import { getProfile, getProjects, getAchievements, getCertificateMedia, getResume } from '@/lib/content';
 import type { GraduationAchievement } from '@/components/AchievementsSection';
 
 function stringValue(value: unknown, fallback = '') {
@@ -77,18 +77,6 @@ export default function Home() {
     githubUrl: stringValue(profileLinks.github),
     linkedinUrl: stringValue(profileLinks.linkedin),
   };
-  // The About Me story is the opening section of about.md, before the skills heading.
-  const aboutStory = getAbout().body.split(/\n#\s/, 1)[0];
-  const aboutParagraphs = aboutStory
-    .split(/\n\s*\n/)
-    .map((paragraph) => paragraph.trim())
-    .filter((paragraph) => paragraph && !paragraph.startsWith('#'));
-  const aboutFacts = [
-    { label: 'Based in', value: 'Cairo, Egypt' },
-    { label: 'Currently', value: 'AI Intern at Arche Robotics (Remote) and programming instructor at iSchool' },
-    { label: 'Studied', value: 'B.Sc. Mechatronics, Robotics & Automation, MUST (2019–2024)' },
-    { label: 'Looking for', value: 'Full-time AI Engineer or AI Automation roles' },
-  ];
 
   return (
     <HomeClient
@@ -99,8 +87,6 @@ export default function Home() {
       resumeUrl={stringValue(resumeData.resume_url, '/resume.pdf')}
       driveUrl={stringValue(resumeData.resume_drive_url)}
       certificateMedia={getCertificateMedia()}
-      aboutParagraphs={aboutParagraphs}
-      aboutFacts={aboutFacts}
     />
   );
 }
