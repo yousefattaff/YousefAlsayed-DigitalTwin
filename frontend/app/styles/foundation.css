@@ -307,12 +307,12 @@ samp,
 
 .brutal-badge-emerald {
   background: var(--accent-emerald);
-  color: var(--ink-dark) !important;
+  color: #FFFFFF !important;
 }
 
 .brutal-badge-orange {
-  background: #000000;
-  color: #FFDD55 !important;
+  background: #010101;
+  color: #F4F5F8 !important;
 }
 
 .about-section .content h1 {
@@ -331,7 +331,7 @@ samp,
 
 .about-section .content h1 .hero-name {
   display: block;
-  color: #000000;
+  color: var(--accent-emerald);
   text-shadow: none;
 }
 
@@ -370,20 +370,20 @@ samp,
 }
 
 .brutal-btn-primary {
-  background: #000000 !important;
+  background: #010101 !important;
   color: #FFFFFF !important;
   box-shadow: 5px 5px 0px var(--accent-emerald);
 }
 
 .brutal-btn-secondary {
   background: var(--accent-emerald) !important;
-  color: #000000 !important;
-  box-shadow: 5px 5px 0px #000000;
+  color: #FFFFFF !important;
+  box-shadow: 5px 5px 0px #010101;
 }
 
 .brutal-btn-outline {
-  background: #000000 !important;
-  color: #FFFFFF !important;
+  background: #FFFFFF !important;
+  color: #010101 !important;
   box-shadow: 5px 5px 0px var(--accent-emerald);
 }
 
@@ -398,13 +398,13 @@ samp,
   }
   .brutal-btn-secondary:hover {
     background: var(--accent-emerald-hover) !important;
-    box-shadow: 7px 7px 0px #000000;
-    color: #000000 !important;
+    box-shadow: 7px 7px 0px #010101;
+    color: #FFFFFF !important;
   }
   .brutal-btn-outline:hover {
-    background: #18191F !important;
+    background: #EEF2FF !important;
     box-shadow: 7px 7px 0px var(--accent-emerald);
-    color: #FFFFFF !important;
+    color: #010101 !important;
   }
 }
 
@@ -444,16 +444,16 @@ samp,
 }
 
 .hero-card-dot-orange {
-  background: #FFDD55;
+  background: #FE2C55;
 }
 
 .hero-card-dot-ink {
-  background: var(--ink-dark);
+  background: #25F4EE;
 }
 
 .hero-card-tag {
   margin-left: auto;
-  color: var(--ink-dark);
+  color: #FFFFFF;
   font-family: var(--font-code) !important;
   font-size: 0.75rem;
   font-weight: 700;
@@ -636,8 +636,8 @@ samp,
   border: 2.5px solid var(--ink-dark);
   border-radius: 12px;
   background: var(--accent-emerald);
-  color: var(--ink-dark) !important;
-  box-shadow: 4px 4px 0px var(--accent-orange);
+  color: #FFFFFF !important;
+  box-shadow: 4px 4px 0px #010101;
 }
 
 .skills-container .skills-grid .skill h3 {
@@ -694,7 +694,7 @@ samp,
 }
 
 .vertical-timeline-element-icon svg {
-  color: var(--ink-dark);
+  color: #FFFFFF;
 }
 
 .vertical-timeline-element-content h3 {

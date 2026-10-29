@@ -12,16 +12,16 @@
   <!-- CANVAS ROOT: Style – Indigo Brutal                                      -->
   <!-- Import into Figma: drag & drop this SVG onto any Figma canvas           -->
   <!-- ======================================================================= -->
-  <rect id="Canvas-Background" x="0" y="0" width="1600" height="2180" fill="#FFDD55" />
+  <rect id="Canvas-Background" x="0" y="0" width="1600" height="2180" fill="#F4F5F8" />
 
   <!-- Canvas Header Banner -->
   <g id="00-File-Cover-Header" transform="translate(60, 44)">
-    <rect x="6" y="6" width="1480" height="96" rx="16" fill="#00C6AE" />
-    <rect x="0" y="0" width="1480" height="96" rx="16" fill="#000000" stroke="#000000" stroke-width="3" />
-    <rect x="28" y="26" width="164" height="44" rx="22" fill="#FFDD55" stroke="#000000" stroke-width="3" />
-    <text x="110" y="54" text-anchor="middle" fill="#000000" font-size="14" class="display">FIGMA SPEC v1.0</text>
-    <text x="216" y="50" fill="#FFFFFF" font-size="26" class="display">Figma Community Reference Palette · Yousef Alsayed</text>
-    <text x="216" y="76" fill="#FFDD55" font-size="14" class="mono">60% Sunshine Yellow (#FFDD55)  ·  30% Mint-Teal (#00C6AE)  ·  10% Jet Black (#000000) &amp; White (#FFFFFF)</text>
+    <rect x="6" y="6" width="1480" height="96" rx="16" fill="#2563EB" />
+    <rect x="0" y="0" width="1480" height="96" rx="16" fill="#010101" stroke="#010101" stroke-width="3" />
+    <rect x="28" y="26" width="164" height="44" rx="22" fill="#2563EB" stroke="#F4F5F8" stroke-width="3" />
+    <text x="110" y="54" text-anchor="middle" fill="#FFFFFF" font-size="14" class="display">FIGMA SPEC v1.0</text>
+    <text x="216" y="50" fill="#F4F5F8" font-size="26" class="display">TikTok Royal Brutal · Yousef Alsayed Portfolio</text>
+    <text x="216" y="76" fill="#93C5FD" font-size="14" class="mono">60% Kinda White (#F4F5F8)  ·  30% Royal Blue (#2563EB)  ·  10% TikTok Black (#010101) &amp; Cyan/Red Glow</text>
   </g>
 
   <!-- ======================================================================= -->

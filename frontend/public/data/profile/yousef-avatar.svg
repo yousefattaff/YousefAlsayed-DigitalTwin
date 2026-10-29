@@ -1,13 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="Illustrated avatar of Yousef Alsayed">
-  <!-- Figma Reference Palette — Mint-Teal (#00C6AE), Sunshine Yellow (#FFDD55), Jet Black (#000000), Crisp White (#FFFFFF) -->
+  <!-- TikTok Royal Palette — Jet Black (#010101), Kinda White (#F4F5F8), Royal Blue (#2563EB), Electric Cyan (#25F4EE) & Pulse Red (#FE2C55) -->
   <g id="Avatar-Yousef-Brutalist">
-    <!-- Outer brutalist frame shadow + teal card background -->
-    <circle cx="124" cy="124" r="108" fill="#000000" />
-    <circle cx="118" cy="118" r="108" fill="#00C6AE" stroke="#000000" stroke-width="6" />
+    <!-- Dual TikTok-style offset shadow + Royal Blue circle background -->
+    <circle cx="125" cy="125" r="108" fill="#FE2C55" />
+    <circle cx="113" cy="113" r="108" fill="#25F4EE" />
+    <circle cx="118" cy="118" r="108" fill="#2563EB" stroke="#010101" stroke-width="6" />
 
-    <!-- Sunshine Yellow Sweater (#FFDD55) like the Figma reference -->
-    <path d="M42 214 C48 168 78 154 118 154 C158 154 188 168 194 214 Z" fill="#FFDD55" stroke="#000000" stroke-width="5" stroke-linejoin="round" />
-    <path d="M92 155 Q118 174 144 155" fill="#FFFFFF" stroke="#000000" stroke-width="4" />
+    <!-- Jet Black Hoodie (#010101) with Off-White (#F4F5F8) collar -->
+    <path d="M42 214 C48 168 78 154 118 154 C158 154 188 168 194 214 Z" fill="#010101" stroke="#010101" stroke-width="5" stroke-linejoin="round" />
+    <path d="M92 155 Q118 174 144 155" fill="#F4F5F8" stroke="#010101" stroke-width="4" />
     <text x="118" y="198" text-anchor="middle" fill="#FFFFFF" font-family="Montserrat, Inter, sans-serif" font-weight="800" font-size="16" letter-spacing="2">Y.AI</text>
 
     <!-- Neck -->

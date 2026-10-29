@@ -286,17 +286,17 @@
 .twin-msg-user {
   border-color: var(--ink-dark);
   background: var(--accent-emerald) !important;
-  color: var(--ink-dark) !important;
+  color: #FFFFFF !important;
   font-weight: 600;
 }
 
 .twin-msg-user .twin-message-time {
-  color: var(--ink-dark) !important;
+  color: #DBEAFE !important;
 }
 
 .twin-msg-assistant {
   border-color: #000000;
-  background: #FFF8D6 !important;
+  background: #F4F5F8 !important;
   color: var(--text-primary) !important;
 }
 

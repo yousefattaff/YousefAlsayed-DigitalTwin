@@ -42,11 +42,12 @@
   height: 36px;
   border: 2.5px solid #FFFFFF;
   border-radius: 50%;
-  background: #FFDD55;
-  color: #000000;
+  background: var(--accent-emerald);
+  color: #FFFFFF;
   font-family: var(--font-display) !important;
   font-size: 0.82rem;
   font-weight: 800;
+  box-shadow: -2px -2px 0px #25F4EE, 2px 2px 0px #FE2C55;
 }
 
 .nav-brand-wordmark {
@@ -91,15 +92,15 @@
 .navigation-bar button:hover,
 .navigation-bar .nav-link-btn:hover {
   border-color: var(--ink-dark);
-  background: #FFDD55 !important;
-  color: #000000 !important;
+  background: var(--accent-emerald) !important;
+  color: #FFFFFF !important;
 }
 
 .nav-style-link {
   display: inline-flex;
   align-items: center;
-  border: 2px solid var(--accent-emerald) !important;
-  color: var(--accent-emerald) !important;
+  border: 2px solid #25F4EE !important;
+  color: #25F4EE !important;
 }
 
 .nav-cta-pill {
@@ -109,21 +110,21 @@
   min-height: 42px;
   margin-left: 6px;
   padding: 8px 16px;
-  border: 2px solid #000000;
+  border: 2px solid #FFFFFF;
   border-radius: var(--radius-full);
   background: var(--accent-emerald) !important;
-  color: #000000 !important;
+  color: #FFFFFF !important;
   font-family: var(--font-display) !important;
   font-size: 0.85rem;
   font-weight: 800;
   white-space: nowrap;
-  box-shadow: 3px 3px 0px #FFDD55;
+  box-shadow: -2px -2px 0px #25F4EE, 3px 3px 0px #FE2C55;
   transition: transform var(--duration-fast) var(--ease-out);
 }
 
 .nav-cta-pill:hover {
-  background: #FFDD55 !important;
-  color: #000000 !important;
+  background: #3B82F6 !important;
+  color: #FFFFFF !important;
   transform: translate(-1px, -1px);
 }
 .navigation-bar button:active {

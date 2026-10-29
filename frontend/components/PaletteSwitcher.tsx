@@ -18,8 +18,47 @@ export interface BrutalPalette {
 
 export const PALETTES: BrutalPalette[] = [
   {
+    id: 'tiktok-royal-light',
+    name: '1. TikTok Off-White & Royal Blue',
+    tag: 'Kinda White · Royal Blue · Black',
+    canvas: '#F4F5F8',
+    secondary: '#2563EB',
+    secondaryHover: '#3B82F6',
+    accent: '#010101',
+    card: '#FFFFFF',
+    ink: '#010101',
+    muted: '#1E293B',
+    border: '#010101',
+  },
+  {
+    id: 'tiktok-royal-dark',
+    name: '2. TikTok Black & Royal Blue',
+    tag: 'TikTok Black · Royal Blue · Off-White',
+    canvas: '#0B0C10',
+    secondary: '#2563EB',
+    secondaryHover: '#3B82F6',
+    accent: '#FE2C55',
+    card: '#161823',
+    ink: '#F4F5F8',
+    muted: '#CBD5E1',
+    border: '#F4F5F8',
+  },
+  {
+    id: 'tiktok-neon-glitch',
+    name: '3. TikTok Cyan, Royal & Pulse',
+    tag: 'Off-White · Electric Blue · Red',
+    canvas: '#F1F5F9',
+    secondary: '#1D4ED8',
+    secondaryHover: '#2563EB',
+    accent: '#FE2C55',
+    card: '#FFFFFF',
+    ink: '#010101',
+    muted: '#0F172A',
+    border: '#010101',
+  },
+  {
     id: 'figma-ref',
-    name: '1. Figma Original',
+    name: '4. Figma Original',
     tag: 'Yellow · Teal · Black',
     canvas: '#FFDD55',
     secondary: '#00C6AE',
@@ -250,7 +289,7 @@ function applyPalette(p: BrutalPalette) {
 }
 
 export default function PaletteSwitcher() {
-  const [activeId, setActiveId] = useState<string>('figma-ref');
+  const [activeId, setActiveId] = useState<string>('tiktok-royal-light');
   const [collapsed, setCollapsed] = useState(false);
 
   const handleSelect = (p: BrutalPalette) => {

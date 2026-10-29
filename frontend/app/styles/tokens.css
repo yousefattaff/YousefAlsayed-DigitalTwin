@@ -1,4 +1,4 @@
-/* Figma Community Portfolio Palette: 60% Sunshine Yellow (#FFDD55), 30% Mint-Teal (#00C6AE), 10% Jet Black (#000000) & White (#FFFFFF). */
+/* TikTok Royal Brutal Palette: Off-White (#F4F5F8), Royal Blue (#2563EB), TikTok Black (#010101), Cyan (#25F4EE) & Pulse Red (#FE2C55). */
 @font-face {
   font-family: "JetBrains Mono";
   src:
@@ -16,45 +16,47 @@
   --font-display: var(--font-montserrat), var(--font-inter), "Montserrat", "Inter", sans-serif;
   --font-code: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  /* 60% Dominant — Sunshine Yellow (#FFDD55) + Crisp White cards (#FFFFFF) */
-  --bg-canvas: #FFDD55;
+  /* 60% Dominant — Kinda White (#F4F5F8) + Pure White cards (#FFFFFF) */
+  --bg-canvas: #F4F5F8;
   --bg-surface: #FFFFFF;
   --bg-card: #FFFFFF;
   --bg-floating: #FFFFFF;
-  --bg-overlay: rgba(0, 0, 0, 0.65);
-  --bg-card-hover: #FFF8D6;
-  --bg-card-active: #FFDD55;
-  --bg-code: #18191F;
-  --bg-code-inline: rgba(0, 198, 174, 0.22);
+  --bg-overlay: rgba(1, 1, 1, 0.72);
+  --bg-card-hover: #EEF2FF;
+  --bg-card-active: #DBEAFE;
+  --bg-code: #010101;
+  --bg-code-inline: rgba(37, 99, 235, 0.14);
 
-  /* 30% Secondary — Mint-Teal (#00C6AE) from Figma reference */
-  --accent-emerald: #00C6AE;
-  --accent-emerald-light: #009583;
-  --accent-emerald-hover: #00DFC4;
+  /* 30% Secondary — Royal Blue (#2563EB) + TikTok Cyan (#25F4EE) */
+  --accent-emerald: #2563EB;
+  --accent-emerald-light: #1D4ED8;
+  --accent-emerald-hover: #3B82F6;
+  --tiktok-cyan: #25F4EE;
+  --tiktok-red: #FE2C55;
 
-  /* 10% Accent / Primary CTA — Jet Black (#000000) & Sunshine Yellow (#FFDD55) */
-  --accent-orange: #000000;
+  /* 10% Accent / Primary CTA — TikTok Pitch Black (#010101) */
+  --accent-orange: #010101;
   --accent-orange-hover: #18191F;
 
   /* High-contrast Neo-Brutalist ink & borders */
-  --ink-dark: #000000;
+  --ink-dark: #010101;
   --border-brutal-width: 3px;
-  --border-subtle: #000000;
-  --border-medium: #000000;
-  --border-hover: #000000;
-  --border-zinc: #000000;
-  --border-code: #000000;
+  --border-subtle: #010101;
+  --border-medium: #010101;
+  --border-hover: #2563EB;
+  --border-zinc: #010101;
+  --border-code: #2563EB;
 
-  --text-primary: #000000;
-  --text-secondary: #18191F;
-  --text-detail: #18191F;
-  --text-emphasis: #000000;
-  --text-muted: #564E2C;
-  --titanium-light: #000000;
+  --text-primary: #010101;
+  --text-secondary: #1E293B;
+  --text-detail: #0F172A;
+  --text-emphasis: #010101;
+  --text-muted: #475569;
+  --titanium-light: #010101;
   --titanium-gradient: none;
 
-  --status-active: #007C6D;
-  --status-active-glow: rgba(0, 198, 174, 0.35);
+  --status-active: #2563EB;
+  --status-active-glow: rgba(37, 99, 235, 0.28);
 
   --radius-sm: 10px;
   --radius-md: 12px;
@@ -62,10 +64,10 @@
   --radius-full: 9999px;
   --rim-light: 0 0 0 0 transparent;
   --rim-gradient: none;
-  --shadow-elevation: 6px 6px 0px #000000;
-  --shadow-card-hover: 8px 8px 0px #000000;
-  --shadow-press: 2px 2px 0px #000000;
-  --shadow-ink: 6px 6px 0px #000000;
+  --shadow-elevation: 6px 6px 0px #010101;
+  --shadow-card-hover: 8px 8px 0px #2563EB;
+  --shadow-press: 2px 2px 0px #010101;
+  --shadow-ink: 6px 6px 0px #010101;
   --blur-glass: 0px;
 
   --duration-fast: 140ms;
