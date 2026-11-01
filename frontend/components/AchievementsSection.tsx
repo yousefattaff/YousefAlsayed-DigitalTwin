@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 import type { CertificateMedia } from '@/lib/content';
+import CardDeck, { type CardDeckItem } from '@/components/CardDeck';
 
 export interface GraduationGalleryVideo {
   src: string;
@@ -32,6 +33,30 @@ export default function AchievementsSection({
 }) {
   const modelViewerRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+  const [certViewMode, setCertViewMode] = useState<'deck' | 'grid'>('deck');
+
+  const certificateDeckItems: CardDeckItem[] = certificateMedia.map((media) => ({
+    id: media.id,
+    title: media.title,
+    subtitle: media.issuer,
+    eyebrow: media.category,
+    badgeCode: media.badgeCode,
+    gradeLabel: media.type === 'pdf' ? 'CERTIFIED PDF' : 'VERIFIED',
+    renderMedia: () => (
+      <Image
+        src={media.previewSrc}
+        alt={media.title}
+        width={1200}
+        height={900}
+        sizes="(max-width: 768px) 92vw, 540px"
+        className="collectible-cert-image"
+      />
+    ),
+    primaryAction: {
+      label: media.type === 'pdf' ? 'Open Official PDF ↗' : 'Open Full Certificate ↗',
+      href: media.src,
+    },
+  }));
 
   useEffect(() => {
     if (!graduationProject.model || !modelViewerRef.current) return;
@@ -112,25 +137,58 @@ export default function AchievementsSection({
       </section>
 
       <section className="resume-extra certificate-media-section">
-        <h2>Certificate files</h2>
-        <p className="certificate-media-intro">Photos and PDF copies of the certificates supplied for this portfolio.</p>
-        <div className="certificate-media-row">
-          {certificateMedia.map((media) => (
-            <article className="certificate-media-card" key={media.id}>
-              {media.type === 'image' ? (
-                <Image src={media.src} alt={media.title} loading="lazy" width={1200} height={900} sizes="(max-width: 768px) 90vw, 400px" />
-              ) : (
-                <iframe src={media.src} title={media.title} loading="lazy" />
-              )}
-              <div className="certificate-media-card-body">
-                <h3>{media.title}</h3>
-                <a href={media.src} target="_blank" rel="noreferrer">
-                  Open {media.type === 'pdf' ? 'PDF' : 'image'}
-                </a>
-              </div>
-            </article>
-          ))}
+        <div className="showcase-section-header">
+          <div>
+            <h2>Certifications &amp; Credentials</h2>
+            <p className="certificate-media-intro">
+              Flip through the interactive credential deck or switch to grid view to inspect all {certificateMedia.length} certificates.
+            </p>
+          </div>
+          <div className="showcase-view-toggle" role="group" aria-label="Certifications layout view">
+            <button
+              type="button"
+              className={`showcase-toggle-btn${certViewMode === 'deck' ? ' is-active' : ''}`}
+              onClick={() => setCertViewMode('deck')}
+              aria-pressed={certViewMode === 'deck'}
+            >
+              3D Card Deck
+            </button>
+            <button
+              type="button"
+              className={`showcase-toggle-btn${certViewMode === 'grid' ? ' is-active' : ''}`}
+              onClick={() => setCertViewMode('grid')}
+              aria-pressed={certViewMode === 'grid'}
+            >
+              Grid View ({certificateMedia.length})
+            </button>
+          </div>
         </div>
+
+        {certViewMode === 'deck' ? (
+          <CardDeck items={certificateDeckItems} ariaLabel="Certifications 3D Card Deck" />
+        ) : (
+          <div className="certificate-media-row">
+            {certificateMedia.map((media) => (
+              <article className="certificate-media-card" key={media.id}>
+                <Image
+                  src={media.previewSrc}
+                  alt={media.title}
+                  loading="lazy"
+                  width={1200}
+                  height={900}
+                  sizes="(max-width: 768px) 90vw, 400px"
+                />
+                <div className="certificate-media-card-body">
+                  <span className="eyebrow">{media.issuer}</span>
+                  <h3>{media.title}</h3>
+                  <a href={media.src} target="_blank" rel="noreferrer">
+                    Open {media.type === 'pdf' ? 'PDF' : 'image'} ↗
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
     </section>
   );

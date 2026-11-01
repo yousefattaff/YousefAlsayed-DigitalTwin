@@ -36,6 +36,9 @@ export default function Home() {
   const projects = getProjects().map((project) => {
     const media = objectValue(project.data.media);
     const links = objectValue(project.data.links);
+    const technologies = Array.isArray(project.data.technologies)
+      ? project.data.technologies.map(String).filter(Boolean)
+      : [];
     return {
       title: stringValue(project.data.title, project.slug),
       description: stringValue(project.data.summary, project.body.split(/\n\n/, 1)[0]),
@@ -43,6 +46,8 @@ export default function Home() {
       image: stringValue(media.image) || undefined,
       video: stringValue(media.video) || undefined,
       url: stringValue(links.repository, '#projects'),
+      role: stringValue(project.data.role, 'AI Engineer'),
+      technologies,
     };
   });
   const graduationProject = objectValue(achievementData.graduation_project);

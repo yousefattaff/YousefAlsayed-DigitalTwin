@@ -388,9 +388,410 @@
   }
 }
 
+/* ==========================================================================
+   3D Collectible Card Deck Showcase (Projects & Certifications)
+   ========================================================================== */
+
+.showcase-section-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.showcase-view-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  border: var(--border-brutal-width) solid var(--ink-dark);
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  box-shadow: 4px 4px 0px var(--ink-dark);
+}
+
+.showcase-toggle-btn {
+  min-height: 38px;
+  padding: 6px 16px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.82rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.showcase-toggle-btn.is-active {
+  border-color: var(--ink-dark);
+  background: var(--accent-emerald) !important;
+  color: #F7F6F2 !important;
+  box-shadow: 2px 2px 0px var(--ink-dark);
+}
+
+.collectible-deck-shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px 8px 12px;
+  outline: none;
+}
+
+.collectible-deck-shell:focus-visible .collectible-slab-card.is-active {
+  outline: 3px solid var(--accent-emerald);
+  outline-offset: 4px;
+}
+
+.collectible-deck-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(100%, 580px);
+  min-height: clamp(390px, 54vw, 490px);
+  margin: 0 auto 32px;
+  perspective: 1200px;
+  user-select: none;
+}
+
+.collectible-slab-card {
+  grid-area: 1 / 1;
+  width: 100%;
+  max-width: 540px;
+  padding: 16px;
+  border: 3px solid var(--ink-dark);
+  border-radius: 20px;
+  background: var(--bg-card);
+  box-shadow: 7px 7px 0px var(--ink-dark);
+  transform-origin: center 85%;
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease,
+    box-shadow 220ms ease;
+  will-change: transform, opacity;
+}
+
+.collectible-slab-card.is-active {
+  cursor: grab;
+  touch-action: pan-y;
+  box-shadow: 8px 8px 0px var(--accent-emerald), 13px 13px 0px var(--ink-dark);
+}
+
+.collectible-slab-card.is-active.is-dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.collectible-slab-card.is-stacked {
+  pointer-events: none;
+  background: #EFECE4;
+  filter: brightness(0.96);
+}
+
+/* PSA-style Graded Top Label Bar */
+.collectible-slab-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border: 2.5px solid var(--ink-dark);
+  border-radius: 12px;
+  background: #FFFFFF;
+  box-shadow: inset 0 0 0 2px var(--accent-emerald);
+}
+
+.collectible-slab-header-left {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.collectible-slab-eyebrow {
+  color: var(--accent-emerald) !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.collectible-slab-issuer {
+  overflow: hidden;
+  color: var(--ink-dark) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.collectible-slab-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.collectible-slab-grade {
+  padding: 2px 8px;
+  border: 1.5px solid var(--ink-dark);
+  border-radius: 6px;
+  background: var(--accent-emerald);
+  color: #F7F6F2 !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.collectible-slab-serial {
+  margin-top: 2px;
+  color: var(--text-muted) !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+/* Card Visual Window */
+.collectible-slab-media {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 2.5px solid var(--ink-dark);
+  border-radius: 12px;
+  background: #1A1D24;
+}
+
+.collectible-slab-media img,
+.collectible-slab-media video,
+.collectible-slab-media .project-media-wrapper,
+.collectible-slab-media .zoom {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: 16 / 10 !important;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.collectible-slab-media .collectible-cert-image {
+  object-fit: contain !important;
+  background: #FFFFFF;
+  padding: 6px;
+}
+
+.collectible-slab-holo {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(116, 192, 252, 0.14) 46%,
+    rgba(232, 89, 106, 0.12) 54%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Slab Footer */
+.collectible-slab-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+  min-height: 28px;
+}
+
+.collectible-slab-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.collectible-slab-chip {
+  padding: 3px 9px;
+  border: 1.5px solid var(--ink-dark);
+  border-radius: 999px;
+  background: var(--bg-canvas);
+  color: var(--ink-dark) !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.collectible-slab-drag-hint {
+  color: var(--text-muted) !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.72rem;
+}
+
+/* Bottom Control Stage (matching reference video) */
+.collectible-deck-controls {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: clamp(12px, 3vw, 28px);
+  width: min(100%, 680px);
+  margin-top: 6px;
+}
+
+.collectible-deck-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: 2.5px solid var(--ink-dark);
+  border-radius: 12px;
+  background: var(--accent-emerald) !important;
+  color: #F7F6F2 !important;
+  font-family: var(--font-code) !important;
+  font-size: 1.35rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px var(--ink-dark);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.collectible-deck-arrow:hover {
+  background: var(--accent-emerald-hover) !important;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--ink-dark);
+}
+
+.collectible-deck-arrow:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--ink-dark);
+}
+
+.collectible-deck-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-width: 0;
+}
+
+.collectible-deck-title {
+  margin: 0;
+  color: var(--ink-dark) !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.collectible-deck-subtitle {
+  margin: 6px 0 0;
+  max-width: 54ch;
+  color: var(--text-secondary) !important;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.collectible-deck-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 3px 12px;
+  border: 2px solid var(--ink-dark);
+  border-radius: 999px;
+  background: var(--bg-card);
+  color: var(--ink-dark) !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.collectible-deck-counter-sep {
+  color: var(--accent-emerald);
+}
+
+.collectible-deck-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.collectible-deck-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  border: 2.5px solid var(--ink-dark);
+  border-radius: 10px;
+  font-family: var(--font-display) !important;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.collectible-deck-action-btn.is-primary {
+  background: var(--ink-dark) !important;
+  color: #F7F6F2 !important;
+  box-shadow: 4px 4px 0px var(--accent-emerald);
+}
+
+.collectible-deck-action-btn.is-secondary {
+  background: var(--bg-card) !important;
+  color: var(--ink-dark) !important;
+  box-shadow: 4px 4px 0px var(--ink-dark);
+}
+
+.collectible-deck-action-btn:hover {
+  transform: translate(-2px, -2px);
+}
+
 @media (max-width: 768px) {
   .project h2 {
     font-size: 1.3rem;
+  }
+
+  .collectible-deck-stage {
+    min-height: 350px;
+    margin-bottom: 24px;
+  }
+
+  .collectible-slab-card {
+    padding: 12px;
+  }
+
+  .collectible-deck-controls {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+    gap: 10px;
+  }
+
+  .collectible-deck-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 1.15rem;
   }
 
   .project-showcase-dialog-backdrop {
@@ -409,4 +810,3 @@
     transform: none !important;
   }
 }
-

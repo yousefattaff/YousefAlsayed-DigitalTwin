@@ -16,7 +16,153 @@ export interface CertificateMedia {
   id: string;
   title: string;
   src: string;
+  previewSrc: string;
   type: 'pdf' | 'image';
+  issuer: string;
+  category: string;
+  badgeCode: string;
+}
+
+function inferCertificateMetadata(filename: string, index: number) {
+  const base = filename.replace(/\.[^.]+$/, '');
+  const clean = base.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+  const badgeCode = `#${String(index + 1).padStart(2, '0')}`;
+
+  if (/CS50AI/i.test(base)) {
+    return {
+      title: 'CS50AI — Intro to Artificial Intelligence with Python',
+      issuer: 'Harvard University · CS50',
+      category: 'AI & SEARCH ALGORITHMS',
+      badgeCode,
+    };
+  }
+  if (/CS50x/i.test(base)) {
+    return {
+      title: 'CS50x — Introduction to Computer Science',
+      issuer: 'Harvard University · CS50',
+      category: 'COMPUTER SCIENCE',
+      badgeCode,
+    };
+  }
+  if (/Machine_Learning_Specialization/i.test(base)) {
+    return {
+      title: 'Machine Learning Specialization',
+      issuer: 'Stanford Online & DeepLearning.AI · Coursera',
+      category: 'MACHINE LEARNING',
+      badgeCode,
+    };
+  }
+  if (/AIEngineerAgenticTrack/i.test(base)) {
+    return {
+      title: 'AI Engineer Agentic Track: Complete Agent & MCP Course',
+      issuer: 'Udemy · Ed Donner & Ligency',
+      category: 'MULTI-AGENT & MCP',
+      badgeCode,
+    };
+  }
+  if (/AI_Engineer_Core_Track/i.test(base)) {
+    return {
+      title: 'AI Engineer Core Track: LLM Engineering, RAG, QLoRA & Agents',
+      issuer: 'Udemy · Ed Donner & Ligency',
+      category: 'LLMS · RAG · QLORA',
+      badgeCode,
+    };
+  }
+  if (/AI_Engineer_Production_Track/i.test(base)) {
+    return {
+      title: 'AI Engineer Production Track: Deploy LLMs & Agents at Scale',
+      issuer: 'Udemy · Ed Donner & Ligency',
+      category: 'PRODUCTION AI OPS',
+      badgeCode,
+    };
+  }
+  if (/AI_Builder_Agents_Voice_Agents_n8n/i.test(base)) {
+    return {
+      title: 'AI Builder: Agents, Voice Agents & Automations in n8n',
+      issuer: 'Udemy · Ed Donner & Ligency',
+      category: 'VOICE AGENTS & N8N',
+      badgeCode,
+    };
+  }
+  if (/AI Coder_Complete_Claude_code/i.test(base)) {
+    return {
+      title: 'AI Coder: Complete Claude Code & Coding Agents',
+      issuer: 'Udemy · Ed Donner & Ligency',
+      category: 'CODING AGENTS',
+      badgeCode,
+    };
+  }
+  if (/AI_Leader_Generative/i.test(base)) {
+    return {
+      title: 'AI Leader: Generative & Agentic AI for Leaders',
+      issuer: 'Udemy · Ed Donner & Ligency',
+      category: 'GENAI STRATEGY',
+      badgeCode,
+    };
+  }
+  if (/Docker_Foundations/i.test(base)) {
+    return {
+      title: 'Docker Foundations Professional Certificate',
+      issuer: 'Docker & LinkedIn Learning',
+      category: 'CONTAINERS & DEVOPS',
+      badgeCode,
+    };
+  }
+  if (/EF SET/i.test(base)) {
+    return {
+      title: 'EF SET English Certificate — CEFR C2 Proficient (71/100)',
+      issuer: 'EF Standard English Test',
+      category: 'C2 ENGLISH PROFICIENCY',
+      badgeCode,
+    };
+  }
+  if (/Deloitte_NextStep/i.test(base)) {
+    return {
+      title: 'Deloitte NextStep Mentorship Program',
+      issuer: 'Deloitte',
+      category: 'CAREER MENTORSHIP',
+      badgeCode,
+    };
+  }
+  if (/TIA Portal/i.test(base)) {
+    return {
+      title: 'TIA Portal Programming (Siemens S7-1200 & S7-1500)',
+      issuer: 'Siemens Industrial Automation',
+      category: 'PLC & AUTOMATION',
+      badgeCode,
+    };
+  }
+  if (/IMT_Embdedded_systems/i.test(base)) {
+    return {
+      title: 'Embedded Systems Diploma',
+      issuer: 'IMT School',
+      category: 'EMBEDDED SYSTEMS & C',
+      badgeCode,
+    };
+  }
+  if (/CNC Programming/i.test(base)) {
+    return {
+      title: 'CNC Programming & Machining',
+      issuer: 'Manufacturing & Mechatronics Training',
+      category: 'CAD / CAM & CNC',
+      badgeCode,
+    };
+  }
+  if (/AAV/i.test(base)) {
+    return {
+      title: 'Arab American Vehicles (AAV) Engineering Training',
+      issuer: 'Arab American Vehicles',
+      category: 'AUTOMOTIVE ENGINEERING',
+      badgeCode,
+    };
+  }
+
+  return {
+    title: clean,
+    issuer: 'Verified Certificate',
+    category: 'CREDENTIAL',
+    badgeCode,
+  };
 }
 
 const contentRoot = fs.existsSync(path.join(process.cwd(), 'content'))
@@ -158,10 +304,26 @@ export function getCertificateMedia(): CertificateMedia[] {
   return fs.readdirSync(certificateRoot)
     .filter((file) => /\.(pdf|png|jpe?g|webp)$/i.test(file))
     .sort((a, b) => a.localeCompare(b))
-    .map((file) => ({
-      id: file,
-      title: file.replace(/\.[^.]+$/, '').replace(/[_-]+/g, ' '),
-      src: `/certificates/${encodeURIComponent(file)}`,
-      type: /\.pdf$/i.test(file) ? 'pdf' as const : 'image' as const,
-    }));
+    .map((file, index) => {
+      const isPdf = /\.pdf$/i.test(file);
+      const base = file.replace(/\.[^.]+$/, '');
+      const previewFile = `${base}.jpg`;
+      const previewExists = isPdf && fs.existsSync(path.join(certificateRoot, 'previews', previewFile));
+      const src = `/certificates/${encodeURIComponent(file)}`;
+      const previewSrc = previewExists
+        ? `/certificates/previews/${encodeURIComponent(previewFile)}`
+        : src;
+      const meta = inferCertificateMetadata(file, index);
+
+      return {
+        id: file,
+        title: meta.title,
+        src,
+        previewSrc,
+        type: isPdf ? 'pdf' as const : 'image' as const,
+        issuer: meta.issuer,
+        category: meta.category,
+        badgeCode: meta.badgeCode,
+      };
+    });
 }
