@@ -15,6 +15,11 @@ export interface ProjectShowcaseItem {
   url?: string;
   role?: string;
   technologies?: string[];
+  category?: string;
+  highlight?: string;
+  whatItDoes?: string;
+  architecture?: string[];
+  keyFeatures?: string[];
 }
 
 function ProjectThumbnail({
@@ -92,15 +97,16 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
     id: project.title,
     title: project.title,
     subtitle: project.description,
-    eyebrow: (project.role || 'AI & Engineering Project').toUpperCase(),
+    eyebrow: (project.category || project.role || 'AI & Engineering Project').toUpperCase(),
     badgeCode: `#${String(index + 1).padStart(2, '0')}`,
     gradeLabel: project.video ? 'LIVE DEMO' : 'FEATURED',
     chips: project.technologies ?? [],
+    highlight: project.highlight,
     renderMedia: (isActive) => (
       <ProjectThumbnail project={project} autoPlay={isActive} />
     ),
     primaryAction: {
-      label: 'Project Details',
+      label: 'Deep Dive & Details →',
       onClick: () => setSelectedProject(project),
     },
     secondaryAction: project.url
@@ -146,31 +152,69 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
         <CardDeck items={deckItems} ariaLabel="Personal Projects 3D Card Deck" />
       ) : (
         <div className="projects-grid">
-          {projectList.map((project) => (
-            <div key={project.title} className="project">
+          {projectList.map((project, index) => (
+            <div key={project.title} className="project project-card-enhanced">
               <a
                 href={project.url || '#projects'}
                 target={project.url?.startsWith('#') ? undefined : '_blank'}
                 rel="noreferrer"
+                className="project-card-media-link"
               >
                 <ProjectThumbnail project={project} />
+                {project.category && (
+                  <span className="project-card-category-badge">{project.category}</span>
+                )}
               </a>
-              <a
-                href={project.url || '#projects'}
-                target={project.url?.startsWith('#') ? undefined : '_blank'}
-                rel="noreferrer"
-              >
-                <h2>{project.title}</h2>
-              </a>
-              <p>{project.description}</p>
-              <button
-                type="button"
-                className="project-details-trigger"
-                onClick={() => setSelectedProject(project)}
-                aria-label={`View details for ${project.title}`}
-              >
-                View project details
-              </button>
+              <div className="project-card-content">
+                <div className="project-card-header-row">
+                  <span className="project-card-serial">#{String(index + 1).padStart(2, '0')}</span>
+                  {project.role && <span className="project-card-role">{project.role}</span>}
+                </div>
+                <a
+                  href={project.url || '#projects'}
+                  target={project.url?.startsWith('#') ? undefined : '_blank'}
+                  rel="noreferrer"
+                >
+                  <h2>{project.title}</h2>
+                </a>
+                {project.highlight && (
+                  <div className="project-card-highlight">
+                    <span aria-hidden="true">⚡</span>
+                    <span>{project.highlight}</span>
+                  </div>
+                )}
+                <p className="project-card-desc">{project.description}</p>
+                {project.technologies && project.technologies.length > 0 && (
+                  <div className="project-card-tech-chips">
+                    {project.technologies.slice(0, 4).map((tech) => (
+                      <span key={tech} className="chip">
+                        <span>{tech}</span>
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <div className="project-card-actions">
+                  <button
+                    type="button"
+                    className="project-details-trigger"
+                    onClick={() => setSelectedProject(project)}
+                    aria-label={`View details for ${project.title}`}
+                  >
+                    Project Details →
+                  </button>
+                  {project.url && (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="project-card-repo-btn"
+                      aria-label={`View repository for ${project.title}`}
+                    >
+                      GitHub ↗
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -185,7 +229,7 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
         >
           <section
             ref={dialogRef}
-            className="project-showcase-dialog"
+            className="project-showcase-dialog project-dossier-dialog"
             role="dialog"
             aria-modal="true"
             aria-labelledby="project-dialog-title"
@@ -200,19 +244,122 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
             >
               ×
             </button>
-            <h2 id="project-dialog-title">{selectedProject.title}</h2>
-            <div className="project-dialog-media">
-              <ProjectThumbnail key={selectedProject.title} project={selectedProject} />
+
+            {/* Executive Dossier Header */}
+            <div className="project-dialog-header">
+              <div className="project-dialog-tags">
+                <span className="project-dialog-category">
+                  {selectedProject.category || 'AI & SOFTWARE ENGINEERING'}
+                </span>
+                {selectedProject.role && (
+                  <span className="project-dialog-role">{selectedProject.role}</span>
+                )}
+              </div>
+              <h2 id="project-dialog-title">{selectedProject.title}</h2>
             </div>
-            <p id="project-dialog-description">{selectedProject.description}</p>
-            <a
-              className="project-dialog-link"
-              href={selectedProject.url || '#projects'}
-              target={selectedProject.url?.startsWith('#') ? undefined : '_blank'}
-              rel="noreferrer"
-            >
-              Open project link
-            </a>
+
+            {/* Media Showcase */}
+            <div className="project-dialog-media">
+              <ProjectThumbnail key={selectedProject.title} project={selectedProject} autoPlay />
+            </div>
+
+            {/* Highlight Banner */}
+            {selectedProject.highlight && (
+              <div className="project-dialog-highlight-banner">
+                <span className="project-dialog-highlight-icon" aria-hidden="true">⚡</span>
+                <strong>{selectedProject.highlight}</strong>
+              </div>
+            )}
+
+            {/* Structured Dossier Body */}
+            <div className="project-dialog-body" id="project-dialog-description">
+              {/* Section 1: What It Does & Problem Solved */}
+              <div className="project-dialog-section">
+                <h3 className="project-dialog-section-title">
+                  <span className="project-dialog-section-num">01</span>
+                  <span>What It Does &amp; The Problem It Solves</span>
+                </h3>
+                <p className="project-dialog-narrative">
+                  {selectedProject.whatItDoes || selectedProject.description}
+                </p>
+              </div>
+
+              {/* Section 2: Architecture & Workflow */}
+              {selectedProject.architecture && selectedProject.architecture.length > 0 && (
+                <div className="project-dialog-section">
+                  <h3 className="project-dialog-section-title">
+                    <span className="project-dialog-section-num">02</span>
+                    <span>System Architecture &amp; Execution Pipeline</span>
+                  </h3>
+                  <ol className="project-dialog-pipeline">
+                    {selectedProject.architecture.map((step, idx) => (
+                      <li key={idx} className="project-dialog-pipeline-step">
+                        <span className="pipeline-step-badge">
+                          STAGE {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <p>{step}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              )}
+
+              {/* Section 3: Engineering Highlights */}
+              {selectedProject.keyFeatures && selectedProject.keyFeatures.length > 0 && (
+                <div className="project-dialog-section">
+                  <h3 className="project-dialog-section-title">
+                    <span className="project-dialog-section-num">03</span>
+                    <span>Engineering Highlights &amp; Production Verification</span>
+                  </h3>
+                  <ul className="project-dialog-highlights">
+                    {selectedProject.keyFeatures.map((feat, idx) => (
+                      <li key={idx} className="project-dialog-highlight-item">
+                        <span className="highlight-bullet" aria-hidden="true">●</span>
+                        <span>{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Section 4: Technologies Used */}
+              {selectedProject.technologies && selectedProject.technologies.length > 0 && (
+                <div className="project-dialog-section">
+                  <h3 className="project-dialog-section-title">
+                    <span className="project-dialog-section-num">04</span>
+                    <span>Technologies &amp; Frameworks</span>
+                  </h3>
+                  <div className="project-dialog-tech-chips">
+                    {selectedProject.technologies.map((tech) => (
+                      <span key={tech} className="project-dialog-tech-chip">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Dialog Footer Actions */}
+            <div className="project-dialog-footer">
+              {selectedProject.url && (
+                <a
+                  className="brutal-btn brutal-btn-primary"
+                  href={selectedProject.url}
+                  target={selectedProject.url.startsWith('#') ? undefined : '_blank'}
+                  rel="noreferrer"
+                >
+                  View GitHub Repository ↗
+                </a>
+              )}
+              <button
+                type="button"
+                className="brutal-btn brutal-btn-outline"
+                onClick={() => setSelectedProject(null)}
+              >
+                Close Details
+              </button>
+            </div>
           </section>
         </div>
       )}

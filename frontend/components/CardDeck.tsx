@@ -11,6 +11,7 @@ export interface CardDeckItem {
   badgeCode: string;
   gradeLabel?: string;
   chips?: string[];
+  highlight?: string;
   renderMedia: (isActive: boolean) => React.ReactNode;
   primaryAction?: {
     label: string;
@@ -206,6 +207,14 @@ export default function CardDeck({
                 {item.renderMedia(isTop)}
                 <div className="collectible-slab-holo" aria-hidden="true" />
               </div>
+
+              {/* Quick Highlight Superpower */}
+              {item.highlight && (
+                <div className="collectible-slab-highlight">
+                  <span className="collectible-slab-highlight-dot" aria-hidden="true">⚡</span>
+                  <span className="collectible-slab-highlight-text">{item.highlight}</span>
+                </div>
+              )}
 
               {/* Card Footer Chips & Quick Hint */}
               <footer className="collectible-slab-footer">

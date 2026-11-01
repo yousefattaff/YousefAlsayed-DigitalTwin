@@ -39,9 +39,20 @@ export default function Home() {
     const technologies = Array.isArray(project.data.technologies)
       ? project.data.technologies.map(String).filter(Boolean)
       : [];
+    const architecture = Array.isArray(project.data.architecture)
+      ? project.data.architecture.map(String).filter(Boolean)
+      : [];
+    const keyFeatures = Array.isArray(project.data.key_features)
+      ? project.data.key_features.map(String).filter(Boolean)
+      : [];
     return {
       title: stringValue(project.data.title, project.slug),
       description: stringValue(project.data.summary, project.body.split(/\n\n/, 1)[0]),
+      category: stringValue(project.data.category, 'AI & SOFTWARE ENGINEERING'),
+      highlight: stringValue(project.data.highlight),
+      whatItDoes: stringValue(project.data.what_it_does),
+      architecture,
+      keyFeatures,
       mock: stringValue(media.mock, '/projects/project-placeholder.png'),
       image: stringValue(media.image) || undefined,
       video: stringValue(media.video) || undefined,
