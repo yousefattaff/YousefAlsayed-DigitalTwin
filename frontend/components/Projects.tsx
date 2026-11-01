@@ -89,32 +89,40 @@ function ProjectThumbnail({
 
 export default function Projects({ projects: projectList }: { projects: ProjectShowcaseItem[] }) {
   const [selectedProject, setSelectedProject] = useState<ProjectShowcaseItem | null>(null);
-  const [viewMode, setViewMode] = useState<'deck' | 'grid'>('deck');
   const dialogRef = useRef<HTMLElement>(null);
   useModal(dialogRef, selectedProject !== null, () => setSelectedProject(null));
 
   const deckItems: CardDeckItem[] = projectList.map((project, index) => ({
     id: project.title,
     title: project.title,
-    subtitle: project.description,
+    subtitle: project.role ? `${project.role} · ${project.description}` : project.description,
     eyebrow: (project.category || project.role || 'AI & Engineering Project').toUpperCase(),
     badgeCode: `#${String(index + 1).padStart(2, '0')}`,
     gradeLabel: project.video ? 'LIVE DEMO' : 'FEATURED',
     chips: project.technologies ?? [],
     highlight: project.highlight,
+    whatItIs: project.whatItDoes || project.description,
+    whatILearned:
+      project.architecture && project.architecture.length > 0
+        ? project.architecture.join(' → ')
+        : undefined,
+    whatItIsLabel: 'What It Does & What I Built',
+    whatILearnedLabel: 'How It Works & What I Learned',
+    stackLabel: 'Stack & Tools Used',
+    highlights: project.keyFeatures ?? [],
     renderMedia: (isActive) => (
       <ProjectThumbnail project={project} autoPlay={isActive} />
     ),
-    primaryAction: {
-      label: 'Deep Dive & Details →',
-      onClick: () => setSelectedProject(project),
-    },
-    secondaryAction: project.url
+    primaryAction: project.url
       ? {
-          label: 'View Repository ↗',
+          label: 'View GitHub Repository ↗',
           href: project.url,
         }
       : undefined,
+    secondaryAction: {
+      label: 'Full Architecture Breakdown →',
+      onClick: () => setSelectedProject(project),
+    },
   }));
 
   return (
@@ -122,103 +130,10 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
       <div className="showcase-section-header">
         <div>
           <h1>Personal Projects</h1>
-          <p className="project-showcase-count" aria-live="polite">
-            {viewMode === 'deck'
-              ? `Interactive 3D Deck · ${projectList.length} standout projects`
-              : `Showing all ${projectList.length} projects`}
-          </p>
-        </div>
-        <div className="showcase-view-toggle" role="group" aria-label="Projects layout view">
-          <button
-            type="button"
-            className={`showcase-toggle-btn${viewMode === 'deck' ? ' is-active' : ''}`}
-            onClick={() => setViewMode('deck')}
-            aria-pressed={viewMode === 'deck'}
-          >
-            3D Card Deck
-          </button>
-          <button
-            type="button"
-            className={`showcase-toggle-btn${viewMode === 'grid' ? ' is-active' : ''}`}
-            onClick={() => setViewMode('grid')}
-            aria-pressed={viewMode === 'grid'}
-          >
-            Grid View ({projectList.length})
-          </button>
         </div>
       </div>
 
-      {viewMode === 'deck' ? (
-        <CardDeck items={deckItems} ariaLabel="Personal Projects 3D Card Deck" />
-      ) : (
-        <div className="projects-grid">
-          {projectList.map((project, index) => (
-            <div key={project.title} className="project project-card-enhanced">
-              <a
-                href={project.url || '#projects'}
-                target={project.url?.startsWith('#') ? undefined : '_blank'}
-                rel="noreferrer"
-                className="project-card-media-link"
-              >
-                <ProjectThumbnail project={project} />
-                {project.category && (
-                  <span className="project-card-category-badge">{project.category}</span>
-                )}
-              </a>
-              <div className="project-card-content">
-                <div className="project-card-header-row">
-                  <span className="project-card-serial">#{String(index + 1).padStart(2, '0')}</span>
-                  {project.role && <span className="project-card-role">{project.role}</span>}
-                </div>
-                <a
-                  href={project.url || '#projects'}
-                  target={project.url?.startsWith('#') ? undefined : '_blank'}
-                  rel="noreferrer"
-                >
-                  <h2>{project.title}</h2>
-                </a>
-                {project.highlight && (
-                  <div className="project-card-highlight">
-                    <span aria-hidden="true">⚡</span>
-                    <span>{project.highlight}</span>
-                  </div>
-                )}
-                <p className="project-card-desc">{project.description}</p>
-                {project.technologies && project.technologies.length > 0 && (
-                  <div className="project-card-tech-chips">
-                    {project.technologies.slice(0, 4).map((tech) => (
-                      <span key={tech} className="chip">
-                        <span>{tech}</span>
-                      </span>
-                    ))}
-                  </div>
-                )}
-                <div className="project-card-actions">
-                  <button
-                    type="button"
-                    className="project-details-trigger"
-                    onClick={() => setSelectedProject(project)}
-                    aria-label={`View details for ${project.title}`}
-                  >
-                    Project Details →
-                  </button>
-                  {project.url && (
-                    <a
-                      href={project.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="project-card-repo-btn"
-                      aria-label={`View repository for ${project.title}`}
-                    >
-                      GitHub ↗
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+      <CardDeck items={deckItems} ariaLabel="Personal Projects" />
       {selectedProject && (
         <div
           className="project-showcase-dialog-backdrop"

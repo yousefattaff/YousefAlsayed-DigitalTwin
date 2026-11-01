@@ -451,6 +451,198 @@
   outline-offset: 4px;
 }
 
+/* Side-by-Side Split Stage: Cards Left + Soft Paper Explainer Square Right */
+.collectible-showcase-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  align-items: stretch;
+  gap: clamp(28px, 4vw, 52px);
+  width: 100%;
+  padding: 12px 0;
+  outline: none;
+}
+
+.collectible-showcase-split:focus-visible .collectible-slab-card.is-active {
+  outline: 3px solid var(--accent-emerald);
+  outline-offset: 4px;
+}
+
+.collectible-left-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.collectible-explainer-square {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  min-width: 0;
+  padding: clamp(22px, 3vw, 32px);
+  border: 3px solid var(--ink-dark);
+  border-radius: 20px;
+  background: var(--bg-card);
+  box-shadow: 7px 7px 0px var(--ink-dark);
+  animation: explainerFadeIn 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes explainerFadeIn {
+  from {
+    opacity: 0.45;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.collectible-explainer-header {
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--ink-dark);
+}
+
+.collectible-explainer-badges {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.collectible-explainer-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border: 1.5px solid var(--ink-dark);
+  border-radius: var(--radius-full);
+  background: var(--accent-emerald);
+  color: #F7F6F2 !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.collectible-explainer-serial {
+  padding: 3px 10px;
+  border: 1.5px solid var(--ink-dark);
+  border-radius: var(--radius-full);
+  background: var(--bg-canvas);
+  color: var(--ink-dark) !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.75rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.collectible-explainer-title {
+  margin: 0;
+  color: var(--ink-dark) !important;
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.collectible-explainer-role {
+  margin: 6px 0 0;
+  color: var(--text-secondary) !important;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.collectible-explainer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.collectible-explainer-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.collectible-explainer-label {
+  margin: 0;
+  color: var(--accent-emerald) !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.collectible-explainer-text {
+  margin: 0;
+  color: var(--text-primary) !important;
+  font-size: 0.94rem;
+  line-height: 1.62;
+}
+
+.collectible-explainer-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.collectible-explainer-chip {
+  padding: 4px 11px;
+  border: 1.5px solid var(--ink-dark);
+  border-radius: var(--radius-full);
+  background: var(--bg-canvas);
+  color: var(--ink-dark) !important;
+  font-family: var(--font-code) !important;
+  font-size: 0.73rem;
+  font-weight: 700;
+  box-shadow: 2px 2px 0px var(--ink-dark);
+}
+
+.collectible-explainer-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.collectible-explainer-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--text-secondary) !important;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.collectible-explainer-bullet {
+  color: var(--accent-emerald);
+  font-size: 0.7rem;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.collectible-explainer-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 2px dashed rgba(26, 29, 36, 0.2);
+}
+
+@media (max-width: 960px) {
+  .collectible-showcase-split {
+    grid-template-columns: 1fr;
+  }
+}
+
 .collectible-deck-stage {
   position: relative;
   display: grid;

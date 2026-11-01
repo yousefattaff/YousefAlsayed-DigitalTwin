@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 import type { CertificateMedia } from '@/lib/content';
@@ -33,7 +33,6 @@ export default function AchievementsSection({
 }) {
   const modelViewerRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
-  const [certViewMode, setCertViewMode] = useState<'deck' | 'grid'>('deck');
 
   const certificateDeckItems: CardDeckItem[] = certificateMedia.map((media) => ({
     id: media.id,
@@ -42,6 +41,13 @@ export default function AchievementsSection({
     eyebrow: media.category,
     badgeCode: media.badgeCode,
     gradeLabel: media.type === 'pdf' ? 'CERTIFIED PDF' : 'VERIFIED',
+    chips: media.stack,
+    whatItIs: media.whatItIs,
+    whatILearned: media.whatILearned,
+    highlights: media.highlights,
+    whatItIsLabel: 'What This Certificate Covers',
+    whatILearnedLabel: 'What I Learned & How I Apply It',
+    stackLabel: 'Stack & Concepts Covered',
     renderMedia: () => (
       <Image
         src={media.previewSrc}
@@ -140,55 +146,10 @@ export default function AchievementsSection({
         <div className="showcase-section-header">
           <div>
             <h2>Certifications &amp; Credentials</h2>
-            <p className="certificate-media-intro">
-              Flip through the interactive credential deck or switch to grid view to inspect all {certificateMedia.length} certificates.
-            </p>
-          </div>
-          <div className="showcase-view-toggle" role="group" aria-label="Certifications layout view">
-            <button
-              type="button"
-              className={`showcase-toggle-btn${certViewMode === 'deck' ? ' is-active' : ''}`}
-              onClick={() => setCertViewMode('deck')}
-              aria-pressed={certViewMode === 'deck'}
-            >
-              3D Card Deck
-            </button>
-            <button
-              type="button"
-              className={`showcase-toggle-btn${certViewMode === 'grid' ? ' is-active' : ''}`}
-              onClick={() => setCertViewMode('grid')}
-              aria-pressed={certViewMode === 'grid'}
-            >
-              Grid View ({certificateMedia.length})
-            </button>
           </div>
         </div>
 
-        {certViewMode === 'deck' ? (
-          <CardDeck items={certificateDeckItems} ariaLabel="Certifications 3D Card Deck" />
-        ) : (
-          <div className="certificate-media-row">
-            {certificateMedia.map((media) => (
-              <article className="certificate-media-card" key={media.id}>
-                <Image
-                  src={media.previewSrc}
-                  alt={media.title}
-                  loading="lazy"
-                  width={1200}
-                  height={900}
-                  sizes="(max-width: 768px) 90vw, 400px"
-                />
-                <div className="certificate-media-card-body">
-                  <span className="eyebrow">{media.issuer}</span>
-                  <h3>{media.title}</h3>
-                  <a href={media.src} target="_blank" rel="noreferrer">
-                    Open {media.type === 'pdf' ? 'PDF' : 'image'} ↗
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
+        <CardDeck items={certificateDeckItems} ariaLabel="Certifications and Credentials" />
       </section>
     </section>
   );
