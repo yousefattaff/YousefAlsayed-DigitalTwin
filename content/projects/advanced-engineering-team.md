@@ -5,8 +5,8 @@ type: project
 order: 1
 category: MULTI-AGENT AI SQUAD
 role: Lead AI Engineer
-highlight: 4 Autonomous Agents · Docker Sandboxed Execution · Langfuse Tracing
-summary: An autonomous 4-agent software development squad powered by CrewAI and Groq. Give it any software specification, and the Engineering Lead architects the design, Backend and Frontend Engineers write modular code, and the QA Engineer executes unit tests in an isolated Docker container.
+highlight: 4 agents · Docker · Langfuse
+summary: Four agents turn one software request into a design, Python, a Gradio demo, and tests.
 status: active
 featured: true
 technologies:
@@ -23,18 +23,15 @@ links:
   repository: https://github.com/yousefattaff/advanced_engineering_team
 media:
   image: /projects/advanced-engineering-team.png
-what_it_does: |
-  Give this system a software requirement, and four CrewAI agents take it in order. The engineering lead writes the design. The backend engineer writes the Python module and can run it in Docker. The frontend engineer builds a Gradio demo. The QA engineer writes tests and can run them in Docker too.
+what_it_does: A lead designs it, backend and frontend build it, and QA writes tests. A failed run is not retried.
 architecture:
-  - "Engineering lead: turns the requirement into a design."
-  - "Backend engineer: writes the Python module and can execute it with the Docker tool."
-  - "Frontend engineer: builds a Gradio app around that module."
-  - "QA engineer: writes tests and can run them in Docker. The crew does not retry failures on its own."
+  - "Lead writes the design."
+  - "Backend writes Python and can run it in Docker."
+  - "Frontend builds the Gradio demo."
+  - "QA writes tests and can run them in Docker."
 key_features:
-  - "Four agents on Groq. The lead and QA use Llama 3.3 70B, the backend uses Qwen3 32B, and the frontend uses Llama 4 Scout."
-  - "Backend and QA run generated Python with a Docker tool. The container is removed when the run finishes."
-  - "Langfuse tracing turns on only when both Langfuse keys are set."
-  - "A run produces a design, Python code, a Gradio demo, and tests. It does not guarantee those tests pass."
+  - "Lead and QA use Llama 3.3 70B. Backend uses Qwen3 32B. Frontend uses Llama 4 Scout."
+  - "Langfuse turns on only when both keys are set."
 ---
 
-Advanced Engineering Team is a sequential multi-agent workflow with engineering lead, backend, frontend, and QA roles. It uses separate model configurations, Docker-based code execution, stdin-driven requirements, and LangFuse observability to turn a software request into generated code and tests.
+Four CrewAI agents on Groq. Docker can run the generated Python. The crew does not retry failures.

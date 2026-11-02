@@ -101,13 +101,7 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
     gradeLabel: project.video ? 'LIVE DEMO' : 'FEATURED',
     chips: project.technologies ?? [],
     highlight: project.highlight,
-    whatItIs: project.whatItDoes || project.description,
-    whatILearned:
-      project.architecture && project.architecture.length > 0
-        ? project.architecture.join(' → ')
-        : undefined,
-    whatItIsLabel: 'What It Does & What I Built',
-    whatILearnedLabel: 'How It Works & What I Learned',
+    steps: project.architecture,
     stackLabel: 'Stack & Tools Used',
     highlights: project.keyFeatures ?? [],
     renderMedia: (isActive) => (
@@ -120,7 +114,7 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
         }
       : undefined,
     secondaryAction: {
-      label: 'Full Architecture Breakdown →',
+      label: 'More detail →',
       onClick: () => setSelectedProject(project),
     },
   }));
@@ -192,7 +186,7 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
               <div className="project-dialog-section">
                 <h3 className="project-dialog-section-title">
                   <span className="project-dialog-section-num">01</span>
-                  <span>What It Does &amp; The Problem It Solves</span>
+                  <span>What it does</span>
                 </h3>
                 <p className="project-dialog-narrative">
                   {selectedProject.whatItDoes || selectedProject.description}
@@ -204,7 +198,7 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
                 <div className="project-dialog-section">
                   <h3 className="project-dialog-section-title">
                     <span className="project-dialog-section-num">02</span>
-                    <span>System Architecture &amp; Execution Pipeline</span>
+                    <span>How it runs</span>
                   </h3>
                   <ol className="project-dialog-pipeline">
                     {selectedProject.architecture.map((step, idx) => (
@@ -224,7 +218,7 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
                 <div className="project-dialog-section">
                   <h3 className="project-dialog-section-title">
                     <span className="project-dialog-section-num">03</span>
-                    <span>Engineering Highlights &amp; Production Verification</span>
+                    <span>Notes</span>
                   </h3>
                   <ul className="project-dialog-highlights">
                     {selectedProject.keyFeatures.map((feat, idx) => (

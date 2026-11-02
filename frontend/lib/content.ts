@@ -341,6 +341,31 @@ function scalar(value: string): unknown {
   return trimmed;
 }
 
+function readBlock(lines: string[], start: number, indent: number, folded: boolean) {
+  const block: string[] = [];
+  let index = start;
+  while (index < lines.length) {
+    const next = lines[index];
+    if (!next.trim()) {
+      let look = index + 1;
+      while (look < lines.length && !lines[look].trim()) look += 1;
+      const lookIndent = lines[look]?.match(/^\s*/)?.[0].length ?? 0;
+      if (look >= lines.length || lookIndent <= indent) break;
+      block.push('');
+      index += 1;
+      continue;
+    }
+    const nextIndent = next.match(/^\s*/)?.[0].length ?? 0;
+    if (nextIndent <= indent) break;
+    block.push(next.trim());
+    index += 1;
+  }
+  const text = folded
+    ? block.join(' ').replace(/\s+/g, ' ').trim()
+    : block.join('\n').trim();
+  return { text, index };
+}
+
 function parseFrontmatter(source: string): Frontmatter {
   const lines = source.split(/\r?\n/);
   const result: Frontmatter = {};
@@ -349,8 +374,13 @@ function parseFrontmatter(source: string): Frontmatter {
   let currentListIndent = -1;
   let currentListParent: Record<string, unknown> | null = null;
 
-  for (const [lineIndex, line] of lines.entries()) {
-    if (!line.trim() || line.trim().startsWith('#')) continue;
+  let lineIndex = 0;
+  while (lineIndex < lines.length) {
+    const line = lines[lineIndex];
+    if (!line.trim() || line.trim().startsWith('#')) {
+      lineIndex += 1;
+      continue;
+    }
     const indent = line.match(/^\s*/)?.[0].length ?? 0;
     const text = line.trim();
 
@@ -364,11 +394,15 @@ function parseFrontmatter(source: string): Frontmatter {
       } else {
         currentList.push(scalar(item));
       }
+      lineIndex += 1;
       continue;
     }
 
     const separator = text.indexOf(':');
-    if (separator < 0) continue;
+    if (separator < 0) {
+      lineIndex += 1;
+      continue;
+    }
     const key = text.slice(0, separator).trim();
     const rawValue = text.slice(separator + 1).trim();
 
@@ -377,6 +411,19 @@ function parseFrontmatter(source: string): Frontmatter {
       currentObject = currentListParent;
       currentListParent = null;
       currentListIndent = -1;
+    }
+
+    const isBlock = rawValue === '|' || rawValue === '|-' || rawValue === '>' || rawValue === '>-';
+    if (isBlock) {
+      const block = readBlock(lines, lineIndex + 1, indent, rawValue.startsWith('>'));
+      const assignTo = indent > 0 && currentObject ? currentObject : result;
+      assignTo[key] = block.text;
+      currentList = null;
+      currentListParent = null;
+      currentListIndent = -1;
+      if (assignTo === result) currentObject = null;
+      lineIndex = block.index;
+      continue;
     }
 
     if (indent > 0 && currentObject && rawValue) {
@@ -408,6 +455,7 @@ function parseFrontmatter(source: string): Frontmatter {
       currentListParent = null;
       currentListIndent = -1;
     }
+    lineIndex += 1;
   }
   return result;
 }

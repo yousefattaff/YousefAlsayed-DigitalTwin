@@ -14,6 +14,7 @@ export interface CardDeckItem {
   highlight?: string;
   whatItIs?: string;
   whatILearned?: string;
+  steps?: string[];
   highlights?: string[];
   whatItIsLabel?: string;
   whatILearnedLabel?: string;
@@ -278,6 +279,20 @@ export default function CardDeck({
                 {activeItem.whatItIsLabel ?? 'What It Is & What I Built'}
               </h4>
               <p className="collectible-explainer-text">{activeItem.whatItIs}</p>
+            </div>
+          )}
+
+          {activeItem.steps && activeItem.steps.length > 0 && (
+            <div className="collectible-explainer-block">
+              <h4 className="collectible-explainer-label">How it runs</h4>
+              <ol className="collectible-explainer-steps">
+                {activeItem.steps.map((step, index) => (
+                  <li key={step}>
+                    <span>{index + 1}</span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
             </div>
           )}
 
