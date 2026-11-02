@@ -783,6 +783,12 @@
   white-space: nowrap;
 }
 
+.collectible-showcase-split.is-document .collectible-slab-issuer {
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+}
+
 .collectible-slab-header-right {
   display: flex;
   flex-direction: column;
