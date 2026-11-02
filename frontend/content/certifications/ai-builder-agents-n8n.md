@@ -2,7 +2,7 @@
 title: AI Builder — Create Agents, Voice Agents & Automations in n8n
 slug: ai-builder-agents-n8n
 type: certification
-order: 11
+order: 4
 certification_type: course
 issuer: Udemy / Ed Donner / Ligency
 issued: 2026-10-14

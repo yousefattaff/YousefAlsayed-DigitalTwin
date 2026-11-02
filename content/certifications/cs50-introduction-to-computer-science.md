@@ -2,7 +2,7 @@
 title: CS50's Introduction to Computer Science
 slug: cs50-introduction-to-computer-science
 type: certification
-order: 2
+order: 9
 certification_type: course
 issuer: Harvard / edX
 issued: completed

@@ -2,7 +2,7 @@
 title: AI Coder — Complete Claude Code & Coding Agents Course
 slug: ai-coder-claude-code
 type: certification
-order: 12
+order: 5
 certification_type: course
 issuer: Udemy / Ed Donner / Ligency
 issued: 2026-10-21

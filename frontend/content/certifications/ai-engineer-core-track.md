@@ -2,7 +2,7 @@
 title: AI Engineer Core Track — LLM Engineering, RAG, QLoRA, Agents
 slug: ai-engineer-core-track
 type: certification
-order: 8
+order: 2
 certification_type: course
 issuer: Udemy / Ed Donner / Ligency
 issued: 2026-05-06

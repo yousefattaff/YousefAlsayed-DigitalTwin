@@ -2,7 +2,7 @@
 title: EF SET English Certificate
 slug: ef-set-english-certificate
 type: certification
-order: 4
+order: 11
 certification_type: exam
 issuer: EF SET
 issued: 2024-07-27

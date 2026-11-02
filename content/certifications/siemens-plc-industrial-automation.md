@@ -2,7 +2,7 @@
 title: PLC Industrial Automation
 slug: siemens-plc-industrial-automation
 type: certification
-order: 5
+order: 12
 certification_type: course
 issuer: Siemens
 issued: September 2023

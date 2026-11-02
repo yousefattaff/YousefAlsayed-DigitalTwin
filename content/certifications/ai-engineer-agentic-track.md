@@ -2,7 +2,7 @@
 title: AI Engineer Agentic Track — The Complete Agent & MCP Course
 slug: ai-engineer-agentic-track
 type: certification
-order: 7
+order: 1
 certification_type: course
 issuer: Udemy / Ed Donner / Ligency
 issued: 2026-06-15

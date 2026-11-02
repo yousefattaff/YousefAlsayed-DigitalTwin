@@ -2,7 +2,7 @@
 title: AI Engineer Production Track — Deploy LLMs & Agents at Scale
 slug: ai-engineer-production-track
 type: certification
-order: 9
+order: 3
 certification_type: course
 issuer: Udemy / Ed Donner / Ligency
 issued: 2026-10-03

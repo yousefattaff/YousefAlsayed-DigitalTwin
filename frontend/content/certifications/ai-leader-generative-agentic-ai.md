@@ -2,7 +2,7 @@
 title: AI Leader — Generative AI & Agentic AI for Leaders & Founders
 slug: ai-leader-generative-agentic-ai
 type: certification
-order: 10
+order: 6
 certification_type: course
 issuer: Udemy / Ed Donner / Ligency
 issued: 2026-10-09

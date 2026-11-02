@@ -2,7 +2,7 @@
 title: Machine Learning Specialization
 slug: machine-learning-specialization
 type: certification
-order: 1
+order: 7
 certification_type: course
 issuer: Stanford Online / DeepLearning.AI / Coursera
 issued: 2026-08-24

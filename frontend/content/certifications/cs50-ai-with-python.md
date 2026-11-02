@@ -2,7 +2,7 @@
 title: CS50's Introduction to Artificial Intelligence with Python
 slug: cs50-ai-with-python
 type: certification
-order: 3
+order: 8
 certification_type: course
 issuer: Harvard / edX
 issued: completed

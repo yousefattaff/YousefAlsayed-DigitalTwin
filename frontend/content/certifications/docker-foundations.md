@@ -2,7 +2,7 @@
 title: Docker Foundations Professional Certificate
 slug: docker-foundations
 type: certification
-order: 13
+order: 10
 certification_type: course
 issuer: LinkedIn Learning
 issued: 2026-09-06

@@ -2,7 +2,7 @@
 title: CNC Programming and Operation
 slug: dmg-mori-cnc-programming
 type: certification
-order: 6
+order: 13
 certification_type: course
 issuer: DMG MORI
 issued: September 2022

@@ -445,9 +445,25 @@ export function getCertificateMedia(): CertificateMedia[] {
   const certificateRoot = path.join(process.cwd(), 'public', 'certificates');
   if (!fs.existsSync(certificateRoot)) return [];
 
+  const aiFirst = [
+    /AIEngineerAgenticTrack/i,
+    /AI_Engineer_Core_Track/i,
+    /AI_Engineer_Production_Track/i,
+    /AI_Builder_Agents/i,
+    /AI Coder_Complete/i,
+    /AI_Leader_Generative/i,
+    /Machine_Learning_Specialization/i,
+    /CS50AI/i,
+  ];
+
+  const certificateRank = (filename: string) => {
+    const aiIndex = aiFirst.findIndex((pattern) => pattern.test(filename));
+    return aiIndex === -1 ? aiFirst.length : aiIndex;
+  };
+
   return fs.readdirSync(certificateRoot)
     .filter((file) => /\.(pdf|png|jpe?g|webp)$/i.test(file))
-    .sort((a, b) => a.localeCompare(b))
+    .sort((a, b) => certificateRank(a) - certificateRank(b) || a.localeCompare(b))
     .map((file, index) => {
       const isPdf = /\.pdf$/i.test(file);
       const base = file.replace(/\.[^.]+$/, '');
