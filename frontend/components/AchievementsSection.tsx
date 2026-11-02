@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useReducedMotion } from '@/lib/useReducedMotion';
 import type { CertificateMedia } from '@/lib/content';
+import CardDeck, { type CardDeckItem } from '@/components/CardDeck';
 
 export interface GraduationGalleryVideo {
   src: string;
@@ -32,6 +33,36 @@ export default function AchievementsSection({
 }) {
   const modelViewerRef = useRef<HTMLDivElement>(null);
   const reducedMotion = useReducedMotion();
+
+  const certificateDeckItems: CardDeckItem[] = certificateMedia.map((media) => ({
+    id: media.id,
+    title: media.title,
+    subtitle: media.issuer,
+    eyebrow: media.category,
+    badgeCode: media.badgeCode,
+    gradeLabel: media.type === 'pdf' ? 'CERTIFIED PDF' : 'VERIFIED',
+    chips: media.stack,
+    whatItIs: media.whatItIs,
+    whatILearned: media.whatILearned,
+    highlights: media.highlights,
+    whatItIsLabel: 'What This Certificate Covers',
+    whatILearnedLabel: 'What I Learned & How I Apply It',
+    stackLabel: 'Stack & Concepts Covered',
+    renderMedia: () => (
+      <Image
+        src={media.previewSrc}
+        alt={media.title}
+        width={1200}
+        height={900}
+        sizes="(max-width: 768px) 92vw, 540px"
+        className="collectible-cert-image"
+      />
+    ),
+    primaryAction: {
+      label: media.type === 'pdf' ? 'Open Official PDF ↗' : 'Open Full Certificate ↗',
+      href: media.src,
+    },
+  }));
 
   useEffect(() => {
     if (!graduationProject.model || !modelViewerRef.current) return;
@@ -112,25 +143,13 @@ export default function AchievementsSection({
       </section>
 
       <section className="resume-extra certificate-media-section">
-        <h2>Certificate files</h2>
-        <p className="certificate-media-intro">Photos and PDF copies of the certificates supplied for this portfolio.</p>
-        <div className="certificate-media-row">
-          {certificateMedia.map((media) => (
-            <article className="certificate-media-card" key={media.id}>
-              {media.type === 'image' ? (
-                <Image src={media.src} alt={media.title} loading="lazy" width={1200} height={900} sizes="(max-width: 768px) 90vw, 400px" />
-              ) : (
-                <iframe src={media.src} title={media.title} loading="lazy" />
-              )}
-              <div className="certificate-media-card-body">
-                <h3>{media.title}</h3>
-                <a href={media.src} target="_blank" rel="noreferrer">
-                  Open {media.type === 'pdf' ? 'PDF' : 'image'}
-                </a>
-              </div>
-            </article>
-          ))}
+        <div className="showcase-section-header">
+          <div>
+            <h2>Certifications &amp; Credentials</h2>
+          </div>
         </div>
+
+        <CardDeck items={certificateDeckItems} ariaLabel="Certifications and Credentials" />
       </section>
     </section>
   );
