@@ -280,6 +280,22 @@ function inferCertificateMetadata(filename: string, index: number) {
       ],
     };
   }
+  if (/Proficient_AI_Engineer/i.test(base)) {
+    return {
+      title: 'Proficient AI Engineer',
+      issuer: "Ed Donner's AI curriculum",
+      category: 'AI PROGRAM',
+      badgeCode,
+      whatItIs:
+        'Program completion certificate, dated November 1, 2026, for the full Proficient AI Engineer curriculum. The certificate names the AI Builder, AI Coder, AI Leadership, Core, Agentic, and MLOps tracks.',
+      whatILearned:
+        'The certificate records completion of that curriculum and deployment of an AI application.',
+      stack: ['AI Builder', 'AI Coder', 'AI Leadership', 'LLM Engineering', 'Agents and MCP', 'MLOps'],
+      highlights: [
+        'Covers the same tracks as the individual Udemy certificates in this deck.',
+      ],
+    };
+  }
   if (/AAV/i.test(base)) {
     return {
       title: 'Arab American Vehicles (AAV) Engineering Training',
@@ -446,6 +462,7 @@ export function getCertificateMedia(): CertificateMedia[] {
   if (!fs.existsSync(certificateRoot)) return [];
 
   const aiFirst = [
+    /Proficient_AI_Engineer/i,
     /AIEngineerAgenticTrack/i,
     /AI_Engineer_Core_Track/i,
     /AI_Engineer_Production_Track/i,
