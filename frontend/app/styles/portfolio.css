@@ -235,6 +235,8 @@
 }
 
 .graduation-media-row {
+  display: flex;
+  justify-content: center;
   width: 100%;
   max-width: 100%;
   padding: 8px 4px 18px;
@@ -258,7 +260,7 @@
   width: min(520px, 100%);
   max-width: 100%;
   min-width: 0;
-  margin: 0;
+  margin: 0 auto;
   scroll-snap-align: start;
 }
 
