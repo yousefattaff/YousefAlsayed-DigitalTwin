@@ -393,7 +393,9 @@ function retrieve(input: TwinChatInput, topic: string, knowledge: Knowledge): { 
     const overlap = Array.from(terms).filter((term) => document.terms.has(term)).length;
     const titleOverlap = Array.from(terms).filter((term) => queryTerms(document.title).has(term)).length;
     const priority = graduationSources.length
-      ? graduationSources.includes(document) ? 0 : 1
+      ? graduationSources.includes(document)
+        ? document.category === 'achievements' ? 0 : 1
+        : 2
       : categories?.indexOf(document.category) ?? 0;
     return { document, overlap, score: overlap + titleOverlap * 3, priority };
   }).filter(({ document, overlap, priority }) => {

@@ -544,6 +544,7 @@ footer svg {
 
 .graduation-media-row {
   align-items: center;
+  justify-content: center;
   display: flex;
   gap: 18px;
   margin-top: 18px;
