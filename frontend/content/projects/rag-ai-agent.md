@@ -3,10 +3,10 @@ title: RAG-AI-Agent
 slug: rag-ai-agent
 type: project
 order: 5
-category: ENTERPRISE DOCUMENT INTELLIGENCE
+category: DOCUMENT QUESTION ANSWERING
 role: AI / RAG Engineer
-highlight: ChromaDB Vector Store · Strict Page Citations · Tool Calling Mode
-summary: A production document intelligence application that transforms uploaded PDFs into specialized conversational experts (e.g. Dr. Insulino) with strict page-level citations and tool-augmented agent capabilities.
+highlight: Local Chroma · page sources · MiniLM and BM25
+summary: A Streamlit app that turns uploaded text PDFs into a named expert. Questions are answered from that expert's Chroma collection, with the file and page shown beside the answer.
 status: active
 featured: true
 technologies:
@@ -14,24 +14,24 @@ technologies:
   - Streamlit
   - LangChain
   - ChromaDB
-  - Groq LPU
-  - PubMed API & Tavily
+  - Groq
+  - MiniLM
 links:
   repository: https://github.com/yousefattaff/RAG-AI-Agent
 media:
   image: /projects/rag-ai-agent-dr-insulino.jpg
 what_it_does: |
-  Transforms complex multi-page PDFs (such as clinical medical guides or technical documentation) into grounded conversational experts like 'Dr. Insulino'. The system chunks and embeds pages locally into ChromaDB, executes dense vector similarity retrieval, cites exact document names and page numbers for every factual claim, and can seamlessly invoke external tools like PubMed, Tavily web search, or calculators.
+  You name an expert and upload text PDFs. Pages with no extractable text are skipped. Each chunk is stored with its filename and page in that expert's Chroma collection, using MiniLM embeddings. A question is planned, searched with vector MMR and BM25, reranked, padded with neighboring chunks, graded, and compressed. Groq then writes the answer. If retrieval is empty, the app says it could not find it in the documents and does not call the model.
 architecture:
-  - "Document Ingestion: Chunks and embeds multi-page PDFs locally into ChromaDB using Hugging Face embeddings."
-  - "Grounded Dense Retrieval: Fetches top-k relevant passages with similarity gating to prevent hallucinations."
-  - "Citation Synthesis: Formats responses with strict inline source attribution: [Source: document.pdf | Page: X]."
-  - "Agent Tool Mode: Dynamically invokes PubMed API, Tavily search, or calculators when document context alone is insufficient."
+  - "Ingestion splits pages at 1,000 characters with 200 overlap and upserts chunks by content id."
+  - "The ask path plans the query, fuses MMR with BM25, reranks with a cross-encoder, expands neighbors, grades the chunks, compresses them, then calls Llama 3.3 70B."
+  - "Query planning and grading use Llama 3.1 8B Instant."
+  - "PubMed, web search, and the calculator are not in this checkout. The screen stays on document question answering. EasyOCR is installed and is not used during ingestion."
 key_features:
-  - "Zero-hallucination document-only mode with fallback transparency when facts are absent."
-  - "Dual modes: fast single-turn document QA or full tool-augmented ReAct agent."
-  - "Interactive Streamlit UI for creating and managing custom persona experts."
-  - "High-throughput inference with Groq LPU and LangChain orchestration."
+  - "Sources show the filename, page, excerpt, and rerank score."
+  - "Edge TTS can read the answer aloud when the network is available."
+  - "Experts built before the header and sequence-index change need to be rebuilt."
+  - "GraphRAG, RAPTOR, and OCR are left out of the live path."
 ---
 
-RAG-AI-Agent creates named experts from uploaded PDFs. It chunks and embeds source pages locally, retrieves grounded context for document-only answers, displays filename and page citations, and optionally enables PubMed, Tavily, calculator, and voice tools through an agent mode.
+RAG-AI-Agent keeps one Chroma collection per expert and answers from retrieved PDF chunks. The tool-calling agent is not part of the current code.

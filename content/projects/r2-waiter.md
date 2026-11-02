@@ -5,8 +5,8 @@ type: project
 order: 4
 category: AUTONOMOUS RESTAURANT ROBOTICS
 role: Robotics & Control Engineer
-highlight: ROS 2 Nav2 · Dynamic 3-Tray Routing · Live Animated Face
-summary: An autonomous TurtleBot3 restaurant service robot built on ROS 2, featuring dynamic three-tray order fulfillment, AMCL localization with Nav2 obstacle avoidance, and live animated facial expressions driven by robot state.
+highlight: ROS 2 Foxy · 3 tray slots · animated face
+summary: A PyQt5 controller for a TurtleBot3 Waffle in a Gazebo restaurant. Pick up to three tables, and it sends them to Nav2 one at a time, then returns to the kitchen.
 status: completed
 featured: true
 technologies:
@@ -15,24 +15,24 @@ technologies:
   - ROS 2 Foxy
   - Nav2
   - TurtleBot3
-  - Gazebo Simulation
+  - Gazebo
 links:
   repository: https://github.com/yousefattaff/R2-WAITER
 media:
   image: /graduation/r2_waiter_portfolio_renders.png
   video: /projects/r2-waiter.mp4
 what_it_does: |
-  Built to automate dining room operations. R2-WAITER navigates restaurant floorplans using ROS 2 Nav2, maps dining tables with LIDAR and sensor fusion, assigns meals across a three-tray delivery queue, tracks real-time odometry, handles stuck-robot recovery routines, and interacts with diners through an animated facial expression system driven by live robot topics.
+  The Orders screen maps up to three selected tables onto tray labels. SET OFF sends those tables as sequential Nav2 goals and appends the kitchen. The bridge waits for each result and shows distance from odometry. The face thinks while the robot moves, celebrates at a table, and looks left or right from angular velocity. If ROS Python is missing, the desktop app opens in mock mode.
 architecture:
-  - "Table & Tray Dispatcher: Assigns incoming orders to delivery trays and plans sequential table visits."
-  - "Nav2 Path Planning: Executes AMCL localization, global costmaps, and dynamic obstacle avoidance."
-  - "Recovery Watchdogs: Detects blocked aisles or stuck goals and executes autonomous clearance maneuvers."
-  - "Expressive Gaze Interface: PyQt5 animated robot face responds to motion, arrival states, and diner interactions."
+  - "The PyQt5 window dispatches table keys, then kitchen, through Ros2Bridge."
+  - "Ros2Bridge sends one NavigateToPose goal at a time. A failed goal is reported, and the button unlocks when the mission emits done."
+  - "The table navigator marks a goal stuck if remaining distance does not improve by 0.2 m for 30 seconds, cancels it, and speaks. Nav2's own recoveries run before that check."
+  - "The face is an HTML page inside Qt WebEngine. rosbridge feeds /cmd_vel so the gaze can follow turns."
 key_features:
-  - "Tested in realistic Gazebo 3D restaurant simulations with TurtleBot3 Waffle hardware configuration."
-  - "Multi-waypoint sequential navigation with dynamic goal preemption."
-  - "Layered driver architecture separating mission logic from ROS 2 motor control topics."
-  - "Includes live video demonstration of animated expressions and autonomous service."
+  - "The simulation is ROS 2 Foxy, a Gazebo restaurant world, a TurtleBot3 Waffle, and Nav2 with the DWB controller."
+  - "The map image is built once with SLAM. It is not committed, so Nav2 cannot plan until that file exists."
+  - "Tables 8–12 and home are still origin placeholders in locations.json."
+  - "The state-machine unit tests run without a ROS install."
 ---
 
-R2-WAITER controls a TurtleBot3 Waffle in a restaurant simulation. It provides a three-tray order workflow, table selection, sequential Nav2 goals, odometry feedback, dynamic robot gaze, animated expressions, and recovery handling for failed or stuck navigation goals.
+R2-WAITER is the ROS 2 restaurant simulation and desktop controller. The operator picks tables, Nav2 drives the TurtleBot, and the face follows the robot's motion.
