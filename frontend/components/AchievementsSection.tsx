@@ -102,7 +102,7 @@ export default function AchievementsSection({
           {graduationProject.model && (
             <div className="graduation-model-viewer">
               {React.createElement('model-viewer', {
-                src: `${graduationProject.model}?v=yousef-face`,
+                src: `${graduationProject.model}?v=robot-face`,
                 alt: `${graduationProject.title} 3D model`,
                 'camera-controls': true,
                 'auto-rotate': !reducedMotion,
