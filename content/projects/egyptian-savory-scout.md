@@ -5,8 +5,8 @@ type: project
 order: 3
 category: SEMANTIC RECOMMENDER SYSTEM
 role: AI / Full-Stack Engineer
-highlight: 1,000+ Locations · TF-IDF + SBERT Reranking · Natural Language Explanations
-summary: An AI-powered dining discovery engine that indexes 1,000+ authentic Egyptian restaurants across Cairo and the Nile Valley, matching natural-language cravings to verified menus with dual-stage lexical and dense semantic ranking.
+highlight: 1,000 restaurants · TF-IDF ranking · local model explanation
+summary: An Egyptian restaurant finder. You describe a craving and a city, and it ranks the database, then a local model writes the recommendation.
 status: active
 featured: true
 technologies:
@@ -14,24 +14,23 @@ technologies:
   - FastAPI
   - React
   - TF-IDF
-  - ChromaDB / SBERT
-  - Hugging Face
+  - Transformers
 links:
   repository: https://github.com/yousefattaff/EgyptianSavoryScout
 media:
   image: /projects/egyptian-savory-scout-ui.png
 what_it_does: |
-  Finding authentic Egyptian dining shouldn't require guessing exact keywords. Type any natural craving like 'spicy grilled meat and authentic tagines with Nile view', and this system applies hard regional filtering across Cairo & Nile Valley cities, computes TF-IDF lexical relevance, reranks candidates with Sentence-BERT (SBERT), and generates natural-language explanations of why each restaurant fits your craving.
+  The app searches about 1,000 Egyptian restaurant entries. If the query names a supported city or area, restaurants outside that city are removed. The rest are ranked with TF-IDF and cosine similarity, with a small boost from the restaurant rating. Up to five of those results go to a fine-tuned local language model, which writes the recommendation. The page is a React app. If the API address is not set, the page uses an in-browser mock.
 architecture:
-  - "Query Parsing: Extracts dining intent, desired ambiance, and regional constraints (Cairo, Giza, Alexandria)."
-  - "Hard City Filtering: Restricts candidates to geographically relevant verified listings."
-  - "Two-Stage Retrieval: Combines sub-50ms TF-IDF lexical ranking with dense Sentence-BERT semantic similarity."
-  - "LLM Explanation Engine: Generates personalized tasting notes and signature dish recommendations for top matches."
+  - "The React page sends the query to a FastAPI endpoint."
+  - "The ranker drops restaurants outside a detected city, then scores the rest with TF-IDF. The score is 90 percent similarity and 10 percent rating."
+  - "The top five candidates go to a local Transformers model loaded from a path on disk."
+  - "The API parses the model output and returns the recommendation with a confidence level."
 key_features:
-  - "Curated dataset indexing 1,000+ authentic Egyptian restaurants and local street gourmet gems."
-  - "Dual-stage retrieval balances sub-50ms latency with high semantic precision."
-  - "Interactive React UI with real-time match scores and tag filtering."
-  - "FastAPI backend with structured Pydantic response contracts."
+  - "The database is about 1,000 restaurant entries across Egypt."
+  - "Ranking is TF-IDF and cosine similarity. The project does not use ChromaDB or a sentence-transformer reranker."
+  - "This is a V1. The training data and the recommendation setup are still being improved."
+  - "The UI can run with a mock response when the backend URL is missing."
 ---
 
-EgyptianSavoryScout applies hard city filtering and TF-IDF ranking before asking a local language model to explain the recommendation. The project includes a FastAPI endpoint, a React interface, a structured restaurant dataset, and a clear recommendation response contract.
+EgyptianSavoryScout filters by city, ranks restaurants with TF-IDF, and asks a local language model to explain the recommendation.
