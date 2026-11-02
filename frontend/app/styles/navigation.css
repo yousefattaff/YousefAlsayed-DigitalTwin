@@ -25,9 +25,22 @@
   box-shadow: 5px 5px 0px var(--accent-emerald) !important;
 }
 
+.navigation-bar > div:first-child {
+  flex-shrink: 0;
+}
+
+.nav-menu-toggle {
+  display: inline-flex;
+}
+
+.nav-desktop-links {
+  display: none;
+}
+
 .nav-brand-btn {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   gap: 10px;
   padding: 4px 10px 4px 4px !important;
   border: 0 !important;
@@ -66,6 +79,17 @@
   font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+@media (min-width: 1100px) {
+  .nav-menu-toggle {
+    display: none;
+  }
+
+  .nav-desktop-links {
+    display: flex;
+  }
 }
 
 .navigation-bar nav {

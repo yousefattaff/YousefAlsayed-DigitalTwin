@@ -30,7 +30,7 @@ export default function Navbar() {
   useModal(menuRef, mobileOpen, () => setMobileOpen(false));
 
   useEffect(() => {
-    const desktop = window.matchMedia('(min-width: 640px)');
+    const desktop = window.matchMedia('(min-width: 1100px)');
     const handleResize = (event: MediaQueryListEvent) => {
       if (event.matches) setMobileOpen(false);
     };
@@ -53,7 +53,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <button
               type="button"
-              className="sm:hidden p-2 text-inherit"
+              className="nav-menu-toggle p-2 text-inherit"
               onClick={() => setMobileOpen((open) => !open)}
               aria-label={mobileOpen ? 'Close mobile menu' : 'Open mobile menu'}
               aria-expanded={mobileOpen}
@@ -86,7 +86,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop links */}
-          <nav className="hidden sm:flex items-center gap-1">
+          <nav className="nav-desktop-links items-center gap-1">
             {navItems.map(([label, id]) => (
               <button
                 key={id}
