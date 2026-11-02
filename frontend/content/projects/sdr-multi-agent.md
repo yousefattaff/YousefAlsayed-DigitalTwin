@@ -5,15 +5,16 @@ type: project
 order: 2
 category: B2B OUTBOUND SALES PIPELINE
 role: AI Automation Engineer
-highlight: Tavily Deep Search · Multi-Draft Evaluation · SendGrid Dispatch
-summary: An autonomous outbound sales pipeline that researches target companies, synthesizes executive dossiers, drafts personalized outreach emails across multiple angles, evaluates the best version, and queues delivery via SendGrid.
+highlight: 3 Tavily searches · 3 email styles · SendGrid delivery
+summary: A sales-development pipeline that researches one prospect, writes three cold emails, picks one, and sends it through SendGrid.
 status: active
 featured: true
 technologies:
   - Python
   - OpenAI Agents SDK
   - Groq
-  - Tavily Search
+  - OpenRouter
+  - Tavily
   - SendGrid
   - Langfuse
 links:
@@ -21,18 +22,17 @@ links:
 media:
   image: /projects/sdr-multi-agent.png
 what_it_does: |
-  Automates the entire B2B sales development lifecycle. Input any target company name, and the pipeline executes strict input guardrails, dispatches parallel Tavily search workers to extract company news, revenue metrics, and tech stacks, synthesizes a strategic dossier, generates multi-angle value proposition emails, scores drafts with an evaluator agent, and queues personalized HTML emails via SendGrid.
+  Give it a company, not a person's name. A guardrail stops the run if it sees a personal name, and it also stops if that check cannot be read. Three Tavily searches run at the same time. A writer turns the results into a company overview, pain points, and personalization hooks. A sales manager then gets a professional draft, a witty draft, and a concise draft, picks one, and hands that draft to an email agent. The email agent writes a subject, turns the body into HTML, and sends it with SendGrid.
 architecture:
-  - "Input Guardrails: Validates prospect identity and flags malformed or toxic queries."
-  - "Research Planner: Dispatches parallel search workers via Tavily API to gather blogs, funding, and tech stacks."
-  - "Research Writer: Synthesizes an executive intelligence dossier with confidence scoring."
-  - "Sales Manager Evaluator: Drafts 3 distinct value propositions, scores them for relevance, and selects the winner."
-  - "SendGrid Queueing: Renders responsive HTML email and dispatches it via SendGrid with OpenTelemetry tracing."
+  - "Name guardrail: blocks a personal first or last name before any research or email. Company and product names are allowed."
+  - "Research: a planner asks for three searches. Those searches run together through Tavily, then a writer builds the research summary."
+  - "Drafts: professional, witty, and concise agents each return a subject and body. The sales manager selects one and quotes it."
+  - "Send: the email agent writes the subject, converts the chosen body to HTML, and calls SendGrid. A failed send is not reported as sent."
 key_features:
-  - "Orchestrated with OpenAI Agents SDK using modular multi-agent role handoffs."
-  - "Parallel Tavily search workers slash prospect research latency by over 60%."
-  - "Evaluation agent acts as an editorial judge, preventing generic sales spam."
-  - "End-to-end tracing and latency breakdowns monitored in Langfuse."
+  - "Most agents run on Groq. The witty drafter and the sales manager run on OpenRouter."
+  - "The default run uses a Stripe prospect and sends a real email to the address in the environment file."
+  - "Langfuse must accept the keys at startup. The run flushes one trace before the process exits."
+  - "A broken draft can be sent back to the manager. The pipeline does not claim a measured speedup."
 ---
 
-SDR Multi-Agent combines deep research, parallel web search, multiple drafting agents, guardrails, HTML email generation, and SendGrid delivery. Langfuse tracing and OpenTelemetry instrumentation make the complete pipeline observable.
+SDR Multi-Agent researches a prospect with three parallel Tavily searches, drafts three cold emails, selects one, and sends it through SendGrid. Langfuse records the run.
