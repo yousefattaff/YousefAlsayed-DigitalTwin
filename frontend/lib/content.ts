@@ -463,13 +463,13 @@ export function getCertificateMedia(): CertificateMedia[] {
 
   const aiFirst = [
     /Proficient_AI_Engineer/i,
+    /Machine_Learning_Specialization/i,
     /AIEngineerAgenticTrack/i,
     /AI_Engineer_Core_Track/i,
     /AI_Engineer_Production_Track/i,
     /AI_Builder_Agents/i,
     /AI Coder_Complete/i,
     /AI_Leader_Generative/i,
-    /Machine_Learning_Specialization/i,
     /CS50AI/i,
   ];
 
