@@ -200,22 +200,6 @@ function inferCertificateMetadata(filename: string, index: number) {
       ],
     };
   }
-  if (/EF SET/i.test(base)) {
-    return {
-      title: 'EF SET English Certificate — CEFR C2 Proficient (71/100)',
-      issuer: 'EF Standard English Test',
-      category: 'C2 ENGLISH PROFICIENCY',
-      badgeCode,
-      whatItIs:
-        'Standardized international English assessment certifying C2 Proficient level (71/100 overall: C2 Reading 74/100, C1 Listening 67/100).',
-      whatILearned:
-        'Demonstrates full professional fluency for collaborating with international engineering teams, writing clear technical documentation, and teaching programming in English.',
-      stack: ['C2 Proficient English', 'Technical Documentation', 'International Collaboration', 'Live Instruction'],
-      highlights: [
-        'Applied daily while working remotely with Arche Robotics and teaching 30+ students in English at iSchool.',
-      ],
-    };
-  }
   if (/Deloitte_NextStep/i.test(base)) {
     return {
       title: 'Deloitte NextStep Mentorship Program',
