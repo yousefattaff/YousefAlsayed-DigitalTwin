@@ -111,31 +111,20 @@ export default function AchievementsSection({
               })}
             </div>
           )}
-          {(graduationProject.galleryVideos ?? []).map((video) => (
-            <video
-              key={video.src}
-              className="graduation-gallery-video"
-              src={video.src}
-              poster={video.poster}
-              aria-label={video.title}
-              controls
-              playsInline
-              preload="none"
-            >
-              Your browser does not support this video.
-            </video>
-          ))}
           <div className="graduation-photo-row">
-            {graduationProject.photos.map((photo, index) => (
+            {graduationProject.photos.map((photo) => (
               <Image
                 key={photo}
-                className={index === 0 ? 'graduation-design-render' : undefined}
                 src={photo}
-                alt={`${graduationProject.title} gallery image ${index + 1}`}
+                alt={
+                  photo.includes('stage')
+                    ? 'The team on stage after third place at the International Gathering of Artificial Intelligence in Egypt'
+                    : 'R2-WAITER on the exhibition table'
+                }
                 loading="lazy"
                 width={1280}
-                height={720}
-                sizes="(max-width: 768px) 90vw, 400px"
+                height={960}
+                sizes="(max-width: 768px) 92vw, 520px"
               />
             ))}
           </div>
@@ -149,7 +138,7 @@ export default function AchievementsSection({
           </div>
         </div>
 
-        <CardDeck items={certificateDeckItems} ariaLabel="Certifications and Credentials" />
+        <CardDeck items={certificateDeckItems} ariaLabel="Certifications and Credentials" variant="document" />
       </section>
     </section>
   );

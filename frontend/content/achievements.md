@@ -32,31 +32,22 @@ career_history:
 graduation_project:
   title: R2-WAITER — Autonomous Service Robot
   status: completed
-  description: Autonomous waiter robot for restaurants — B.Sc. Final Year Project in Mechatronics Engineering at MUST, Spring 2024.
+  description: Third place at the International Gathering of Artificial Intelligence in Egypt. Final-year mechatronics project at MUST, 2024.
   details:
-    - Designed and built an autonomous restaurant service robot on ROS1, integrating LIDAR (A1 M8) and Intel RealSense D435i depth-camera data for real-time 3D mapping, localization, and obstacle avoidance.
-    - Implemented SLAM with gmapping and slam_toolbox, plus Kalman Filter and Extended Kalman Filter sensor-fusion pipelines for robust pose estimation in dynamic environments.
-    - Built the navigation stack with Move_base, AMCL, and a combined DWA plus model-free adaptive-control approach for path planning and obstacle avoidance in tight restaurant aisles.
-    - Developed a layered driver, control-core, and application architecture on an NVIDIA Jetson Nano for hardware interfacing, mapping, localization, navigation, and human-robot interaction.
-    - Designed a customer-facing tablet and mobile web application with a ROS-bridge/WebSocket backend for order placement, table tracking through RF beacons, and secure per-customer order locking.
-    - Built a Python/PyQt5 and HTML/CSS/JavaScript interactive robot-face interface driven by live ROS topic data to reflect robot state and movement.
-    - Contributed to electrical and mechanical subsystems, including Eagle PCB and control-circuit design, motor sizing, battery-capacity calculations, and the mechanical structure for a six-person team project.
-  video: /projects/r2-waiter.mp4
-  gallery_videos:
-    - src: /projects/r2-waiter.mp4
-      poster: /graduation/r2_waiter_portfolio_renders.png
-      title: R2-Waiter animated face
-    - src: /graduation/r2-waiter-gallery-video.mp4
-      poster: /graduation/r2-waiter-gallery-video-poster.jpg
-      title: R2-Waiter project video
+    - Six of us built a restaurant robot.
+    - It navigated with a LIDAR and a RealSense camera on a Jetson Nano.
+    - Guests ordered from a tablet, and the face on the robot followed what it was doing.
+  video: ""
+  gallery_videos: []
   model: /graduation/r2_waiter_solidified_wink.glb
   photos:
-    - /graduation/r2_waiter_portfolio_renders.png
-  award: 3rd place at the International Gathering of Artificial Intelligence in Egypt
+    - /graduation/r2-waiter-on-stage.jpg
+    - /graduation/r2-waiter-gallery-photo.jpeg
+  award: 3rd place, International Gathering of Artificial Intelligence in Egypt
 ---
 
 # Graduation project and engineering achievement
 
 R2-WAITER is Yousef's completed autonomous restaurant service robot and B.Sc. final-year project at MUST in Spring 2024. The six-person team integrated ROS1, LIDAR, an Intel RealSense D435i depth camera, SLAM, sensor fusion, navigation, a customer ordering interface, and an interactive robot face on an NVIDIA Jetson Nano.
 
-The project earned 3rd place at the International Gathering of Artificial Intelligence in Egypt. The gallery includes the robot model, demonstration videos, and project photos.
+The project earned 3rd place at the International Gathering of Artificial Intelligence in Egypt. The photos are the team on stage and the robot on the table.

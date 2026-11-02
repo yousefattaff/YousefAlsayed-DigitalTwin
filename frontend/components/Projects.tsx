@@ -102,8 +102,7 @@ export default function Projects({ projects: projectList }: { projects: ProjectS
     chips: project.technologies ?? [],
     highlight: project.highlight,
     steps: project.architecture,
-    stackLabel: 'Stack & Tools Used',
-    highlights: project.keyFeatures ?? [],
+    stackLabel: 'Stack',
     renderMedia: (isActive) => (
       <ProjectThumbnail project={project} autoPlay={isActive} />
     ),

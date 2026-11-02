@@ -276,6 +276,9 @@
 
 .graduation-photo-row img {
   object-fit: contain;
+  height: auto;
+  aspect-ratio: auto;
+  background: #111318;
 }
 
 .graduation-gallery-video {
@@ -822,15 +825,32 @@
   width: 100% !important;
   height: 100% !important;
   aspect-ratio: 16 / 10 !important;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
   display: block;
   pointer-events: none;
 }
 
-.collectible-slab-media .collectible-cert-image {
+.collectible-showcase-split.is-document .collectible-slab-media {
+  aspect-ratio: 4 / 3;
+  background: #ffffff;
+}
+
+.collectible-showcase-split.is-document .collectible-slab-media img,
+.collectible-showcase-split.is-document .collectible-cert-image {
   object-fit: contain !important;
-  background: #FFFFFF;
-  padding: 6px;
+  background: #ffffff;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .collectible-showcase-split.is-document .collectible-deck-stage {
+    min-height: 460px;
+  }
+
+  .collectible-showcase-split.is-document .collectible-slab-media {
+    aspect-ratio: 4 / 3;
+  }
 }
 
 .collectible-slab-holo {

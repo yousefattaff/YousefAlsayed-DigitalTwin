@@ -42,9 +42,11 @@ const STACK_OFFSETS = [
 export default function CardDeck({
   items,
   ariaLabel,
+  variant = 'project',
 }: {
   items: CardDeckItem[];
   ariaLabel: string;
+  variant?: 'project' | 'document';
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -139,7 +141,7 @@ export default function CardDeck({
 
   return (
     <div
-      className="collectible-showcase-split"
+      className={`collectible-showcase-split is-${variant}`}
       role="region"
       aria-roledescription="carousel"
       aria-label={ariaLabel}
@@ -212,7 +214,7 @@ export default function CardDeck({
 
                 <div className="collectible-slab-media">
                   {item.renderMedia(isTop)}
-                  <div className="collectible-slab-holo" aria-hidden="true" />
+                  {variant === 'project' && <div className="collectible-slab-holo" aria-hidden="true" />}
                 </div>
 
                 {item.highlight && (
