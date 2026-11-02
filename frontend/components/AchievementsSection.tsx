@@ -111,23 +111,6 @@ export default function AchievementsSection({
               })}
             </div>
           )}
-          <div className="graduation-photo-row">
-            {graduationProject.photos.map((photo) => (
-              <Image
-                key={photo}
-                src={photo}
-                alt={
-                  photo.includes('stage')
-                    ? 'The team on stage after third place at the International Gathering of Artificial Intelligence in Egypt'
-                    : 'R2-WAITER on the exhibition table'
-                }
-                loading="lazy"
-                width={1280}
-                height={960}
-                sizes="(max-width: 768px) 92vw, 520px"
-              />
-            ))}
-          </div>
         </div>
       </section>
 

@@ -40,9 +40,7 @@ graduation_project:
   video: ""
   gallery_videos: []
   model: /graduation/r2_waiter_solidified_wink.glb
-  photos:
-    - /graduation/r2-waiter-on-stage.jpg
-    - /graduation/r2-waiter-gallery-photo.jpeg
+  photos: []
   award: 3rd place, International Gathering of Artificial Intelligence in Egypt
 ---
 
@@ -50,4 +48,4 @@ graduation_project:
 
 R2-WAITER is Yousef's completed autonomous restaurant service robot and B.Sc. final-year project at MUST in Spring 2024. The six-person team integrated ROS1, LIDAR, an Intel RealSense D435i depth camera, SLAM, sensor fusion, navigation, a customer ordering interface, and an interactive robot face on an NVIDIA Jetson Nano.
 
-The project earned 3rd place at the International Gathering of Artificial Intelligence in Egypt. The photos are the team on stage and the robot on the table.
+The project earned 3rd place at the International Gathering of Artificial Intelligence in Egypt. The graduation section shows the 3D model of the robot.
