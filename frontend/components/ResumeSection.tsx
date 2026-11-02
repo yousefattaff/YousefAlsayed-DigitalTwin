@@ -10,7 +10,7 @@ export default function ResumeSection({
       <header className="content-header">
         <p className="eyebrow">Resume</p>
         <h1>Resume</h1>
-        <p className="content-lede">View my resume PDF directly in this document window, or download a copy below.</p>
+        <p className="content-lede">View the PDF here, or download the PDF or the Word file. The Word file is the one to upload to an application form.</p>
       </header>
       <div className="resume-viewer" aria-label="Resume PDF viewer">
         <div className="resume-viewer-bar">
@@ -27,6 +27,7 @@ export default function ResumeSection({
       </div>
       <p className="resume-download">
         <a href={resumeUrl} download>Download resume PDF</a>
+        <a href="/Yousef-Alsayed-Resume.docx" download>Download Word file</a>
         {driveUrl && <a href={driveUrl} target="_blank" rel="noreferrer">Open in Google Drive</a>}
       </p>
     </section>

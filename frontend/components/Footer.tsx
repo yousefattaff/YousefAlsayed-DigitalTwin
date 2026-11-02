@@ -25,6 +25,8 @@ export default function Footer() {
         <a href="mailto:yousefabuelkhear@gmail.com">Email Yousef</a>
         {' · '}
         <a href="/resume.pdf" download>Download resume</a>
+        {' · '}
+        <a href="/Yousef-Alsayed-Resume.docx" download>Word file</a>
       </p>
       <p>
         A portfolio designed &amp; built by{' '}
