@@ -56,3 +56,49 @@ At Arche Robotics, I use Python, AWS Lambda, AWS SAM, and DynamoDB Streams for r
 # Arche Robotics tools (ar)
 
 في Arche Robotics، بستخدم Python وAWS Lambda وAWS SAM وDynamoDB Streams لمراقبة أسطول الروبوتات لحظيًا. Groq بيشغّل استدلال الـLLM، ومعاه نظام تخطي من ست مراحل للتحكم في التكلفة. وبستخدم FastMCP مع Model Context Protocol (MCP) عبر stdio للاختبار بين البيئة المحلية والسحابة، وDynamoLogReader مع GSI1 لقراءة بيانات الروبوتات مباشرة. كمان عندي watchdogs لمتابعة البطارية واستعادة بيانات الـtelemetry.
+
+# DynamoDB Streams script (en)
+
+Here is a simplified illustrative Python example of how I consume DynamoDB Stream records in an AWS Lambda handler at Arche Robotics to monitor robot telemetry:
+
+```python
+import json
+import boto3
+
+def lambda_handler(event, context):
+    for record in event.get('Records', []):
+        if record.get('eventName') in ('INSERT', 'MODIFY'):
+            new_image = record.get('dynamodb', {}).get('NewImage', {})
+            robot_id = new_image.get('robot_id', {}).get('S')
+            battery = new_image.get('battery', {}).get('N')
+            if robot_id and battery:
+                process_telemetry(robot_id, float(battery))
+
+def process_telemetry(robot_id, battery):
+    print(f"Telemetry from robot {robot_id}: battery {battery}%")
+```
+
+This illustrative example is not my production source code, but shows the sub-second stream pattern.
+
+# DynamoDB Streams script (ar)
+
+ده مثال توضيحي ومبسط بلغة Python لكيفية معالجة أحداث DynamoDB Streams داخل AWS Lambda لمراقبة أسطول الروبوتات في Arche Robotics:
+
+```python
+import json
+import boto3
+
+def lambda_handler(event, context):
+    for record in event.get('Records', []):
+        if record.get('eventName') in ('INSERT', 'MODIFY'):
+            new_image = record.get('dynamodb', {}).get('NewImage', {})
+            robot_id = new_image.get('robot_id', {}).get('S')
+            battery = new_image.get('battery', {}).get('N')
+            if robot_id and battery:
+                process_telemetry(robot_id, float(battery))
+
+def process_telemetry(robot_id, battery):
+    print(f"Telemetry from robot {robot_id}: battery {battery}%")
+```
+
+هذا الكود هو مثال توضيحي وليس الكود الإنتاجي الفعلي، ويوضح فقط نمط المعالجة اللحظية.

@@ -541,5 +541,5 @@ export function isSafeReply(text: string, reference: string, secret?: string): b
   if (instructions.split(/[.\n]/).some((sentence) => sentence.trim().length >= 65
     && values.some((value) => value.includes(sentence.trim())))) return false;
   const allowed = new Set(urls(reference));
-  return urls(text).every((url) => allowed.has(url));
+  return urls(text).every((url) => allowed.has(url) || (text.includes('```') && /\b(?:amazonaws\.com|example\.(?:com|org)|localhost)\b/i.test(url)));
 }

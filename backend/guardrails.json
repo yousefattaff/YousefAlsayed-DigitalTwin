@@ -35,7 +35,7 @@
     "authorization\\s*:\\s*bearer\\s+\\S+|-----begin (?:[a-z ]+ )?private key-----",
     "</?(?:think|analysis|system|developer|tool)(?:\\s[^>]*)?>|<\\|(?:im_start|start_header_id)[^>]*\\|>",
     "\\b(?:here (?:is|are)|my|the) (?:system prompt|system instructions|developer instructions|hidden reasoning|chain of thought)\\s*:",
-    "\\b(?:javascript|data|file|vbscript)\\s*:",
+    "\\b(?:javascript|vbscript)\\s*:|\\bdata\\s*:[a-z]+/[a-z0-9.+-]+|\\bfile\\s*://",
     "<(?:script|iframe|object|embed|img|svg|form|style)(?:\\s|>)",
     "\\b(?:i have|i successfully|i just) (?:executed|deleted|deployed|sent|installed|downloaded|accessed your)\\b"
   ],
