@@ -452,7 +452,7 @@ const overviewTopics: Record<string, RegExp> = {
   Background: /^(?:(?:tell me about|what is|describe|share|explain) )?(?:your )?(?:history|background|biography|professional background|professional history|professional journey)$|^(?:احكيلي عن بدايتك|بدايتك|خلفيتك المهنية)$/,
   Motivation: /^(?:why did you choose ai|why ai|what got you into ai|how did you get into ai|why do you like ai|ليه اخترت ai|ليه الذكاء الاصطناعي|ايه اللي دخلك مجال ai)$/,
   'Current Focus': /^(?:what are you working on now|what are you currently working on|what are you working on|what is your current focus|what do you work on now|بتشتغل على ايه دلوقتي|بتعمل ايه حاليًا|تركيزك الحالي ايه)$/,
-  Skills: /^(?:(?:tell me about|show me|list|what are) )?(?:your )?(?:skills|tools|stack|tech stack|technologies)$|^what (?:ai )?tools do you use$|^(?:مهارات|مهاراتك|ادواتك|ايه مهاراتك)$/,
+  Skills: /^(?:(?:tell me about|show me|list|what are) )?(?:your )?(?:skills|tools|stack|tech stack|technologies|(?:programming )?languages)(?: do you (?:know|use|code in))?$|^what (?:ai )?tools do you use$|^(?:مهارات|مهاراتك|ادواتك|ايه مهاراتك|لغات البرمجة|ايه لغات البرمجة اللي تعرفها)$/,
   Career: /^(?:(?:tell me about|what is|speak on|talk about|discuss) )?(?:your )?(?:career|experience|work|work history)$|^(?:خبرتك|شغلك|خبراتك|احكيلي عن شغلك)$/,
   Education: /^(?:(?:tell me about|what is) )?(?:your )?education$|^(?:تعليمك|دراستك)$/,
   Certifications: /^(?:(?:tell me about|list|what are) )?(?:your )?(?:certifications|certificates)$|^what certifications do you have$|^(?:شهاداتك|شهادات|ما هي شهاداتك)$/,
@@ -514,12 +514,14 @@ function authoredAnswer(document: KnowledgeDocument, names: string[], language: 
 function factualRecovery(message: string, topic: string, knowledge: Knowledge): ReturnType<typeof authoredAnswer> {
   const words = phrase(message);
   const arche = /\barche robotics\b/.test(phrase(`${topic} ${message}`));
-  const toolsQuestion = /^(?:(?:can|could|would) you )?(?:please )?(?:elaborate on|tell me about|explain|describe) (?:the |your )?(?:ai )?(?:tools|technologies|tech stack)(?: you use)?(?: there| at arche robotics)?$/.test(words)
+  const toolsQuestion = /^(?:(?:can|could|would) you )?(?:please )?(?:elaborate on|tell me about|explain|describe) (?:the |your )?(?:ai )?(?:tools|technologies|tech stack|work)(?: you use)?(?: there| at arche robotics)?$/.test(words)
     || /^(?:what|which) (?:ai )?(?:tools|technologies) do you use(?: there| at arche robotics)?$/.test(words)
-    || /^(?:بتستخدم ايه في شغلك|ايه ادواتك|ما هي ادواتك)(?: في arche robotics)?$/.test(words);
+    || /^(?:tell me about (?:your )?work at arche robotics)$/.test(words)
+    || /^(?:بتستخدم ايه في شغلك|ايه ادواتك|ما هي ادواتك|احكيلي عن شغلك)(?: في arche robotics)?$/.test(words);
   const graduation = /^(?:was|is) your (?:r2 waiter )?(?:graduation|final year) (?:service )?robot ros1 or ros2(?: and what hardware did it use)?$/.test(words)
     || /^(?:what|which) (?:hardware|ros version|sensors) (?:did|does) your (?:r2 waiter )?(?:graduation|final year) (?:service )?robot use$/.test(words)
-    || /^(?:روبوت التخرج كان ros1 ولا ros2|ايه الهاردوير اللي استخدمته في روبوت التخرج)$/.test(words);
+    || /^(?:tell me about (?:your )?r2[- ]waiter(?: project)?)$/i.test(words)
+    || /^(?:روبوت التخرج كان ros1 ولا ros2|ايه الهاردوير اللي استخدمته في روبوت التخرج|احكيلي عن مشروع r2[- ]waiter|كلمني عن r2[- ]waiter)$/.test(words);
   const target = arche && toolsQuestion ? { source: 'experience.md', section: 'Arche Robotics tools' }
     : graduation ? { source: 'achievements.md', section: 'Graduation answer' } : undefined;
   if (!target) return;
