@@ -182,7 +182,7 @@ export function hasSupportedNumbers(answer: string, evidence: { quote: string }[
 
 // Deterministic factual-anchor checks, not a semantic entailment proof.
 // Technical names stay in English in both languages.
-const conversationalWords = new Set(('i me my myself we our you your it its a an the and or of at in on to for from with as by is am are was were be been have has had do did can this that these those through into about also mainly use used using work worked working build built building develop developed developing focus focused include includes including yes sure absolutely happy glad thanks welcome great really practical hands hands-on help helps helped part experience skills tools background portfolio project projects مثلا انا عندي شغلي بستخدم استخدمت باستخدام اشتغلت بشتغل عملت بعمل بنيت ببني طورت بطور في من علي مع و او ده دي دا اللي كان كانت بيكون هو هي ان عشان كمان بشكل ايوه طبعا اكيد اهلا سعيد شكرا اقدر عندنا عندي انا وانا فيه فيها بتاعي بتاعتي').split(' '));
+const conversationalWords = new Set(('i me my myself we our you your it its a an the and or of at in on to for from with as by is am are was were be been have has had do did can this that these those through into about also mainly use used using work worked working build built building develop developed developing focus focused include includes including yes sure absolutely happy glad thanks welcome great really practical hands hands-on help helps helped part experience skills tools background portfolio project projects مثلا انا عندي شغلي بستخدم استخدمت باستخدام اشتغلت بشتغل عملت بعمل بنيت ببني طورت بطور في من علي مع و او ده دي دا اللي كان كانت بيكون هو هي ان عشان كمان بشكل ايوه طبعا اكيد اهلا سعيد شكرا اقدر عندنا عندي انا وانا فيه فيها بتاعي بتاعتي كورة كرة قدم أنمي انمي أغسطس اغسطس مواليد اتولدت هوايات هواياتك').split(' '));
 // Grammatical words do not establish qualifications, technologies or dates.
 for (const word of [
   'their', 'them', 'which', 'where', 'while', 'when', 'how', 'what', 'why', 'if', 'once', 'then', 'both', 'each', 'within', 'across', 'so',
@@ -223,7 +223,7 @@ for (const word of [
   'custom', 'template', 'templates', 'codebase', 'configured', 'configuring', 'configuration',
   'downstream', 'upstream', 'schema', 'schemas', 'tweak', 'tweaks', 'match', 'matches',
   'listen', 'listening', 'push', 'pushing', 'queue', 'queues', 'placeholder', 'placeholders',
-  'aggregator', 'aggregating', 'publish', 'publishing', 'index', 'indexes', 'indices', 'gpu', 'gpus', 'dockerized', 'containerized', 'sdk', 'sdks', 'boto', 'boto3', 'json', 'module', 'modules', 'stream', 'streams'
+  'aggregator', 'aggregating', 'publish', 'publishing', 'index', 'indexes', 'indices', 'gpu', 'gpus', 'dockerized', 'containerized', 'sdk', 'sdks', 'boto', 'boto3', 'json', 'module', 'modules', 'stream', 'streams', 'football', 'anime', 'august', 'born', 'hobbies', 'hobby', 'interests', 'interest', 'personal'
 ]) conversationalWords.add(word);
 
 // These are evidence-dependent equivalents, never a global permission to name
@@ -256,6 +256,11 @@ const englishEvidenceTerms: Record<string, RegExp> = {
   json: /\b(?:json|data|payload|telemetry|log|logs|python|api)\b/i,
   module: /\b(?:module|modules|package|packages|library|libraries|code|python)\b/i,
   modules: /\b(?:module|modules|package|packages|library|libraries|code|python)\b/i,
+  football: /\b(?:football|sports?|hobbies|free time)\b/i,
+  anime: /\b(?:anime|manga|animation|hobbies|free time)\b/i,
+  august: /\b(?:august|2000|born|birthday)\b/i,
+  born: /\b(?:born|august|2000|age|birthday)\b/i,
+  hobbies: /\b(?:hobbies|interests|football|anime|free time)\b/i,
   ui: /\b(?:ui|ux|pyqt5?|desktop|interface|front-?end|designer)\b/i,
   ux: /\b(?:ui|ux|pyqt5?|desktop|interface|front-?end|designer)\b/i,
   gui: /\b(?:ui|ux|pyqt5?|desktop|interface|front-?end|designer)\b/i,
@@ -306,6 +311,8 @@ const englishEvidenceTerms: Record<string, RegExp> = {
   m: /\b(?:engineer|intern|instructor)\b/i,
 };
 const arabicEvidenceTerms: Record<string, RegExp> = {
+  كورة: /football/i, كرة: /football/i, قدم: /football/i, انمي: /anime/i, أنمي: /anime/i,
+  مواليد: /born|august|2000/i, اتولدت: /born|august|2000/i, هوايات: /hobbies|interests|football|anime/i, هواياتك: /hobbies|interests|football|anime/i,
   يناير: /january/i, فبراير: /february/i, مارس: /march/i, ابريل: /april/i,
   مايو: /may/i, يونيو: /june/i, يوليو: /july/i, اغسطس: /august/i,
   سبتمبر: /september/i, اكتوبر: /october/i, نوفمبر: /november/i, ديسمبر: /december/i,
@@ -405,7 +412,7 @@ export function inspectSupportedClaims(answer: string, evidence: { quote: string
     /\b(?:use|used|using|know|proficient in|experience with|skilled in|expertise in|speciali[sz]e in|built with|worked with)\s+([^.!?;:\n]{1,160})/gi,
     /\b(?:joined|employed by|work(?:ed|ing)? at|intern at|internship at|studied at|graduated from|degree (?:in|from)|doctorate (?:in|from)|phd (?:in|from))\s+([^.!?;:\n]{1,120})/gi,
   ];
-  const nounGlue = new Set(('a an the and or with for to in on at my our primarily mainly extensively mostly various several combination mix together well such as especially particularly practical real time like related along other similar associated different model models simulation simulations robot hardware platform solution application protocol day days daily instead rather than of via through into by base bases chassis mobile camera cameras sensor sensors environment package node custom downstream upstream template demo schema index indexes gpu gpus 2 1 dockerized containerized when sdk sdks boto boto3 json module modules stream streams').split(' '));
+  const nounGlue = new Set(('a an the and or with for to in on at my our primarily mainly extensively mostly various several combination mix together well such as especially particularly practical real time like related along other similar associated different model models simulation simulations robot hardware platform solution application protocol day days daily instead rather than of via through into by base bases chassis mobile camera cameras sensor sensors environment package node custom downstream upstream template demo schema index indexes gpu gpus 2 1 dockerized containerized when sdk sdks boto boto3 json module modules stream streams football anime august born 2000 26').split(' '));
   for (const pattern of phrases) {
     for (const match of claimText.matchAll(pattern)) {
       const nounPhrase = match[1].split(/\b(?:to|for|that|which|where|while|since|because|so|when|in|on|at|as|and I|and we)\b|[—–]/i)[0];

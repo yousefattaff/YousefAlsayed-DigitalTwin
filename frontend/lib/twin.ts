@@ -478,6 +478,12 @@ function personalReply(message: string, knowledge: Knowledge): Pick<TwinChatRepl
     const answer = document ? authoredAnswer(document, ['Phone'], replyLanguage(message)) : undefined;
     if (answer) return { ...answer, reply_kind: 'answer' };
   }
+  const personalQuestion = /^(?:(?:when|what year) (?:were you|was yousef) born|birth ?date|birthday|when is your birthday|what are your hobbies|what do you do in your free time|free time|hobbies|هواياتك|هواياتك ايه|بتحب ايه في وقت فراغك|اتولدت امتى|مواليد سنة كام|تاريخ ميلادك|عيد ميلادك امتى)$/u.test(words);
+  if (personalQuestion) {
+    const document = knowledge.documents.find((item) => item.source === 'digital-twin.md');
+    const answer = document ? authoredAnswer(document, ['Personal'], replyLanguage(message)) : undefined;
+    if (answer) return { ...answer, reply_kind: 'answer' };
+  }
   const nameQuestion = /^(?:what s your name|what is your name|tell me your name|who is yousef|اسمك|اسم يوسف|مين يوسف)$/u.test(words);
   if (!nameQuestion) return;
   const document = knowledge.documents.find((item) => item.source === 'digital-twin.md');

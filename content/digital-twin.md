@@ -91,3 +91,12 @@ You can explore my [GitHub](https://github.com/yousefattaff), connect with me on
 # Contact (ar)
 
 تقدر تشوف شغلي على [GitHub](https://github.com/yousefattaff)، أو تتواصل معايا على [LinkedIn](https://www.linkedin.com/in/yousef-alsayed-abdelfattah)، أو تحمّل [السيرة الذاتية](https://yousefalsayed.me/resume.pdf). وللاستفسارات المباشرة، ابعتلي على [الإيميل](mailto:yousefabuelkhear@gmail.com).
+
+# Personal (en)
+
+I was born on August 17, 2000 (26 years old) and live in New Cairo, Egypt. Outside of AI and robotics, I love playing and watching football, and watching anime in my free time.
+
+# Personal (ar)
+
+أنا من مواليد 17 أغسطس 2000 (عندي 26 سنة) ومقيم في القاهرة الجديدة، مصر. وبرة مجالات الـAI والروبوتات، بحب لعب ومتابعة كرة القدم، والاستمتاع بمشاهدة الأنمي في وقت فراغي.
+

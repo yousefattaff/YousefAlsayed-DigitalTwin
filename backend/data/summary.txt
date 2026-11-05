@@ -5,3 +5,6 @@ I earned a B.Sc. in Mechatronics Engineering from Misr University for Science an
 At Arche Robotics I build real-time AI fleet-monitoring agents using Python, AWS Lambda, DynamoDB Streams, Groq, and MCP. At iSchool I teach Python, AI, JavaScript, and UI/UX to students across Grades 1–12.
 
 My highlighted projects are R2-Waiter, Advanced Engineering Team, EgyptianSavoryScout, and the SDR Multi-Agent B2B outbound sales pipeline. My toolkit includes Python, PyTorch, LangChain, CrewAI, LangGraph, FastAPI, Next.js, Docker, n8n, AWS, Groq, Qwen, QLoRA, ChromaDB, Langfuse, and MCP.
+
+I was born on August 17, 2000 (age 26). Outside engineering, I love playing and watching football, and watching anime.
+

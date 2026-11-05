@@ -131,8 +131,15 @@
     "team_size": 6,
     "contribution": "Built the operator interface that sent ROS navigation goals between restaurant tables.",
     "award": "3rd place, International Gathering of Artificial Intelligence in Egypt",
-    "hardware": ["LiDAR", "Intel RealSense D435i", "NVIDIA Jetson Nano"],
-    "software": ["ROS2", "Ubuntu Linux"]
+    "hardware": [
+      "LiDAR",
+      "Intel RealSense D435i",
+      "NVIDIA Jetson Nano"
+    ],
+    "software": [
+      "ROS2",
+      "Ubuntu Linux"
+    ]
   },
   "other_projects": {
     "Advanced Engineering Team": "Four CrewAI agents for design, Python, a Gradio interface, and Docker-based testing.",
@@ -141,5 +148,12 @@
     "RAG-AI-Agent": "PDF assistant with Chroma collections, file/page citations, and top four of 24 candidate chunks.",
     "DealBreaker": "Egyptian electronics prices, Playwright scraping, Random Forest prediction, and ChromaDB RAG.",
     "ATmega32 Drivers": "Embedded C device-driver exercises with DIO pin access."
-  }
+  },
+  "date_of_birth": "2000-08-17",
+  "birth_year": 2000,
+  "age": 26,
+  "personal_interests": [
+    "Playing and watching football",
+    "Watching anime"
+  ]
 }

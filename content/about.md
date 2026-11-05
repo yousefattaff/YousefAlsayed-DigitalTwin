@@ -29,3 +29,12 @@ My agent and automation toolkit includes the OpenAI Agents SDK, CrewAI, LangGrap
 For backend engineering and deployment, I use Python, FastAPI, Pydantic, Langfuse, Docker, AWS Lambda, AWS SAM, and DynamoDB Streams. My portfolio also includes Groq and OpenAI integrations, API Gateway, S3, CloudFront, Git, Next.js, and React. My AI-assisted development training includes Claude Code and coding agents.
 
 I have completed my military service and am looking for a full-time AI Engineer or AI Automation role where I can contribute to real products and continue learning.
+
+# Personal Background and Interests (en)
+
+I was born on August 17, 2000 (26 years old), and live in New Cairo, Egypt. Outside engineering, I love playing and watching football, and I enjoy watching anime in my free time.
+
+# خلفية شخصية واهتمامات (ar)
+
+أنا من مواليد 17 أغسطس 2000 (عندي 26 سنة)، وعايش في القاهرة الجديدة، مصر. وبرة الشغل والهندسة، بحب لعب ومتابعة كرة القدم، وبحب أتفرج على الأنمي في وقت فراغي.
+
