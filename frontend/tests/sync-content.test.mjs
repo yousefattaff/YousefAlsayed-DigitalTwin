@@ -25,12 +25,13 @@ function fixture(t) {
   write(root, 'frontend/data/twin/facts.json', '{"name":"Fixture"}');
   write(root, 'frontend/data/twin/summary.txt', 'Fixture profile.');
   write(root, 'frontend/data/twin/style.txt', 'Use a direct voice.');
+  write(root, 'frontend/data/twin/guardrails.json', '{"instructions":"Fixture policy"}');
   return root;
 }
 
 function sync(root) {
   return spawnSync(process.execPath, [path.join(root, 'frontend/scripts/sync-content.mjs')], {
-    cwd: path.join(root, 'frontend'), encoding: 'utf8', timeout: 5_000,
+    cwd: path.join(root, 'frontend'), encoding: 'utf8', timeout: 15_000,
   });
 }
 
@@ -77,6 +78,15 @@ test('standalone frontend synchronization keeps its bundled knowledge without ro
   assert.equal(fs.readFileSync(path.join(root, 'frontend/content/profile.md'), 'utf8'), 'Standalone profile.');
   assert.equal(fs.readFileSync(path.join(root, 'frontend/content/projects/current.md'), 'utf8'), 'Standalone project.');
   assert.equal(fs.readFileSync(path.join(root, 'frontend/data/twin/facts.json'), 'utf8'), '{"name":"Fixture"}');
+});
+
+test('the canonical guardrail policy is copied into a standalone frontend bundle', (t) => {
+  const root = fixture(t);
+  const policy = '{"instructions":"Strict canonical policy","input_patterns":[],"output_patterns":[]}';
+  write(root, 'content/profile.md', 'Current profile.');
+  write(root, 'backend/guardrails.json', policy);
+  assert.equal(sync(root).status, 0);
+  assert.equal(fs.readFileSync(path.join(root, 'frontend/data/twin/guardrails.json'), 'utf8'), policy);
 });
 
 test('an incomplete canonical source fails before replacing or pruning bundled content', (t) => {

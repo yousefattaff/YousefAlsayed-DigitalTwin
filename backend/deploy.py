@@ -8,7 +8,7 @@ BACKEND_DIR = Path(__file__).resolve().parent
 CONTENT_DIR = BACKEND_DIR.parent / "content"
 PACKAGE_DIR = BACKEND_DIR / "lambda-package"
 ARCHIVE_PATH = BACKEND_DIR / "lambda-deployment.zip"
-APP_FILES = ("server.py", "lambda_handler.py")
+APP_FILES = ("server.py", "lambda_handler.py", "guardrails.json")
 
 
 def main():

@@ -15,7 +15,7 @@ His agent toolkit includes the OpenAI Agents SDK, CrewAI, LangGraph, n8n, MCP, F
 
 # RAG, fine-tuning, and model evaluation
 
-He builds document retrieval pipelines with LangChain and ChromaDB. His LinkedIn profile lists fine-tuning, PyTorch, and React.js as top skills. His Qwen and QLoRA work includes learning and hands-on experiments fine-tuning smaller local models.
+He builds document retrieval pipelines with LangChain and ChromaDB. His LinkedIn profile lists fine-tuning, PyTorch, JavaScript, and React.js as top skills. His Qwen and QLoRA work includes learning and hands-on experiments fine-tuning smaller local models.
 
 He uses Pydantic for structured outputs and Langfuse for tracing. At Outlier, he evaluated LLM responses, contributed RLHF feedback, and used prompt variations to investigate hallucination and reasoning problems.
 

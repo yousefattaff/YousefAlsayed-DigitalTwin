@@ -31,4 +31,4 @@ key_features:
   - "A failed send is not reported as sent."
 ---
 
-Three parallel searches, three email styles, one send.
+My SDR Multi-Agent is a B2B outbound sales pipeline that researches prospects, drafts personalized messages, and sends the selected email through SendGrid. It runs three parallel Tavily searches and produces professional, witty, and concise drafts before a manager selects one. A failed send is not reported as sent.

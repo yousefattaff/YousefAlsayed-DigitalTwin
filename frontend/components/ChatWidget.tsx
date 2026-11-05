@@ -13,6 +13,7 @@ interface Message {
   role: 'user' | 'assistant';
   content: string;
   timestamp: Date;
+  excludeFromHistory?: boolean;
 }
 
 type ConnectionState = 'checking' | 'connected' | 'unavailable' | 'unconfigured';
@@ -32,6 +33,7 @@ function conversationContext(messages: Message[], topic?: string): ChatContext {
   const history: ChatContext['history'] = [];
   let remaining = 3000;
   for (const message of messages.slice(-6).reverse()) {
+    if (message.excludeFromHistory) continue;
     if (message.role === 'assistant' && message.content.startsWith('Connection error:')) continue;
     const content = message.content.slice(0, Math.min(2000, remaining));
     if (!content) continue;
@@ -116,12 +118,26 @@ export default function ChatWidget() {
       );
       if (request.signal.aborted || requestRef.current !== request) return;
       sessionIdRef.current = data.session_id ?? sessionIdRef.current;
-      topicRef.current = data.topic ?? topicRef.current;
+      if (data.reply_kind === 'answer' || !data.reply_kind) topicRef.current = data.topic ?? topicRef.current;
       setConnection('connected');
       const assistantMessage = createMessage('assistant', data.response);
-      setMessages((prev) => [...prev, assistantMessage]);
+      if (data.reply_kind && data.reply_kind !== 'answer') {
+        // Keep social turns and fallbacks from replacing the active portfolio subject.
+        assistantMessage.excludeFromHistory = true;
+        setMessages((prev) => [...prev.map((message) => message.id === userMessage.id
+          ? { ...message, excludeFromHistory: true } : message), assistantMessage]);
+      } else {
+        setMessages((prev) => [...prev, assistantMessage]);
+      }
     } catch (error) {
       if (request.signal.aborted || requestRef.current !== request) return;
+      if (error instanceof ChatRequestError && ['guardrail', 'rate_limit'].includes(error.code)) {
+        setConnection('connected');
+        const refusal = { ...createMessage('assistant', getChatErrorMessage(error, query)), excludeFromHistory: true };
+        setMessages((prev) => [...prev.map((message) => message.id === userMessage.id
+          ? { ...message, excludeFromHistory: true } : message), refusal]);
+        return;
+      }
       setConnection(error instanceof ChatRequestError && error.code === 'configuration'
         ? 'unconfigured' : 'unavailable');
       const errorMessage = createMessage('assistant',
@@ -155,7 +171,7 @@ export default function ChatWidget() {
     <div className="items-container" id="twin">
       <h1>AI Digital Twin</h1>
       <p className="twin-intro">
-        Ask my AI twin about my solutions, career, projects, and technical skills. Answers draw from my portfolio and LinkedIn profile.
+        Chat with my AI twin about robots, AI, code, and the projects I&apos;ve built. Career details come from my portfolio and LinkedIn profile.
       </p>
 
       <div className="twin-chat-box">

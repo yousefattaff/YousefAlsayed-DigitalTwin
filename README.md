@@ -87,9 +87,17 @@ Open [localhost:3000](http://localhost:3000). The launcher checks the server key
 
 `GROQ_API_KEY` must remain server-only. Keep credentials in ignored `.env*` files or Vercel environment settings; `.env.example` is the only public environment template.
 
+Inter and Montserrat are bundled in `frontend/public/fonts/` with their existing character subsets and fallback metrics. Builds do not fetch fonts from Google.
+
+Both chat services enforce policy version 7 in `backend/guardrails.json`, synchronized into the frontend during development and builds. The Twin represents Yousef in the first person with a warm, friendly tone and technical detail when useful. Input checks inspect English and Arabic overrides, role spoofing, prompt extraction, common injection vocabulary, and Unicode/encoded payloads. Injection attempts receive a polite refusal. Ordinary technical and casual questions reach the model; off-topic requests receive playful pivots, and missing details get honest clarifications. Only fixed instructions enter the system role. Previous messages resolve retrieval subjects but are never sent to the model. Suspect documents are excluded before retrieval.
+
+The native Vercel Twin uses `answer_mode: "grounded_conversation"` and `grounding_method: "deterministic"`. Short profile, projects, skills, career, education, certifications and contact requests return authored English/Arabic answers with exact citations from `content/digital-twin.md`, without a provider call. Other questions send at most five evidence passages (2,800 quote characters) to one low-reasoning generation call, capped at 1,024 completion tokens. JSON, source containment, factual identifiers, numbers, links and language checks run locally. Recognized Arche Robotics tools and graduation questions can recover from a rejected draft with independent authored source text. Other unsupported or malformed drafts, including Groq `json_validate_failed` errors, return a localized HTTP 200 fallback with empty evidence. The widget excludes social, declined and unsupported exchanges from future context, so a refusal cannot poison the next project question. Requested illustrative code examples are allowed while their factual prose stays grounded. The optional Python backend also uses one generation pass and local validation. See [the runtime contract and maintenance roadmap](docs/TWIN_RESILIENCE.md) for behavior and limitations.
+
+Answers include `evidence: [{source, quote}]` for verification. Grounded conversation still depends on the authored source being correct, and deterministic scope patterns can miss unusual phrasing, so live checks remain necessary. The Twin has no execution or external-action tools, and model context contains only public portfolio material. Mocked provider tests verify server enforcement; they do not establish that production was updated or that the live model selects relevant passages.
+
 ## Content workflow
 
-Edit Markdown in root [content/](content/README.md). Public identity and links live in `profile.md`; `experience.md`, `expertise.md`, projects, and certifications provide the Twin's career knowledge. The persona sources are `backend/data/facts.json`, `summary.txt`, and `style.txt`; the LinkedIn source is `backend/data/linkedin.pdf`.
+Edit Markdown in root [content/](content/README.md). Public identity and links live in `profile.md`; `digital-twin.md` contains the owner-approved bilingual profile and portfolio overviews. Preserve its `# Topic (en)` and `# Topic (ar)` headings. `experience.md`, `expertise.md`, projects, and certifications provide detailed career knowledge. The persona sources are `backend/data/facts.json`, `summary.txt`, and `style.txt`; the LinkedIn source is `backend/data/linkedin.pdf`.
 
 `predev` and `prebuild` synchronize these sources into `frontend/content/` and `frontend/data/twin/`. The sync removes stale bundled Markdown after a canonical document is deleted or renamed, so the deployed Twin uses current knowledge. Next.js traces the copies into both serverless functions. Run `npm run sync:content` after content edits when preparing a standalone frontend upload, and include the synchronized copies in the release.
 
@@ -109,7 +117,14 @@ npm run start
 
 The release checker verifies secret/artifact exclusions, source and Git-index credentials, browser output, native API manifests, bundled knowledge, protected IDs, and referenced local assets. It runs offline and does not modify Git.
 
-`GET /api/health` checks server configuration and loaded documents. A successful health response is distinct from a real Groq reply; exercise `POST /api/chat` and a follow-up question to verify provider connectivity.
+`GET /api/health` must report `guardrail_policy: 8`, `answer_mode: "grounded_conversation"`, `grounding_method: "deterministic"`, and `llm_configured: true`. Health checks configuration without calling Groq. To check the deployed Twin independently of deployment, run:
+
+```powershell
+cd frontend
+npm.cmd run verify:twin -- --site=https://yousefalsayed.me
+```
+
+If already inside `frontend/`, omit `cd frontend`. Require `[live] PASSED 38 checks` and exit code 0. The command checks the reported age/override/work/history/projects/profile sequence, including `histroy`, as well as the earlier refusal immediately followed by `projects`, both overview languages, the updated professional profile, contact links, skills, roles, education and certifications. It also checks targeted attack refusals, poisoned context, provider-backed career and tools follow-ups, ROS2 hardware, illustrative Python code, bilingual pizza pivots, missing qualifications, and five questions completed within 30 seconds. Every accepted quote must occur in canonical Markdown. Results go to ignored `frontend/.vercel/twin-live-verification.json`. An older policy, provider failure, irrelevant factual passage, or blocked network fails verification. These sample checks do not establish correctness for every possible question.
 
 ## Deployment and release
 

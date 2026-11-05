@@ -16,6 +16,7 @@ next-env.d.ts
 
 # Python environments, bytecode, generated packages, and local state.
 .venv/
+.pytest_cache/
 __pycache__/
 *.py[cod]
 build/

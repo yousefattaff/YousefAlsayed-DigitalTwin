@@ -4,7 +4,7 @@ WORKDIR /app
 ARG UV_VERSION=0.10.12
 COPY backend/pyproject.toml backend/uv.lock ./
 RUN pip install --no-cache-dir "uv==${UV_VERSION}" && uv sync --frozen --no-dev --no-install-project --no-cache
-COPY backend/server.py backend/lambda_handler.py ./
+COPY backend/server.py backend/lambda_handler.py backend/guardrails.json ./
 COPY content /content
 
 ENV PATH="/app/.venv/bin:$PATH"

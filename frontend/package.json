@@ -10,13 +10,16 @@
     "dev:frontend": "next dev",
     "dev:check": "node scripts/dev.mjs --check",
     "prebuild": "node scripts/sync-content.mjs",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "deploy:vercel": "node scripts/deploy-vercel.mjs",
     "deploy:check": "node scripts/deploy-vercel.mjs --check",
+    "verify:twin": "node scripts/verify-twin.mjs",
+    "preverify:provider": "node scripts/sync-content.mjs",
+    "verify:provider": "node scripts/verify-provider.mjs",
     "release:check": "node scripts/release-check.mjs",
     "lint": "eslint",
-    "test": "node --test tests/chat.test.mjs tests/twin.test.mjs tests/sync-content.test.mjs tests/vercel-target.test.mjs tests/vercel-api.test.mjs tests/release-check.test.mjs"
+    "test": "node --test tests/chat.test.mjs tests/twin.test.mjs tests/sync-content.test.mjs tests/vercel-target.test.mjs tests/vercel-api.test.mjs tests/release-check.test.mjs tests/windows-environment.test.mjs tests/twin-verification.test.mjs tests/verify-provider.test.mjs"
   },
   "dependencies": {
     "@google/model-viewer": "^4.4.0",

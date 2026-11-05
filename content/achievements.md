@@ -46,6 +46,14 @@ graduation_project:
 
 # Graduation project and engineering achievement
 
-R2-WAITER is Yousef's completed autonomous restaurant service robot and B.Sc. final-year project at MUST in Spring 2024. The six-person team integrated ROS1, LIDAR, an Intel RealSense D435i depth camera, SLAM, sensor fusion, navigation, a customer ordering interface, and an interactive robot face on an NVIDIA Jetson Nano.
+R2-WAITER is Yousef's completed autonomous restaurant service robot and B.Sc. final-year project at MUST in Spring 2024. The six-person team integrated ROS2 on Ubuntu Linux, LIDAR, an Intel RealSense D435i depth camera, SLAM, sensor fusion, navigation, a customer ordering interface, and an interactive robot face on an NVIDIA Jetson Nano.
 
 The project earned 3rd place at the International Gathering of Artificial Intelligence in Egypt. The graduation section shows the 3D model of the robot.
+
+# Graduation answer (en)
+
+My graduation service robot, R2-WAITER, used ROS2 on Ubuntu Linux. Our six-person team integrated LIDAR, an Intel RealSense D435i depth camera, and an NVIDIA Jetson Nano, with SLAM, sensor fusion, navigation, a customer ordering interface, and an interactive robot face. It was my B.Sc. final-year project at MUST in Spring 2024 and earned 3rd place at the International Gathering of Artificial Intelligence in Egypt.
+
+# Graduation answer (ar)
+
+روبوت التخرج بتاعي R2-WAITER استخدم ROS2 على Ubuntu Linux. فريقنا كان من ستة أشخاص، ودمجنا LIDAR وكاميرا Intel RealSense D435i وNVIDIA Jetson Nano مع SLAM وsensor fusion والملاحة وواجهة لطلبات العملاء ووجه تفاعلي للروبوت. ده مشروع التخرج للبكالوريوس في MUST في ربيع 2024، وحصل على المركز 3 في International Gathering of Artificial Intelligence in Egypt.

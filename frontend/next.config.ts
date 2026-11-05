@@ -12,6 +12,9 @@ if (process.env.FIGMA && process.env.FIGMA_PUBLIC_URL) {
 const nextConfig: NextConfig = {
   ...(process.env.FIGMA ? { output: 'standalone' as const } : {}),
   allowedDevOrigins,
+  outputFileTracingExcludes: {
+    '*': ['.env*', './.env*', '**/.env*'],
+  },
   outputFileTracingIncludes: {
     '/api/*': ['./content/**/*.md', './data/twin/*'],
   },

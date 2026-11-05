@@ -46,3 +46,11 @@ In September 2021, Yousef completed practical car assembly and maintenance train
 # Education — Mechatronics, Robotics, and Automation Engineering
 
 Yousef studied for a bachelor's degree in Mechatronics, Robotics, and Automation Engineering at Misr University for Science and Technology (MUST) from September 2019 to June 2024. His background includes embedded C for microcontrollers and autonomous robots with ROS.
+
+# Arche Robotics tools (en)
+
+At Arche Robotics, I use Python, AWS Lambda, AWS SAM, and DynamoDB Streams for real-time robot fleet monitoring. Groq handles LLM inference, controlled by a six-stage skip ladder to manage costs. I use FastMCP with Model Context Protocol (MCP) over stdio for local-to-cloud testing, and a DynamoLogReader with GSI1 for direct telemetry access. Battery and telemetry watchdogs support recovery.
+
+# Arche Robotics tools (ar)
+
+في Arche Robotics، بستخدم Python وAWS Lambda وAWS SAM وDynamoDB Streams لمراقبة أسطول الروبوتات لحظيًا. Groq بيشغّل استدلال الـLLM، ومعاه نظام تخطي من ست مراحل للتحكم في التكلفة. وبستخدم FastMCP مع Model Context Protocol (MCP) عبر stdio للاختبار بين البيئة المحلية والسحابة، وDynamoLogReader مع GSI1 لقراءة بيانات الروبوتات مباشرة. كمان عندي watchdogs لمتابعة البطارية واستعادة بيانات الـtelemetry.

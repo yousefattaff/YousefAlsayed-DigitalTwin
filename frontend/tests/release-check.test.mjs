@@ -112,7 +112,7 @@ test('environment and generated artifacts are rejected if indexed or offered for
 });
 
 test('private caches, Terraform state and inputs, build outputs, and Lambda archives cannot remain indexed', () => {
-  const files = ['backend/.memory/chat.json', 'backend/.chroma/index.sqlite', '.codex/runs/session.json', '.agents/cache/data.json',
+  const files = ['backend/.memory/chat.json', 'backend/.chroma/index.sqlite', 'backend/.pytest_cache/README.md', '.codex/runs/session.json', '.agents/cache/data.json',
     '.aws/credentials', '.superpowers/logs/run.json', 'backend/infra/terraform/terraform.tfstate',
     'backend/infra/terraform/terraform.tfstate.backup', 'backend/infra/terraform/prod.tfvars', 'backend/infra/terraform/prod.tfvars.json',
     'backend/lambda-package/server.py', 'backend/deploy/lambda-deployment.zip', 'frontend/.next.zip',

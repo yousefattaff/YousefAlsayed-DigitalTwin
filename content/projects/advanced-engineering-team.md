@@ -34,4 +34,4 @@ key_features:
   - "Langfuse turns on only when both keys are set."
 ---
 
-Four CrewAI agents on Groq. Docker can run the generated Python. The crew does not retry failures.
+My Advanced Engineering Team is a 4-agent CrewAI squad: a lead handles design, a backend agent handles Python and Docker, a frontend agent builds a Gradio interface, and QA writes and runs tests. It turns one software request into a designed, tested, runnable application. The agents use Groq, and Docker can run the generated Python. The crew does not retry failures.

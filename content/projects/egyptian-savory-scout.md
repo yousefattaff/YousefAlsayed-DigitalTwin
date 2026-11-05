@@ -29,4 +29,4 @@ key_features:
   - "No vector database and no sentence-transformer reranker."
 ---
 
-City filter, TF-IDF ranking, then a local language model.
+My EgyptianSavoryScout is a localized restaurant finder covering 1,000+ Egyptian dining spots. Its LLM/RAG workflow filters by city, retrieves recommendations with TF-IDF ranking, and uses a local language model to explain the results. It uses FastAPI and React, without a vector database or sentence-transformer reranker.

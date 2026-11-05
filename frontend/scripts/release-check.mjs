@@ -14,10 +14,10 @@ const secretPatterns = [
   ['JWT token', /\beyJ[A-Za-z0-9_-]{12,}\.[A-Za-z0-9_-]{20,}\.[A-Za-z0-9_-]{20,}\b/],
 ];
 const placeholder = /(?:your[_ -]|replace[_ -]|example|dummy|placeholder|redacted|^\$|^<|^test[_ -])/i;
-const excluded = new Set(['.git', 'node_modules', '.next', 'out', '.local', '.venv', '.terraform', '__pycache__',
+const excluded = new Set(['.git', 'node_modules', '.next', 'out', '.local', '.venv', '.pytest_cache', '.terraform', '__pycache__',
   '.vercel', '.superpowers', '.aws', '.agents', '.codex', '.memory', '.chroma', 'build', 'dist', 'coverage', 'lambda-package',
   'terraform.tfstate.d', 'audit', 'staging_media', 'scratch_imgs', 'memory', 'github-profile']);
-const privateArtifact = /(?:^|\/)(?:node_modules|\.next|out|\.vercel|\.venv|\.terraform|\.local|\.memory|\.chroma|\.superpowers|\.aws|\.agents|\.codex|__pycache__|terraform\.tfstate\.d)(?:\/|$)|\.(?:log|tsbuildinfo|pem|key|tfvars(?:\.json)?|tfstate(?:\.[^/]+)?)$/;
+const privateArtifact = /(?:^|\/)(?:node_modules|\.next|out|\.vercel|\.venv|\.pytest_cache|\.terraform|\.local|\.memory|\.chroma|\.superpowers|\.aws|\.agents|\.codex|__pycache__|terraform\.tfstate\.d)(?:\/|$)|\.(?:log|tsbuildinfo|pem|key|tfvars(?:\.json)?|tfstate(?:\.[^/]+)?)$/;
 const generatedArtifact = /(?:^|\/)(?:build|dist|coverage|lambda-package)(?:\/|$)|(?:^|\/)(?:\.next|out|build|dist|node_modules|lambda-package|lambda-deployment)(?:-[^/]+)?\.(?:zip|tgz|tar(?:\.gz)?)$/;
 const envFile = filename => path.posix.basename(filename).startsWith('.env');
 const privateEnv = filename => envFile(filename) && path.posix.basename(filename) !== '.env.example';
@@ -206,6 +206,7 @@ export async function runReleaseCheck(frontend = fileURLToPath(new URL('../', im
     for (const name of ['facts.json', 'summary.txt', 'style.txt']) {
       knowledge.push({ source: path.join(repository, 'backend/data', name), bundled: path.join(frontend, 'data/twin', name) });
     }
+    knowledge.push({ source: path.join(repository, 'backend/guardrails.json'), bundled: path.join(frontend, 'data/twin/guardrails.json') });
     counts.knowledgeFiles = knowledge.length;
     for (const { source, bundled } of knowledge) {
       const [original, copy] = await Promise.all([fs.readFile(source), fs.readFile(bundled)]);

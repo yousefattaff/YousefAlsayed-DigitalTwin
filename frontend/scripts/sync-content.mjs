@@ -62,8 +62,10 @@ if (existsSync(source)) {
 }
 
 await fs.mkdir(persona, { recursive: true });
-for (const filename of ['facts.json', 'summary.txt', 'style.txt']) {
-  const original = path.join(repository, 'backend', 'data', filename);
+for (const filename of ['facts.json', 'summary.txt', 'style.txt', 'guardrails.json']) {
+  const original = filename === 'guardrails.json'
+    ? path.join(repository, 'backend', filename)
+    : path.join(repository, 'backend', 'data', filename);
   const bundled = path.join(persona, filename);
   if (existsSync(original)) await fs.copyFile(original, bundled);
   if (!existsSync(bundled)) throw new Error(`Digital Twin knowledge is missing: data/twin/${filename}.`);

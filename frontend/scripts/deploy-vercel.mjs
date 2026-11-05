@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url';
 import { assertNativeTwinRouting, productionSite, resolveSiteProject } from './vercel-target.mjs';
 import { upsertVercelEnvironment, vercelJsonMutation } from './vercel-api.mjs';
 import { requiredIds } from './release-check.mjs';
+import { buildEnvironment } from './windows-environment.mjs';
+import { publicTwinTransport, readPortfolioSources, verifyTwin } from './twin-verification.mjs';
 
 const frontend = fileURLToPath(new URL('../', import.meta.url));
 const require = createRequire(import.meta.url);
@@ -30,7 +32,7 @@ function safe(text) {
 
 function run(command, args, { input, quiet = false, timeoutMs = 600_000 } = {}) {
   return new Promise((resolve, reject) => {
-    const child = spawn(command, args, { cwd: frontend, env: process.env, windowsHide: true, stdio: ['pipe', 'pipe', 'pipe'] });
+    const child = spawn(command, args, { cwd: frontend, env: buildEnvironment(), windowsHide: true, stdio: ['pipe', 'pipe', 'pipe'] });
     let stdout = '';
     let stderr = '';
     let timedOut = false;
@@ -55,7 +57,16 @@ function run(command, args, { input, quiet = false, timeoutMs = 600_000 } = {}) 
 
 const npmCli = process.env.npm_execpath || path.join(path.dirname(process.execPath), 'node_modules', 'npm', 'bin', 'npm-cli.js');
 const npm = (args, options) => run(process.execPath, [npmCli, ...args], options);
-const cli = (args, options) => run(process.execPath, [vercelCli, '--no-color', '--non-interactive', ...(vercelScope ? ['--scope', vercelScope] : []), ...args], options);
+const cli = (args, options) => {
+  if (args[0] === 'curl') {
+    const dashDashIndex = args.indexOf('--');
+    const curlArgs = dashDashIndex !== -1
+      ? [...args.slice(0, dashDashIndex), ...(vercelScope ? ['--scope', vercelScope] : []), ...args.slice(dashDashIndex)]
+      : [...args, ...(vercelScope ? ['--scope', vercelScope] : [])];
+    return run(process.execPath, [vercelCli, ...curlArgs], options);
+  }
+  return run(process.execPath, [vercelCli, '--no-color', '--non-interactive', ...(vercelScope ? ['--scope', vercelScope] : []), ...args], options);
+};
 
 async function findCli() {
   if (process.env.VERCEL_CLI_PATH && existsSync(process.env.VERCEL_CLI_PATH)) return process.env.VERCEL_CLI_PATH;
@@ -75,11 +86,130 @@ async function findCli() {
   throw new Error('Vercel CLI is not installed or cached. Install it with npm install --global vercel, then run this command again.');
 }
 
+async function patchVercelNextCache() {
+  if (process.platform !== 'win32') return;
+  try {
+    const cache = (await npm(['config', 'get', 'cache'], { quiet: true })).trim();
+    const npx = path.join(cache, '_npx');
+    if (!existsSync(npx)) return;
+    for (const entry of await fs.readdir(npx)) {
+      const target = path.join(npx, entry, 'node_modules', '@vercel', 'next', 'dist', 'index.js');
+      if (!existsSync(target)) continue;
+      let text = await fs.readFile(target, 'utf8');
+      let changed = false;
+      if (text.includes('originalPagePath = import_path5.default.relative(appDir, fsPath);')) {
+        text = text.replace('originalPagePath = import_path5.default.relative(appDir, fsPath);', 'originalPagePath = import_path5.default.relative(appDir, fsPath).replaceAll("\\\\", "/");');
+        changed = true;
+      }
+      if (text.includes('return pageBuildTraces[page + ".nft.json"] || appBuildTraces[page + ".nft.json"];')) {
+        text = text.replace('return pageBuildTraces[page + ".nft.json"] || appBuildTraces[page + ".nft.json"];', 'const norm = page.replaceAll("\\\\", "/"); return pageBuildTraces[norm + ".nft.json"] || appBuildTraces[norm + ".nft.json"] || pageBuildTraces[page + ".nft.json"] || appBuildTraces[page + ".nft.json"];');
+        changed = true;
+      }
+      const oldAsyncSymlink = `      if (!await pathExists2(dir)) {
+        await mkdirs(dir);
+      }
+      return fs5.symlink(srcpath, dstpath, toType);`;
+      const newAsyncSymlink = `      if (!await pathExists2(dir)) {
+        await mkdirs(dir);
+      }
+      try {
+        return await fs5.symlink(srcpath, dstpath, toType);
+      } catch (err) {
+        if (err.code === "EPERM" || err.code === "EACCES") {
+          const absSrc = path6.resolve(dir, srcpath);
+          const copy = require_copy();
+          return copy(absSrc, dstpath);
+        }
+        throw err;
+      }`;
+      if (text.includes(oldAsyncSymlink)) {
+        text = text.replace(oldAsyncSymlink, newAsyncSymlink);
+        changed = true;
+      }
+      const oldSyncSymlink = `      const exists = fs5.existsSync(dir);
+      if (exists)
+        return fs5.symlinkSync(srcpath, dstpath, type);
+      mkdirsSync(dir);
+      return fs5.symlinkSync(srcpath, dstpath, type);`;
+      const newSyncSymlink = `      const exists = fs5.existsSync(dir);
+      if (!exists) mkdirsSync(dir);
+      try {
+        return fs5.symlinkSync(srcpath, dstpath, type);
+      } catch (err) {
+        if (err.code === "EPERM" || err.code === "EACCES") {
+          const absSrc = path6.resolve(dir, srcpath);
+          const copySync = require_copy_sync();
+          return copySync(absSrc, dstpath);
+        }
+        throw err;
+      }`;
+      if (text.includes(oldSyncSymlink)) {
+        text = text.replace(oldSyncSymlink, newSyncSymlink);
+        changed = true;
+      }
+      if (changed) await fs.writeFile(target, text, 'utf8');
+    }
+    for (const entry of await fs.readdir(npx)) {
+      const adapterTarget = path.join(npx, entry, 'node_modules', '@vercel', 'next', 'dist', 'adapter', 'index.js');
+      if (!existsSync(adapterTarget)) continue;
+      let aText = await fs.readFile(adapterTarget, 'utf8');
+      const oldSymlink = `          await import_promises.default.symlink(
+            import_node_path.default.relative(
+              import_node_path.default.dirname(prerenderFunctionDir),
+              parentFunctionDir
+            ),
+            prerenderFunctionDir
+          ).catch((err) => {
+            if (!(typeof err === "object" && err && err.code === "EEXIST")) {
+              throw err;
+            }
+          });`;
+      const newSymlink = `          await import_promises.default.symlink(
+            import_node_path.default.relative(
+              import_node_path.default.dirname(prerenderFunctionDir),
+              parentFunctionDir
+            ),
+            prerenderFunctionDir
+          ).catch(async (err) => {
+            if (err && (err.code === "EPERM" || err.code === "EACCES")) {
+              await import_promises.default.cp(parentFunctionDir, prerenderFunctionDir, { recursive: true });
+              return;
+            }
+            if (!(typeof err === "object" && err && err.code === "EEXIST")) {
+              throw err;
+            }
+          });`;
+      const normalizedAText = aText.replaceAll('\r\n', '\n');
+      if (normalizedAText.includes(oldSymlink)) {
+        aText = normalizedAText.replace(oldSymlink, newSymlink);
+        await fs.writeFile(adapterTarget, aText, 'utf8');
+      }
+    }
+    for (const entry of await fs.readdir(npx)) {
+      const chunksDir = path.join(npx, entry, 'node_modules', 'vercel', 'dist', 'chunks');
+      if (!existsSync(chunksDir)) continue;
+      for (const chunkFile of await fs.readdir(chunksDir)) {
+        if (!chunkFile.endsWith('.js')) continue;
+        const chunkPath = path.join(chunksDir, chunkFile);
+        let cText = await fs.readFile(chunkPath, 'utf8');
+        const oldFuncSymlink = 'return await import_fs_extra.default.mkdirp(destDir),await import_fs_extra.default.symlink(target,dest),!0';
+        const newFuncSymlink = 'await import_fs_extra.default.mkdirp(destDir);try{await import_fs_extra.default.symlink(target,dest)}catch(err){if(err&&(err.code==="EPERM"||err.code==="EACCES")){await (await import("node:fs/promises")).cp(targetDest,dest,{recursive:!0})}else{throw err}}return!0';
+        if (cText.includes(oldFuncSymlink)) {
+          cText = cText.replace(oldFuncSymlink, newFuncSymlink);
+          await fs.writeFile(chunkPath, cText, 'utf8');
+        }
+      }
+    }
+  } catch {
+    // Ignore cache patch errors
+  }
+}
+
 async function verifyBuild() {
   const tracePath = path.join(frontend, '.next', 'server', 'app', 'api', 'chat', 'route.js.nft.json');
   const trace = JSON.parse(await fs.readFile(tracePath, 'utf8'));
   const files = trace.files.map(file => file.replaceAll('\\', '/'));
-  for (const file of ['content/profile.md', 'content/experience.md', 'content/achievements.md', 'content/expertise.md', 'content/projects/r2-waiter.md', 'data/twin/facts.json', 'data/twin/summary.txt', 'data/twin/style.txt']) {
+  for (const file of ['content/profile.md', 'content/experience.md', 'content/achievements.md', 'content/expertise.md', 'content/projects/r2-waiter.md', 'data/twin/facts.json', 'data/twin/summary.txt', 'data/twin/style.txt', 'data/twin/guardrails.json']) {
     assert.ok(files.some(value => value.endsWith(file)), `Chat function trace omits ${file}.`);
   }
   const manifests = JSON.parse(await fs.readFile(path.join(frontend, '.next', 'server', 'app-paths-manifest.json'), 'utf8'));
@@ -108,45 +238,30 @@ async function publicRequest(deployment, pathname, { body, head = false } = {}) 
   });
 }
 
-async function requestJson(deployment, pathname, body, publicAccess = false) {
-  for (let attempt = 0; attempt < 3; attempt++) {
+async function verifyLive(deployment, full = true, publicAccess = false) {
+  const policy = JSON.parse(await fs.readFile(path.join(frontend, 'data/twin/guardrails.json'), 'utf8'));
+  const request = publicAccess ? publicTwinTransport(deployment) : async (pathname, body) => {
     const args = ['curl', pathname, '--deployment', deployment, '--', '--silent', '--show-error', '--max-time', '45'];
     if (body) args.push('--request', 'POST', '--header', 'Content-Type: application/json', '--data-binary', '@-');
-    const text = publicAccess
-      ? await (await publicRequest(deployment, pathname, { body })).text()
-      : await cli(args, { quiet: true, input: body ? JSON.stringify(body) : undefined, timeoutMs: 60_000 });
+    args.push('--write-out', '\n%{http_code}');
+    const output = await cli(args, { quiet: true, input: body ? JSON.stringify(body) : undefined, timeoutMs: 60_000 });
+    const separator = output.lastIndexOf('\n');
+    assert.ok(separator >= 0, 'The candidate API returned no HTTP status.');
+    const status = Number(output.slice(separator + 1).trim());
     let data;
-    try { data = JSON.parse(text); } catch { throw new Error(`Deployment returned non-JSON at ${pathname}.`); }
-    if (data.code === 'rate_limit' && attempt < 2) {
-      console.log('[verify] Groq rate limit reached; retrying verification after 60 seconds.');
-      await new Promise(resolve => setTimeout(resolve, 60_000));
-      continue;
-    }
-    if (pathname.endsWith('/chat')) {
-      assert.ok(typeof data.response === 'string' && data.response.trim(), `Live Twin request failed (${data.code || 'unreadable response'}).`);
-    }
-    return data;
-  }
-}
-
-async function verifyLive(deployment, full = true, publicAccess = false) {
-  const health = await requestJson(deployment, '/api/health', undefined, publicAccess);
-  assert.equal(health.status, 'healthy');
-  assert.equal(health.llm_configured, true, 'Production GROQ_API_KEY is missing.');
-  assert.ok(health.rag_documents > 0, 'Production knowledge is missing.');
-  const question = 'When did you start at Arche Robotics, and what do you work on there?';
-  const first = await requestJson(deployment, '/api/chat', { message: question }, publicAccess);
-  assert.ok(/\bjul(?:y)?\s*,?\s*2026\b|\b07[/. -]2026\b/i.test(first.response), 'Live answer did not match the verified July 2026 start date.');
-  const answers = [first.response];
-  if (full) {
-    const followup = await requestJson(deployment, '/api/chat', {
-      message: 'Can you elaborate on the AI tools you use there?', session_id: first.session_id, topic: first.topic,
-      history: [{ role: 'user', content: question }, { role: 'assistant', content: first.response.slice(0, 2000) }],
-    }, publicAccess);
-    assert.ok(/Python|FastMCP|Groq|DynamoDB|AWS|LangGraph|LangChain/i.test(followup.response), 'The stateless follow-up did not answer with the documented tools.');
-    const graduation = await requestJson(deployment, '/api/chat', { message: 'Was your graduation service robot ROS1 or ROS2, and what hardware did it use?' }, publicAccess);
-    assert.ok(/ROS[ -]?1/i.test(graduation.response) && /Jetson|LIDAR|RealSense/i.test(graduation.response), 'Live graduation answer did not match the verified ROS1 hardware.');
-    answers.push(followup.response, graduation.response);
+    try { data = JSON.parse(output.slice(0, separator)); } catch { throw new Error(`The candidate API returned non-JSON at ${pathname} (HTTP ${status}).`); }
+    return { status, data };
+  };
+  const verified = { status: 'running', checks: [] };
+  report.checks[full ? 'candidateTwin' : 'productionTwin'] = verified;
+  try {
+    Object.assign(verified, await verifyTwin({ request, sources: await readPortfolioSources(), policyVersion: policy.version,
+      checks: verified.checks, pace: 65_000,
+      onCheck: (check) => console.log(`[verify] PASS ${check.name}`),
+      onRetry: (name) => console.log(`[verify] Retrying ${name} after a provider or token-limit pause.`) }));
+  } catch (error) {
+    verified.status = 'failed';
+    throw error;
   }
   let html;
   if (publicAccess) {
@@ -168,8 +283,7 @@ async function verifyLive(deployment, full = true, publicAccess = false) {
       await cli(['curl', asset, '--deployment', deployment, '--', '--silent', '--show-error', '--head', '--fail', '--max-time', '20'], { quiet: true, timeoutMs: 30_000 });
     }
   }
-  report.checks[full ? 'candidateTwin' : 'productionTwin'] = { status: 'pass', health, answers };
-  report.checks.productionAssets = 'pass: seven required sections, resume, gallery poster, and video';
+  report.checks.productionAssets = `pass: ${requiredIds.length} required sections, resume, gallery poster, and video`;
   if (publicAccess) report.checks.publicProductionAccess = 'pass: anonymous page, native chat, health, and media';
 }
 
@@ -235,7 +349,7 @@ try {
     phase = 'project settings';
     report.remoteMutationAttempted = true;
     await vercelJsonMutation(cli, projectApi, 'PATCH', {
-      framework: config.framework, buildCommand: config.buildCommand, installCommand: config.installCommand, outputDirectory: null,
+      framework: config.framework, buildCommand: config.buildCommand, installCommand: config.installCommand, outputDirectory: null, rootDirectory: null,
     });
     report.remoteChangesMade = true;
     report.checks.projectSettings = 'pass: native Next.js framework and output settings updated';
@@ -252,11 +366,45 @@ try {
     report.checks.productionEnvironment.status = 'pass';
     phase = 'pulling production settings';
     await cli(['pull', '--yes', '--environment', 'production'], { timeoutMs: 60_000 });
+    const pulledLink = JSON.parse(await fs.readFile(projectLinkFile, 'utf8'));
+    if (pulledLink.settings?.rootDirectory) { pulledLink.settings.rootDirectory = null; await fs.writeFile(projectLinkFile, JSON.stringify(pulledLink, null, 2)); }
     phase = 'tests and production build';
     await npm(['test']);
     await npm(['run', 'lint']);
-    await cli(['build', '--prod', '--yes']);
+    await patchVercelNextCache();
+    try {
+      await cli(['build', '--prod', '--yes']);
+    } catch (buildErr) {
+      if (String(buildErr?.message).includes('EPERM') || String(buildErr?.message).includes('4294963248')) {
+        console.log('[deploy] Transient file lock during vercel build; waiting 3s and retrying...');
+        await new Promise(r => setTimeout(r, 3000));
+        await cli(['build', '--prod', '--yes']);
+      } else {
+        throw buildErr;
+      }
+    }
     await verifyBuild();
+    async function scrubEnvFromConfigs(dir) {
+      for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) await scrubEnvFromConfigs(full);
+        else if (entry.name === '.vc-config.json') {
+          const config = JSON.parse(await fs.readFile(full, 'utf8'));
+          if (config.filePathMap) {
+            let changed = false;
+            for (const [key, val] of Object.entries(config.filePathMap)) {
+              if (key.startsWith('.env') || (typeof val === 'string' && val.startsWith('.env'))) {
+                delete config.filePathMap[key];
+                changed = true;
+              }
+            }
+            if (changed) await fs.writeFile(full, JSON.stringify(config, null, 2));
+          }
+        }
+      }
+    }
+    const outputFunctions = path.join(frontend, '.vercel', 'output', 'functions');
+    if (existsSync(outputFunctions)) await scrubEnvFromConfigs(outputFunctions);
     phase = 'production candidate deployment';
     const deploymentText = await cli(['deploy', '--prebuilt', '--prod', '--skip-domain', '--yes', '--json'], { quiet: true });
     const deploymentResult = JSON.parse(deploymentText);

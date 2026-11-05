@@ -1,7 +1,10 @@
+export type ChatReplyKind = 'answer' | 'social' | 'insufficient_evidence' | 'declined';
+
 export interface ChatResponse {
   response: string;
   session_id?: string;
   topic?: string;
+  reply_kind?: ChatReplyKind;
 }
 
 export interface ChatContext {
@@ -14,27 +17,37 @@ export type ChatErrorCode =
   | 'unavailable'
   | 'timeout'
   | 'rate_limit'
+  | 'guardrail'
   | 'invalid_response';
 
 const errorMessages: Record<ChatErrorCode, string> = {
-  configuration: 'The AI service is not configured yet. Please try again later.',
-  unavailable: 'The AI service is temporarily unavailable. Please try again shortly.',
-  timeout: 'The AI service took too long to respond. Please try again.',
-  rate_limit: 'The AI service is busy. Please wait a moment and try again.',
-  invalid_response: 'The AI service returned an unreadable response. Please try again.',
+  configuration: "I'm getting set up. Please check back in a little while.",
+  unavailable: "I'm having trouble connecting right now. Please try again in a moment.",
+  timeout: 'That took a little too long. Give me another try.',
+  rate_limit: "I'm getting a few questions at once. Please give me a moment, then try again.",
+  invalid_response: "I couldn't finish that reply. Please give me another try.",
+  guardrail: "I'm more at home with robots and AI! Happy to chat about my projects or how I build things.",
 };
 
 export class ChatRequestError extends Error {
   readonly code: ChatErrorCode;
+  readonly retryAfterMs?: number;
 
-  constructor(code: ChatErrorCode) {
+  constructor(code: ChatErrorCode, retryAfterMs?: number) {
     super(errorMessages[code]);
     this.name = 'ChatRequestError';
     this.code = code;
+    this.retryAfterMs = retryAfterMs;
   }
 }
 
-export function getChatErrorMessage(error: unknown): string {
+export function getChatErrorMessage(error: unknown, question = ''): string {
+  if (error instanceof ChatRequestError && error.code === 'rate_limit' && /[\u0600-\u06ff]/.test(question)) {
+    return 'جايلي كذا سؤال في نفس الوقت. اديني لحظة وجرب تاني.';
+  }
+  if (error instanceof ChatRequestError && error.code === 'guardrail' && /[\u0600-\u06ff]/.test(question)) {
+    return 'دي برة تخصصي شوية! أنا في حتتي مع الروبوتات والذكاء الاصطناعي، وحابب أحكيلك عن مشاريعي.';
+  }
   return error instanceof ChatRequestError ? error.message : errorMessages.unavailable;
 }
 
@@ -97,12 +110,18 @@ async function requestJson(
       signal: controller.signal,
     });
     if (!response.ok) {
-      if (response.status === 429) throw new ChatRequestError('rate_limit');
+      if (response.status === 429) {
+        const header = response.headers.get('retry-after');
+        const seconds = header ? Number(header) : NaN;
+        const delay = Number.isFinite(seconds) ? seconds * 1000 : header ? Date.parse(header) - Date.now() : NaN;
+        throw new ChatRequestError('rate_limit', Number.isFinite(delay) ? Math.max(0, delay) : undefined);
+      }
       if (response.status === 504) throw new ChatRequestError('timeout');
       const data = await response.json().catch(() => null);
-      if (data && typeof data === 'object' && 'code' in data
-        && typeof data.code === 'string' && Object.hasOwn(errorMessages, data.code)) {
-        throw new ChatRequestError(data.code as ChatErrorCode);
+      const errorBody = data && typeof data === 'object' && 'detail' in data ? data.detail : data;
+      if (errorBody && typeof errorBody === 'object' && 'code' in errorBody
+        && typeof errorBody.code === 'string' && Object.hasOwn(errorMessages, errorBody.code)) {
+        throw new ChatRequestError(errorBody.code as ChatErrorCode);
       }
       throw new ChatRequestError('unavailable');
     }
@@ -125,6 +144,18 @@ async function requestJson(
   }
 }
 
+function retryDelay(ms: number, signal?: AbortSignal): Promise<void> {
+  if (signal?.aborted) return Promise.reject(canceledRequest());
+  return new Promise((resolve, reject) => {
+    const abort = () => { clearTimeout(timer); reject(canceledRequest()); };
+    const timer = setTimeout(() => {
+      signal?.removeEventListener('abort', abort);
+      resolve();
+    }, ms);
+    signal?.addEventListener('abort', abort, { once: true });
+  });
+}
+
 async function withFallback<T>(
   operation: (endpoint: string) => Promise<T>,
   signal?: AbortSignal,
@@ -137,6 +168,7 @@ async function withFallback<T>(
       if (signal?.aborted) throw canceledRequest();
       return result;
     } catch (error) {
+      if (error instanceof ChatRequestError && ['guardrail', 'rate_limit'].includes(error.code)) throw error;
       if (signal?.aborted || index === endpoints.length - 1) throw error;
     }
   }
@@ -165,11 +197,21 @@ export async function requestChat(
     message, session_id: sessionId, history: context?.history, topic: context?.topic,
   });
   return withFallback(async (endpoint) => {
-    const data = await requestJson(endpoint, '/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-    }, 45_000, signal);
+    let data: unknown;
+    for (let attempt = 0; ; attempt++) {
+      try {
+        data = await requestJson(endpoint, '/chat', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body,
+        }, 45_000, signal);
+        break;
+      } catch (error) {
+        if (!(error instanceof ChatRequestError) || error.code !== 'rate_limit' || attempt === 1) throw error;
+        // Never retry earlier than Retry-After. Long cooldowns return a gentle message.
+        const delay = Math.max(1_200 * 2 ** attempt, error.retryAfterMs ?? 0);
+        if (delay > 5_000) throw error;
+        await retryDelay(delay, signal);
+      }
+    }
     if (!data || typeof data !== 'object' || !('response' in data)
       || typeof data.response !== 'string' || !data.response.trim()) {
       throw new ChatRequestError('invalid_response');
@@ -181,6 +223,9 @@ export async function requestChat(
         : undefined,
       topic: 'topic' in data && typeof data.topic === 'string' && data.topic.trim()
         ? data.topic.trim().slice(0, 300)
+        : undefined,
+      reply_kind: 'reply_kind' in data && ['answer', 'social', 'insufficient_evidence', 'declined'].includes(data.reply_kind as string)
+        ? data.reply_kind as ChatReplyKind
         : undefined,
     };
   }, signal);

@@ -61,7 +61,7 @@ class PackagingTests(unittest.TestCase):
         self.assertIn(requirements, dependencies.args[0])
         with zipfile.ZipFile(self.archive) as archive:
             self.assertEqual(set(archive.namelist()), {
-                "server.py", "lambda_handler.py", "content/profile.md", "content/projects/robot.md",
+                "server.py", "lambda_handler.py", "guardrails.json", "content/profile.md", "content/projects/robot.md",
             })
             self.assertEqual(archive.read("content/projects/robot.md"), (self.content / "projects" / "robot.md").read_bytes())
         self.assertFalse(self.archive.with_suffix(".zip.tmp").exists())

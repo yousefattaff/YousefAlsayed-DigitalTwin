@@ -1,8 +1,8 @@
 {
-  "full_name": "Yousef Alsayed Abdelfattah",
+  "full_name": "Yousef El Sayed Abdel Fattah Abou El Kheir",
   "name": "Yousef",
   "current_role": "AI Engineering Intern at Arche Robotics & English-Speaking Programming Instructor at iSchool",
-  "location": "Cairo, Egypt",
+  "location": "New Cairo, Cairo, Egypt",
   "email": "yousefabuelkhear@gmail.com",
   "linkedin": "https://www.linkedin.com/in/yousef-alsayed-abdelfattah",
   "specialties": [
@@ -24,7 +24,7 @@
       "company": "Arche Robotics",
       "role": "Artificial Intelligence Intern",
       "period": "July 2026 - Present",
-      "location": "Istanbul, T?rkiye",
+      "location": "Istanbul, Türkiye",
       "description": "Developing a real-time AI fleet-monitoring agent with Python, AWS Lambda, AWS SAM, DynamoDB Streams, Groq, and FastMCP. Approximately 0.3-second capture, a six-stage inference skip ladder, fixes for nine production issues, 265 Pytest unit tests, and 13 live-stream smoke tests."
     },
     {
@@ -32,7 +32,7 @@
       "role": "English-Speaking Programming Instructor",
       "period": "May 2026 - Present",
       "location": "Cairo, Egypt",
-      "description": "Teaching over 30 students across Grades 1?12 in Python, AI, JavaScript, and UI/UX through project-based curricula."
+      "description": "Teaching over 30 students across Grades 1–12 in Python, AI, JavaScript, and UI/UX through project-based curricula."
     },
     {
       "company": "Egyptian Armed Forces Engineering Authority",
@@ -82,7 +82,9 @@
     "LinkedIn Learning - Docker Foundations Professional Certificate (2026-09-06)",
     "Stanford Online / DeepLearning.AI / Coursera - Machine Learning Specialization (2026-08-24)",
     "Certificate of Completion — Mathematics",
-    "Siemens - PLC Industrial Automation (September 2023)"
+    "Siemens - PLC Industrial Automation (September 2023)",
+    "Proficient AI Engineer Track (Ed Donner)",
+    "GitHub Certification"
   ],
   "key_technologies": [
     "AI solution development and AI-assisted coding",
@@ -106,5 +108,8 @@
     "Siemens TIA Portal, PLC programming, and CNC fundamentals"
   ],
   "headline": "AI Engineer | AI Solutions, LLMs & Multi-Agent Systems",
-  "availability": "Seeking a full-time AI Engineer or AI Automation role; military service completed."
+  "availability": "Seeking a full-time AI Engineer or AI Automation role; military service completed.",
+  "display_name": "Yousef Alsayed",
+  "expertise_level": "Junior-to-mid AI engineer with hands-on experience in autonomous agents, RAG systems, and cloud-backed production bots",
+  "github": "https://github.com/yousefattaff"
 }

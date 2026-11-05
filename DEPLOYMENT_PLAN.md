@@ -9,7 +9,7 @@ Vercel delivers the portfolio through its edge network. Chat and health execute 
 - `frontend/app/api/chat/route.ts` → `frontend/lib/twin.ts` → Groq.
 - `frontend/app/api/health/route.ts` → server-key/model/knowledge configuration checks.
 - Primary model: `openai/gpt-oss-120b`; supported fallback model: `openai/gpt-oss-20b`.
-- One 25-second provider deadline; route `maxDuration` is 40 seconds.
+- One successful generation call with low reasoning effort and 1,024 completion tokens, followed by deterministic validation. At most five passages and 2,800 quote characters enter generation. Model fallback shares one 25-second deadline; route `maxDuration` is 40 seconds. See [the resilience guide](docs/TWIN_RESILIENCE.md).
 - Native requests carry bounded `history`, an optional `session_id`, and a retrieval `topic`. Replies return `response`, `session_id`, `topic`, and `sources`.
 
 Canonical Markdown from root `content/` and persona files from `backend/data/` are synchronized into `frontend/content/` and `frontend/data/twin/` before development/build. Deleted or renamed source Markdown is removed from the bundled copy after current documents have been copied successfully. `next.config.ts` includes both directories in `/api/*` file traces, so deployed functions have self-contained knowledge.
@@ -60,6 +60,7 @@ From `frontend/`:
 ```bash
 npm ci --include=dev
 npm run dev:check
+npm run verify:provider -- --case=tools
 npm test
 npm run lint
 npm run build
@@ -72,24 +73,35 @@ The preflight is local: it validates configuration, knowledge traces, native rou
 With an authenticated Vercel CLI and access to Vercel and Groq:
 
 ```bash
-npm run deploy:vercel -- --site=https://yousefalsayed.me
+npm.cmd run deploy:vercel -- --site=https://yousefalsayed.me
 ```
 
-The deployment helper resolves the custom domain to its deployment/project/account and verifies domain attachment before changing settings. It clears obsolete static output settings, upserts Production environment variables using the existing local key, pulls settings, runs tests/lint, and builds using the Vercel CLI.
+The deployment helper resolves the custom domain to its deployment/project/account and verifies domain attachment before changing settings. It clears obsolete static output settings, upserts Production environment variables using the existing local key, pulls settings, runs tests/lint, and builds using the Vercel CLI. Windows subprocesses receive a verified absolute `cmd.exe` in lowercase `comspec` and a normalized `PATH`, including build workers that otherwise fail with `spawn cmd.exe ENOENT`.
 
-It deploys a candidate without assigning production domains, checks project identity, native routing, grounded replies, follow-up context, and media, then promotes the candidate and checks the public custom domain. Secret values travel through stdin and are redacted from reports.
+It deploys a candidate without assigning production domains, checks project identity, native routing, policy version 7, injection refusals, the exact refusal-to-projects sequence, approved bilingual profile answers, source quotes, provider-backed follow-ups, and media, then promotes the candidate and repeats the Twin checks on the public custom domain. Grounded conversation returns first-person answers backed by portfolio quotes and citations. Secret values travel through stdin and are redacted from reports.
 
 Deployment and preflight reports are stored separately under ignored `frontend/.vercel/`. A successful release must include a production URL and passing live checks; a local build or preflight alone cannot establish deployment success.
+
+If deployment stops during tests/build, the new application was not published, even when tests passed. Earlier project settings and Production environment writes may already have succeeded; inspect the report's phase and remote-change flags. Run the corrected deployment helper again after fixing the reported failure.
 
 ## Post-deployment checks
 
 1. Open `https://yousefalsayed.me` and confirm each public section: `about`, `skills`, `projects`, `achievements`, `terminal`, `contact`, and `twin`.
-2. Request `/api/health`; require loaded knowledge, supported models, and `llm_configured: true`.
+2. Request `/api/health`; require loaded knowledge, supported models, `llm_configured: true`, `guardrail_policy: 8`, `answer_mode: "grounded_conversation"`, and `grounding_method: "deterministic"`.
 3. Ask the Twin about Arche Robotics, then ask a tools follow-up carrying the returned session/topic and conversation history.
-4. Ask about the graduation project and check that it retains the verified ROS1/hardware context.
-5. Check project/gallery assets, resume, video posters, and video byte-range delivery.
+4. Ask about the graduation project and check its owner-approved ROS2, Jetson Nano, LiDAR and RealSense facts.
+5. Send the reported override, then `projects`; require all four highlighted projects and working public contact links. Check the Arabic overview and updated professional profile too.
+6. Check project/gallery assets, resume, video posters, and video byte-range delivery.
 
 Health reports configuration without calling the provider. Real chat requests are needed to establish inference availability. A `502 DNS_HOSTNAME_NOT_FOUND` on the API can indicate an obsolete upstream rewrite; review the deployment's routing and output settings before changing DNS.
+
+From `frontend/`, run the independent anonymous live check:
+
+```powershell
+npm.cmd run verify:twin -- --site=https://yousefalsayed.me
+```
+
+Require `[live] PASSED 38 checks` and exit code 0. This checks the exact age/override/work/`histroy`/history/projects/profile sequence and the earlier refusal followed immediately by `projects`, approved bilingual overviews, casual pivots, history/topic poisoning, grounded career and graduation answers, an illustrative DynamoDB Python example, the LIDAR/Ubuntu question, and missing qualifications. Returned quotes must occur in canonical Markdown. The report is saved to ignored `.vercel/twin-live-verification.json`. Ordinary provider checks retry rate limits at most twice with 65-second pacing; authored overviews run without retry. The final five-question burst must complete within 30 seconds without retries or HTTP errors. Persistent limits and network errors fail verification. A passing sample establishes these deployed behaviors, not universal factual accuracy or injection immunity.
 
 ## Namecheap custom domain
 
