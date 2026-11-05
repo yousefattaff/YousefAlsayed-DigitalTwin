@@ -185,7 +185,7 @@ export function hasSupportedNumbers(answer: string, evidence: { quote: string }[
 const conversationalWords = new Set(('i me my myself we our you your it its a an the and or of at in on to for from with as by is am are was were be been have has had do did can this that these those through into about also mainly use used using work worked working build built building develop developed developing focus focused include includes including yes sure absolutely happy glad thanks welcome great really practical hands hands-on help helps helped part experience skills tools background portfolio project projects مثلا انا عندي شغلي بستخدم استخدمت باستخدام اشتغلت بشتغل عملت بعمل بنيت ببني طورت بطور في من علي مع و او ده دي دا اللي كان كانت بيكون هو هي ان عشان كمان بشكل ايوه طبعا اكيد اهلا سعيد شكرا اقدر عندنا عندي انا وانا فيه فيها بتاعي بتاعتي').split(' '));
 // Grammatical words do not establish qualifications, technologies or dates.
 for (const word of [
-  'their', 'them', 'which', 'where', 'while', 'both', 'each', 'within', 'across', 'so',
+  'their', 'them', 'which', 'where', 'while', 'when', 'how', 'what', 'why', 'if', 'once', 'then', 'both', 'each', 'within', 'across', 'so',
   'here', 'example', 'examples', 'illustrative', 'simplified', 'snippet', 'snippets',
   'code', 'source', 'script', 'scripts', 'sample', 'samples', 'sketch',
   'demonstrate', 'demonstrates', 'demonstrating', 'demonstration',
@@ -223,7 +223,7 @@ for (const word of [
   'custom', 'template', 'templates', 'codebase', 'configured', 'configuring', 'configuration',
   'downstream', 'upstream', 'schema', 'schemas', 'tweak', 'tweaks', 'match', 'matches',
   'listen', 'listening', 'push', 'pushing', 'queue', 'queues', 'placeholder', 'placeholders',
-  'aggregator', 'aggregating', 'publish', 'publishing', 'index', 'indexes', 'indices', 'gpu', 'gpus', 'dockerized', 'containerized'
+  'aggregator', 'aggregating', 'publish', 'publishing', 'index', 'indexes', 'indices', 'gpu', 'gpus', 'dockerized', 'containerized', 'sdk', 'sdks', 'boto', 'boto3', 'json', 'module', 'modules', 'stream', 'streams'
 ]) conversationalWords.add(word);
 
 // These are evidence-dependent equivalents, never a global permission to name
@@ -249,7 +249,13 @@ const englishEvidenceTerms: Record<string, RegExp> = {
   api: /\b(?:api|apis|rest|fastapi|endpoints?)\b/i,
   apis: /\b(?:api|apis|rest|fastapi|endpoints?)\b/i,
   iam: /\b(?:aws|sam|lambda|dynamodb|cloud)\b/i,
-  boto3: /\b(?:python|aws|lambda|dynamodb)\b/i,
+  boto3: /\b(?:python|aws|lambda|dynamodb|boto3?)\b/i,
+  boto: /\b(?:python|aws|lambda|dynamodb|boto3?)\b/i,
+  sdk: /\b(?:sdk|sdks|boto3?|api|apis|library|libraries|tools?)\b/i,
+  sdks: /\b(?:sdk|sdks|boto3?|api|apis|library|libraries|tools?)\b/i,
+  json: /\b(?:json|data|payload|telemetry|log|logs|python|api)\b/i,
+  module: /\b(?:module|modules|package|packages|library|libraries|code|python)\b/i,
+  modules: /\b(?:module|modules|package|packages|library|libraries|code|python)\b/i,
   ui: /\b(?:ui|ux|pyqt5?|desktop|interface|front-?end|designer)\b/i,
   ux: /\b(?:ui|ux|pyqt5?|desktop|interface|front-?end|designer)\b/i,
   gui: /\b(?:ui|ux|pyqt5?|desktop|interface|front-?end|designer)\b/i,
@@ -343,7 +349,7 @@ export function inspectSupportedClaims(answer: string, evidence: { quote: string
   // still require evidence, and leak/link checks inspect the entire answer.
   if (hasExample) {
     answer = answer
-      .replace(/\bnot (?:my|the) (?:(?:original|actual|exact|production) )+(?:source )?(?:code|script|implementation)\b/gi, '')
+      .replace(/\bnot\s+(?:(?:my|the|a|an)\s+)?(?:(?:original|actual|exact|production|real|live)\s+)*(?:source(?:[ -]code)?|code|script|implementation)\b/gi, '')
       .replace(/\b(?:for )?(?:illustrative|demonstration|example)? (?:purposes? )?only\b/gi, '')
       .replace(/\bonly (?:an? )?(?:illustrative|simplified|sample|example)\b/gi, '');
   }
@@ -384,7 +390,7 @@ export function inspectSupportedClaims(answer: string, evidence: { quote: string
 
   // Proper names, acronyms and mixed-case technical identifiers. Ordinary
   // sentence openings are not evidence claims by themselves.
-  const sentenceOpeners = new Set(('since currently today now there here during after before alongside additionally additional primarily specifically typically overall beyond together having developing building working helping focusing monitoring identifying detecting analyzing analysing handling maintaining improving using starting joining responsible responsibilities mainly below note please key core main other further important several these those each every such recent related previous first second third finally similarly furthermore moreover likewise instead cutting reducing lowering bringing achieving serving daily day feel free let reach dive check see look ask sure certainly here').split(' '));
+  const sentenceOpeners = new Set(('since currently today now there here during after before alongside additionally additional primarily specifically typically overall beyond together having developing building working helping focusing monitoring identifying detecting analyzing analysing handling maintaining improving using starting joining responsible responsibilities mainly below note please key core main other further important several these those each every such recent related previous first second third finally similarly furthermore moreover likewise instead cutting reducing lowering bringing achieving serving daily day feel free let reach dive check see look ask sure certainly here when whenever while where if once then the this that these those in on at for with by from to as both all').split(' '));
   for (const match of claimText.matchAll(/(?<![A-Za-z0-9])(?:\p{Lu}[\p{L}\p{N}]*|[a-z]+\p{Lu}[\p{L}\p{N}]*)(?:[+#]+)?/gu)) {
     const word = match[0];
     const lower = word.toLowerCase();
@@ -399,7 +405,7 @@ export function inspectSupportedClaims(answer: string, evidence: { quote: string
     /\b(?:use|used|using|know|proficient in|experience with|skilled in|expertise in|speciali[sz]e in|built with|worked with)\s+([^.!?;:\n]{1,160})/gi,
     /\b(?:joined|employed by|work(?:ed|ing)? at|intern at|internship at|studied at|graduated from|degree (?:in|from)|doctorate (?:in|from)|phd (?:in|from))\s+([^.!?;:\n]{1,120})/gi,
   ];
-  const nounGlue = new Set(('a an the and or with for to in on at my our primarily mainly extensively mostly various several combination mix together well such as especially particularly practical real time like related along other similar associated different model models simulation simulations robot hardware platform solution application protocol day days daily instead rather than of via through into by base bases chassis mobile camera cameras sensor sensors environment package node custom downstream upstream template demo schema index indexes gpu gpus 2 1 dockerized containerized').split(' '));
+  const nounGlue = new Set(('a an the and or with for to in on at my our primarily mainly extensively mostly various several combination mix together well such as especially particularly practical real time like related along other similar associated different model models simulation simulations robot hardware platform solution application protocol day days daily instead rather than of via through into by base bases chassis mobile camera cameras sensor sensors environment package node custom downstream upstream template demo schema index indexes gpu gpus 2 1 dockerized containerized when sdk sdks boto boto3 json module modules stream streams').split(' '));
   for (const pattern of phrases) {
     for (const match of claimText.matchAll(pattern)) {
       const nounPhrase = match[1].split(/\b(?:to|for|that|which|where|while|since|because|so|when|in|on|at|as|and I|and we)\b|[—–]/i)[0];
