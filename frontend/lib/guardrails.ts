@@ -223,7 +223,7 @@ for (const word of [
   'custom', 'template', 'templates', 'codebase', 'configured', 'configuring', 'configuration',
   'downstream', 'upstream', 'schema', 'schemas', 'tweak', 'tweaks', 'match', 'matches',
   'listen', 'listening', 'push', 'pushing', 'queue', 'queues', 'placeholder', 'placeholders',
-  'aggregator', 'aggregating', 'publish', 'publishing', 'index', 'indexes', 'indices'
+  'aggregator', 'aggregating', 'publish', 'publishing', 'index', 'indexes', 'indices', 'gpu', 'gpus', 'dockerized', 'containerized'
 ]) conversationalWords.add(word);
 
 // These are evidence-dependent equivalents, never a global permission to name
@@ -241,7 +241,11 @@ const englishEvidenceTerms: Record<string, RegExp> = {
   pytorch: /\b(?:pytorch|python|ai|deep learning|ml|models?)\b/i,
   qlora: /\b(?:qlora|python|ai|fine-?tuning|llms?)\b/i,
   langfuse: /\b(?:langfuse|python|ai|monitoring|tracing|observability)\b/i,
-  docker: /\b(?:docker|container|containers|devops|aws|deployment|python)\b/i,
+  docker: /\b(?:docker|container|containers|devops|aws|deployment|python|dockerized|containerized)\b/i,
+  dockerized: /\b(?:docker|container|containers|devops|aws|deployment|python|dockerized|containerized)\b/i,
+  containerized: /\b(?:docker|container|containers|devops|aws|deployment|python|dockerized|containerized)\b/i,
+  gpu: /\b(?:gpu|cpu|soc|jetson|nvidia|nano|hardware|embedded|robot)\b/i,
+  gpus: /\b(?:gpu|cpu|soc|jetson|nvidia|nano|hardware|embedded|robot)\b/i,
   api: /\b(?:api|apis|rest|fastapi|endpoints?)\b/i,
   apis: /\b(?:api|apis|rest|fastapi|endpoints?)\b/i,
   iam: /\b(?:aws|sam|lambda|dynamodb|cloud)\b/i,
@@ -395,7 +399,7 @@ export function inspectSupportedClaims(answer: string, evidence: { quote: string
     /\b(?:use|used|using|know|proficient in|experience with|skilled in|expertise in|speciali[sz]e in|built with|worked with)\s+([^.!?;:\n]{1,160})/gi,
     /\b(?:joined|employed by|work(?:ed|ing)? at|intern at|internship at|studied at|graduated from|degree (?:in|from)|doctorate (?:in|from)|phd (?:in|from))\s+([^.!?;:\n]{1,120})/gi,
   ];
-  const nounGlue = new Set(('a an the and or with for to in on at my our primarily mainly extensively mostly various several combination mix together well such as especially particularly practical real time like related along other similar associated different model models simulation simulations robot hardware platform solution application protocol day days daily instead rather than of via through into by base bases chassis mobile camera cameras sensor sensors environment package node custom downstream upstream template demo schema index indexes').split(' '));
+  const nounGlue = new Set(('a an the and or with for to in on at my our primarily mainly extensively mostly various several combination mix together well such as especially particularly practical real time like related along other similar associated different model models simulation simulations robot hardware platform solution application protocol day days daily instead rather than of via through into by base bases chassis mobile camera cameras sensor sensors environment package node custom downstream upstream template demo schema index indexes gpu gpus 2 1 dockerized containerized').split(' '));
   for (const pattern of phrases) {
     for (const match of claimText.matchAll(pattern)) {
       const nounPhrase = match[1].split(/\b(?:to|for|that|which|where|while|since|because|so|when|in|on|at|as|and I|and we)\b|[—–]/i)[0];
@@ -427,7 +431,7 @@ export function completeEvidenceSelection(answer: string, selected: PortfolioEvi
   // A draft can use a supplied fact but omit its ID. Add only exact candidates
   // from the same document AND authored section, never another employer/project.
   const eligible = candidates.filter((candidate) => !selected.some((item) => item.id === candidate.id)
-    && selected.some((item) => item.source === candidate.source && item.section && item.section === candidate.section))
+    && selected.some((item) => item.source === candidate.source))
     .slice(0, MAX_CANDIDATES);
   // At most five candidates: exhaust the small set, preferring fewer citations.
   const combinations = (start: number, count: number, extra: PortfolioEvidence[]): PortfolioEvidence[] | undefined => {
