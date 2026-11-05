@@ -38,3 +38,19 @@ R2-Waiter is my autonomous service robot graduation project at MUST in 2024. It 
 # Repository implementation
 
 The linked R2-WAITER repository contains a ROS 2 restaurant simulation with a PyQt5 controller and an animated face. It uses TurtleBot3 and Gazebo; the physical graduation robot's hardware is documented separately above.
+
+# What was my personal contribution? (en)
+
+In R2-WAITER, I built the operator interface that sent ROS navigation goals so the restaurant robot could move from table to table, as recorded in my public resume. I worked with a six-person graduation team. The physical robot integrated SLAM, sensor fusion, navigation, customer ordering, and an interactive face.
+
+# How does the restaurant simulation work? (en)
+
+In the public simulation, the operator selects up to three tables using a PyQt5 desktop controller. Nav2 drives a TurtleBot3 Waffle in Gazebo to each table and then back to the kitchen. The animated face reacts to motion, stuck goals are canceled, and failed goals are reported without being counted as arrivals.
+
+# إيه مساهمتي في روبوت التخرج؟ (ar)
+
+سيرتي الذاتية بتوثّق إني بنيت واجهة المشغّل اللي بتبعت ROS navigation goals عشان روبوت المطعم يتحرك بين الترابيزات. اشتغلت ضمن فريق تخرج من ستة أشخاص. الروبوت الفعلي دمج SLAM و sensor fusion والملاحة وطلبات العملاء ووجه تفاعلي.
+
+# محاكاة المطعم بتشتغل إزاي؟ (ar)
+
+في المحاكاة العامة، المشغّل بيختار لحد ثلاث ترابيزات باستخدام واجهة PyQt5. Nav2 بيحرّك TurtleBot3 Waffle داخل Gazebo لكل ترابيزة وبعدها يرجّعه للمطبخ. الوجه بيتفاعل مع الحركة، والـ goals المتعطلة بتتلغي، وفشل الوصول بيتسجّل من غير اعتباره وصول ناجح.

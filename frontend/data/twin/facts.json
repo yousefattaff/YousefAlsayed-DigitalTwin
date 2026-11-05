@@ -5,6 +5,7 @@
   "location": "New Cairo, Cairo, Egypt",
   "email": "yousefabuelkhear@gmail.com",
   "linkedin": "https://www.linkedin.com/in/yousef-alsayed-abdelfattah",
+  "phone": "+20 115 382 6643",
   "specialties": [
     "AI solution development, AI-assisted coding, and workflow automation",
     "LLM applications, multi-agent systems, OpenAI Agents SDK, CrewAI, LangGraph, n8n, and MCP",
@@ -16,7 +17,8 @@
     {
       "degree": "Bachelor of Science in Mechatronics, Robotics, and Automation Engineering",
       "institution": "Misr University for Science and Technology (MUST)",
-      "period": "September 2019 - June 2024"
+      "period": "September 2019 - June 2024",
+      "cgpa": 3.34
     }
   ],
   "experience": [
@@ -84,7 +86,11 @@
     "Certificate of Completion — Mathematics",
     "Siemens - PLC Industrial Automation (September 2023)",
     "Proficient AI Engineer Track (Ed Donner)",
-    "GitHub Certification"
+    "GitHub Certification",
+    "EF Standard English Test (EF SET) English Certificate (2026-10)",
+    "Deloitte - NextStep Mentorship (July 2026)",
+    "iSchool - 17 instructor module certificates (Python, UI/UX, mobile and web development, data science, game engines)",
+    "IMT - Embedded Systems Diploma (March 2023)"
   ],
   "key_technologies": [
     "AI solution development and AI-assisted coding",
@@ -92,7 +98,8 @@
     "OpenAI Agents SDK, CrewAI, LangGraph, and n8n",
     "MCP and FastMCP",
     "LangChain, ChromaDB, and RAG",
-    "PyTorch, Qwen, and QLoRA fine-tuning experiments",
+    "PyTorch, Qwen, QLoRA, and Unsloth fine-tuning experiments",
+    "GGUF quantization and Ollama local model serving",
     "Prompt engineering, LLM evaluation, and RLHF",
     "FastAPI",
     "Pydantic and Langfuse",
@@ -101,6 +108,7 @@
     "AWS SAM, DynamoDB Streams, and real-time telemetry",
     "AWS Lambda, S3, API Gateway, and CloudFront",
     "Pytest and automated testing",
+    "Playwright browser automation and web scraping",
     "Claude Code and coding agents",
     "Git",
     "Next.js and React",
@@ -111,5 +119,27 @@
   "availability": "Seeking a full-time AI Engineer or AI Automation role; military service completed.",
   "display_name": "Yousef Alsayed",
   "expertise_level": "Junior-to-mid AI engineer with hands-on experience in autonomous agents, RAG systems, and cloud-backed production bots",
-  "github": "https://github.com/yousefattaff"
+  "github": "https://github.com/yousefattaff",
+  "spoken_languages": {
+    "Arabic": "native",
+    "English": "professional"
+  },
+  "military_service_completed": true,
+  "graduation_project": {
+    "name": "R2-WAITER",
+    "year": 2024,
+    "team_size": 6,
+    "contribution": "Built the operator interface that sent ROS navigation goals between restaurant tables.",
+    "award": "3rd place, International Gathering of Artificial Intelligence in Egypt",
+    "hardware": ["LiDAR", "Intel RealSense D435i", "NVIDIA Jetson Nano"],
+    "software": ["ROS2", "Ubuntu Linux"]
+  },
+  "other_projects": {
+    "Advanced Engineering Team": "Four CrewAI agents for design, Python, a Gradio interface, and Docker-based testing.",
+    "SDR Multi-Agent": "Company research with Tavily, three email styles, and SendGrid delivery.",
+    "EgyptianSavoryScout": "1,000+ Egyptian dining spots; TF-IDF ranking and locally fine-tuned Qwen2 1.5B via Ollama.",
+    "RAG-AI-Agent": "PDF assistant with Chroma collections, file/page citations, and top four of 24 candidate chunks.",
+    "DealBreaker": "Egyptian electronics prices, Playwright scraping, Random Forest prediction, and ChromaDB RAG.",
+    "ATmega32 Drivers": "Embedded C device-driver exercises with DIO pin access."
+  }
 }

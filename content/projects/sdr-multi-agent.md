@@ -32,3 +32,19 @@ key_features:
 ---
 
 My SDR Multi-Agent is a B2B outbound sales pipeline that researches prospects, drafts personalized messages, and sends the selected email through SendGrid. It runs three parallel Tavily searches and produces professional, witty, and concise drafts before a manager selects one. A failed send is not reported as sent.
+
+# What input does the sales workflow accept? (en)
+
+The SDR workflow starts with a company name. If the input is a personal name, the run stops before research or email. For a company, three Tavily searches run in parallel and provide research for the email-drafting agents.
+
+# How are the email drafts selected and delivered? (en)
+
+The workflow creates professional, witty, and concise drafts. A manager selects one for SendGrid delivery. Groq runs most agents, while OpenRouter runs the witty draft and the manager. The application uses the OpenAI Agents SDK, with Langfuse included in its toolkit.
+
+# إيه المدخلات اللي workflow المبيعات بيقبلها؟ (ar)
+
+SDR Multi-Agent بيبدأ باسم شركة. لو المدخل اسم شخص، التشغيل بيتوقف قبل البحث أو الإرسال. لو شركة، ثلاث عمليات بحث Tavily بتشتغل بالتوازي وبتوفر معلومات للـ agents اللي بتكتب الإيميلات.
+
+# بيختار ويبعت الرسالة إزاي؟ (ar)
+
+الـ workflow بيجهّز مسودات professional و witty و concise، والمدير بيختار واحدة للإرسال عبر SendGrid. Groq بيشغّل أغلب الـ agents، و OpenRouter بيشغّل المسودة witty والمدير. التطبيق مبني باستخدام OpenAI Agents SDK، و Langfuse ضمن أدواته.

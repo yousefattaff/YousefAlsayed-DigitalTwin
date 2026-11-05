@@ -35,3 +35,19 @@ key_features:
 ---
 
 My Advanced Engineering Team is a 4-agent CrewAI squad: a lead handles design, a backend agent handles Python and Docker, a frontend agent builds a Gradio interface, and QA writes and runs tests. It turns one software request into a designed, tested, runnable application. The agents use Groq, and Docker can run the generated Python. The crew does not retry failures.
+
+# Which agents and models are involved? (en)
+
+The lead and QA agents use Llama 3.3 70B, the backend agent uses Qwen3 32B, and the frontend agent uses Llama 4 Scout. CrewAI coordinates their work through Groq. The project combines a design stage, Python implementation, a Gradio demo, and tests.
+
+# What can run inside Docker? (en)
+
+The backend agent can run its generated Python in Docker, and the QA agent can run tests in Docker. Langfuse tracing is optional and turns on when both required keys are configured. A failed crew run is not automatically retried.
+
+# الـ agents والموديلات في المشروع إيه؟ (ar)
+
+الـ lead والـ QA بيستخدموا Llama 3.3 70B، والـ backend بيستخدم Qwen3 32B، والـ frontend بيستخدم Llama 4 Scout. CrewAI بينسّق الشغل باستخدام Groq. المشروع بيجمع التصميم وكتابة Python و Gradio demo والاختبارات.
+
+# إيه اللي ممكن يشتغل في Docker؟ (ar)
+
+الـ backend agent يقدر يشغّل Python اللي كتبها داخل Docker، والـ QA يقدر يشغّل الاختبارات داخل Docker. تتبع Langfuse اختياري وبيشتغل عند إعداد المفتاحين المطلوبين. لو تشغيل الفريق فشل، مفيش إعادة محاولة تلقائية.

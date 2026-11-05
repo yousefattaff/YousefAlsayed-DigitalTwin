@@ -21,6 +21,8 @@ Since May 2026, Yousef has worked as an English-speaking programming instructor 
 
 He develops and delivers project-based curricula in Python, AI, JavaScript, and UI/UX design, using interactive lessons to explain programming concepts and develop problem-solving skills.
 
+Yousef holds 17 iSchool instructor module certificates — internal training modules that qualify him to teach across grade bands and subject areas. The covered topics include Python instruction, UI/UX fundamentals, mobile and web development, data science, and game engines. This module training is what lets him teach the same core concepts at the right level whether a student is in Grade 1 or Grade 12.
+
 # Egyptian Armed Forces Engineering Authority — IT Help Desk
 
 From January 2025 to March 2026, Yousef completed compulsory national military service with the Egyptian Armed Forces Engineering Authority in Giza, Egypt. He provided on-site IT infrastructure, hardware, and technical troubleshooting support. His military service is complete.
@@ -45,7 +47,7 @@ In September 2021, Yousef completed practical car assembly and maintenance train
 
 # Education — Mechatronics, Robotics, and Automation Engineering
 
-Yousef studied for a bachelor's degree in Mechatronics, Robotics, and Automation Engineering at Misr University for Science and Technology (MUST) from September 2019 to June 2024. His background includes embedded C for microcontrollers and autonomous robots with ROS.
+Yousef studied for a bachelor's degree in Mechatronics, Robotics, and Automation Engineering at Misr University for Science and Technology (MUST) from September 2019 to June 2024. His background includes embedded C for microcontrollers and autonomous robots with ROS. In March 2023, he completed an IMT embedded systems diploma, and he put it to work building ATmega32 microcontroller drivers in Embedded C.
 
 # Arche Robotics tools (en)
 

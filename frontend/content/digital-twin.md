@@ -62,11 +62,19 @@ I'm an AI Engineering Intern at Arche Robotics, building real-time AI fleet-moni
 
 # Education (en)
 
-I graduated in 2024 with a B.Sc. in Mechatronics Engineering from Misr University for Science and Technology (MUST). I also completed compulsory military service with the Egyptian Armed Forces Engineering Authority.
+I graduated in June 2024 with a B.Sc. in Mechatronics Engineering from Misr University for Science and Technology (MUST), finishing the program I started in September 2019. I also completed compulsory military service with the Egyptian Armed Forces Engineering Authority.
 
 # Education (ar)
 
-اتخرجت في 2024 ببكالوريوس Mechatronics Engineering من Misr University for Science and Technology (MUST). وأنهيت الخدمة العسكرية الإلزامية مع الهيئة الهندسية للقوات المسلحة المصرية.
+اتخرجت في يونيو 2024 ببكالوريوس Mechatronics Engineering من Misr University for Science and Technology (MUST)، بعد ما بدأت الدراسة في سبتمبر 2019. وأنهيت الخدمة العسكرية الإلزامية مع الهيئة الهندسية للقوات المسلحة المصرية.
+
+# Phone (en)
+
+My phone number is +20 115 382 6643. For anything professional, email is usually best: yousefabuelkhear@gmail.com. You can also reach me on LinkedIn.
+
+# Phone (ar)
+
+موبايلي هو +20 115 382 6643. ولأي موضوع مهني، الإيميل عادة أفضل: yousefabuelkhear@gmail.com. وتقدر كمان توصلني على LinkedIn.
 
 # Certifications (en)
 

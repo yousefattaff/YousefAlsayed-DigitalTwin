@@ -472,6 +472,12 @@ function personalReply(message: string, knowledge: Knowledge): Pick<TwinChatRepl
       reply_kind: 'insufficient_evidence',
     };
   }
+  const phoneQuestion = /^(?:(?:what|whats|what s) (?:is|s) your (?:phone|mobile|cell|contact|whatsapp) number|your (?:phone|mobile|cell|contact|whatsapp) number|what is your contact number|phone number|رقمك|رقمك ايه|ايه رقمك|ماهو رقمك|ما هو رقمك|رقم تليفونك|رقم تليفونك ايه|رقم موبايلك|رقم موبايلك ايه|رقم هاتفك|رقم هاتفك ايه|رقم الواتس|رقم الواتساب)$/u.test(words);
+  if (phoneQuestion) {
+    const document = knowledge.documents.find((item) => item.source === 'digital-twin.md');
+    const answer = document ? authoredAnswer(document, ['Phone'], replyLanguage(message)) : undefined;
+    if (answer) return { ...answer, reply_kind: 'answer' };
+  }
   const nameQuestion = /^(?:what s your name|what is your name|tell me your name|who is yousef|اسمك|اسم يوسف|مين يوسف)$/u.test(words);
   if (!nameQuestion) return;
   const document = knowledge.documents.find((item) => item.source === 'digital-twin.md');

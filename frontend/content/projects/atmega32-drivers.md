@@ -31,3 +31,19 @@ key_features:
 ---
 
 Layered ATmega32 exercises. DIO is the microcontroller layer. Each demo has its own main.
+
+# What did I build in the ATmega32 project? (en)
+
+My ATmega32 project contains small Embedded C programs organized into applications, device drivers, and pin I/O. Each example is its own program with its own main function. The repository uses AVR-GCC and includes LCD, keypad, LED, motor, and ultrasonic-sensor exercises.
+
+# How are the driver layers organized? (en)
+
+Example applications call LCD, keypad, or motor driver headers. Those device drivers use DIO to access the microcontroller pins. DIO is the implemented microcontroller-driver layer; UART, SPI, and I2C drivers are not written in this repository version.
+
+# بنيت إيه في مشروع ATmega32؟ (ar)
+
+مشروع ATmega32 فيه برامج Embedded C صغيرة متقسمة لتطبيقات و device drivers وطبقة pin I/O. كل مثال برنامج مستقل بدالة main خاصة بيه. المستودع بيستخدم AVR-GCC وفيه تدريبات LCD و keypad و LED وموتورات و ultrasonic sensor.
+
+# طبقات الـ drivers مترتبة إزاي؟ (ar)
+
+التطبيقات بتنادي driver headers للشاشة أو الـ keypad أو الموتور. الـ device drivers بتستخدم DIO للوصول لأطراف المتحكم. DIO هي طبقة microcontroller drivers المنفذة، و UART و SPI و I2C لسه مش مكتوبين في النسخة دي.

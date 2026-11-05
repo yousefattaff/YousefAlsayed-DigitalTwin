@@ -7,6 +7,7 @@ education:
   - degree: Bachelor of Science in Mechatronics, Robotics, and Automation Engineering
     institution: Misr University for Science and Technology (MUST)
     period: September 2019 - June 2024
+    cgpa: 3.34
 skills:
   - AI solution development and AI-assisted coding
   - Python
@@ -31,6 +32,8 @@ resume_drive_url: ''
 ---
 
 Yousef Alsayed Abdelfattah earned a bachelor's degree in Mechatronics, Robotics, and Automation Engineering at Misr University for Science and Technology (MUST), studying from September 2019 to June 2024.
+
+His public resume records a CGPA of 3.34, Arabic as his native language, and English at professional proficiency.
 
 His current focus is developing AI solutions with LLMs, agents, retrieval, workflow automation, and AI-assisted coding. His experience includes Arche Robotics, iSchool, Outlier, and IT support during completed national military service. Detailed roles and dates are documented in experience.md, and technical skills are documented in expertise.md.
 
