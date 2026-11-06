@@ -529,9 +529,12 @@ function factualRecovery(message: string, topic: string, knowledge: Knowledge): 
     || /^(?:tell me about (?:your )?r2[- ]waiter(?: project)?)$/i.test(words)
     || /^(?:روبوت التخرج كان ros1 ولا ros2|ايه الهاردوير اللي استخدمته في روبوت التخرج|احكيلي عن مشروع r2[- ]waiter|كلمني عن r2[- ]waiter)$/.test(words);
   const dynamodb = /\bdynamodb\b/.test(words) && /(?:python|script|code|example|بايثون|سكربت|كود|مثال)/.test(words);
+  const pythonSkills = /^(?:do you|can you) (?:know|use|code in|write) python$/.test(words)
+    || /^(?:بتعرف بايثون|بتستخدم بايثون)$/.test(words);
   const target = dynamodb ? { source: 'experience.md', section: 'DynamoDB Streams script' }
     : arche && toolsQuestion ? { source: 'experience.md', section: 'Arche Robotics tools' }
-    : graduation ? { source: 'achievements.md', section: 'Graduation answer' } : undefined;
+    : graduation ? { source: 'achievements.md', section: 'Graduation answer' }
+    : pythonSkills ? { source: 'digital-twin.md', section: 'Skills' } : undefined;
   if (!target) return;
   const document = knowledge.documents.find((item) => item.source === target.source);
   if (document) return authoredAnswer(document, [target.section], replyLanguage(message));
