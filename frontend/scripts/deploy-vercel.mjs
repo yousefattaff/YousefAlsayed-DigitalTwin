@@ -373,12 +373,12 @@ try {
     await npm(['run', 'lint']);
     await patchVercelNextCache();
     try {
-      await cli(['build', '--prod', '--yes']);
+      await cli(['build', '--prod', '--yes'], { timeoutMs: 1_200_000 });
     } catch (buildErr) {
       if (String(buildErr?.message).includes('EPERM') || String(buildErr?.message).includes('4294963248')) {
         console.log('[deploy] Transient file lock during vercel build; waiting 3s and retrying...');
         await new Promise(r => setTimeout(r, 3000));
-        await cli(['build', '--prod', '--yes']);
+        await cli(['build', '--prod', '--yes'], { timeoutMs: 1_200_000 });
       } else {
         throw buildErr;
       }
@@ -406,14 +406,14 @@ try {
     const outputFunctions = path.join(frontend, '.vercel', 'output', 'functions');
     if (existsSync(outputFunctions)) await scrubEnvFromConfigs(outputFunctions);
     phase = 'production candidate deployment';
-    const deploymentText = await cli(['deploy', '--prebuilt', '--prod', '--skip-domain', '--yes', '--json'], { quiet: true });
+    const deploymentText = await cli(['deploy', '--prebuilt', '--prod', '--skip-domain', '--yes', '--json'], { quiet: true, timeoutMs: 600_000 });
     const deploymentResult = JSON.parse(deploymentText);
     const value = deploymentResult.url || deploymentResult.deploymentUrl || deploymentResult.deployment?.url;
     assert.ok(value, 'Vercel did not return a deployment URL.');
     const candidate = value.startsWith('https://') ? value : `https://${value}`;
     report.candidateUrl = candidate;
     phase = 'live candidate verification';
-    await cli(['inspect', candidate, '--wait', '--timeout', '60s'], { timeoutMs: 75_000 });
+    await cli(['inspect', candidate, '--wait', '--timeout', '120s'], { timeoutMs: 180_000 });
     const candidateDeployment = JSON.parse(await cli(['api', `/v13/deployments/${encodeURIComponent(new URL(candidate).hostname)}${query}`, '--raw'], { quiet: true, timeoutMs: 30_000 }));
     assert.equal(candidateDeployment.readyState, 'READY');
     assert.equal(candidateDeployment.target, 'production');
@@ -427,7 +427,7 @@ try {
       report.customDomain = { name: customDomain, status: 'attached; Namecheap DNS verification still required' };
     }
     phase = 'production promotion and final verification';
-    await cli(['promote', candidate, '--yes', '--timeout', '60s'], { timeoutMs: 75_000 });
+    await cli(['promote', candidate, '--yes', '--timeout', '120s'], { timeoutMs: 180_000 });
     const deployment = JSON.parse(await cli(['api', `/v13/deployments/${encodeURIComponent(new URL(candidate).hostname)}${query}`, '--raw'], { quiet: true, timeoutMs: 30_000 }));
     assert.equal(deployment.readyState, 'READY');
     assert.equal(deployment.target, 'production');
